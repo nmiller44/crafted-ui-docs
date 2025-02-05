@@ -1,0 +1,14 @@
+---
+title: 'Header Section'
+description: 'Section header used to display a title and subtitle'
+---
+import BaseSidebar from "../../../layouts/BaseSidebar.astro";
+import SamplePage from "../../../components/SamplePage.astro";
+import HeaderSection from "../../../components/HeaderSection.astro";
+import Section from '../../../components/Section.astro';
+
+<BaseSidebar title={ frontmatter.title } description={ frontmatter.description }>
+    <SamplePage>
+        <HeaderSection title={ frontmatter.title } subtitle={ frontmatter.description } />
+    </SamplePage>
+</BaseSidebar>
