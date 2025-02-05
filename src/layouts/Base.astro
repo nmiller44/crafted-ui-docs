@@ -1,4 +1,6 @@
 ---
+import Nav from "../components/Nav.astro";
+
 const { 
     title = "Crafted UI Docs", 
     description = "Documentation for the Crafted UI component library."
@@ -8,12 +10,15 @@ const {
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta name="generator" content={Astro.generator} />
 		<title>{ title }</title>
-        <meta name="description" content={ description }>
+        <meta name="description" content={ description } />
 	</head>
 	<body>
-        <slot />
+        <Nav />
+        <main>
+            <slot />
+        </main>
 	</body>
 </html>

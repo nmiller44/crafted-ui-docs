@@ -1,0 +1,91 @@
+---
+import { getLinks } from "../data/links";
+
+const links = getLinks();
+---
+<nav class="bg-white border-b">
+  <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
+    <div class="relative flex h-14 items-center justify-between">
+      <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
+
+        <!-- Mobile Menu Button-->
+        <button type="button"
+                id="mobile-menu-button" 
+                class="relative inline-flex items-center justify-center rounded-md p-2 text-green-900 hover:bg-green-900 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" 
+                aria-controls="mobile-menu" 
+                aria-expanded="false">
+          <span class="absolute -inset-0.5"></span>
+          <span class="sr-only">Open main menu</span>
+
+          <!-- Icon Closed -->
+          <svg id="mobile-menu-closed" class="block h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+          </svg>
+
+          <!-- Icon Open -->
+          <svg id="mobile-menu-open" class="block hidden h-6 w-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+      <div class="flex flex-1 items-center sm:items-stretch sm:justify-start ml-12 lg:ml-0">
+        <div class="flex flex-shrink-0 items-center">
+            <a href="/" class="flex items-center font-bold text-green-800">
+                <svg class="h-7 w-7" id="crafted-logo" fill="currentColor" xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 176.4 147.6">
+                    <path d="M63.8,110c-.8,0-1.6,0-2.5-.3-9.5-2.3-10.2-14.1-11.1-29.1-.8-13.4-1.9-31.7-10.3-36.5-5.1-3-13.9-1.4-25.3,4.6l-5.8,3-6.1-11.6,5.8-3c15.8-8.2,28.6-9.7,37.9-4.3,14.5,8.3,15.8,29.8,16.8,47,.3,5.1.7,12.2,1.7,15.9,1.4-1.3,3.8-4,7.1-9.3l3.5-5.5,11.1,7-3.5,5.5c-5,7.9-11.6,16.6-19.4,16.6Z"/>
+                    <rect x="35.8" y="80.9" width="155.4" height="13.1" transform="translate(-29.2 101) rotate(-43)"/>
+                    <path d="M107.8,49.6c-4.4,0-8.7-1.2-12.4-3.6-5.9-3.8-9.7-10.3-10.4-17.9-.8-7.6,1.8-15.2,6.9-20.1,7.4-7.2,19.6-8.6,29.5-3.4l5.8,3-6.1,11.6-5.8-3c-5-2.6-10.9-2.2-14.3,1.2-2.3,2.2-3.4,5.7-3,9.4.4,3.5,2,6.6,4.5,8.2,3.8,2.5,9.5,1.8,13.9-1.7l5.1-4.1,8.1,10.3-5.1,4.1c-5,4-10.9,6-16.7,6Z"/>
+                    <path d="M63.8,110c-.8,0-1.6,0-2.5-.3-9.5-2.3-10.2-14.1-11.1-29.1-.8-13.4-1.9-31.7-10.3-36.5-5.1-3-13.9-1.4-25.3,4.6l-5.8,3-6.1-11.6,5.8-3c15.8-8.2,28.6-9.7,37.9-4.3,14.5,8.3,15.8,29.8,16.8,47,.3,5.1.7,12.2,1.7,15.9,1.4-1.3,3.8-4,7.1-9.3l3.5-5.5,11.1,7-3.5,5.5c-5,7.9-11.6,16.6-19.4,16.6Z"/>
+                    <rect x="35.8" y="80.9" width="155.4" height="13.1" transform="translate(-29.2 101) rotate(-43)"/>
+                    <path d="M107.8,49.6c-4.4,0-8.7-1.2-12.4-3.6-5.9-3.8-9.7-10.3-10.4-17.9-.8-7.6,1.8-15.2,6.9-20.1,7.4-7.2,19.6-8.6,29.5-3.4l5.8,3-6.1,11.6-5.8-3c-5-2.6-10.9-2.2-14.3,1.2-2.3,2.2-3.4,5.7-3,9.4.4,3.5,2,6.6,4.5,8.2,3.8,2.5,9.5,1.8,13.9-1.7l5.1-4.1,8.1,10.3-5.1,4.1c-5,4-10.9,6-16.7,6Z"/>
+                </svg>
+                <span class="ml-2">CraftedUI</span>
+            </a>
+        </div>
+        <div class="hidden sm:ml-8 sm:block">
+          <div class="flex space-x-4">
+            { links.map((link) => (
+                <a  href={link.href} 
+                    class="rounded-md px-3 py-2 text-sm text-gray-900 hover:text-gray-600">
+                        { link.title }
+                </a>  
+                )
+            )}
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Section -->
+      <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div class="hidden sm:hidden" id="mobile-menu">
+    <div class="space-y-1 px-2 pb-3 pt-2">
+        { links.map((link) => (
+            <a  href={link.href} 
+                class="block rounded-md px-3 py-2 text-base font-medium text-green-900 hover:bg-green-600 hover:text-white">
+                    { link.title }
+            </a>  
+            )
+        )}
+    </div>
+  </div>
+</nav>
+
+<script is:inline>
+    const mobileButton = document.getElementById('mobile-menu-button');
+    mobileButton?.addEventListener("click", () => {
+
+        const menuContainer = document.getElementById('mobile-menu');
+        menuContainer.classList.toggle("hidden")
+        
+        const mobileMenuOpen = document.getElementById('mobile-menu-open');
+        mobileMenuOpen.classList.toggle("hidden")
+
+        const mobileMenuClosed = document.getElementById('mobile-menu-closed');
+        mobileMenuClosed.classList.toggle("hidden")
+    })
+</script>
