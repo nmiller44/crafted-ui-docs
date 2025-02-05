@@ -1,9 +1,12 @@
 ---
 import Base from '../layouts/Base.astro'
+import Pane from '../components/Pane.astro'
 
 const title = 'Crafted UI Docs'
 const description = 'Documentation for the Crafted UI component library.'
 ---
 <Base title={title} description={description}>
-	<h1 class="text-3xl font-bold underline">Crafted UI</h1>
+	<Pane>
+		<h1 class="text-3xl font-bold underline">Crafted UI</h1>
+	</Pane>
 </Base>
