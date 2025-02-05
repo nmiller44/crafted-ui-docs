@@ -1,0 +1,49 @@
+---
+import Base from "./Base.astro";
+import HeaderPage from "../components/HeaderPage.astro";
+import Sidebar from "../components/Sidebar.astro";
+import SidebarContent from "../components/SidebarContent.astro";
+import SidebarSection from "../components/SidebarSection.astro";
+import SidebarSectionHeader from "../components/SidebarSectionHeader.astro";
+import SidebarSectionContent from "../components/SidebarSectionContent.astro";
+import SidebarSectionContentItem from "../components/SidebarSectionContentItem.astro";
+import { sidebarComponents } from "../data/sidebar";
+
+const { 
+    title = "Crafted UI Docs", 
+    description = "Documentation for the Crafted UI component library."
+} = Astro.props;
+---
+<Base title={title} description={description}>
+    <div class="flex gap-6 lg:gap-10 px-6">
+        <div class="hidden lg:block">
+            <Sidebar>
+                <SidebarContent>
+                    <SidebarSection>
+                        <SidebarSectionHeader>Getting Started</SidebarSectionHeader>
+                        <SidebarSectionContent>
+                            <SidebarSectionContentItem href="/docs/installation">Installation</SidebarSectionContentItem>
+                        </SidebarSectionContent>
+                    </SidebarSection>
+                    <SidebarSection>
+                        <SidebarSectionHeader>{ sidebarComponents.title }</SidebarSectionHeader>
+                        <SidebarSectionContent>
+                            { sidebarComponents.items.map((item) => (
+                                <SidebarSectionContentItem href={item.href}>{item.title}</SidebarSectionContentItem>
+                            ))}
+                        </SidebarSectionContent>
+                    </SidebarSection>
+                </SidebarContent>
+
+            </Sidebar>
+        </div>
+        <div class="grow max-w-4xl">
+            <main class="py-6 lg:py-8">
+                <HeaderPage subtitle={ description }>{ title }</HeaderPage>
+                <div class="flex flex-col pt-8 pb-12">
+                    <slot />
+                </div>
+            </main>
+        </div>
+    </div>
+</Base>
