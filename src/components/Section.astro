@@ -17,8 +17,13 @@ const { title, subtitle, prose = true } = Astro.props;
         <HeaderSection title={title} subtitle={subtitle} />
         )
     }
-    <div class="mt-6"
-        (...prose && is={Prose})>
-        <slot />
+    <div class="mt-6">
+        {
+            prose
+            ?   (<Prose >
+                    <slot />
+                </Prose>)
+            :   <slot />
+        }
     </div>
 </section>
