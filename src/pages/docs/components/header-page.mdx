@@ -1,0 +1,35 @@
+---
+title: 'Header Page'
+description: 'Header used for the title of a page.'
+---
+import BaseSidebar from "../../../layouts/BaseSidebar.astro";
+import SamplePage from "../../../components/SamplePage.astro";
+import HeaderPage from "../../../components/HeaderPage.astro";
+import Section from '../../../components/Section.astro';
+
+<BaseSidebar title={ frontmatter.title } description={ frontmatter.description }>
+
+    <SamplePage>
+        <HeaderPage title="Header Page" subtitle="Subtitle" />
+    </SamplePage>
+
+    <Section title="Usage">
+        The `HeaderPage` component can be passed an optional `title` and `subtitle` parameter to display a pre-styled title and subtitle. By omitting the `title` parameter customized content can be passed to the component via `<slot />`.
+
+        #### Default Usage
+        ```astro
+        <HeaderPage title="Header Page" subtitle="Subtitle" />
+        ```
+
+        #### Custom Content
+        ```astro
+        <HeaderPage>
+            <div>
+                <h1 class="text-2xl font-bold text-blue-600">Custom Title</h1>
+                <p class="text-sm italic">Custom Subtitle</p>
+            </div>
+        </HeaderPage>
+        ```
+    </Section>
+
+</BaseSidebar>

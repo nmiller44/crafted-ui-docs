@@ -1,0 +1,21 @@
+---
+title: 'Installation'
+description: 'Install Crafted UI in your project.'
+---
+import BaseSidebar from "../../layouts/BaseSidebar.astro";
+import Section from '../../components/Section.astro';
+
+<BaseSidebar title={frontmatter.title} description={frontmatter.description}>
+    <Section title="Required">
+        Crafted UI requires TailwindCSS to be installed in your project. If you haven't already installed TailwindCSS, you can do so by following the [official installation guide](https://tailwindcss.com/docs/installation).
+    </Section>
+
+    <Section title="Installation">
+        You can install Crafted UI via npm.
+
+        ```bash
+        npm install crafted-ui
+        ```
+    </Section>
+
+</BaseSidebar>

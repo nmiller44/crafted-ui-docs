@@ -1,0 +1,11 @@
+---
+import { classNames } from "../utils/classNames"
+---
+<div class={classNames(
+                "m-auto",
+                "prose lg:prose-xl dark:prose-invert",
+                "prose-h1:text-5xl prose-h1:font-bold prose-h1:text-neutral-800",
+                "prose-a:text-blue-600 prose-p:text-justify"
+            )}>
+    <slot />
+</div>

@@ -1,0 +1,59 @@
+---
+title: 'Sidebar'
+description: 'Documentation for the Sidebar component of Crafted UI'
+---
+import BaseSidebar from "../../../layouts/BaseSidebar.astro";
+import SamplePage from "../../../components/SamplePage.astro";
+import Sidebar from "../../../components/Sidebar.astro";
+import SidebarContent from "../../../components/SidebarContent.astro";
+import SidebarSection from "../../../components/SidebarSection.astro";
+import SidebarSectionHeader from "../../../components/SidebarSectionHeader.astro";
+import SidebarSectionContent from "../../../components/SidebarSectionContent.astro";
+import SidebarSectionContentItem from "../../../components/SidebarSectionContentItem.astro";
+import Section from '../../../components/Section.astro';
+
+<BaseSidebar title={frontmatter.title} description={frontmatter.description}>
+
+    <SamplePage full>
+        <div class="flex gap-6 lg:gap-10">
+            <div class="pl-6">
+                <Sidebar>
+                    <SidebarContent>
+                        <SidebarSection>
+                            <SidebarSectionHeader>Getting Started</SidebarSectionHeader>
+                            <SidebarSectionContent>
+                                <SidebarSectionContentItem href="#">Installation</SidebarSectionContentItem>
+                            </SidebarSectionContent>
+                        </SidebarSection>
+                        <SidebarSection>
+                            <SidebarSectionHeader>Components</SidebarSectionHeader>
+                            <SidebarSectionContent>
+                                <SidebarSectionContentItem href="#">Installation</SidebarSectionContentItem>
+                            </SidebarSectionContent>
+                        </SidebarSection>
+                    </SidebarContent>
+                </Sidebar>
+            </div>
+            <div class="grow bg-gray-200">
+            </div>
+        </div>
+    </SamplePage>
+
+    <Section title="Subcomponents">
+
+        ### SidebarContent
+        Div containing primary Sidebar content
+
+        #### Usage
+
+        ```astro
+        <SidebarContent>
+            Sidebar Content
+        </SidebarContent>
+        ```
+
+        #### Parameters
+        `subtitle`: text
+    </Section>
+    
+</BaseSidebar>
