@@ -1,12 +1,30 @@
 ---
 import Base from '../layouts/Base.astro'
 import Pane from '../components/Pane.astro'
+import Button from '../components/Button.astro'
 
 const title = 'Crafted UI Docs'
 const description = 'Documentation for the Crafted UI component library.'
 ---
 <Base title={title} description={description}>
 	<Pane>
-		<h1 class="text-3xl font-bold underline">Crafted UI</h1>
+		<div class="mx-auto max-w-2xl px-4 py-32 flex">
+			<div class="max-w-xl">
+				<h1 class="text-5xl font-extrabold tracking-tight text-gray-900">
+					Start crafting your next project.
+				</h1>
+				<p class="mt-4 text-lg text-gray-700">
+					Crafted UI provided a great looking set of modern components that help you build faster.
+				</p>
+				<div class="mt-8">
+					<Button type="link" href="/docs/components">
+						View Components
+					</Button>
+				</div>
+			</div>
+			<div>
+
+			</div>
+		</div>
 	</Pane>
 </Base>
