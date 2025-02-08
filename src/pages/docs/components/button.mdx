@@ -3,7 +3,33 @@ title: 'Button'
 description: 'A button styled component for user interaction.'
 ---
 import BaseSidebar from "../../../layouts/BaseSidebar.astro";
+import SamplePage from "../../../components/SamplePage.astro";
+import Button from "../../../components/Button.astro";
+
+import Prose from '../../../components/Prose.astro';
+import Section from '../../../components/Section.astro';
 
 <BaseSidebar title={frontmatter.title} description={frontmatter.description}>
+
+    <SamplePage>
+        <div class="py-8 px-6">
+            <Button>Button</Button>
+        </div>
+    </SamplePage>
+
+    <Section title="Usage">
+        ### Usage
+        The `Button` component can be passed an optional `type` parameter to change the button style. The default style is `primary`.
+
+        #### Default Usage
+        ```astro
+        <Button>Button</Button>
+        ```
+
+        #### Custom Usage
+        ```astro
+        <Button type="secondary">Button</Button>
+        ```
+    </Section>
 
 </BaseSidebar>

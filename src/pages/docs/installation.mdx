@@ -7,7 +7,8 @@ import Section from '../../components/Section.astro';
 
 <BaseSidebar title={frontmatter.title} description={frontmatter.description}>
     <Section title="Required">
-        Crafted UI requires TailwindCSS to be installed in your project. If you haven't already installed TailwindCSS, you can do so by following the [official installation guide](https://tailwindcss.com/docs/installation).
+        Crafted UI requires TailwindCSS to be installed in your project. If you haven't already installed TailwindCSS, you can do so by following the 
+        <a href="https://tailwindcss.com/docs/installation" target="_blank" rel="noopener">official installation guide</a>.
     </Section>
 
     <Section title="Installation">
@@ -15,6 +16,20 @@ import Section from '../../components/Section.astro';
 
         ```bash
         npm install crafted-ui
+        ```
+    </Section>
+
+    <Section title="Add to Tailwind Config">
+        Update your `tailwind.config.js` file to include the Crafted UI library path.
+
+        ```js
+        export default {
+          content: [
+            "./app/**/*.{js,jsx,ts,tsx}",
+            "./node_modules/crafted-ui/**/*.{js,ts,jsx,tsx}",
+          ],
+        ...
+        };
         ```
     </Section>
 
