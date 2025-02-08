@@ -15,7 +15,7 @@ const {
 } = Astro.props;
 ---
 <Base title={title} description={description}>
-    <div class="flex gap-6 lg:gap-10 px-6">
+    <div class="lg:flex lg:gap-10 px-6">
         <div class="hidden lg:block">
             <Sidebar>
                 <SidebarContent>
@@ -34,10 +34,9 @@ const {
                         </SidebarSectionContent>
                     </SidebarSection>
                 </SidebarContent>
-
             </Sidebar>
         </div>
-        <div class="grow max-w-4xl">
+        <div class="max-w-xl">
             <main class="py-6 lg:py-8">
                 <HeaderPage subtitle={ description }>{ title }</HeaderPage>
                 <div class="flex flex-col pt-8 pb-12">
