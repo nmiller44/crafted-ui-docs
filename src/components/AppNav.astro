@@ -1,4 +1,10 @@
 ---
+import SidebarContent from "../components/SidebarContent.astro";
+import SidebarSection from "../components/SidebarSection.astro";
+import SidebarSectionHeader from "../components/SidebarSectionHeader.astro";
+import SidebarSectionContent from "../components/SidebarSectionContent.astro";
+import SidebarSectionContentItem from "../components/SidebarSectionContentItem.astro";
+import { sidebarComponents } from "../data/sidebar";
 import { getLinks } from "../data/links";
 
 const links = getLinks();
@@ -72,6 +78,27 @@ const links = getLinks();
             )
         )}
     </div>
+
+    <!-- Mobile Sidebar Nav -->
+    <div class="space-y-1 px-2">
+      <SidebarContent>
+        <SidebarSection>
+            <SidebarSectionHeader>Getting Started</SidebarSectionHeader>
+            <SidebarSectionContent>
+                <SidebarSectionContentItem href="/docs/installation">Installation</SidebarSectionContentItem>
+            </SidebarSectionContent>
+        </SidebarSection>
+        <SidebarSection>
+            <SidebarSectionHeader>{ sidebarComponents.title }</SidebarSectionHeader>
+            <SidebarSectionContent>
+                { sidebarComponents.items.map((item) => (
+                    <SidebarSectionContentItem href={item.href}>{item.title}</SidebarSectionContentItem>
+                ))}
+            </SidebarSectionContent>
+        </SidebarSection>
+      </SidebarContent>
+    </div>
+
   </div>
 </nav>
 
