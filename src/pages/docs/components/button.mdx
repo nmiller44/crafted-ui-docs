@@ -12,8 +12,13 @@ import Section from '../../../components/Section.astro';
 <BaseSidebar title={frontmatter.title} description={frontmatter.description}>
 
     <SamplePage>
-        <div class="py-8 px-6">
+        <div class="py-8 grid grid-cols-4 lg:grid-cols-6 gap-4">
             <Button>Button</Button>
+            <Button color="red">Button</Button>
+            <Button color="yellow">Button</Button>
+            <Button color="blue">Button</Button>
+            <Button color="indigo">Button</Button>
+            <Button color="white">Button</Button>
         </div>
     </SamplePage>
 
