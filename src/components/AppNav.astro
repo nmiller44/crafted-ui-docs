@@ -4,12 +4,13 @@ import SidebarSection from "../components/SidebarSection.astro";
 import SidebarSectionHeader from "../components/SidebarSectionHeader.astro";
 import SidebarSectionContent from "../components/SidebarSectionContent.astro";
 import SidebarSectionContentItem from "../components/SidebarSectionContentItem.astro";
-import { sidebarComponents } from "../data/sidebar";
+import { sidebarLinks } from "../data/sidebar";
 import { getLinks } from "../data/links";
+import DarkToggle from "./DarkToggle.astro";
 
 const links = getLinks();
 ---
-<nav class="bg-white border-b">
+<nav class="bg-white border-b dark:bg-neutral-800 dark:border-neutral-600">
   <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
     <div class="relative flex h-14 items-center justify-between">
       <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
@@ -52,7 +53,7 @@ const links = getLinks();
           <div class="flex space-x-4">
             { links.map((link) => (
                 <a  href={link.href} 
-                    class="rounded-md px-3 py-2 text-sm text-gray-900 hover:text-gray-600">
+                    class="rounded-md px-3 py-2 text-sm text-gray-900 hover:text-gray-600 dark:text-neutral-300 dark:hover:text-neutral-100">
                         { link.title }
                 </a>  
                 )
@@ -63,6 +64,7 @@ const links = getLinks();
 
       <!-- Right Section -->
       <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+        <DarkToggle />
       </div>
     </div>
   </div>
@@ -82,20 +84,16 @@ const links = getLinks();
     <!-- Mobile Sidebar Nav -->
     <div class="space-y-1 px-2">
       <SidebarContent>
-        <SidebarSection>
-            <SidebarSectionHeader>Getting Started</SidebarSectionHeader>
-            <SidebarSectionContent>
-                <SidebarSectionContentItem href="/docs/installation">Installation</SidebarSectionContentItem>
-            </SidebarSectionContent>
-        </SidebarSection>
-        <SidebarSection>
-            <SidebarSectionHeader>{ sidebarComponents.title }</SidebarSectionHeader>
-            <SidebarSectionContent>
-                { sidebarComponents.items.map((item) => (
-                    <SidebarSectionContentItem href={item.href}>{item.title}</SidebarSectionContentItem>
-                ))}
-            </SidebarSectionContent>
-        </SidebarSection>
+        { sidebarLinks.map((sect) => (
+            <SidebarSection>
+                <SidebarSectionHeader>{ sect.title }</SidebarSectionHeader>
+                <SidebarSectionContent>
+                    { sect.items.map((item) => (
+                        <SidebarSectionContentItem href={item.href}>{item.title}</SidebarSectionContentItem>
+                    ))}
+                </SidebarSectionContent>
+            </SidebarSection>                       
+        ))}
       </SidebarContent>
     </div>
 
