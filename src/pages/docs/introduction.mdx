@@ -1,0 +1,17 @@
+---
+title: 'Introduction'
+description: 'Crafted UI is a package of reusable components built to simplify the crafting of unique web applications. Open source and carefully crafted to be cleanly designed and accessible.'
+---
+import BaseSidebar from "@layouts/BaseSidebar.astro";
+import Section from '@components/Section.astro';
+
+<BaseSidebar title={frontmatter.title} description={frontmatter.description}>
+    <Section>
+        Crafted UI is a component library that allows for installation via NPM, the CLI, or copied as a starting point for your own component library. Crafted UI was conceived from a need to quickly build multiple web products with a consistent design system that could evolve and improve over time. The library was originally designed as a set of React components, but has evolved to include Astro components and vanilla HTML components as well. The library is built with TailwindCSS and is designed to be easily customized and extended.
+    </Section>
+
+    <Section title="Base UI">
+        The React components included in the Crafted UI library are built on <a href="https://base-ui.com/">Base UI</a>. Base UI is a headless component library that provides a set of unstyled, accessible components on which to build. Building on Base UI allows the Crafted UI team to focus on building components and using Crafted UI in projects. 
+    </Section>
+
+</BaseSidebar>

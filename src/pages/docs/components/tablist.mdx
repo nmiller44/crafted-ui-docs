@@ -1,0 +1,136 @@
+---
+title: 'Tablist'
+description: 'A navigation component that organizes content into multiple tabs.'
+---
+import BaseSidebar from "@layouts/BaseSidebar.astro";
+import SamplePage from "@components/SamplePage.astro";
+import Prose from '@components/Prose.astro';
+import Section from '@components/Section.astro';
+import Tablist from '@components/tablist/Tablist.astro';
+import TablistItem from '@components/tablist/TablistItem.astro';
+
+<BaseSidebar title={frontmatter.title} description={frontmatter.description}>
+
+    <SamplePage>
+      <div class="max-w-md">
+        <Tablist bordered={true}>
+          <TablistItem>
+            <a href="#overview">Overview</a>
+          </TablistItem>
+          <TablistItem>
+            <a href="#features" class="active">Features</a>
+          </TablistItem>
+          <TablistItem>
+            <a href="#usage">Usage</a>
+          </TablistItem>
+          <TablistItem>
+            <a href="#accessibility">Accessibility</a>
+          </TablistItem>
+        </Tablist>
+      </div>
+    </SamplePage>
+
+    <Section title="Overview">
+        The Tablist component set provides a way to organize content into multiple selectable tabs. It consists of two components: Tablist (container) and TablistItem (individual tabs). These components are built on top of semantic HTML elements for better accessibility.
+    </Section>
+
+    <Section title="Tablist">
+        ### Description
+        The root container component that wraps the tablist elements.
+
+        ### Usage
+        ```tsx
+        import { Tablist, TablistItem } from "@crafted-ui/react";
+
+        <Tablist>
+          <TablistItem>
+            <a href="#tab1">Tab 1</a>
+          </TablistItem>
+          <TablistItem>
+            <a href="#tab2" class="active">Tab 2</a>
+          </TablistItem>
+          <TablistItem>
+            <a href="#tab3">Tab 3</a>
+          </TablistItem>
+        </Tablist>
+        ```
+
+        ### Props
+        The `Tablist` component accepts the following props:
+        
+        | Prop | Type | Default | Description |
+        | --- | --- | --- | --- |
+        | bordered | boolean | false | Whether to show a bottom border on the tablist container |
+        | className | string | undefined | Additional CSS class names |
+        | children | ReactNode | undefined | Content of the tablist container |
+    </Section>
+
+    <Section title="TablistItem">
+        ### Description
+        Represents an individual item in the tablist. The active tab can be indicated by adding the `active` class to the child element.
+
+        ### Usage with Links
+        ```tsx
+        import { Tablist, TablistItem } from "@crafted-ui/react";
+
+        <Tablist>
+          <TablistItem>
+            <a href="#tab1">Tab 1</a>
+          </TablistItem>
+          <TablistItem>
+            <a href="#tab2" class="active">Tab 2</a>
+          </TablistItem>
+          <TablistItem>
+            <a href="#tab3">Tab 3</a>
+          </TablistItem>
+        </Tablist>
+        ```
+
+        ### Usage with Custom Content
+        ```tsx
+        import { Tablist, TablistItem } from "@crafted-ui/react";
+
+        <Tablist bordered={true}>
+          <TablistItem>
+            <div>
+              <span>Tab 1</span>
+              <span class="ml-2 text-xs text-muted-foreground">(10)</span>
+            </div>
+          </TablistItem>
+          <TablistItem>
+            <div class="active">
+              <span>Tab 2</span>
+              <span class="ml-2 text-xs text-muted-foreground">(5)</span>
+            </div>
+          </TablistItem>
+          <TablistItem>
+            <div>
+              <span>Tab 3</span>
+              <span class="ml-2 text-xs text-muted-foreground">(3)</span>
+            </div>
+          </TablistItem>
+        </Tablist>
+        ```
+
+        ### Props
+        | Prop | Type | Default | Description |
+        | --- | --- | --- | --- |
+        | className | string | undefined | Additional CSS class names |
+        | children | ReactNode | undefined | Content of the tablist item |
+    </Section>
+
+    <Section title="Accessibility">
+        The Tablist component follows accessibility best practices by using semantic HTML elements:
+        
+        - The tablist container uses a `<ul>` element for proper list semantics
+        - Each tab item is a `<li>` element
+        
+        When implementing tablists, ensure that:
+        
+        1. Links or buttons inside tabs have meaningful text
+        2. The active tab should be marked with the `active` class
+        3. If using tabs to control content panels, use appropriate ARIA attributes in your implementation
+        4. Consider keyboard navigation between tabs for enhanced accessibility
+    </Section>
+
+</BaseSidebar>
