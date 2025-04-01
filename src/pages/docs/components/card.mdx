@@ -6,8 +6,13 @@ import BaseSidebar from "@layouts/BaseSidebar.astro";
 import SamplePage from "@components/SamplePage.astro";
 import Card from "@components/card/Card.astro";
 import CardBody from "@components/card/CardBody.astro";
+import CardHeader from "@components/card/CardHeader.astro";
+import CardFooter from "@components/card/CardFooter.astro";
+import Prose from '@components/Prose.astro';
+import Section from '@components/Section.astro';
 
 <BaseSidebar title={frontmatter.title} description={frontmatter.description}>
+
     <SamplePage>
         <div class="py-8 px-6">
             <Card title={frontmatter.title} subtitle={frontmatter.description}>
@@ -15,8 +20,214 @@ import CardBody from "@components/card/CardBody.astro";
                     <div>Card Content</div>
                     <div>Add Content to the Main Card body.</div>
                 </CardBody>
+                <CardFooter>
+                    <div class="text-sm text-muted-foreground">Last updated: April 1, 2025</div>
+                </CardFooter>
             </Card>
         </div>
     </SamplePage>
+
+    <Section title="Overview">
+        The Card component set provides a flexible container for displaying content in a clear and concise way. It consists of four components: Card (main container), CardHeader (for titles and subtitles), CardBody (for main content), and CardFooter (for actions or metadata). These components are designed to be used together to create beautiful, consistent card layouts throughout your application.
+    </Section>
+
+    <Section title="Card">
+        ### Description
+        The main container component that wraps all card elements. It provides the card's visual styling including borders, shadows, and rounded corners.
+
+        ### Usage
+        ```tsx
+        import { Card, CardBody } from "@crafted-ui/react";
+
+        <Card title="Card Title" subtitle="Card description">
+          <CardBody>
+            <p>Card content goes here</p>
+          </CardBody>
+        </Card>
+        ```
+
+        ### Props
+        The `Card` component accepts the following props:
+        
+        | Prop | Type | Description |
+        | --- | --- | --- |
+        | title | string | The card's title |
+        | subtitle | string | Additional descriptive text for the card |
+        | className | string | Additional CSS class names |
+        | children | ReactNode | Content of the card (used when not using title/subtitle) |
+    </Section>
+
+    <Section title="CardHeader">
+        ### Description
+        A component for displaying a title and optional subtitle at the top of a card.
+
+        ### Usage
+        ```tsx
+        import { Card, CardHeader, CardBody } from "@crafted-ui/react";
+
+        <Card>
+          <CardHeader title="Card Title" subtitle="Card description" />
+          <CardBody>
+            <p>Card content goes here</p>
+          </CardBody>
+        </Card>
+        ```
+
+        ### Props
+        The `CardHeader` component accepts the following props:
+        
+        | Prop | Type | Description |
+        | --- | --- | --- |
+        | title | string | The header's title text |
+        | subtitle | string | Optional descriptive text |
+        | className | string | Additional CSS class names |
+        | children | ReactNode | Custom header content (used when not using title/subtitle) |
+    </Section>
+
+    <Section title="CardBody">
+        ### Description
+        A container for the main content of a card with appropriate padding.
+
+        ### Usage
+        ```tsx
+        import { Card, CardBody } from "@crafted-ui/react";
+
+        <Card title="Card Title">
+          <CardBody>
+            <p>This is the main content area of the card.</p>
+            <p>You can place any content here.</p>
+          </CardBody>
+        </Card>
+        ```
+
+        ### Props
+        | Prop | Type | Description |
+        | --- | --- | --- |
+        | className | string | Additional CSS class names |
+        | children | ReactNode | Content of the card body |
+    </Section>
+
+    <Section title="CardFooter">
+        ### Description
+        A component for displaying actions, metadata, or additional information at the bottom of a card.
+
+        ### Usage
+        ```tsx
+        import { Card, CardBody, CardFooter } from "@crafted-ui/react";
+
+        <Card title="Card Title">
+          <CardBody>
+            <p>This is the main content area of the card.</p>
+          </CardBody>
+          <CardFooter>
+            <div class="flex justify-between items-center">
+              <span class="text-sm text-gray-500">Last updated: April 1, 2025</span>
+              <button class="text-sm text-blue-500">Read more</button>
+            </div>
+          </CardFooter>
+        </Card>
+        ```
+
+        ### Props
+        | Prop | Type | Description |
+        | --- | --- | --- |
+        | className | string | Additional CSS class names |
+        | children | ReactNode | Content of the card footer |
+    </Section>
+
+    <Section title="Examples">
+        ### Basic Card
+        ```tsx
+        <Card title="Basic Card" subtitle="A simple card with a title and subtitle">
+          <CardBody>
+            <p>This is a basic card with a title and subtitle.</p>
+          </CardBody>
+        </Card>
+        ```
+
+        ### Card with Custom Header
+        ```tsx
+        <Card>
+          <CardHeader>
+            <div class="flex items-center justify-between">
+              <h3 class="text-lg font-semibold">Custom Header</h3>
+              <button class="text-sm text-blue-500">Action</button>
+            </div>
+          </CardHeader>
+          <CardBody>
+            <p>This card has a custom header with an action button.</p>
+          </CardBody>
+        </Card>
+        ```
+
+        ### Card with Multiple Content Sections
+        ```tsx
+        <Card title="Content Card">
+          <CardBody>
+            <div class="space-y-4">
+              <div class="p-4 bg-gray-100 rounded">
+                <h4 class="font-medium">Section 1</h4>
+                <p>Content for section one</p>
+              </div>
+              <div class="p-4 bg-gray-100 rounded">
+                <h4 class="font-medium">Section 2</h4>
+                <p>Content for section two</p>
+              </div>
+            </div>
+          </CardBody>
+        </Card>
+        ```
+
+        ### Card with Footer
+        ```tsx
+        <Card title="Card with Footer">
+          <CardBody>
+            <p>This card includes a footer section for actions or metadata.</p>
+          </CardBody>
+          <CardFooter>
+            <div class="flex justify-between">
+              <span class="text-sm text-gray-500">Created: April 1, 2025</span>
+              <div class="space-x-2">
+                <button class="px-3 py-1 text-sm bg-blue-500 text-white rounded">Save</button>
+                <button class="px-3 py-1 text-sm border border-gray-300 rounded">Cancel</button>
+              </div>
+            </div>
+          </CardFooter>
+        </Card>
+        ```
+
+        ### Complete Card with All Sections
+        ```tsx
+        <Card>
+          <CardHeader title="Complete Card" subtitle="Using all card components together" />
+          <CardBody>
+            <p>This example demonstrates using all card components together to create a complete card layout.</p>
+            <ul class="mt-4 space-y-2">
+              <li>Card - Main container</li>
+              <li>CardHeader - Title and subtitle</li>
+              <li>CardBody - Main content</li>
+              <li>CardFooter - Actions and metadata</li>
+            </ul>
+          </CardBody>
+          <CardFooter>
+            <div class="flex justify-end space-x-2">
+              <button class="px-3 py-1 text-sm bg-gray-200 rounded">Cancel</button>
+              <button class="px-3 py-1 text-sm bg-blue-500 text-white rounded">Continue</button>
+            </div>
+          </CardFooter>
+        </Card>
+        ```
+    </Section>
+
+    <Section title="Accessibility">
+        The Card component follows best practices for accessibility:
+        
+        - Use meaningful titles that clearly describe the card's purpose
+        - Ensure sufficient color contrast for all text within cards
+        - When using cards as interactive elements (like links or buttons), ensure they have appropriate keyboard focus states
+        - Use appropriate heading levels (h1-h6) within cards to maintain proper document hierarchy
+        
+        Cards are primarily visual containers, so ensure that the content within them is accessible and properly structured.
+    </Section>
 
 </BaseSidebar>
