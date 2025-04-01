@@ -1,0 +1,21 @@
+---
+import { classNames } from "@utils/classNames"
+
+interface Props {
+    isActive?: boolean;
+    className?: string;
+}
+
+const { 
+    isActive = false,
+    className
+ } = Astro.props;
+---
+<li class={classNames(
+            "text-muted-foreground",
+            "has-[.active]:text-primary has-[.active]:font-bold",
+            isActive ? "active text-primary font-bold" : "",
+            className
+        )}>
+    <slot />
+</li>

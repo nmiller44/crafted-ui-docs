@@ -1,0 +1,169 @@
+---
+title: 'Breadcrumb'
+description: 'A navigation component that helps users keep track of their location within the website.'
+---
+import BaseSidebar from "@layouts/BaseSidebar.astro";
+import SamplePage from "@components/SamplePage.astro";
+import Prose from '@components/Prose.astro';
+import Section from '@components/Section.astro';
+import Breadcrumb from '@components/breadcrumb/Breadcrumb.astro';
+import BreadcrumbList from '@components/breadcrumb/BreadcrumbList.astro';
+import BreadcrumbListItem from '@components/breadcrumb/BreadcrumbListItem.astro';
+
+<BaseSidebar title={frontmatter.title} description={frontmatter.description}>
+
+    <SamplePage>
+      <div class="max-w-md">
+        <Breadcrumb>
+          <BreadcrumbList>
+            <BreadcrumbListItem>
+              <a href="/">Home</a>
+            </BreadcrumbListItem>
+            <BreadcrumbListItem>
+              <svg    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" 
+                      className="size-3 mt-1">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+              </svg>
+            </BreadcrumbListItem>
+            <BreadcrumbListItem>
+              <a href="/docs">Docs</a>
+            </BreadcrumbListItem>
+            <BreadcrumbListItem>
+              <svg    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" 
+                      className="size-3 mt-1">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
+              </svg>
+            </BreadcrumbListItem>
+            <BreadcrumbListItem isActive={true}>
+              <div class="active">Breadcrumb</div>
+            </BreadcrumbListItem>
+          </BreadcrumbList>
+        </Breadcrumb>
+      </div>
+    </SamplePage>
+
+    <Section title="Overview">
+        The Breadcrumb component set provides a way to display the user's current location within a website's hierarchy. It consists of three components: Breadcrumb (container), BreadcrumbList (list container), and BreadcrumbListItem (individual links). These components are built on top of semantic HTML elements for better accessibility.
+    </Section>
+
+    <Section title="Breadcrumb">
+        ### Description
+        The root navigation component that wraps the breadcrumb elements.
+
+        ### Usage
+        ```tsx
+        import {  Breadcrumb, 
+                  BreadcrumbList, 
+                  BreadcrumbListItem } from "@crafted-ui/react";
+
+        <Breadcrumb>
+          <BreadcrumbList>
+            <BreadcrumbListItem>
+              <a href="/">Home</a>
+            </BreadcrumbListItem>
+            <span>/</span>
+            <BreadcrumbListItem isActive={true}>
+              Current Page
+            </BreadcrumbListItem>
+          </BreadcrumbList>
+        </Breadcrumb>
+        ```
+
+        ### Props
+        The `Breadcrumb` component accepts the following props:
+        
+        | Prop | Type | Description |
+        | --- | --- | --- |
+        | className | string | Additional CSS class names |
+        | children | ReactNode | Content of the breadcrumb container |
+    </Section>
+
+    <Section title="BreadcrumbList">
+        ### Description
+        A container for breadcrumb items, implemented as an unordered list for better accessibility.
+
+        ### Usage
+        ```tsx
+        import { Breadcrumb, BreadcrumbList } from "@crafted-ui/react";
+
+        <Breadcrumb>
+          <BreadcrumbList>
+            {/* Breadcrumb items go here */}
+          </BreadcrumbList>
+        </Breadcrumb>
+        ```
+
+        ### Props
+        The `BreadcrumbList` component accepts the following props:
+        
+        | Prop | Type | Description |
+        | --- | --- | --- |
+        | className | string | Additional CSS class names |
+        | children | ReactNode | Content of the breadcrumb list |
+    </Section>
+
+    <Section title="BreadcrumbListItem">
+        ### Description
+        Represents an individual item in the breadcrumb navigation. Can be marked as active to indicate the current page.
+
+        ### Usage with Links
+        ```tsx
+        import { Breadcrumb, BreadcrumbList, BreadcrumbListItem } from "@crafted-ui/react";
+
+        <Breadcrumb>
+          <BreadcrumbList>
+            <BreadcrumbListItem>
+              <a href="/">Home</a>
+            </BreadcrumbListItem>
+            <span>/</span>
+            <BreadcrumbListItem isActive={true}>
+              Current Page
+            </BreadcrumbListItem>
+          </BreadcrumbList>
+        </Breadcrumb>
+        ```
+
+        ### Usage with Custom Separators
+        ```tsx
+        import { Breadcrumb, BreadcrumbList, BreadcrumbListItem } from "@crafted-ui/react";
+
+        <Breadcrumb>
+          <BreadcrumbList>
+            <BreadcrumbListItem>
+              <a href="/">Home</a>
+            </BreadcrumbListItem>
+            <span>→</span>
+            <BreadcrumbListItem>
+              <a href="/docs">Documentation</a>
+            </BreadcrumbListItem>
+            <span>→</span>
+            <BreadcrumbListItem isActive={true}>
+              Components
+            </BreadcrumbListItem>
+          </BreadcrumbList>
+        </Breadcrumb>
+        ```
+
+        ### Props
+        | Prop | Type | Default | Description |
+        | --- | --- | --- | --- |
+        | className | string | undefined | Additional CSS class names |
+        | isActive | boolean | false | Whether the item represents the current page |
+        | children | ReactNode | undefined | Content of the breadcrumb item |
+    </Section>
+
+    <Section title="Accessibility">
+        The Breadcrumb component follows accessibility best practices by using semantic HTML elements:
+        
+        - The root component uses a `<nav>` element with an appropriate ARIA landmark
+        - The list container uses a `<ul>` element for proper list semantics
+        - Each item is a `<li>` element
+        
+        When implementing breadcrumbs, ensure that:
+        
+        1. Links have meaningful text (avoid "click here")
+        2. The current page item should not be a link but should be marked with `isActive={true}`
+        3. Separators are visually distinct and can be customized as needed
+    </Section>
+
+</BaseSidebar>

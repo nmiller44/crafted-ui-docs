@@ -1,0 +1,65 @@
+---
+title: 'Typography'
+description: 'Styling for headings, paragraphs, and text.'
+---
+import BaseSidebar from "@layouts/BaseSidebar.astro";
+import SamplePage from "@components/SamplePage.astro";
+import Section from '@components/Section.astro';
+import Heading1 from '@components/heading/Heading1.astro';
+import Heading2 from '@components/heading/Heading2.astro';
+import Heading3 from '@components/heading/Heading3.astro';
+import Heading4 from '@components/heading/Heading4.astro';
+import Heading5 from '@components/heading/Heading5.astro';
+import Prose from '@components/Prose.astro';
+
+<BaseSidebar title={frontmatter.title} description={frontmatter.description}>
+    <SamplePage>
+        <div class="lg:py-8 lg:px-6">
+            <Heading1 title="Typograpy" subtitle="Page headings should appear once per page." />
+            <div class="mt-6">
+                Page headings feature four extra large font size, a bold font weight, and tight tracking for emphasis.
+            </div>
+
+            <Section title="Section Title" subtitle="Add subtitle to any Heading.">
+                <Prose>
+                    Paragraph text is styled with a lighter color and a larger line height for readability.
+                </Prose>
+
+                <p class="text-foreground leading-7 [&:not(:first-child)]:mt-6">
+                    Additional children get a top margin to separate them from the previous paragraph.
+                </p>
+            </Section>
+        </div>
+    </SamplePage>
+
+    <Section title="Overview">
+        Crafted UI provides a set of typography styles for headings, paragraphs, and text. These styles are designed to be consistent and easy to use across different components and pages. Common Heading components are reused for specialty headings such as Pages, Sections, and Cards.
+    </Section>
+
+    <Section title="Headings">
+        ### Description
+        Headings are styled with a larger font size, bold font weight, and tight tracking for emphasis. The Heading1 component is used for page headings, while the Heading2 component is used for section titles.
+
+        ### Sample
+        <SamplePage>
+            <div class="space-y-12">
+                <Heading1 title="Heading1" subtitle="Page headings should appear once per page." />
+                <Heading2 title="Heading2" subtitle="Used for Section Titles" />
+                <Heading3 title="Heading3" subtitle="Add subtitle to any Heading." />
+                <Heading4 title="Heading4" subtitle="Extra Heading sizes provides." />
+                <Heading5 title="Heading5" subtitle="Any distinction from standard text." />
+            </div>
+        </SamplePage>
+
+        ### Usage
+        ```tsx
+        import { Heading1, Heading2, Heading3, Heading4, Heading5 } from "@crafted-ui/react";
+
+        <Heading1 title="Heading1" subtitle="Page headings should appear once per page." />
+        <Heading2 title="Heading2" subtitle="Used for Section Titles" />
+        <Heading3 title="Heading3" subtitle="Add subtitle to any Heading." />
+        <Heading4 title="Heading4" subtitle="Extra Heading sizes provides." />
+        <Heading5 title="Heading5" subtitle="Any distinction from standard text." />
+        ```
+    </Section>
+</BaseSidebar> 
