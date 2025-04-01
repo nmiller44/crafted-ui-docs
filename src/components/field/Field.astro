@@ -1,0 +1,14 @@
+---
+import { classNames } from "@utils/classNames"
+
+interface Props {
+    className?: string;
+}
+
+const { 
+    className
+ } = Astro.props;
+---
+<div class={classNames("space-y-1.5", className)}>
+    <slot />
+</div>

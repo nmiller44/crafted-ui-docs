@@ -1,0 +1,14 @@
+---
+import { classNames } from "@utils/classNames"
+
+interface Props {
+    className?: string;
+}
+
+const { 
+    className
+ } = Astro.props;
+---
+<ul class={classNames("flex space-x-2 items-center", className)}>
+    <slot />
+</ul>

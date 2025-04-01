@@ -1,0 +1,14 @@
+---
+import { classNames } from "@utils/classNames"
+
+interface Props {
+    className?: string;
+}
+
+const { 
+    className
+ } = Astro.props;
+---
+<nav class={classNames("", className)}>
+    <slot />
+</nav>
