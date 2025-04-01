@@ -1,0 +1,22 @@
+---
+import { classNames } from "@utils/classNames"
+import CardHeader from "@components/card/CardHeader.astro";
+
+interface Props {
+    title?: string;
+    subtitle?: string;
+    className?: string;
+}
+
+const { title, subtitle, className } = Astro.props;
+---
+<div class={classNames( 
+                "flex flex-col",
+                "rounded-md border border-border bg-card text-card-foreground shadow",
+                className)}>
+    {
+        !!title
+        ? <CardHeader title={title} subtitle={subtitle} />
+        : <slot />
+    }
+</div>
