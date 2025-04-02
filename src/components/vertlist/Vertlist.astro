@@ -5,10 +5,8 @@ interface Props {
     className?: string;
 }
 
-const { 
-    className
- } = Astro.props;
+const { className } = Astro.props;
 ---
-<div class={classNames("p-5 grow", className)}>
+<ul class={classNames("flex flex-col space-y-2", className)}>
     <slot />
-</div>
+</ul>

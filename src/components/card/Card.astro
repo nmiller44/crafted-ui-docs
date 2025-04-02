@@ -15,8 +15,8 @@ const { title, subtitle, className } = Astro.props;
                 "rounded-md border border-border bg-card text-card-foreground shadow",
                 className)}>
     {
-        !!title
-        ? <CardHeader title={title} subtitle={subtitle} />
-        : <slot />
+        !!title &&
+            <CardHeader title={title} subtitle={subtitle} />
     }
+    <slot />
 </div>

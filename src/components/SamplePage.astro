@@ -5,9 +5,9 @@ interface Props {
 
 const { full = false } = Astro.props;
 ---
-<div class="rounded-lg border border-gray-200 bg-white shadow-sm">
+<div class="rounded-lg border border-border bg-background shadow-sm not-prose">
     <div class="max-w-4xl m-auto">
-        <div class={ full ? "" : "px-4 py-6 lg:py-8" }>
+        <div class={ full ? "" : "px-6 py-6 lg:py-8" }>
             <slot />
         </div>
     </div>

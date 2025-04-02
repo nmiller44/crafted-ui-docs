@@ -1,13 +1,11 @@
 ---
 import Base from "./Base.astro";
-import HeaderPage from "../components/HeaderPage.astro";
-import Sidebar from "../components/Sidebar.astro";
-import SidebarContent from "../components/SidebarContent.astro";
-import SidebarSection from "../components/SidebarSection.astro";
-import SidebarSectionHeader from "../components/SidebarSectionHeader.astro";
-import SidebarSectionContent from "../components/SidebarSectionContent.astro";
-import SidebarSectionContentItem from "../components/SidebarSectionContentItem.astro";
-import { sidebarComponents, sidebarLinks } from "../data/sidebar";
+import HeaderPage from "@components/HeaderPage.astro";
+import Sidebar from "@components/Sidebar.astro";
+import Vertlist from "@components/vertlist/Vertlist.astro";
+import VertlistItem from "@components/vertlist/VertlistItem.astro";
+import VertlistHeader from "@components/vertlist/VertlistHeader.astro";
+import { sidebarLinks } from "@data/sidebar";
 
 const { 
     title = "Crafted UI Docs", 
@@ -17,22 +15,20 @@ const {
 <Base title={title} description={description}>
     <div class="mx-auto max-w-7xl lg:flex lg:gap-10 px-4 lg:px-6">
         <div class="hidden lg:block">
-            <Sidebar>
-                <SidebarContent>
-                    { sidebarLinks.map((sect) => (
-                        <SidebarSection>
-                            <SidebarSectionHeader>{ sect.title }</SidebarSectionHeader>
-                            <SidebarSectionContent>
-                                { sect.items.map((item) => (
-                                    <SidebarSectionContentItem href={item.href}>{item.title}</SidebarSectionContentItem>
-                                ))}
-                            </SidebarSectionContent>
-                        </SidebarSection>                       
-                    ))}
-                </SidebarContent>
+            <Sidebar className="space-y-8">
+                { sidebarLinks.map((sect) => (
+                    <Vertlist>
+                        <VertlistHeader>{ sect.title }</VertlistHeader>
+                            { sect.items.map((item) => (
+                                <VertlistItem>
+                                    <a href={item.href}>{item.title}</a>
+                                </VertlistItem>
+                            ))}
+                    </Vertlist>                       
+                ))}
             </Sidebar>
         </div>
-        <div class="max-w-2xl">
+        <div class="grow max-w-5xl">
             <main class="py-6 lg:py-8">
                 <HeaderPage title={ title } subtitle={ description } />
                 <div class="flex flex-col pt-8 pb-12">
