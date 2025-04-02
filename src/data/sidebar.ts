@@ -28,6 +28,7 @@ export const sidebarLinks = [
             { title: 'Header Section', href: '/docs/components/header-section' },
             { title: 'Sidebar', href: '/docs/components/sidebar' },
             { title: 'Tablist', href: '/docs/components/tablist' },
+            { title: 'Vertlist', href: '/docs/components/vertlist' },
         ]
     },
     {
