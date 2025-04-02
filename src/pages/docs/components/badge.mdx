@@ -1,0 +1,80 @@
+---
+title: 'Badge'
+description: 'Color-coded indicators for tags, categories, and statuses.'
+---
+import BaseSidebar from "../../../layouts/BaseSidebar.astro";
+import SamplePage from "../../../components/SamplePage.astro";
+import Section from '../../../components/Section.astro';
+
+import Badge from "../../../components/Badge.astro";
+
+import Heading3 from '../../../components/heading/Heading3.astro';
+import Heading5 from '../../../components/heading/Heading5.astro';
+
+<BaseSidebar title={frontmatter.title} description={frontmatter.description}>
+    <SamplePage>
+        <div class="flex flex-col">
+            <div class="flex space-x-2">
+                <Heading5>
+                    Add Badges component page to docs
+                </Heading5>
+                <div class="pl-1">
+                    <Badge>Badge</Badge>
+                </div>
+            </div>
+        </div>
+    </SamplePage>
+
+    <Section title="Examples">
+        <Heading3 title="Colors" />
+
+        <SamplePage>
+            <div class="flex space-x-4">
+                <Badge>Default</Badge>
+                <Badge color="green">Green</Badge>
+                <Badge color="red">Red</Badge>
+                <Badge color="yellow">Yellow</Badge>
+                <Badge color="blue">Blue</Badge>
+                <Badge color="indigo">Indigo</Badge>
+                <Badge color="purple">Purple</Badge>
+            </div>
+        </SamplePage>
+
+        <Heading3 title="Outline" />
+
+        <SamplePage>
+            <div class="flex space-x-4">
+                <Badge outline>Default</Badge>
+                <Badge color="green" outline>Green</Badge>
+                <Badge color="red" outline>Red</Badge>
+                <Badge color="yellow" outline>Yellow</Badge>
+                <Badge color="blue" outline>Blue</Badge>
+                <Badge color="indigo" outline>Indigo</Badge>
+                <Badge color="purple" outline>Purple</Badge>
+            </div>
+        </SamplePage>
+
+        <Heading3 title="Pill" />
+
+        <SamplePage>
+            <div class="flex space-x-4">
+                <Badge pill>Default</Badge>
+                <Badge color="green" pill>Green</Badge>
+                <Badge color="red" outline pill>Red</Badge>
+                <Badge color="yellow" pill>Yellow</Badge>
+                <Badge color="blue" outline pill>Blue</Badge>
+                <Badge color="indigo" pill>Indigo</Badge>
+                <Badge color="purple" outline pill>Purple</Badge>
+            </div>
+        </SamplePage>
+
+        <Heading3 title="Links" />
+
+        Coming soon, on the roadmap for v1
+
+    </Section>
+
+    <Section title="Props">
+        
+    </Section>
+</BaseSidebar>

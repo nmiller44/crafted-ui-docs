@@ -10,7 +10,7 @@ export default defineConfig({
   integrations: [mdx()],
 
   redirects: {
-    '/docs/components': '/docs/components/button'
+    '/docs/components': '/docs/components/badge'
   },
 
   vite: {
