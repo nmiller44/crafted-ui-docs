@@ -1,7 +1,17 @@
 ---
+import { classNames } from "@utils/classNames"
+
+interface Props {
+    className?: string;
+}
+
+const { className } = Astro.props;
 ---
 <aside>
-    <div class="min-w-44">
+    <div class={classNames(  "min-w-sidebar group bg-background",
+                            "flex flex-col space-y-4",
+                            "pt-8",
+                            className)}>
         <slot />
     </div>
 </aside>
