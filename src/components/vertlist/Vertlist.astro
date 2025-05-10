@@ -7,6 +7,8 @@ interface Props {
 
 const { className } = Astro.props;
 ---
-<ul class={classNames("flex flex-col space-y-2", className)}>
+<ul class={classNames(
+            "flex flex-col space-y-2", 
+            className)}>
     <slot />
 </ul>
