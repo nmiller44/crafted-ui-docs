@@ -7,10 +7,10 @@ interface Props {
         'green' | 'red' | 'yellow' | 'blue' | 'indigo' | 'purple' | 'pink';
     outline?: boolean;
     pill?: boolean;
-    class?: string;
+    className?: string;
 }
 
-const { title, clr = 'default', outline = false, pill = false, class: className } = Astro.props;
+const { title, clr = 'default', outline = false, pill = false, className } = Astro.props;
 
 const colorStyle: any = {
     blank: 'bg-transparent text-foreground ring-transparent',

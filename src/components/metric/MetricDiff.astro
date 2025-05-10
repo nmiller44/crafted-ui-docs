@@ -1,5 +1,4 @@
 ---
-import { classNames } from "@utils/classNames"
 import type { HTMLAttributes } from "astro/types";
 import Badge from "../badge/Badge.astro";
 
@@ -19,7 +18,7 @@ const dirToColor: { blank: "blank"; positive: "green"; negative: "red"; neutral:
 }
 ---
 {diff ? (
-    <Badge clr={dirToColor[dir]} class={className} {...props}>{diff}</Badge>
+    <Badge clr={dirToColor[dir]} className={className}>{diff}</Badge>
 ) : (
     <div class={className} {...props}><slot /></div>
 )}
