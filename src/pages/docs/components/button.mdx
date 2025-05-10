@@ -2,38 +2,248 @@
 title: 'Button'
 description: 'A button styled component for user interaction.'
 ---
-import BaseSidebar from "../../../layouts/BaseSidebar.astro";
-import SamplePage from "../../../components/SamplePage.astro";
-import Button from "../../../components/Button.astro";
+import BaseSidebar from "@/layouts/BaseSidebar.astro";
+import SamplePage from "@/components/SamplePage.astro";
+import Button from "@/components/button/Button.astro";
 
-import Prose from '../../../components/Prose.astro';
-import Section from '../../../components/Section.astro';
+import Prose from '@/components/Prose.astro';
+import Section from '@/components/Section.astro';
+import Heading3 from '@/components/heading/Heading3.astro';
 
 <BaseSidebar title={frontmatter.title} description={frontmatter.description}>
 
     <SamplePage>
-        <div class="py-8 grid grid-cols-4 lg:grid-cols-6 gap-4">
-            <Button>Button</Button>
-            <Button color="red">Button</Button>
-            <Button color="yellow">Button</Button>
-            <Button color="blue">Button</Button>
-            <Button color="indigo">Button</Button>
-            <Button color="white">Button</Button>
+        <div className="space-y-8">
+            {/* Color Variants */}
+            <div class="flex flex-col space-y-4">
+                <Heading3 title="Color Variants" />
+                <div className="flex flex-wrap gap-4">
+                    <Button>Default</Button>
+                    <Button clr="primary">Primary</Button>
+                    <Button clr="secondary">Secondary</Button>
+                    <Button clr="accent">Accent</Button>
+                    <Button clr="destructive">Destructive</Button>
+                    <Button clr="muted">Muted</Button>
+                    <Button clr="blank">Blank</Button>
+                </div>
+            </div>
+
+            <div class="flex flex-col space-y-4">
+                <Heading3 title="Color Options" />
+                <div className="flex flex-wrap gap-4">
+                    <Button clr="green">Green</Button>
+                    <Button clr="red">Red</Button>
+                    <Button clr="yellow">Yellow</Button>
+                    <Button clr="blue">Blue</Button>
+                    <Button clr="indigo">Indigo</Button>
+                    <Button clr="purple">Purple</Button>
+                    <Button clr="pink">Pink</Button>
+                </div>
+            </div>
+
+            <div class="flex flex-col space-y-4">
+                <Heading3 title="Outline Variants" />
+                <div className="flex flex-wrap gap-4">
+                    <Button outline>Default</Button>
+                    <Button clr="primary" outline>Primary</Button>
+                    <Button clr="secondary" outline>Secondary</Button>
+                    <Button clr="destructive" outline>Destructive</Button>
+                    <Button clr="red" outline>Red</Button>
+                    <Button clr="blue" outline>Blue</Button>
+                </div>
+            </div>
         </div>
     </SamplePage>
 
-    <Section title="Usage">
-        ### Usage
-        The `Button` component can be passed an optional `type` parameter to change the button style. The default style is `primary`.
+    <Section title="Overview">
+        The Button component provides a standardized way to create interactive buttons throughout your application. It comes with various color options, outline styles, and shape variants to support different visual hierarchies and usage contexts.
+    </Section>
 
-        #### Default Usage
-        ```astro
-        <Button>Button</Button>
+    <Section title="Button">
+        ### Description
+        A versatile button component that handles user interactions with customizable styling options.
+
+        ### Usage
+        ```tsx
+        import { Button } from "@crafted-ui/react";
+
+        <Button>Click me</Button>
         ```
 
-        #### Custom Usage
-        ```astro
-        <Button type="secondary">Button</Button>
+        ### Props
+        The `Button` component accepts the following props:
+        
+        | Prop | Type | Default | Description |
+        | --- | --- | --- | --- |
+        | clr | 'blank' \| 'default' \| 'primary' \| 'muted' \| 'secondary' \| 'accent' \| 'destructive' \| 'green' \| 'red' \| 'yellow' \| 'blue' \| 'indigo' \| 'purple' \| 'pink' | 'default' | Sets the button's color scheme |
+        | outline | boolean | false | When true, renders an outlined version of the button |
+        | full | boolean | false | When true, makes the button take the full width of its container |
+        | rounded | boolean | false | When true, applies fully rounded corners (border-radius) |
+        | type | "button" \| "submit" \| "reset" | "button" | HTML button type attribute |
+        | className | string | undefined | Additional CSS class names |
+        | children | ReactNode | undefined | Content of the button |
+
+        The component also accepts all standard HTML button attributes.
+    </Section>
+
+    <Section title="Color Variants">
+        ### Design Cue Colors
+        Standard buttons with colors based on design cue variables.
+
+        <SamplePage>
+            <div className="flex flex-wrap gap-4">
+                <Button>Default</Button>
+                <Button clr="primary">Primary</Button>
+                <Button clr="secondary">Secondary</Button>
+                <Button clr="accent">Accent</Button>
+                <Button clr="destructive">Destructive</Button>
+                <Button clr="muted">Muted</Button>
+                <Button clr="blank">Blank</Button>
+            </div>
+        </SamplePage>
+
+        ```tsx
+        <Button>Default</Button>
+        <Button clr="primary">Primary</Button>
+        <Button clr="secondary">Secondary</Button>
+        <Button clr="accent">Accent</Button>
+        <Button clr="destructive">Destructive</Button>
+        <Button clr="muted">Muted</Button>
+        <Button clr="blank">Blank</Button>
+        ```
+
+        ### Color Variants
+        Base colors for buttons with specific color choices.
+
+        <SamplePage>
+            <div className="flex flex-wrap gap-4">
+                <Button clr="green">Green</Button>
+                <Button clr="red">Red</Button>
+                <Button clr="yellow">Yellow</Button>
+                <Button clr="blue">Blue</Button>
+                <Button clr="indigo">Indigo</Button>
+                <Button clr="purple">Purple</Button>
+                <Button clr="pink">Pink</Button>
+            </div>
+        </SamplePage>
+
+        ```tsx
+        <Button clr="green">Green</Button>
+        <Button clr="red">Red</Button>
+        <Button clr="yellow">Yellow</Button>
+        <Button clr="blue">Blue</Button>
+        <Button clr="indigo">Indigo</Button>
+        <Button clr="purple">Purple</Button>
+        <Button clr="pink">Pink</Button>
+        ```
+
+        ### Outline Variants
+        All button colors offer outline variants.
+
+        <SamplePage>
+            <div className="flex flex-wrap gap-4">
+                <Button outline>Default</Button>
+                <Button clr="primary" outline>Primary</Button>
+                <Button clr="accent" outline>Accent</Button>
+                <Button clr="destructive" outline>Destructive</Button>
+                <Button clr="blue" outline>Blue</Button>
+                <Button clr="purple" outline>Purple</Button>
+            </div>
+
+        </SamplePage>
+
+        ```tsx
+        <Button outline>Default</Button>
+        <Button clr="primary" outline>Primary</Button>
+        <Button clr="accent" outline>Accent</Button>
+        <Button clr="destructive" outline>Destructive</Button>
+        <Button clr="blue" outline>Blue</Button>
+        <Button clr="purple" outline>Purple</Button>
+        ```
+    </Section>
+
+    <Section title="Style Variants">
+        ### Full Width
+        Makes the button take up 100% of the available width.
+
+        <SamplePage>
+            <div className="flex flex-wrap gap-4">
+                <Button full>Full Width Button</Button>
+            </div>
+        </SamplePage>
+        
+        ```tsx
+        <Button full>Full Width Button</Button>
+        ```
+
+        ### Rounded
+        Applies fully rounded corners to the button.
+
+        <SamplePage>
+            <div className="flex flex-wrap gap-4">
+                <Button rounded>Rounded Button</Button>
+            </div>
+        </SamplePage>
+        
+        ```tsx
+        <Button rounded>Rounded Button</Button>
+        ```
+
+        ### Combined Variants
+        Variants can be combined for more specific styling:
+
+        <SamplePage>
+            <div className="flex flex-wrap gap-4">
+                <Button clr="primary" outline rounded>Primary Outlined Rounded</Button>
+            </div>
+        </SamplePage>
+        
+        ```tsx
+        <Button clr="primary" outline rounded>
+          Primary Outlined Rounded
+        </Button>
+        ```
+    </Section>
+
+    <Section title="Accessibility">
+        The Button component follows accessibility best practices:
+        
+        - Uses the native HTML `<button>` element for proper semantics
+        - Maintains proper focus styles for keyboard navigation
+        - Includes appropriate color contrast ratios
+        - Preserves the button's type attribute for form submission control
+        
+        When implementing buttons, ensure that:
+        
+        1. Button text clearly communicates the action that will occur
+        2. Primary actions are visually distinct from secondary actions
+        3. Destructive actions are appropriately styled to indicate caution
+    </Section>
+
+    <Section title="Examples">
+        ### Basic Button
+        ```tsx
+        <Button>Click me</Button>
+        ```
+
+        ### Submit Button in a Form
+        ```tsx
+        <Button type="submit" clr="primary">Submit Form</Button>
+        ```
+
+        ### Button with Icon
+        ```tsx
+        <Button clr="primary">
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
+          </svg>
+          <span>Back</span>
+        </Button>
+        ```
+
+        ### Destructive Action Button
+        ```tsx
+        <Button clr="destructive">Delete Account</Button>
         ```
     </Section>
 
