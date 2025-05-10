@@ -1,7 +1,7 @@
 ---
 import Base from '../layouts/Base.astro'
 import Pane from '../components/Pane.astro'
-import Button from '../components/Button.astro'
+import Button from '../components/button/Button.astro'
 
 const title = 'Crafted UI Docs'
 const description = 'Documentation for the Crafted UI component library.'
@@ -17,8 +17,8 @@ const description = 'Documentation for the Crafted UI component library.'
 					Crafted UI provided a great looking set of modern components that help you build faster.
 				</p>
 				<div class="mt-8">
-					<Button type="link" href="/docs/components">
-						View Components
+					<Button type="button" color="primary">
+						<a href="/docs/components">View Components</a>
 					</Button>
 				</div>
 			</div>
