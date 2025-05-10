@@ -12,7 +12,7 @@ import TablistItem from '@components/tablist/TablistItem.astro';
 <BaseSidebar title={frontmatter.title} description={frontmatter.description}>
 
     <SamplePage>
-      <div class="max-w-md">
+      <div class="max-w-md group bg-background">
         <Tablist bordered={true}>
           <TablistItem>
             <a href="#overview">Overview</a>
@@ -31,12 +31,101 @@ import TablistItem from '@components/tablist/TablistItem.astro';
     </SamplePage>
 
     <Section title="Overview">
-        The Tablist component set provides a way to organize content into multiple selectable tabs. It consists of two components: Tablist (container) and TablistItem (individual tabs). These components are built on top of semantic HTML elements for better accessibility.
+        The Tablist component set provides a way to organize content into multiple selectable tabs. It consists of two components: Tablist (container) and TablistItem (individual tabs). These components are built on top of semantic HTML elements for better accessibility and adapt to different parent background contexts.
+    </Section>
+
+    <Section title="Variations">
+        ### Bordered vs. Non-bordered
+        The Tablist component can be displayed with or without a bottom border. When the `bordered` prop is set to `true`, the active tab is highlighted with a primary-colored bottom border.
+
+        <SamplePage>
+          <div class="max-w-md flex flex-col space-y-6">
+            <Tablist bordered={true}>
+              <TablistItem>
+                <a href="#tab1" class="active">Tab 1</a>
+              </TablistItem>
+              <TablistItem>
+                <a href="#tab2">Tab 2</a>
+              </TablistItem>
+              <TablistItem>
+                <a href="#tab3">Tab 3</a>
+              </TablistItem>
+            </Tablist>
+
+            <Tablist>
+              <TablistItem>
+                <a href="#tab1" class="active">Tab 1</a>
+              </TablistItem>
+              <TablistItem>
+                <a href="#tab2">Tab 2</a>
+              </TablistItem>
+              <TablistItem>
+                <a href="#tab3">Tab 3</a>
+              </TablistItem>
+            </Tablist>
+          </div>
+        </SamplePage>
+
+        ```tsx
+        // Bordered tablist
+        <Tablist bordered={true}>
+          <TablistItem><a href="#tab1" className="active">Tab 1</a></TablistItem>
+          <TablistItem><a href="#tab2">Tab 2</a></TablistItem>
+          <TablistItem><a href="#tab3">Tab 3</a></TablistItem>
+        </Tablist>
+
+        // Non-bordered tablist
+        <Tablist>
+          <TablistItem><a href="#tab1" className="active">Tab 1</a></TablistItem>
+          <TablistItem><a href="#tab2">Tab 2</a></TablistItem>
+          <TablistItem><a href="#tab3">Tab 3</a></TablistItem>
+        </Tablist>
+        ```
+
+        ### Background Color Adaptations
+        The Tablist component automatically adapts its styling based on the parent element's background color. This ensures proper contrast and visual consistency across different UI contexts.
+
+        ```tsx
+        // On default background
+        <div className="bg-background">
+          <Tablist>
+            <TablistItem><div className="active">Tab 1</div></TablistItem>
+            <TablistItem><a href="#">Tab 2</a></TablistItem>
+            <TablistItem><a href="#">Tab 3</a></TablistItem>
+          </Tablist>
+        </div>
+
+        // On primary background
+        <div className="bg-primary">
+          <Tablist>
+            <TablistItem><div className="active">Tab 1</div></TablistItem>
+            <TablistItem><a href="#">Tab 2</a></TablistItem>
+            <TablistItem><a href="#">Tab 3</a></TablistItem>
+          </Tablist>
+        </div>
+
+        // On foreground background
+        <div className="bg-foreground">
+          <Tablist>
+            <TablistItem><div className="active">Tab 1</div></TablistItem>
+            <TablistItem><a href="#">Tab 2</a></TablistItem>
+            <TablistItem><a href="#">Tab 3</a></TablistItem>
+          </Tablist>
+        </div>
+        ```
+
+        The component automatically adjusts:
+        - Text color for better contrast
+        - Hover background colors
+        - Active tab styling
+        - Border colors (when bordered)
+
+        This contextual adaptation means you don't need to manually adjust styles when using Tablist on different background colors.
     </Section>
 
     <Section title="Tablist">
         ### Description
-        The root container component that wraps the tablist elements.
+        The root container component that wraps the tablist elements. It can be used with or without borders and adapts to various parent background contexts.
 
         ### Usage
         ```tsx
@@ -47,7 +136,7 @@ import TablistItem from '@components/tablist/TablistItem.astro';
             <a href="#tab1">Tab 1</a>
           </TablistItem>
           <TablistItem>
-            <a href="#tab2" class="active">Tab 2</a>
+            <a href="#tab2" className="active">Tab 2</a>
           </TablistItem>
           <TablistItem>
             <a href="#tab3">Tab 3</a>
@@ -63,11 +152,13 @@ import TablistItem from '@components/tablist/TablistItem.astro';
         | bordered | boolean | false | Whether to show a bottom border on the tablist container |
         | className | string | undefined | Additional CSS class names |
         | children | ReactNode | undefined | Content of the tablist container |
+        
+        Plus all standard HTML props for the `ul` element.
     </Section>
 
     <Section title="TablistItem">
         ### Description
-        Represents an individual item in the tablist. The active tab can be indicated by adding the `active` class to the child element.
+        Represents an individual item in the tablist. The active tab can be indicated by adding the `active` class to the child element. TablistItem automatically adapts its styling based on the parent Tablist's context.
 
         ### Usage with Links
         ```tsx
@@ -78,7 +169,7 @@ import TablistItem from '@components/tablist/TablistItem.astro';
             <a href="#tab1">Tab 1</a>
           </TablistItem>
           <TablistItem>
-            <a href="#tab2" class="active">Tab 2</a>
+            <a href="#tab2" className="active">Tab 2</a>
           </TablistItem>
           <TablistItem>
             <a href="#tab3">Tab 3</a>
@@ -94,22 +185,54 @@ import TablistItem from '@components/tablist/TablistItem.astro';
           <TablistItem>
             <div>
               <span>Tab 1</span>
-              <span class="ml-2 text-xs text-muted-foreground">(10)</span>
+              <span className="ml-2 text-xs text-muted-foreground">(10)</span>
             </div>
           </TablistItem>
           <TablistItem>
-            <div class="active">
+            <div className="active">
               <span>Tab 2</span>
-              <span class="ml-2 text-xs text-muted-foreground">(5)</span>
+              <span className="ml-2 text-xs text-muted-foreground">(5)</span>
             </div>
           </TablistItem>
           <TablistItem>
             <div>
               <span>Tab 3</span>
-              <span class="ml-2 text-xs text-muted-foreground">(3)</span>
+              <span className="ml-2 text-xs text-muted-foreground">(3)</span>
             </div>
           </TablistItem>
         </Tablist>
+        ```
+
+        ### Variations
+        The Tablist adapts to different parent background contexts:
+        
+        ```tsx
+        // On default background
+        <div className="bg-background">
+            <Tablist>
+                <TablistItem><div className="active">Tab 1</div></TablistItem>
+                <TablistItem><a href="#">Tab 2</a></TablistItem>
+                <TablistItem><a href="#">Tab 3</a></TablistItem>
+            </Tablist>
+        </div>
+
+        // On primary background
+        <div className="bg-primary">
+            <Tablist>
+                <TablistItem><div className="active">Tab 1</div></TablistItem>
+                <TablistItem><a href="#">Tab 2</a></TablistItem>
+                <TablistItem><a href="#">Tab 3</a></TablistItem>
+            </Tablist>
+        </div>
+
+        // On foreground background
+        <div className="bg-foreground">
+            <Tablist>
+                <TablistItem><div className="active">Tab 1</div></TablistItem>
+                <TablistItem><a href="#">Tab 2</a></TablistItem>
+                <TablistItem><a href="#">Tab 3</a></TablistItem>
+            </Tablist>
+        </div>
         ```
 
         ### Props
@@ -117,6 +240,8 @@ import TablistItem from '@components/tablist/TablistItem.astro';
         | --- | --- | --- | --- |
         | className | string | undefined | Additional CSS class names |
         | children | ReactNode | undefined | Content of the tablist item |
+        
+        Plus all standard HTML props for the `li` element.
     </Section>
 
     <Section title="Accessibility">
