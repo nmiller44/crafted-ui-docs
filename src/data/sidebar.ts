@@ -38,7 +38,7 @@ export const sidebarLinks = [
     {
         title: 'Forms',
         items: [
-            { title: 'Form', href: '/docs/forms/forms' },
+            { title: 'Form', href: '/docs/forms/form' },
             { title: 'Field', href: '/docs/forms/field' },
         ]
     }

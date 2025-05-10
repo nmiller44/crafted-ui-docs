@@ -1,0 +1,183 @@
+---
+title: 'Forms'
+description: 'Crafted UI utilizes the Base UI Form component for flexible validation and error handling.'
+---
+import BaseSidebar from "../../../layouts/BaseSidebar.astro";
+import SamplePage from "../../../components/SamplePage.astro";
+import HeaderPage from "../../../components/HeaderPage.astro";
+import Section from '../../../components/Section.astro';
+import Prose from '../../../components/Prose.astro';
+import Field from '../../../components/field/Field.astro';
+import FieldLabel from '../../../components/field/FieldLabel.astro';
+import FieldError from '../../../components/field/FieldError.astro';
+import Input from '../../../components/input/Input.astro';
+import Button from '../../../components/button/Button.astro';
+import Fieldset from '../../../components/fieldset/Fieldset.astro';
+
+<BaseSidebar title={frontmatter.title} description={frontmatter.description}>
+    <SamplePage>
+        <div class="py-8 px-6">
+            <HeaderPage>Form Component</HeaderPage>
+            <div class="max-w-2xl">
+                <div class="space-y-8 py-6">
+                    <form>
+                        <Fieldset>
+                            <Field>
+                                <FieldLabel>Full Name</FieldLabel>
+                                <Input 
+                                    type="text" 
+                                    id="name" 
+                                />
+                            </Field>
+                            
+                            <Field>
+                                <FieldLabel>Email</FieldLabel>
+                                <Input 
+                                    type="email" 
+                                    id="email" 
+                                />
+                            </Field>
+                            
+                            <Field>
+                                <FieldLabel>Message</FieldLabel>
+                                <textarea 
+                                    id="message" 
+                                    rows={4} 
+                                    className="w-full rounded-md border border-neutral-300 px-3 py-2 text-sm shadow-sm" 
+                                ></textarea>
+                            </Field>
+                            <div>
+                                <Button clr="primary">Submit</Button>
+                            </div>    
+                        </Fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </SamplePage>
+
+    <Section title="Overview">
+        The Form component in Crafted UI is a thin wrapper around the Base UI Form component, providing a seamless integration with the rest of your application. It handles form submissions, validation, and error handling with a clean, accessible interface.
+        
+        Form is designed to work together with the Field, FieldLabel, FieldError, and Input components to create complete form experiences.
+    </Section>
+
+    <Section title="Usage">
+        ### Basic Form
+        
+        ```tsx
+        import { Form, Field, FieldLabel, Input, Button } from "@crafted-ui/react";
+
+        <Form onSubmit={(event) => {
+          event.preventDefault();
+          // Handle form submission
+        }}>
+          <Field>
+            <FieldLabel>Username</FieldLabel>
+            <Input name="username" required />
+          </Field>
+          
+          <Field>
+            <FieldLabel>Password</FieldLabel>
+            <Input type="password" name="password" required />
+          </Field>
+          
+          <Button type="submit">Sign In</Button>
+        </Form>
+        ```
+
+        ### Form with Fieldset
+        
+        Use the Fieldset component to group related fields:
+        
+        ```tsx
+        import { Form } from "@crafted-ui/react";
+        import { Field, FieldLabel, FieldError } from "@crafted-ui/react";
+        import { Fieldset } from "@crafted-ui/react";
+        import { Input, Button } from "@crafted-ui/react";
+
+        <Form onSubmit={handleSubmit} className="space-y-6">
+          <Fieldset title="Personal Information" subtitle="Tell us about yourself">
+            <Field>
+              <FieldLabel>First Name</FieldLabel>
+              <Input name="firstName" required />
+            </Field>
+            
+            <Field>
+              <FieldLabel>Last Name</FieldLabel>
+              <Input name="lastName" required />
+            </Field>
+            
+            <Field>
+              <FieldLabel>Email</FieldLabel>
+              <Input name="email" type="email" required />
+            </Field>
+          </Fieldset>
+          
+          <Fieldset title="Address" subtitle="Where should we send your order?">
+            <Field>
+              <FieldLabel>Street Address</FieldLabel>
+              <Input name="street" required />
+            </Field>
+            
+            <Field>
+              <FieldLabel>City</FieldLabel>
+              <Input name="city" required />
+            </Field>
+            
+            <div className="grid grid-cols-2 gap-4">
+              <Field>
+                <FieldLabel>State</FieldLabel>
+                <Input name="state" required />
+              </Field>
+              
+              <Field>
+                <FieldLabel>Zip Code</FieldLabel>
+                <Input name="zipCode" required />
+              </Field>
+            </div>
+          </Fieldset>
+          
+          <Button type="submit">Submit</Button>
+        </Form>
+        ```
+    </Section>
+
+    <Section title="Props">
+        The `Form` component accepts all standard HTML form attributes and props from the `@base-ui-components/react` Form component, plus:
+        
+        | Prop | Type | Description |
+        | --- | --- | --- |
+        | className | string | Additional CSS class names to apply to the form |
+        | children | ReactNode | The content of the form |
+        | onSubmit | (event: React.FormEvent) => void | Form submission handler function |
+        | ref | React.Ref | Reference to the underlying form element |
+    </Section>
+
+    <Section title="Accessibility">
+        The Form component follows best practices for accessibility:
+        
+        - Uses semantic HTML form elements
+        - Supports keyboard navigation
+        - Form elements can be properly labeled
+        - Works with screen readers
+        - Error messages are properly associated with form inputs
+        
+        When implementing forms:
+        
+        1. Always use labels for form inputs
+        2. Provide clear error messages when validation fails
+        3. Use aria attributes when necessary for complex form interfaces
+        4. Ensure error states are communicated both visually and to assistive technology
+    </Section>
+
+    <Section title="Best Practices">
+        - Group related form fields using the Fieldset component
+        - Use meaningful validation messages for form errors
+        - Include clear submission feedback
+        - Use appropriate input types (email, tel, number, etc.)
+        - Consider using controlled components for complex forms
+        - Leverage form libraries like React Hook Form or Formik for complex validation scenarios
+        - Use FieldInset for adding units or symbols next to inputs (like $ or %)
+    </Section>
+</BaseSidebar>
