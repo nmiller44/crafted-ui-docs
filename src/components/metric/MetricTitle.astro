@@ -1,0 +1,21 @@
+---
+import { classNames } from "@utils/classNames"
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"div"> {
+    title?: string;
+    subtitle?: string;
+    className?: string;
+}
+
+const { title, subtitle, className, ...props } = Astro.props;
+---
+<div class={classNames("flex flex-col space-y-0.5", className)} {...props}>
+    {title && 
+        <div class="text-sm text-muted-foreground">{title}</div>
+    }
+    {subtitle && 
+        <div class="text-xs text-muted-foreground/75">{subtitle}</div>
+    }
+    <slot />
+</div>

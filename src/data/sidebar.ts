@@ -29,9 +29,6 @@ export const sidebarLinks = [
             { title: 'Breadcrumb', href: '/docs/components/breadcrumb' },
             { title: 'Button', href: '/docs/components/button' },
             { title: 'Card', href: '/docs/components/card' },
-            { title: 'Container', href: '/docs/components/container' },
-            { title: 'Header Page', href: '/docs/components/header-page' }, 
-            { title: 'Header Section', href: '/docs/components/header-section' },
             { title: 'Metric', href: '/docs/components/metric' },
             { title: 'Sidebar', href: '/docs/components/sidebar' },
             { title: 'Tablist', href: '/docs/components/tablist' },
@@ -41,7 +38,7 @@ export const sidebarLinks = [
     {
         title: 'Forms',
         items: [
-            { title: 'Form', href: '/docs/forms/forms' },
+            { title: 'Form', href: '/docs/forms/form' },
             { title: 'Field', href: '/docs/forms/field' },
         ]
     }

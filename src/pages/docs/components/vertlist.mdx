@@ -49,7 +49,7 @@ import Section from '@components/Section.astro';
 
     <Section title="Vertlist">
         ### Description
-        The main container component that wraps the vertical list elements.
+        The main container component that wraps the vertical list elements. It's rendered as a `<ul>` element with proper styling for vertical layout and spacing.
 
         ### Usage
         ```tsx
@@ -61,7 +61,7 @@ import Section from '@components/Section.astro';
             <a href="/page1">Page 1</a>
           </VertlistItem>
           <VertlistItem>
-            <a href="/page2" class="active">Page 2</a>
+            <a href="/page2" className="active">Page 2</a>
           </VertlistItem>
           <VertlistItem>
             <a href="/page3">Page 3</a>
@@ -76,11 +76,13 @@ import Section from '@components/Section.astro';
         | --- | --- | --- |
         | className | string | Additional CSS class names |
         | children | ReactNode | Content of the vertlist |
+
+        Any additional props will be passed to the underlying `<ul>` element.
     </Section>
 
     <Section title="VertlistHeader">
         ### Description
-        A component for displaying section headers within a vertical list.
+        A component for displaying section headers within a vertical list. It's rendered as a `<li>` element with proper styling for section headers.
 
         ### Usage
         ```tsx
@@ -104,11 +106,13 @@ import Section from '@components/Section.astro';
         | --- | --- | --- |
         | className | string | Additional CSS class names |
         | children | ReactNode | Content of the header item |
+
+        Any additional props will be passed to the underlying `<li>` element.
     </Section>
 
     <Section title="VertlistItem">
         ### Description
-        A component for individual items within a vertical list. Active items can be indicated by adding the `active` class to the child element.
+        A component for individual items within a vertical list. Active items can be indicated by adding the `active` className to the child anchor element. It's rendered as a `<li>` element with proper styling for list items.
 
         ### Usage
         ```tsx
@@ -120,7 +124,7 @@ import Section from '@components/Section.astro';
             <a href="/home">Home</a>
           </VertlistItem>
           <VertlistItem>
-            <a href="/dashboard" class="active">Dashboard</a>
+            <a href="/dashboard" className="active">Dashboard</a>
           </VertlistItem>
           <VertlistItem>
             <a href="/settings">Settings</a>
@@ -133,17 +137,21 @@ import Section from '@components/Section.astro';
         | --- | --- | --- |
         | className | string | Additional CSS class names |
         | children | ReactNode | Content of the list item |
+
+        Any additional props will be passed to the underlying `<li>` element.
     </Section>
 
     <Section title="Examples">
         ### Basic Vertlist
         ```tsx
+        import { Vertlist, VertlistItem } from "@crafted-ui/react";
+
         <Vertlist>
           <VertlistItem>
             <a href="/page1">Page 1</a>
           </VertlistItem>
           <VertlistItem>
-            <a href="/page2" class="active">Page 2</a>
+            <a href="/page2" className="active">Page 2</a>
           </VertlistItem>
           <VertlistItem>
             <a href="/page3">Page 3</a>
@@ -153,6 +161,8 @@ import Section from '@components/Section.astro';
 
         ### Vertlist with Headers
         ```tsx
+        import { Vertlist, VertlistHeader, VertlistItem } from "@crafted-ui/react";
+        
         <Vertlist>
           <VertlistHeader>Main Navigation</VertlistHeader>
           <VertlistItem>
@@ -180,10 +190,12 @@ import Section from '@components/Section.astro';
 
         ### Vertlist with Icons
         ```tsx
+        import { Vertlist, VertlistHeader, VertlistItem } from "@crafted-ui/react";
+
         <Vertlist>
           <VertlistHeader>Navigation</VertlistHeader>
           <VertlistItem>
-            <a href="/home" class="flex items-center gap-2">
+            <a href="/home" className="flex items-center gap-2">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
                 <polyline points="9 22 9 12 15 12 15 22"></polyline>
@@ -192,16 +204,16 @@ import Section from '@components/Section.astro';
             </a>
           </VertlistItem>
           <VertlistItem>
-            <a href="/settings" class="flex items-center gap-2">
+            <a href="/settings" className="flex items-center gap-2">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <circle cx="12" cy="12" r="3"></circle>
-                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1-2-2 2 2 0 0 1-2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
               </svg>
               <span>Settings</span>
             </a>
           </VertlistItem>
           <VertlistItem>
-            <a href="/profile" class="flex items-center gap-2 active">
+            <a href="/profile" className="flex items-center gap-2 active">
               <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
                 <circle cx="12" cy="7" r="4"></circle>
@@ -214,19 +226,21 @@ import Section from '@components/Section.astro';
 
         ### Nested Vertlists
         ```tsx
+        import { Vertlist, VertlistHeader, VertlistItem } from "@crafted-ui/react";
+        
         <Vertlist>
           <VertlistHeader>Main Categories</VertlistHeader>
           <VertlistItem>
             <a href="/category1">Category 1</a>
           </VertlistItem>
           <VertlistItem>
-            <div class="pl-4">
+            <div className="pl-4">
               <Vertlist>
                 <VertlistItem>
                   <a href="/subcategory1">Subcategory 1</a>
                 </VertlistItem>
                 <VertlistItem>
-                  <a href="/subcategory2" class="active">Subcategory 2</a>
+                  <a href="/subcategory2" className="active">Subcategory 2</a>
                 </VertlistItem>
                 <VertlistItem>
                   <a href="/subcategory3">Subcategory 3</a>
@@ -241,16 +255,45 @@ import Section from '@components/Section.astro';
         ```
     </Section>
 
+    <Section title="Styling & Theming">
+        The Vertlist components adapt to their parent container's styling through CSS groups. They support different background contexts with special styling for hover and active states. For example, when placed in a container with `bg-background`, `bg-primary`, or `bg-foreground` classes, the hover and active states will automatically adjust to match the parent's theme.
+        
+        ### Automatic Theme Adaptation
+
+        ```tsx
+        // In a default background context
+        <div className="bg-background">
+          <Vertlist>
+            <VertlistHeader>Section Title</VertlistHeader>
+            <VertlistItem><a href="/page1" className="active">Page 1</a></VertlistItem>
+            <VertlistItem><a href="/page2">Page 2</a></VertlistItem>
+          </Vertlist>
+        </div>
+
+        // In a primary background context
+        <div className="bg-primary text-primary-foreground">
+          <Vertlist>
+            <VertlistHeader>Section Title</VertlistHeader>
+            <VertlistItem><a href="/page1" className="active">Page 1</a></VertlistItem>
+            <VertlistItem><a href="/page2">Page 2</a></VertlistItem>
+          </Vertlist>
+        </div>
+        ```
+    </Section>
+
     <Section title="Accessibility">
         The Vertlist component follows best practices for accessibility:
         
-        - Use meaningful text labels for list items that clearly describe their purpose
-        - Ensure sufficient color contrast for active and hover states
-        - When using lists for navigation, provide clear visual indicators for the current page
-        - Use proper semantic markup for lists (ul/li elements)
-        - Ensure interactive elements are keyboard navigable and have appropriate focus states
+        - Uses semantic HTML structure with `<ul>` and `<li>` elements
+        - Provides clear visual and interactive states through hover and active styles
+        - Supports proper keyboard navigation when used with anchor elements
+        - Uses proper text sizing and contrast for readability
+        - Active items are clearly indicated both visually and programmatically
         
-        Vertical lists are typically used for navigation, so ensure that the currently active page is clearly indicated both visually and programmatically.
+        For navigation patterns, ensure that you:
+        - Use meaningful text labels for list items that clearly describe their purpose
+        - Add `aria-current="page"` to the active link when used for navigation
+        - Ensure adequate focus states for keyboard navigation
     </Section>
 
 </BaseSidebar>

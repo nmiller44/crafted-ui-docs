@@ -1,0 +1,24 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import Badge from "../badge/Badge.astro";
+
+interface Props extends HTMLAttributes<"div"> {
+    diff: string;
+    dir?: "negative" | "positive" | "neutral" | "blank";
+    className?: string;
+}
+
+const { diff, dir = "blank", className, ...props } = Astro.props;
+
+const dirToColor: { blank: "blank"; positive: "green"; negative: "red"; neutral: "yellow"; } = {
+    blank: "blank",
+    positive: "green",
+    negative: "red",
+    neutral: "yellow"
+}
+---
+{diff ? (
+    <Badge clr={dirToColor[dir]} className={className}>{diff}</Badge>
+) : (
+    <div class={className} {...props}><slot /></div>
+)}

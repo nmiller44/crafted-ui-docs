@@ -1,0 +1,38 @@
+---
+import { classNames } from "@utils/classNames"
+import type { HTMLAttributes } from "astro/types";
+import MetricTitle from "./MetricTitle.astro";
+import MetricDiff from "./MetricDiff.astro";
+import MetricValue from "./MetricValue.astro";
+
+interface Props extends HTMLAttributes<"div"> {
+    title?: string;
+    value?: string;
+    diff?: string;
+    dir?: "negative" | "positive" | "neutral" | "blank";
+    className?: string;
+}
+
+const { title, value, diff, dir = "blank", className, ...props } = Astro.props;
+---
+<div class={classNames("flex flex-col h-full justify-between space-y-3", className)} {...props}>
+    {value ? (
+        title && (
+            <>
+                <div class="flex justify-between">
+                    <MetricTitle title={title} />
+                    {diff && (
+                        <div>
+                            <MetricDiff diff={diff} dir={dir} />
+                        </div>
+                    )}
+                </div>
+                <div>
+                    <MetricValue value={value} />
+                </div>
+            </>
+        )
+    ) : (
+        <slot />
+    )}
+</div>

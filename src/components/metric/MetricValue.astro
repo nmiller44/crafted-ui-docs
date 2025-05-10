@@ -1,0 +1,15 @@
+---
+import { classNames } from "@utils/classNames"
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<"div"> {
+    value: string;
+    className?: string;
+}
+
+const { value, className, ...props } = Astro.props;
+---
+<div class={classNames("text-xl font-bold", className)} {...props}>
+    {value}
+    <slot />
+</div>

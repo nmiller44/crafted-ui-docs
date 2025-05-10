@@ -1,0 +1,344 @@
+---
+title: 'Metric'
+description: 'A component for displaying metrics, statistics and data points with optional directional indicators.'
+---
+import BaseSidebar from "@/layouts/BaseSidebar.astro";
+import SamplePage from "@/components/SamplePage.astro";
+import Metric from "@/components/metric/Metric.astro";
+import MetricTitle from "@/components/metric/MetricTitle.astro";
+import MetricValue from "@/components/metric/MetricValue.astro";
+import MetricDiff from "@/components/metric/MetricDiff.astro";
+import Card from "@/components/card/Card.astro";
+import CardBody from "@/components/card/CardBody.astro";
+
+import Prose from '@/components/Prose.astro';
+import Section from '@/components/Section.astro';
+import Heading3 from '@/components/heading/Heading3.astro';
+
+<BaseSidebar title={frontmatter.title} description={frontmatter.description}>
+
+    <SamplePage>
+        <div class="grid grid-cols-3 gap-4">
+            <Card>
+                <CardBody>
+                    <Metric title="Total Revenue" value="$45,231.89" diff="+20.1%" dir="positive" />
+                </CardBody>
+            </Card>
+            <Card>
+                <CardBody>
+                    <Metric title="Active Users" value="2,234" diff="-4.5%" dir="negative" />
+                </CardBody>
+            </Card>
+            <Card>
+                <CardBody>
+                    <Metric title="Conversion Rate" value="3.2%" diff="0%" dir="neutral" />
+                </CardBody>
+            </Card>
+        </div>
+    </SamplePage>
+
+    <Section title="Overview">
+        The Metric component set provides a way to display metrics, statistics, and data points with optional directional indicators. It consists of four components: Metric (container), MetricTitle, MetricValue, and MetricDiff. These components are designed to present data points with contextual information in a clean, organized format.
+    </Section>
+
+    <Section title="Metric">
+        ### Description
+        The main component that combines title, value, and difference indicator in a structured layout.
+
+        ### Usage
+        ```tsx
+        import { Metric } from "@crafted-ui/react";
+
+        <Metric 
+          title="Total Revenue" 
+          value="$45,231.89" 
+          diff="+20.1%" 
+          dir="positive" 
+        />
+        ```
+
+        ### Props
+        The `Metric` component accepts the following props:
+        
+        | Prop | Type | Default | Description |
+        | --- | --- | --- | --- |
+        | title | string | undefined | The title of the metric |
+        | value | string | undefined | The value of the metric |
+        | diff | string | undefined | The difference or change indicator |
+        | dir | "positive" \| "negative" \| "neutral" \| "blank" | "blank" | Direction of change, affects the color of the diff badge |
+        | className | string | undefined | Additional CSS class names |
+        | children | ReactNode | undefined | Alternative content if value is not provided |
+
+        The component also accepts all standard HTML div attributes.
+    </Section>
+
+    <Section title="Direction Variants">
+        ### Color Direction Indicators
+        Metrics can show directional change with color-coded indicators.
+
+        <SamplePage>
+            <div class="grid grid-cols-3 gap-4">
+                <Card>
+                    <CardBody>
+                        <Metric title="Revenue" value="$45,231.89" diff="+20.1%" dir="positive" />
+                    </CardBody>
+                </Card>
+                <Card>
+                    <CardBody>
+                        <Metric title="Users" value="2,234" diff="-4.5%" dir="negative" />
+                    </CardBody>
+                </Card>
+                <Card>
+                    <CardBody>
+                        <Metric title="Conversion" value="3.2%" diff="0%" dir="neutral" />
+                    </CardBody>
+                </Card>
+                <Card>
+                    <CardBody>
+                        <Metric title="Traffic" value="42,350" diff="12.3%" dir="blank" />
+                    </CardBody>
+                </Card>
+            </div>
+        </SamplePage>
+
+        ```tsx
+        <Metric title="Revenue" value="$45,231.89" diff="+20.1%" dir="positive" />
+        <Metric title="Users" value="2,234" diff="-4.5%" dir="negative" />
+        <Metric title="Conversion" value="3.2%" diff="0%" dir="neutral" />
+        <Metric title="Traffic" value="42,350" diff="12.3%" dir="blank" />
+        ```
+    </Section>
+
+    <Section title="Composite Components">
+        ### MetricTitle Component
+        Used to display the title and optional subtitle of a metric.
+
+        <SamplePage>
+            <div class="flex flex-col space-y-4 max-w-xs">
+                <MetricTitle title="Total Revenue" />
+                <MetricTitle title="Monthly Sales" subtitle="Last 30 days" />
+            </div>
+        </SamplePage>
+
+        ```tsx
+        import { MetricTitle } from "@crafted-ui/react";
+
+        <MetricTitle title="Total Revenue" />
+        <MetricTitle title="Monthly Sales" subtitle="Last 30 days" />
+        ```
+
+        ### MetricValue Component
+        Used to display the value of a metric.
+
+        <SamplePage>
+            <div class="flex flex-col space-y-4 max-w-xs">
+                <MetricValue value="$45,231.89" />
+                <MetricValue value="2,234" />
+                <MetricValue value="3.2%" />
+            </div>
+        </SamplePage>
+
+        ```tsx
+        import { MetricValue } from "@crafted-ui/react";
+
+        <MetricValue value="$45,231.89" />
+        <MetricValue value="2,234" />
+        <MetricValue value="3.2%" />
+        ```
+
+        ### MetricDiff Component
+        Used to display a difference or change indicator with appropriate color coding.
+
+        <SamplePage>
+            <div class="flex flex-wrap gap-4">
+                <MetricDiff diff="+20.1%" dir="positive" />
+                <MetricDiff diff="-4.5%" dir="negative" />
+                <MetricDiff diff="0%" dir="neutral" />
+                <MetricDiff diff="12.3%" dir="blank" />
+            </div>
+        </SamplePage>
+
+        ```tsx
+        import { MetricDiff } from "@crafted-ui/react";
+
+        <MetricDiff diff="+20.1%" dir="positive" />
+        <MetricDiff diff="-4.5%" dir="negative" />
+        <MetricDiff diff="0%" dir="neutral" />
+        <MetricDiff diff="12.3%" dir="blank" />
+        ```
+    </Section>
+
+    <Section title="Custom Layouts">
+        ### Using Components Together
+        You can combine individual components for more customized layouts:
+
+        <SamplePage>
+            <Card>
+                <CardBody>
+                    <Metric>
+                        <div class="flex justify-between">
+                            <MetricTitle title="Total Revenue" subtitle="Last 30 days" />
+                            <MetricDiff diff="+20.1%" dir="positive" />
+                        </div>
+                        <MetricValue value="$45,231.89" />
+                    </Metric>
+                </CardBody>
+            </Card>
+        </SamplePage>
+
+        ```tsx
+        import { Metric, MetricTitle, MetricValue, MetricDiff } from "@crafted-ui/react";
+
+        <Metric>
+          <div className="flex justify-between">
+            <MetricTitle title="Total Revenue" subtitle="Last 30 days" />
+            <MetricDiff diff="+20.1%" dir="positive" />
+          </div>
+          <MetricValue value="$45,231.89" />
+        </Metric>
+        ```
+
+        ### Grid Layout
+        You can create dashboard-style metric displays:
+
+        <SamplePage>
+            <div class="grid grid-cols-3 gap-4">
+                <Card>
+                    <CardBody>
+                        <Metric>
+                            <div class="flex justify-between">
+                                <MetricTitle title="Total Revenue" subtitle="Last 30 days" />
+                                <MetricDiff diff="+20.1%" dir="positive" />
+                            </div>
+                            <MetricValue value="$45,231.89" />
+                        </Metric>
+                    </CardBody>
+                </Card>
+                <Card>
+                    <CardBody>
+                        <Metric>
+                            <div class="flex justify-between">
+                                <MetricTitle title="Active Users" />
+                                <MetricDiff diff="-4.5%" dir="negative" />
+                            </div>
+                            <MetricValue value="2,234" />
+                        </Metric>
+                    </CardBody>
+                </Card>
+                <Card>
+                    <CardBody>
+                        <Metric>
+                            <div class="flex justify-between">
+                                <MetricTitle title="Conversion Rate" />
+                                <MetricDiff diff="0%" dir="neutral" />
+                            </div>
+                            <MetricValue value="3.2%" />
+                        </Metric>
+                    </CardBody>
+                </Card>
+            </div>
+        </SamplePage>
+
+        ```tsx
+        <div className="grid grid-cols-3 gap-4">
+          <Card>
+            <CardBody>
+              <Metric>
+                <div className="flex justify-between">
+                  <MetricTitle title="Total Revenue" subtitle="Last 30 days" />
+                  <MetricDiff diff="+20.1%" dir="positive" />
+                </div>
+                <MetricValue value="$45,231.89" />
+              </Metric>
+            </CardBody>
+          </Card>
+          <Card>
+            <CardBody>
+              <Metric>
+                <div className="flex justify-between">
+                  <MetricTitle title="Active Users" />
+                  <MetricDiff diff="-4.5%" dir="negative" />
+                </div>
+                <MetricValue value="2,234" />
+              </Metric>
+            </CardBody>
+          </Card>
+          <Card>
+            <CardBody>
+              <Metric>
+                <div className="flex justify-between">
+                  <MetricTitle title="Conversion Rate" />
+                  <MetricDiff diff="0%" dir="neutral" />
+                </div>
+                <MetricValue value="3.2%" />
+              </Metric>
+            </CardBody>
+          </Card>
+        </div>
+        ```
+    </Section>
+
+    <Section title="Accessibility">
+        The Metric components use semantic HTML elements and follow accessibility best practices:
+        
+        - Clear visual hierarchy with distinct title and value
+        - Color coding for difference indicators with contextual meaning
+        - All text has appropriate contrast ratios
+        
+        When implementing metrics, ensure that:
+        
+        1. The metric values have sufficient context (provided by titles)
+        2. Color is not the only means of conveying the direction of change
+        3. Text remains readable at various screen sizes
+    </Section>
+
+    <Section title="Examples">
+        ### Basic Metric
+        ```tsx
+        import { Metric } from "@crafted-ui/react";
+        
+        <Metric title="Total Users" value="24,531" />
+        ```
+
+        ### Metric with Direction Indicator
+        ```tsx
+        import { Metric } from "@crafted-ui/react";
+        
+        <Metric 
+          title="Monthly Revenue" 
+          value="$12,543.00" 
+          diff="+12.3%" 
+          dir="positive" 
+        />
+        ```
+
+        ### Dashboard Metrics
+        ```tsx
+        import { Metric, Card, CardBody } from "@crafted-ui/react";
+        
+        <div className="grid grid-cols-4 gap-3">
+          <Card>
+            <CardBody>
+              <Metric title="Total Users" value="58,429" diff="+12.5%" dir="positive" />
+            </CardBody>
+          </Card>
+          <Card>
+            <CardBody>
+              <Metric title="Revenue" value="$123,456.78" diff="+24.3%" dir="positive" />
+            </CardBody>
+          </Card>
+          <Card>
+            <CardBody>
+              <Metric title="Conversion" value="2.4%" diff="-0.5%" dir="negative" />
+            </CardBody>
+          </Card>
+          <Card>
+            <CardBody>
+              <Metric title="Avg. Order" value="$34.28" diff="0%" dir="neutral" />
+            </CardBody>
+          </Card>
+        </div>
+        ```
+    </Section>
+
+</BaseSidebar>
