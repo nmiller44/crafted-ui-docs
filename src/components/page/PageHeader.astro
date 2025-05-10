@@ -1,0 +1,32 @@
+---
+import { classNames } from "../../utils/classNames"
+import Heading1 from "../heading/Heading1.astro";
+
+interface Props {
+    title?: string;
+    subtitle?: string;
+    className?: string;
+    wrapperClassName?: string;
+}
+
+const { title, subtitle, className, wrapperClassName } = Astro.props;
+---
+<div class={classNames(
+    "pb-10", 
+    (!!title && !!Astro.slots.has('default')) ? "md:flex md:items-center md:justify-between" : "",
+    wrapperClassName
+)}>
+{ !!title
+?   <>
+        <div>
+            <Heading1 title={title} subtitle={subtitle} className={ className } />
+        </div>
+        { Astro.slots.has('default') &&
+            <div>
+                <slot />
+            </div>
+        }
+    </>
+:   <slot /> 
+}
+</div>
