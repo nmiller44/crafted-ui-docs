@@ -2,79 +2,249 @@
 title: 'Badge'
 description: 'Color-coded indicators for tags, categories, and statuses.'
 ---
-import BaseSidebar from "../../../layouts/BaseSidebar.astro";
-import SamplePage from "../../../components/SamplePage.astro";
-import Section from '../../../components/Section.astro';
+import BaseSidebar from "@/layouts/BaseSidebar.astro";
+import SamplePage from "@/components/SamplePage.astro";
+import Badge from "@/components/badge/Badge.astro";
 
-import Badge from "../../../components/Badge.astro";
-
-import Heading3 from '../../../components/heading/Heading3.astro';
-import Heading5 from '../../../components/heading/Heading5.astro';
+import Prose from '@/components/Prose.astro';
+import Section from '@/components/Section.astro';
+import Heading3 from '@/components/heading/Heading3.astro';
 
 <BaseSidebar title={frontmatter.title} description={frontmatter.description}>
+
     <SamplePage>
-        <div class="flex flex-col">
-            <div class="flex space-x-2">
-                <Heading5>
-                    Add Badges component page to docs
-                </Heading5>
-                <div class="pl-1">
-                    <Badge>Badge</Badge>
+        <div className="space-y-8">
+            {/* Color Variants */}
+            <div class="flex flex-col space-y-4">
+                <Heading3 title="Color Variants" />
+                <div className="flex flex-wrap gap-4">
+                    <Badge>Default</Badge>
+                    <Badge clr="primary">Primary</Badge>
+                    <Badge clr="secondary">Secondary</Badge>
+                    <Badge clr="accent">Accent</Badge>
+                    <Badge clr="destructive">Destructive</Badge>
+                    <Badge clr="muted">Muted</Badge>
+                    <Badge clr="blank">Blank</Badge>
+                </div>
+            </div>
+
+            <div class="flex flex-col space-y-4">
+                <Heading3 title="Color Options" />
+                <div className="flex flex-wrap gap-4">
+                    <Badge clr="green">Green</Badge>
+                    <Badge clr="red">Red</Badge>
+                    <Badge clr="yellow">Yellow</Badge>
+                    <Badge clr="blue">Blue</Badge>
+                    <Badge clr="indigo">Indigo</Badge>
+                    <Badge clr="purple">Purple</Badge>
+                    <Badge clr="pink">Pink</Badge>
+                </div>
+            </div>
+
+            <div class="flex flex-col space-y-4">
+                <Heading3 title="Outline Variants" />
+                <div className="flex flex-wrap gap-4">
+                    <Badge outline>Default</Badge>
+                    <Badge clr="primary" outline>Primary</Badge>
+                    <Badge clr="secondary" outline>Secondary</Badge>
+                    <Badge clr="destructive" outline>Destructive</Badge>
+                    <Badge clr="red" outline>Red</Badge>
+                    <Badge clr="blue" outline>Blue</Badge>
+                </div>
+            </div>
+
+            <div class="flex flex-col space-y-4">
+                <Heading3 title="Pill Shape" />
+                <div className="flex flex-wrap gap-4">
+                    <Badge pill>Default</Badge>
+                    <Badge clr="primary" pill>Primary</Badge>
+                    <Badge clr="green" pill>Green</Badge>
+                    <Badge clr="red" outline pill>Red</Badge>
+                    <Badge clr="blue" outline pill>Blue</Badge>
                 </div>
             </div>
         </div>
     </SamplePage>
 
-    <Section title="Examples">
-        <Heading3 title="Colors" />
-
-        <SamplePage>
-            <div class="flex space-x-4">
-                <Badge>Default</Badge>
-                <Badge color="green">Green</Badge>
-                <Badge color="red">Red</Badge>
-                <Badge color="yellow">Yellow</Badge>
-                <Badge color="blue">Blue</Badge>
-                <Badge color="indigo">Indigo</Badge>
-                <Badge color="purple">Purple</Badge>
-            </div>
-        </SamplePage>
-
-        <Heading3 title="Outline" />
-
-        <SamplePage>
-            <div class="flex space-x-4">
-                <Badge outline>Default</Badge>
-                <Badge color="green" outline>Green</Badge>
-                <Badge color="red" outline>Red</Badge>
-                <Badge color="yellow" outline>Yellow</Badge>
-                <Badge color="blue" outline>Blue</Badge>
-                <Badge color="indigo" outline>Indigo</Badge>
-                <Badge color="purple" outline>Purple</Badge>
-            </div>
-        </SamplePage>
-
-        <Heading3 title="Pill" />
-
-        <SamplePage>
-            <div class="flex space-x-4">
-                <Badge pill>Default</Badge>
-                <Badge color="green" pill>Green</Badge>
-                <Badge color="red" outline pill>Red</Badge>
-                <Badge color="yellow" pill>Yellow</Badge>
-                <Badge color="blue" outline pill>Blue</Badge>
-                <Badge color="indigo" pill>Indigo</Badge>
-                <Badge color="purple" outline pill>Purple</Badge>
-            </div>
-        </SamplePage>
-
-        <Heading3 title="Links" />
-
-        Coming soon, on the roadmap for v1
-
+    <Section title="Overview">
+        The Badge component provides visual indicators for statuses, categories, or labels in your application. It comes with various color options, outline styles, and shape variants to match your design needs.
     </Section>
 
-    <Section title="Props">
+    <Section title="Badge">
+        ### Description
+        A lightweight component for displaying short status text, categories, or labels.
+
+        ### Usage
+        ```tsx
+        import { Badge } from "@crafted-ui/react";
+
+        <Badge>New</Badge>
+        ```
+
+        ### Props
+        The `Badge` component accepts the following props:
         
+        | Prop | Type | Default | Description |
+        | --- | --- | --- | --- |
+        | title | string | undefined | Text content for the badge (alternative to using children) |
+        | clr | 'blank' \| 'default' \| 'primary' \| 'muted' \| 'secondary' \| 'accent' \| 'destructive' \| 'green' \| 'red' \| 'yellow' \| 'blue' \| 'indigo' \| 'purple' \| 'pink' | 'default' | Sets the badge's color scheme |
+        | outline | boolean | false | When true, renders an outlined version of the badge |
+        | pill | boolean | false | When true, applies fully rounded corners (pill shape) |
+        | className | string | undefined | Additional CSS class names |
+        | children | ReactNode | undefined | Content of the badge |
+
+        The component also accepts all standard HTML div attributes.
     </Section>
+
+    <Section title="Color Variants">
+        ### Design Cue Colors
+        Standard badges with colors based on design cue variables.
+
+        <SamplePage>
+            <div className="flex flex-wrap gap-4">
+                <Badge>Default</Badge>
+                <Badge clr="primary">Primary</Badge>
+                <Badge clr="secondary">Secondary</Badge>
+                <Badge clr="accent">Accent</Badge>
+                <Badge clr="destructive">Destructive</Badge>
+                <Badge clr="muted">Muted</Badge>
+                <Badge clr="blank">Blank</Badge>
+            </div>
+        </SamplePage>
+
+        ```tsx
+        <Badge>Default</Badge>
+        <Badge clr="primary">Primary</Badge>
+        <Badge clr="secondary">Secondary</Badge>
+        <Badge clr="accent">Accent</Badge>
+        <Badge clr="destructive">Destructive</Badge>
+        <Badge clr="muted">Muted</Badge>
+        <Badge clr="blank">Blank</Badge>
+        ```
+
+        ### Color Variants
+        Base colors for badges with specific color choices.
+
+        <SamplePage>
+            <div className="flex flex-wrap gap-4">
+                <Badge clr="green">Green</Badge>
+                <Badge clr="red">Red</Badge>
+                <Badge clr="yellow">Yellow</Badge>
+                <Badge clr="blue">Blue</Badge>
+                <Badge clr="indigo">Indigo</Badge>
+                <Badge clr="purple">Purple</Badge>
+                <Badge clr="pink">Pink</Badge>
+            </div>
+        </SamplePage>
+
+        ```tsx
+        <Badge clr="green">Green</Badge>
+        <Badge clr="red">Red</Badge>
+        <Badge clr="yellow">Yellow</Badge>
+        <Badge clr="blue">Blue</Badge>
+        <Badge clr="indigo">Indigo</Badge>
+        <Badge clr="purple">Purple</Badge>
+        <Badge clr="pink">Pink</Badge>
+        ```
+
+        ### Outline Variants
+        All badge colors offer outline variants.
+
+        <SamplePage>
+            <div className="flex flex-wrap gap-4">
+                <Badge outline>Default</Badge>
+                <Badge clr="primary" outline>Primary</Badge>
+                <Badge clr="accent" outline>Accent</Badge>
+                <Badge clr="destructive" outline>Destructive</Badge>
+                <Badge clr="blue" outline>Blue</Badge>
+                <Badge clr="purple" outline>Purple</Badge>
+            </div>
+
+        </SamplePage>
+
+        ```tsx
+        <Badge outline>Default</Badge>
+        <Badge clr="primary" outline>Primary</Badge>
+        <Badge clr="accent" outline>Accent</Badge>
+        <Badge clr="destructive" outline>Destructive</Badge>
+        <Badge clr="blue" outline>Blue</Badge>
+        <Badge clr="purple" outline>Purple</Badge>
+        ```
+    </Section>
+
+    <Section title="Style Variants">
+        ### Pill Shape
+        Applies fully rounded corners to create a pill-shaped badge.
+
+        <SamplePage>
+            <div className="flex flex-wrap gap-4">
+                <Badge pill>Default</Badge>
+                <Badge clr="primary" pill>Primary</Badge>
+                <Badge clr="destructive" pill>Destructive</Badge>
+            </div>
+        </SamplePage>
+        
+        ```tsx
+        <Badge pill>Default</Badge>
+        <Badge clr="primary" pill>Primary</Badge>
+        <Badge clr="destructive" pill>Destructive</Badge>
+        ```
+
+        ### Combined Variants
+        Variants can be combined for more specific styling:
+
+        <SamplePage>
+            <div className="flex flex-wrap gap-4">
+                <Badge clr="primary" outline pill>Primary Outlined Pill</Badge>
+                <Badge clr="blue" outline pill>Blue Outlined Pill</Badge>
+            </div>
+        </SamplePage>
+        
+        ```tsx
+        <Badge clr="primary" outline pill>Primary Outlined Pill</Badge>
+        <Badge clr="blue" outline pill>Blue Outlined Pill</Badge>
+        ```
+    </Section>
+
+    <Section title="Accessibility">
+        The Badge component follows accessibility best practices:
+        
+        - Uses sufficient color contrast ratios for text readability
+        - Keeps content concise and meaningful
+        - Avoids relying solely on color to convey information
+        
+        When implementing badges, ensure that:
+        
+        1. Badge text clearly communicates what it represents
+        2. Badges are used sparingly to avoid visual clutter
+        3. Badge colors are consistent with your application's color semantics
+    </Section>
+
+    <Section title="Examples">
+        ### Basic Badge
+        ```tsx
+        <Badge>New</Badge>
+        ```
+
+        ### Status Badge
+        ```tsx
+        <Badge clr="green">Active</Badge>
+        ```
+
+        ### Badge with Icon
+        ```tsx
+        <Badge clr="primary">
+          <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm0 13a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm.5-5.5a.5.5 0 0 1-1 0V5a.5.5 0 0 1 1 0v2.5z"/>
+          </svg>
+          <span>Important</span>
+        </Badge>
+        ```
+
+        ### Warning Badge
+        ```tsx
+        <Badge clr="yellow" pill>Warning</Badge>
+        ```
+    </Section>
+
 </BaseSidebar>
