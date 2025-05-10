@@ -16,10 +16,11 @@ const {
 		<meta name="generator" content={Astro.generator} />
 		<title>{ title }</title>
         <meta name="description" content={ description } />
+		<link rel="sitemap" href="/sitemap-index.xml" />
 	</head>
-	<body class="bg-background text-foreground">
+	<body class="min-h-screen flex flex-col bg-background text-foreground antialiased">
         <AppNav />
-        <main class="min-h-[85vh]">
+        <main class="grow">
             <slot />
         </main>
         <AppFooter />

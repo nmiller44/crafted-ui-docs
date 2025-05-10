@@ -14,5 +14,5 @@ const { title, subtitle, className } = Astro.props;
         ? <h1 class={classNames("text-4xl font-bold tracking-tight", className)}>{ title }</h1>
         : <slot />
     }
-    { !!subtitle && <p class="text-sm text-muted-foreground">{ subtitle }</p> }
+    { !!subtitle && <p class="text-lg text-muted-foreground">{ subtitle }</p> }
 </div>

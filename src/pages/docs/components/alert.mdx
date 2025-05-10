@@ -1,0 +1,143 @@
+---
+title: 'Alert'
+description: 'A visual callout for information updates.'
+---
+import BaseSidebar from "@layouts/BaseSidebar.astro";
+import SamplePage from "@components/SamplePage.astro";
+import Prose from '@components/Prose.astro';
+import Section from '@components/Section.astro';
+import Alert from '@components/alert/Alert.astro';
+
+<BaseSidebar title={frontmatter.title} description={frontmatter.description}>
+
+    <SamplePage>
+      <div class="max-w-md space-y-4">
+        <Alert title="Warning Alert">
+          This is a warning message. Please pay attention.
+        </Alert>
+        
+        <Alert title="Error Alert" status="error">
+          An error has occurred. Please try again.
+        </Alert>
+        
+        <Alert title="Success Alert" status="success">
+          Operation completed successfully!
+        </Alert>
+        
+        <Alert title="Info Alert" status="info">
+          Here is some useful information to consider.
+        </Alert>
+      </div>
+    </SamplePage>
+
+    <Section title="Overview">
+        The Alert component provides a way to display important messages or notifications to users. It comes with several visual variants to denote different types of alerts: warning, error, success, and info. This component is designed to provide contextual feedback and capture the user's attention when necessary.
+    </Section>
+
+    <Section title="Alert">
+        ### Description
+        A component that displays a box with an optional title and content to call attention to important information.
+
+        ### Usage
+        ```tsx
+        import { Alert } from "@crafted-ui/react";
+
+        <Alert title="Error Alert" status="error">
+          Something went wrong. Please try again.
+        </Alert>
+        ```
+
+        ### Props
+        The `Alert` component accepts the following props:
+        
+        | Prop | Type | Default | Description |
+        | --- | --- | --- | --- |
+        | title | string | required | The heading text for the alert |
+        | status | 'warning' \| 'error' \| 'success' \| 'info' | 'warning' | Determines the visual style of the alert |
+        | className | string | undefined | Additional CSS class names |
+        | children | ReactNode | undefined | Content of the alert |
+    </Section>
+
+    <Section title="Variants">
+        ### Warning (Default)
+        Used for warnings or cautionary information that requires the user's attention.
+        
+        ```tsx
+        <Alert title="Warning Alert">
+          Please be aware of these important details.
+        </Alert>
+        ```
+
+        ### Error
+        Used to communicate error states or failures that need immediate attention.
+        
+        ```tsx
+        <Alert title="Error Alert" status="error">
+          An error occurred while processing your request.
+        </Alert>
+        ```
+
+        ### Success
+        Used to confirm successful actions or operations.
+        
+        ```tsx
+        <Alert title="Success Alert" status="success">
+          Your profile has been updated successfully.
+        </Alert>
+        ```
+
+        ### Info
+        Used for general information or announcements.
+        
+        ```tsx
+        <Alert title="Info Alert" status="info">
+          A new feature has been added to the platform.
+        </Alert>
+        ```
+    </Section>
+
+    <Section title="Accessibility">
+        The Alert component follows accessibility best practices:
+        
+        - Uses semantic HTML for structure
+        - Employs color schemes that maintain sufficient contrast for visibility
+        - Uses the Heading5 component for the title to maintain proper heading hierarchy
+        
+        When implementing alerts, ensure that:
+        
+        1. Alert content is clear and concise
+        2. Critical alerts (especially errors) provide actionable information
+        3. Avoid using too many alerts on a single page to prevent alert fatigue
+    </Section>
+
+    <Section title="Examples">
+        ### Basic Alert
+        ```tsx
+        <Alert title="No data available">
+          Please check back later.
+        </Alert>
+        ```
+
+        ### Alert with List Content
+        ```tsx
+        <Alert title="Validation Errors" status="error">
+          <ul>
+            <li>Username is required</li>
+            <li>Password must be at least 8 characters</li>
+          </ul>
+        </Alert>
+        ```
+
+        ### Alert with Custom Content
+        ```tsx
+        <Alert title="Account Status" status="info">
+          <div className="flex gap-2 items-center">
+            <span className="font-medium">Current Plan:</span>
+            <span>Professional</span>
+          </div>
+          <div className="text-sm text-gray-600">Renews on June 1, 2025</div>
+        </Alert>
+        ```
+    </Section>
+
+</BaseSidebar>

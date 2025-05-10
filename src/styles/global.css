@@ -60,6 +60,7 @@
 
   @theme {
     --container-container: 80rem;
+    --container-navbar: 4rem;
     --container-sidebar: 12rem;
 
     --color-background: var(--background);
