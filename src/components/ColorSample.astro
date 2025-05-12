@@ -1,0 +1,50 @@
+---
+import { classNames } from "@/utils/classNames"
+
+interface Props {
+    color?: string;  
+    bgColor?: string;
+    textColor?: string;
+    usage?: string;
+    text?: string;
+    className?: string;
+}
+
+const { 
+    color = 'background', 
+    bgColor = 'bg-background', 
+    textColor = 'text-foreground', 
+    usage = 'Color', 
+    text = color[0], 
+    className 
+} = Astro.props;
+
+const colorBg: any = {
+    'background': 'bg-background',
+    'muted': 'bg-muted',
+    'popover': 'bg-popover',
+    'card': 'bg-card',
+}
+
+const colorFg: any = {
+    'foreground': 'text-foreground',
+    'muted-foreground': 'text-muted-foreground',
+    'popover-foreground': 'text-popover-foreground',
+    'card-foreground': 'text-card-foreground',
+}
+---
+<div class="flex items-center gap-3">
+    <div class={classNames("size-10 rounded",
+                            bgColor, textColor,
+                            "flex items-center justify-center font-bold",
+                            "border border-border",
+                            className
+                        )}>
+        { text }
+    </div>
+    <div>
+      <div class="font-mono text-sm">—{ color }</div>
+      <div class="text-xs text-muted-foreground">Text as <span class="font-mono">{ textColor }</span></div>
+      <div class="text-xs text-primary mt-1">{ usage }</div>
+    </div>
+  </div>
