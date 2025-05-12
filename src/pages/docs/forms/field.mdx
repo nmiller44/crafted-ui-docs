@@ -2,13 +2,15 @@
 title: 'Field'
 description: 'A form field component set with label, error handling and inset capabilities.'
 ---
-import BaseSidebar from "../../../layouts/BaseSidebar.astro";
-import SamplePage from "../../../components/SamplePage.astro";
-import Prose from '../../../components/Prose.astro';
-import Section from '../../../components/Section.astro';
-import Field from '../../../components/field/Field.astro';
-import FieldLabel from '../../../components/field/FieldLabel.astro';
-import FieldError from '../../../components/field/FieldError.astro';
+import BaseSidebar from "@/layouts/BaseSidebar.astro";
+import SamplePage from "@/components/SamplePage.astro";
+import Prose from '@/components/Prose.astro';
+import Section from '@/components/Section.astro';
+import Field from '@/components/field/Field.astro';
+import FieldLabel from '@/components/field/FieldLabel.astro';
+import FieldError from '@/components/field/FieldError.astro';
+import Fieldset from '@/components/fieldset/Fieldset.astro';
+import Input from '@/components/input/Input.astro';
 
 <BaseSidebar title={frontmatter.title} description={frontmatter.description}>
 
@@ -35,18 +37,32 @@ import FieldError from '../../../components/field/FieldError.astro';
 
     <Section title="Field">
         ### Description
-        The root component that wraps the form field elements.
+        The root component that wraps the form field elements. It can automatically include a label via the `label` prop.
 
         ### Usage
+        <SamplePage>
+          <Fieldset>
+            <Field label="Label as Prop">
+              <Input type="text" />
+            </Field>
+
+            <Field>
+              <FieldLabel>Standard Label</FieldLabel>
+              <Input type="text" />
+            </Field>
+          </Fieldset>
+        </SamplePage>
+
         ```tsx
-        import { Field, FieldLabel } from "@crafted-ui/react";
+        import { Field, Input } from "@crafted-ui/react";
+
+        <Field label="Username">
+          <Input type="text" />
+        </Field>
 
         <Field>
           <FieldLabel>Username</FieldLabel>
-          <input 
-            type="text" 
-            className="w-full rounded-md border border-neutral-300 px-3 py-1.5 text-sm shadow-sm" 
-          />
+          <Input type="text" />
         </Field>
         ```
 
@@ -55,6 +71,7 @@ import FieldError from '../../../components/field/FieldError.astro';
         
         | Prop | Type | Description |
         | --- | --- | --- |
+        | label | string \| ReactNode | Label content (automatically renders a FieldLabel component) |
         | className | string | Additional CSS class names |
         | children | ReactNode | Content of the field |
     </Section>

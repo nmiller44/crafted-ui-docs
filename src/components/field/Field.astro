@@ -1,14 +1,18 @@
 ---
 import { classNames } from "@utils/classNames"
+import FieldLabel from "./FieldLabel.astro";
 
 interface Props {
     className?: string;
+    label?: string;
 }
 
 const { 
-    className
+    className,
+    label
  } = Astro.props;
 ---
-<div class={classNames("space-y-1.5", className)}>
+<div class={classNames("relative space-y-1.5", className)}>
+    {!!label && <FieldLabel>{label}</FieldLabel>}
     <slot />
 </div>
