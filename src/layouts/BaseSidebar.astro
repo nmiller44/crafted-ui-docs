@@ -7,6 +7,8 @@ import VertlistItem from "@components/vertlist/VertlistItem.astro";
 import VertlistHeader from "@components/vertlist/VertlistHeader.astro";
 import { sidebarLinks } from "@data/sidebar";
 
+const pathname = new URL(Astro.request.url).pathname;
+
 const { 
     title = "Crafted UI Docs", 
     description = "Documentation for the Crafted UI component library."
@@ -21,7 +23,7 @@ const {
                         <VertlistHeader>{ sect.title }</VertlistHeader>
                             { sect.items.map((item) => (
                                 <VertlistItem>
-                                    <a href={item.href}>{item.title}</a>
+                                    <a href={item.href} class={pathname == item.href ? "active" : ""}>{item.title}</a>
                                 </VertlistItem>
                             ))}
                     </Vertlist>                       
