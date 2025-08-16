@@ -13,42 +13,75 @@ import FieldError from '../../../components/field/FieldError.astro';
 import Input from '../../../components/input/Input.astro';
 import Button from '../../../components/button/Button.astro';
 import Fieldset from '../../../components/fieldset/Fieldset.astro';
+import FieldsetButtons from '../../../components/fieldset/FieldsetButtons.astro';
 
 <BaseSidebar title={frontmatter.title} description={frontmatter.description}>
     <SamplePage>
-        <div class="py-8 px-6">
-            <HeaderPage>Form Component</HeaderPage>
-            <div class="max-w-2xl">
-                <div class="space-y-8 py-6">
+        <div class="py-8 px-6 space-y-12">
+            <div>
+                <HeaderPage>Basic Form</HeaderPage>
+                <div class="max-w-2xl">
                     <form>
-                        <Fieldset>
-                            <Field>
-                                <FieldLabel>Full Name</FieldLabel>
+                        <Fieldset title="Contact Information" subtitle="Get in touch with us">
+                            <Field label="Full Name">
                                 <Input 
                                     type="text" 
                                     id="name" 
                                 />
                             </Field>
                             
-                            <Field>
-                                <FieldLabel>Email</FieldLabel>
+                            <Field label="Email">
                                 <Input 
                                     type="email" 
                                     id="email" 
                                 />
                             </Field>
                             
-                            <Field>
-                                <FieldLabel>Message</FieldLabel>
+                            <Field label="Message">
                                 <textarea 
                                     id="message" 
                                     rows={4} 
-                                    className="w-full rounded-md border border-neutral-300 px-3 py-2 text-sm shadow-sm" 
+                                    className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background" 
                                 ></textarea>
                             </Field>
-                            <div>
-                                <Button clr="primary">Submit</Button>
-                            </div>    
+                            <FieldsetButtons>
+                                <Button clr="primary">Send Message</Button>
+                            </FieldsetButtons>
+                        </Fieldset>
+                    </form>
+                </div>
+            </div>
+
+            <div>
+                <HeaderPage>Grid Layout Form</HeaderPage>
+                <div class="max-w-4xl">
+                    <form>
+                        <Fieldset title="User Registration" subtitle="Create your account" grid>
+                            <Field label="First Name" className="col-span-6">
+                                <Input type="text" />
+                            </Field>
+                            <Field label="Last Name" className="col-span-6">
+                                <Input type="text" />
+                            </Field>
+                            <Field label="Email Address">
+                                <Input type="email" />
+                            </Field>
+                            <Field label="Username" className="col-span-6">
+                                <Input type="text" />
+                            </Field>
+                            <Field label="Password" className="col-span-6">
+                                <Input type="password" />
+                            </Field>
+                            <Field label="Company" className="col-span-8">
+                                <Input type="text" />
+                            </Field>
+                            <Field label="Job Title" className="col-span-4">
+                                <Input type="text" />
+                            </Field>
+                            <FieldsetButtons>
+                                <Button outline clr="blank">Cancel</Button>
+                                <Button clr="primary">Create Account</Button>
+                            </FieldsetButtons>
                         </Fieldset>
                     </form>
                 </div>
@@ -86,60 +119,90 @@ import Fieldset from '../../../components/fieldset/Fieldset.astro';
         </Form>
         ```
 
-        ### Form with Fieldset
+        ### Form with Modern Fieldset
         
-        Use the Fieldset component to group related fields:
+        Use the enhanced Fieldset component with title, subtitle, and grid layout:
         
         ```tsx
-        import { Form } from "@crafted-ui/react";
-        import { Field, FieldLabel, FieldError } from "@crafted-ui/react";
-        import { Fieldset } from "@crafted-ui/react";
-        import { Input, Button } from "@crafted-ui/react";
+        import { Form, Fieldset, FieldsetButtons } from "@crafted-ui/react";
+        import { Field, Input, Button } from "@crafted-ui/react";
 
-        <Form onSubmit={handleSubmit} className="space-y-6">
-          <Fieldset title="Personal Information" subtitle="Tell us about yourself">
-            <Field>
-              <FieldLabel>First Name</FieldLabel>
+        <Form onSubmit={handleSubmit}>
+          <Fieldset title="Personal Information" subtitle="Tell us about yourself" grid>
+            <Field label="First Name" className="col-span-6">
               <Input name="firstName" required />
             </Field>
             
-            <Field>
-              <FieldLabel>Last Name</FieldLabel>
+            <Field label="Last Name" className="col-span-6">
               <Input name="lastName" required />
             </Field>
             
-            <Field>
-              <FieldLabel>Email</FieldLabel>
+            <Field label="Email">
               <Input name="email" type="email" required />
             </Field>
-          </Fieldset>
-          
-          <Fieldset title="Address" subtitle="Where should we send your order?">
-            <Field>
-              <FieldLabel>Street Address</FieldLabel>
-              <Input name="street" required />
-            </Field>
             
-            <Field>
-              <FieldLabel>City</FieldLabel>
-              <Input name="city" required />
-            </Field>
-            
-            <div className="grid grid-cols-2 gap-4">
-              <Field>
-                <FieldLabel>State</FieldLabel>
-                <Input name="state" required />
-              </Field>
-              
-              <Field>
-                <FieldLabel>Zip Code</FieldLabel>
-                <Input name="zipCode" required />
-              </Field>
-            </div>
+            <FieldsetButtons>
+              <Button outline>Cancel</Button>
+              <Button clr="primary" type="submit">Save</Button>
+            </FieldsetButtons>
           </Fieldset>
-          
-          <Button type="submit">Submit</Button>
         </Form>
+        ```
+    </Section>
+
+    <Section title="Grid Layout Forms">
+        The enhanced Fieldset component supports grid layouts for more complex forms. Use the `grid` prop to enable a 12-column grid system:
+
+        ```tsx
+        <Fieldset title="Address Information" grid>
+          <Field label="Street Address">
+            <Input name="street" />
+          </Field>
+          
+          <Field label="City" className="col-span-6">
+            <Input name="city" />
+          </Field>
+          
+          <Field label="State" className="col-span-3">
+            <Input name="state" />
+          </Field>
+          
+          <Field label="ZIP" className="col-span-3">
+            <Input name="zip" />
+          </Field>
+          
+          <FieldsetButtons>
+            <Button clr="primary">Save Address</Button>
+          </FieldsetButtons>
+        </Fieldset>
+        ```
+
+        ### Common Grid Patterns
+        - `col-span-6`: Half width (2 fields per row)
+        - `col-span-4`: One third width (3 fields per row)  
+        - `col-span-3`: One quarter width (4 fields per row)
+        - `col-span-full`: Full width (default)
+    </Section>
+
+    <Section title="Form Actions">
+        Use the `FieldsetButtons` component to create consistent button layouts within fieldsets:
+
+        ```tsx
+        // Right-aligned (default)
+        <FieldsetButtons>
+          <Button outline>Cancel</Button>
+          <Button clr="primary">Save</Button>
+        </FieldsetButtons>
+
+        // Left-aligned for destructive actions
+        <FieldsetButtons align="left">
+          <Button clr="destructive">Delete</Button>
+        </FieldsetButtons>
+
+        // Center-aligned for single actions
+        <FieldsetButtons align="center">
+          <Button clr="primary">Continue</Button>
+        </FieldsetButtons>
         ```
     </Section>
 
@@ -172,12 +235,15 @@ import Fieldset from '../../../components/fieldset/Fieldset.astro';
     </Section>
 
     <Section title="Best Practices">
-        - Group related form fields using the Fieldset component
+        - Use Fieldset components with descriptive titles to group related form fields
+        - Leverage the grid layout for complex forms with multiple columns
+        - Use FieldsetButtons for consistent action button placement and alignment
         - Use meaningful validation messages for form errors
         - Include clear submission feedback
         - Use appropriate input types (email, tel, number, etc.)
         - Consider using controlled components for complex forms
         - Leverage form libraries like React Hook Form or Formik for complex validation scenarios
-        - Use FieldInset for adding units or symbols next to inputs (like $ or %)
+        - Use Field with label prop for simplified field creation
+        - Maintain logical tab order, especially in grid layouts
     </Section>
 </BaseSidebar>
