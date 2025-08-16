@@ -1,16 +1,27 @@
 ---
 import { classNames } from "@utils/classNames"
 import type { HTMLAttributes } from "astro/types";
+import FieldsetLegend from "./FieldsetLegend.astro";
 
 interface Props extends HTMLAttributes<'fieldset'>{
+    title?: string;
+    subtitle?: string;
+    grid?: boolean;
     className?: string;
 }
 
 const { 
+    title,
+    subtitle,
+    grid = false,
     className,
     ...props
  } = Astro.props;
 ---
-<fieldset class={classNames("flex flex-col space-y-8", className)} {...props}>
+<fieldset class={classNames(
+    grid ? "grid grid-cols-12 gap-x-6 gap-y-8" : "flex flex-col space-y-8", 
+    className
+)} {...props}>
+    {!!title && <FieldsetLegend title={title} subtitle={subtitle} />}
     <slot />
 </fieldset>

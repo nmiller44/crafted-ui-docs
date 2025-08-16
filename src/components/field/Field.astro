@@ -12,7 +12,11 @@ const {
     label
  } = Astro.props;
 ---
-<div class={classNames("relative space-y-1.5", className)}>
+<div class={classNames(
+    "relative space-y-1.5",
+    "col-span-full",
+    className
+)}>
     {!!label && <FieldLabel>{label}</FieldLabel>}
     <slot />
 </div>

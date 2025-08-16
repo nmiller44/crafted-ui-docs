@@ -1,0 +1,358 @@
+---
+title: 'Fieldset'
+description: 'A fieldset component for grouping related form fields with support for grid layouts.'
+---
+import BaseSidebar from "@layouts/BaseSidebar.astro";
+import SamplePage from "@components/SamplePage.astro";
+import Fieldset from "@components/fieldset/Fieldset.astro";
+import FieldsetButtons from "@components/fieldset/FieldsetButtons.astro";
+import Field from "@components/field/Field.astro";
+import FieldLabel from "@components/field/FieldLabel.astro";
+import Input from "@components/input/Input.astro";
+import Button from "@components/button/Button.astro";
+import Card from "@components/card/Card.astro";
+import Prose from '@components/Prose.astro';
+import Section from '@components/Section.astro';
+
+<BaseSidebar title={frontmatter.title} description={frontmatter.description}>
+
+    <SamplePage>
+        <div class="space-y-12">
+            {/* Basic Fieldset */}
+            <Card body className="max-w-2xl">
+                <Fieldset title="Basic Form" subtitle="Simple fieldset with standard layout">
+                    <Field label="Full Name">
+                        <Input />
+                    </Field>
+                    <Field label="Email Address">
+                        <Input type="email" />
+                    </Field>
+                    <Field label="Phone Number">
+                        <Input type="tel" />
+                    </Field>
+                    <FieldsetButtons>
+                        <Button outline clr="blank">Cancel</Button>
+                        <Button clr="primary">Save</Button>
+                    </FieldsetButtons>
+                </Fieldset>
+            </Card>
+
+            {/* Grid Fieldset */}
+            <Card body className="max-w-4xl">
+                <Fieldset title="User Profile" subtitle="Update your profile information" grid>
+                    <Field label="First Name" className="col-span-6">
+                        <Input />
+                    </Field>
+                    <Field label="Last Name" className="col-span-6">
+                        <Input />
+                    </Field>
+                    <Field label="Email Address">
+                        <Input type="email" />
+                    </Field>
+                    <Field label="Bio" className="col-span-8">
+                        <textarea className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background" rows={3}></textarea>
+                    </Field>
+                    <Field label="Location" className="col-span-4">
+                        <Input />
+                    </Field>
+                    <FieldsetButtons>
+                        <Button outline clr="blank">Reset</Button>
+                        <Button clr="primary">Update Profile</Button>
+                    </FieldsetButtons>
+                </Fieldset>
+            </Card>
+        </div>
+    </SamplePage>
+
+    <Section title="Overview">
+        The Fieldset component provides a semantic way to group related form fields with optional title and subtitle. It supports both traditional stacked layouts and modern grid layouts for complex forms. The component is built on the native HTML fieldset element and includes legend support for accessibility.
+    </Section>
+
+    <Section title="Import">
+        ```tsx
+        import { Fieldset, FieldsetButtons } from "@crafted-ui/react";
+        ```
+    </Section>
+
+    <Section title="Fieldset">
+        ### Description
+        The main fieldset component that groups related form fields with optional title, subtitle, and layout options.
+
+        ### Usage
+        ```tsx
+        import { Fieldset, Field, FieldLabel, Input } from "@crafted-ui/react";
+
+        // Basic fieldset
+        <Fieldset title="Personal Information" subtitle="Tell us about yourself">
+          <Field>
+            <FieldLabel>Full Name</FieldLabel>
+            <Input />
+          </Field>
+          <Field>
+            <FieldLabel>Email</FieldLabel>
+            <Input type="email" />
+          </Field>
+        </Fieldset>
+
+        // Grid layout fieldset
+        <Fieldset title="Address" subtitle="Your address information" grid>
+          <Field className="col-span-6">
+            <FieldLabel>First Name</FieldLabel>
+            <Input />
+          </Field>
+          <Field className="col-span-6">
+            <FieldLabel>Last Name</FieldLabel>
+            <Input />
+          </Field>
+          <Field>
+            <FieldLabel>Street Address</FieldLabel>
+            <Input />
+          </Field>
+        </Fieldset>
+        ```
+
+        ### Props
+        The `Fieldset` component accepts the following props:
+        
+        | Prop | Type | Default | Description |
+        | --- | --- | --- | --- |
+        | title | string | undefined | The fieldset's title, displayed in the legend |
+        | subtitle | string | undefined | Additional descriptive text for the fieldset |
+        | grid | boolean | false | When true, uses a 12-column grid layout instead of stacked layout |
+        | className | string | undefined | Additional CSS class names |
+        | children | ReactNode | undefined | Form fields and other content |
+
+        The component also accepts all standard HTML fieldset attributes.
+    </Section>
+
+    <Section title="FieldsetButtons">
+        ### Description
+        A specialized component for placing action buttons within a fieldset, with alignment options.
+
+        ### Usage
+        ```tsx
+        import { FieldsetButtons, Button } from "@crafted-ui/react";
+
+        <FieldsetButtons>
+          <Button outline>Cancel</Button>
+          <Button clr="primary">Save</Button>
+        </FieldsetButtons>
+
+        // Left-aligned buttons
+        <FieldsetButtons align="left">
+          <Button clr="destructive">Delete</Button>
+        </FieldsetButtons>
+
+        // Center-aligned buttons
+        <FieldsetButtons align="center">
+          <Button>Continue</Button>
+        </FieldsetButtons>
+        ```
+
+        ### Props
+        The `FieldsetButtons` component accepts the following props:
+        
+        | Prop | Type | Default | Description |
+        | --- | --- | --- | --- |
+        | align | 'left' \| 'center' \| 'right' | 'right' | Alignment of buttons within the container |
+        | className | string | undefined | Additional CSS class names |
+        | children | ReactNode | undefined | Button components |
+    </Section>
+
+    <Section title="Layout Options">
+        ### Stacked Layout (Default)
+        The default layout stacks fields vertically with consistent spacing.
+
+        <SamplePage>
+            <Card body className="max-w-md">
+                <Fieldset title="Contact Information">
+                    <Field label="Name">
+                        <Input />
+                    </Field>
+                    <Field label="Email">
+                        <Input type="email" />
+                    </Field>
+                    <Field label="Message">
+                        <textarea className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background" rows={3}></textarea>
+                    </Field>
+                </Fieldset>
+            </Card>
+        </SamplePage>
+
+        ```tsx
+        <Fieldset title="Contact Information">
+          <Field>
+            <FieldLabel>Name</FieldLabel>
+            <Input />
+          </Field>
+          <Field>
+            <FieldLabel>Email</FieldLabel>
+            <Input type="email" />
+          </Field>
+        </Fieldset>
+        ```
+
+        ### Grid Layout
+        The grid layout uses a 12-column system for more complex forms. Fields span the full width by default but can be customized using className.
+
+        <SamplePage>
+            <Card body className="max-w-2xl">
+                <Fieldset title="Billing Address" grid>
+                    <Field label="Street Address">
+                        <Input />
+                    </Field>
+                    <Field label="City" className="col-span-4">
+                        <Input />
+                    </Field>
+                    <Field label="State" className="col-span-4">
+                        <Input />
+                    </Field>
+                    <Field label="ZIP Code" className="col-span-4">
+                        <Input />
+                    </Field>
+                </Fieldset>
+            </Card>
+        </SamplePage>
+
+        ```tsx
+        <Fieldset title="Billing Address" grid>
+          <Field>
+            <FieldLabel>Street Address</FieldLabel>
+            <Input />
+          </Field>
+          <Field className="col-span-4">
+            <FieldLabel>City</FieldLabel>
+            <Input />
+          </Field>
+          <Field className="col-span-4">
+            <FieldLabel>State</FieldLabel>
+            <Input />
+          </Field>
+          <Field className="col-span-4">
+            <FieldLabel>ZIP Code</FieldLabel>
+            <Input />
+          </Field>
+        </Fieldset>
+        ```
+
+        ### Common Grid Patterns
+        Here are some common column span patterns for the 12-column grid:
+
+        - `col-span-6`: Half width (2 fields per row)
+        - `col-span-4`: One third width (3 fields per row)
+        - `col-span-3`: One quarter width (4 fields per row)
+        - `col-span-8`: Two thirds width
+        - `col-span-9`: Three quarters width
+        - `col-span-full`: Full width (default)
+    </Section>
+
+    <Section title="Button Alignment">
+        ### Right Aligned (Default)
+        Buttons are right-aligned by default, which follows common form conventions.
+
+        <SamplePage>
+            <Card body className="max-w-md">
+                <FieldsetButtons>
+                    <Button outline clr="blank">Cancel</Button>
+                    <Button clr="primary">Submit</Button>
+                </FieldsetButtons>
+            </Card>
+        </SamplePage>
+
+        ### Left Aligned
+        Use left alignment for destructive actions or secondary workflows.
+
+        <SamplePage>
+            <Card body className="max-w-md">
+                <FieldsetButtons align="left">
+                    <Button clr="destructive">Delete Account</Button>
+                </FieldsetButtons>
+            </Card>
+        </SamplePage>
+
+        ### Center Aligned
+        Center alignment can be used for single-button actions or modal dialogs.
+
+        <SamplePage>
+            <Card body className="max-w-md">
+                <FieldsetButtons align="center">
+                    <Button clr="primary">Continue</Button>
+                </FieldsetButtons>
+            </Card>
+        </SamplePage>
+    </Section>
+
+    <Section title="Accessibility">
+        The Fieldset component follows accessibility best practices:
+        
+        - Uses the semantic HTML `<fieldset>` element for proper grouping
+        - Includes a `<legend>` element when title is provided for screen reader context
+        - Maintains proper focus order within form fields
+        - Grid layouts maintain logical tab order
+        
+        When implementing fieldsets:
+        
+        1. Use descriptive titles that clearly identify the purpose of the field group
+        2. Include subtitles to provide additional context when helpful
+        3. Ensure logical tab order, especially in grid layouts
+        4. Group related fields together for better user experience
+    </Section>
+
+    <Section title="Examples">
+        ### Registration Form
+        ```tsx
+        <Fieldset title="Create Account" subtitle="Sign up for a new account">
+          <Field>
+            <FieldLabel>Username</FieldLabel>
+            <Input required />
+          </Field>
+          <Field>
+            <FieldLabel>Email</FieldLabel>
+            <Input type="email" required />
+          </Field>
+          <Field>
+            <FieldLabel>Password</FieldLabel>
+            <Input type="password" required />
+          </Field>
+          <FieldsetButtons>
+            <Button clr="primary" type="submit">Create Account</Button>
+          </FieldsetButtons>
+        </Fieldset>
+        ```
+
+        ### Complex Grid Form
+        ```tsx
+        <Fieldset title="Employee Information" subtitle="Enter employee details" grid>
+          <Field className="col-span-6">
+            <FieldLabel>First Name</FieldLabel>
+            <Input required />
+          </Field>
+          <Field className="col-span-6">
+            <FieldLabel>Last Name</FieldLabel>
+            <Input required />
+          </Field>
+          <Field className="col-span-8">
+            <FieldLabel>Email</FieldLabel>
+            <Input type="email" required />
+          </Field>
+          <Field className="col-span-4">
+            <FieldLabel>Employee ID</FieldLabel>
+            <Input />
+          </Field>
+          <Field>
+            <FieldLabel>Department</FieldLabel>
+            <Select>
+              <option>Engineering</option>
+              <option>Marketing</option>
+              <option>Sales</option>
+            </Select>
+          </Field>
+          <FieldsetButtons>
+            <Button outline>Save Draft</Button>
+            <Button clr="primary">Add Employee</Button>
+          </FieldsetButtons>
+        </Fieldset>
+        ```
+    </Section>
+
+</BaseSidebar>

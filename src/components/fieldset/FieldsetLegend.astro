@@ -1,0 +1,26 @@
+---
+import { classNames } from "@utils/classNames"
+import type { HTMLAttributes } from "astro/types";
+import Heading5 from "@components/heading/Heading5.astro";
+
+interface Props extends HTMLAttributes<'legend'>{
+    title?: string;
+    subtitle?: string;
+    className?: string;
+}
+
+const { 
+    title,
+    subtitle,
+    className,
+    ...props
+ } = Astro.props;
+---
+<legend class={classNames(
+    "space-y-1.5",
+    "col-span-full",
+    className
+)} {...props}>
+    {!!title && <Heading5 title={title} subtitle={subtitle} />}
+    <slot />
+</legend>
