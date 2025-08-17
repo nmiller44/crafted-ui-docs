@@ -52,7 +52,7 @@ import Alert from '@components/alert/Alert.astro';
         
         | Prop | Type | Default | Description |
         | --- | --- | --- | --- |
-        | title | string | required | The heading text for the alert |
+        | title | string | undefined | The heading text for the alert |
         | status | 'warning' \| 'error' \| 'success' \| 'info' | 'warning' | Determines the visual style of the alert |
         | className | string | undefined | Additional CSS class names |
         | children | ReactNode | undefined | Content of the alert |
@@ -115,6 +115,13 @@ import Alert from '@components/alert/Alert.astro';
         ```tsx
         <Alert title="No data available">
           Please check back later.
+        </Alert>
+        ```
+
+        ### Alert without Title
+        ```tsx
+        <Alert status="info">
+          This is an alert message without a title.
         </Alert>
         ```
 

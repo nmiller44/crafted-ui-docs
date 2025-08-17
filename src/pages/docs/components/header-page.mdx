@@ -10,25 +10,76 @@ import Section from '../../../components/Section.astro';
 <BaseSidebar title={ frontmatter.title } description={ frontmatter.description }>
 
     <SamplePage>
-        <HeaderPage title="Header Page" subtitle="Subtitle" />
+        <div class="space-y-8">
+            <HeaderPage title="Page Title" subtitle="Main page subtitle description" />
+            <HeaderPage title="Simple Page Header" />
+        </div>
     </SamplePage>
 
-    <Section title="Usage">
-        The `HeaderPage` component can be passed an optional `title` and `subtitle` parameter to display a pre-styled title and subtitle. By omitting the `title` parameter customized content can be passed to the component via `<slot />`.
+    <Section title="Overview">
+        The PageHeader component is designed to display page-level titles and subtitles in a consistent format. It serves as the main heading for a page and helps establish hierarchy and navigation context for users.
+    </Section>
 
-        #### Default Usage
-        ```astro
-        <HeaderPage title="Header Page" subtitle="Subtitle" />
+    <Section title="Import">
+        ```jsx
+        import { PageHeader } from "@crafted-ui/react";
+        ```
+    </Section>
+
+    <Section title="Usage">
+        The `PageHeader` component can be passed an optional `title` and `subtitle` parameter to display a pre-styled title and subtitle. By omitting the `title` parameter customized content can be passed to the component via children.
+
+        ### Default Usage
+        ```tsx
+        <PageHeader title="Dashboard" subtitle="Overview of your account activity" />
         ```
 
-        #### Custom Content
-        ```astro
-        <HeaderPage>
+        ### Simple Title Only
+        ```tsx
+        <PageHeader title="Settings" />
+        ```
+
+        ### Custom Content
+        ```tsx
+        <PageHeader>
           <div>
-            <h1 class="text-2xl font-bold text-blue-600">Custom Title</h1>
-            <p class="text-sm italic">Custom Subtitle</p>
+            <h1 className="text-2xl font-bold text-blue-600">Custom Title</h1>
+            <p className="text-sm italic">Custom Subtitle</p>
           </div>
-        </HeaderPage>
+        </PageHeader>
+        ```
+    </Section>
+
+    <Section title="Props">
+        The `PageHeader` component accepts the following props:
+        
+        | Prop | Type | Default | Description |
+        | --- | --- | --- | --- |
+        | title | string | undefined | The main page title |
+        | subtitle | string | undefined | Optional descriptive text below the title |
+        | className | string | undefined | Additional CSS class names |
+        | children | ReactNode | undefined | Custom content to display instead of title/subtitle |
+    </Section>
+
+    <Section title="Integration with Page Component">
+        The PageHeader functionality is also integrated directly into the Page component. When using the Page component with title and subtitle props, it automatically renders a PageHeader:
+
+        ```tsx
+        import { Page } from "@crafted-ui/react";
+
+        <Page title="Dashboard" subtitle="Overview of your account">
+          {/* Page content */}
+        </Page>
+        ```
+
+        This is equivalent to:
+        ```tsx
+        import { Page, PageHeader } from "@crafted-ui/react";
+
+        <Page>
+          <PageHeader title="Dashboard" subtitle="Overview of your account" />
+          {/* Page content */}
+        </Page>
         ```
     </Section>
 

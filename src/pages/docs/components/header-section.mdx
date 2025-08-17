@@ -5,10 +5,103 @@ description: 'Section header used to display a title and subtitle'
 import BaseSidebar from "../../../layouts/BaseSidebar.astro";
 import SamplePage from "../../../components/SamplePage.astro";
 import HeaderSection from "../../../components/HeaderSection.astro";
+import Button from "../../../components/button/Button.astro";
 import Section from '../../../components/Section.astro';
 
 <BaseSidebar title={ frontmatter.title } description={ frontmatter.description }>
+
     <SamplePage>
-        <HeaderSection title={ frontmatter.title } subtitle={ frontmatter.description } />
+        <div class="space-y-8">
+            <HeaderSection title="Default Section Header" subtitle="Basic header without styling" />
+            <HeaderSection title="Lined Section Header" subtitle="Header with bottom border" lined />
+            <HeaderSection title="Header with Action" subtitle="Header with button on the right">
+                <Button>New Item</Button>
+            </HeaderSection>
+        </div>
     </SamplePage>
+
+    <Section title="Overview">
+        The SectionHeader component provides a consistent way to display section titles and subtitles with optional styling and action elements. It supports various configurations including lined borders and flexible content layout.
+    </Section>
+
+    <Section title="Import">
+        ```jsx
+        import { SectionHeader } from "@crafted-ui/react";
+        ```
+    </Section>
+
+    <Section title="Usage">
+        ### Basic Usage
+        ```tsx
+        <SectionHeader title="Section Title" subtitle="Optional subtitle" />
+        ```
+
+        ### Lined Header
+        Add a bottom border to visually separate the header from content:
+        ```tsx
+        <SectionHeader title="Section Title" subtitle="Optional subtitle" lined />
+        ```
+
+        ### Header with Actions
+        Include action elements like buttons on the right side:
+        ```tsx
+        <SectionHeader title="Section Title" subtitle="Optional subtitle">
+          <Button>Add New</Button>
+        </SectionHeader>
+        ```
+
+        ### Custom Content
+        Use without title/subtitle for completely custom content:
+        ```tsx
+        <SectionHeader>
+          <div className="flex items-center justify-between">
+            <h2>Custom Header</h2>
+            <div className="flex gap-2">
+              <Button variant="outline">Cancel</Button>
+              <Button>Save</Button>
+            </div>
+          </div>
+        </SectionHeader>
+        ```
+    </Section>
+
+    <Section title="Props">
+        The `SectionHeader` component accepts the following props:
+        
+        | Prop | Type | Default | Description |
+        | --- | --- | --- | --- |
+        | title | string | undefined | The main heading text |
+        | subtitle | string | undefined | Optional descriptive text below the title |
+        | lined | boolean | false | When true, adds a bottom border |
+        | className | string | undefined | Additional CSS class names for the heading |
+        | wrapperClassName | string | undefined | Additional CSS class names for the wrapper element |
+        | children | ReactNode | undefined | Action elements or custom content |
+    </Section>
+
+    <Section title="Examples">
+        ### Simple Section Header
+        ```tsx
+        <SectionHeader title="User Settings" subtitle="Manage your account preferences" />
+        ```
+
+        ### Section with Lined Border
+        ```tsx
+        <SectionHeader 
+          title="Recent Activity" 
+          subtitle="Your latest actions and updates"
+          lined 
+        />
+        ```
+
+        ### Section with Multiple Actions
+        ```tsx
+        <SectionHeader title="Projects" subtitle="Manage your active projects">
+          <div className="flex gap-2">
+            <Button variant="outline">Import</Button>
+            <Button>New Project</Button>
+          </div>
+        </SectionHeader>
+        ```
+    </Section>
+
 </BaseSidebar>
