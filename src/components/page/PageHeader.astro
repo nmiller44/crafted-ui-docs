@@ -25,7 +25,7 @@ const classes = classNames(
 ---
 <header class={classes} {...props}>
     { !!title
-        ? <>
+        ? <div class="space-y-6">
             <div>
                 <Heading1 title={title} subtitle={subtitle} className={className} />
             </div>
@@ -34,7 +34,7 @@ const classes = classNames(
                     <slot />
                 </div>
             }
-        </>
+        </div>
         : <slot />
     }
 </header>
