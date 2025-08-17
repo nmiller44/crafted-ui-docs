@@ -22,6 +22,13 @@ export const sidebarLinks = [
         ]
     },
     {
+        title: 'Layout',
+        items: [
+            { title: 'Page', href: '/docs/layout/page' },
+            { title: 'Section', href: '/docs/layout/section' },
+        ]
+    },
+    {
         title: 'Components',
         items: [
             { title: 'Alert', href: '/docs/components/alert' },

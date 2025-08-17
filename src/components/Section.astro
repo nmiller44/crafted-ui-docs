@@ -6,12 +6,13 @@ import Prose from "./Prose.astro";
 interface Props {
     title?: string;
     subtitle?: string;
+    className?: string;
     prose?: boolean;
 }
 
-const { title, subtitle, prose = true } = Astro.props;
+const { title, subtitle, prose = true, className } = Astro.props;
 ---
-<section class="[&:not(:first-child)]:mt-12">
+<section class="[&:not(:first-child)]:mt-12 space-y-6">
     { 
         !!title && (
         <HeaderSection title={title} subtitle={subtitle} />

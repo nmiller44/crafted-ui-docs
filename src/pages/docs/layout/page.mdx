@@ -1,0 +1,372 @@
+---
+title: 'Page'
+description: 'A layout component for structuring page content with consistent spacing and container width.'
+---
+import BaseSidebar from "@/layouts/BaseSidebar.astro";
+import SamplePage from "@/components/SamplePage.astro";
+import Page from "@/components/page/Page.astro";
+import PageHeader from "@/components/page/PageHeader.astro";
+import Section from "@/components/section/Section.astro";
+
+import Prose from '@/components/Prose.astro';
+import Heading3 from '@/components/heading/Heading3.astro';
+import Button from '@/components/button/Button.astro';
+
+<BaseSidebar title={frontmatter.title} description={frontmatter.description}>
+
+    <SamplePage>
+        <Page title="Sample Page" subtitle="This demonstrates a complete page layout with header and content">
+            <Section title="First Section" prose={false}>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="p-4 bg-muted rounded-md">
+                        <p>This content is automatically contained within the page container with responsive padding.</p>
+                    </div>
+                    <div class="p-4 bg-muted rounded-md">
+                        <p>Page components handle container width, spacing, and responsive behavior automatically.</p>
+                    </div>
+                </div>
+            </Section>
+            
+            <Section title="Second Section" prose={false}>
+                <div class="p-4 bg-accent/10 rounded-md">
+                    <p>Sections within a page are automatically spaced using space-y-12 for consistent vertical rhythm.</p>
+                </div>
+            </Section>
+        </Page>
+    </SamplePage>
+
+    <Section title="Overview">
+        The Page component provides a complete page layout structure with automatic container sizing, responsive padding, and consistent spacing. It combines container functionality with page-specific styling and can optionally include a PageHeader for titles and actions. The Page component is designed to be the top-level layout component for your application pages.
+    </Section>
+
+    <Section title="Page">
+        ### Description
+        A layout component that wraps page content with consistent container sizing, padding, and spacing.
+
+        ### Usage
+        ```tsx
+        import { Page } from "@crafted-ui/react";
+
+        <Page title="My Page" subtitle="Page description">
+          <Section title="Content Section">
+            <p>Page content goes here</p>
+          </Section>
+        </Page>
+        ```
+
+        ### Props
+        The `Page` component accepts the following props:
+        
+        | Prop | Type | Description |
+        | --- | --- | --- |
+        | title | string | Optional page title that renders a PageHeader |
+        | subtitle | string | Optional subtitle for the page header |
+        | className | string | Additional CSS class names for the content container |
+        | children | ReactNode | Content of the page |
+
+        The component also accepts all standard HTML div attributes for the content container.
+    </Section>
+
+    <Section title="PageHeader">
+        ### Description
+        A header component specifically designed for page titles with optional actions and responsive layout.
+
+        ### Usage
+        ```tsx
+        import { PageHeader } from "@crafted-ui/react";
+
+        <PageHeader 
+          title="Page Title" 
+          subtitle="Page description"
+        >
+          <Button>Action</Button>
+        </PageHeader>
+        ```
+
+        ### Props
+        The `PageHeader` component accepts the following props:
+        
+        | Prop | Type | Description |
+        | --- | --- | --- |
+        | title | string | Header title text |
+        | subtitle | string | Optional subtitle text |
+        | className | string | Additional CSS class names for the heading |
+        | wrapperClassName | string | Additional CSS class names for the header container |
+        | children | ReactNode | Optional content (like buttons) to display alongside the header |
+
+        The component also accepts all standard HTML header attributes.
+    </Section>
+
+    <Section title="Layout Structure">
+        ### Container Behavior
+        The Page component applies consistent container sizing and responsive padding:
+
+        - **Container width**: `max-w-container mx-auto` (centers content with maximum width)
+        - **Responsive padding**: `px-4 py-6 sm:px-6 lg:px-8 lg:py-8`
+        - **Content spacing**: `space-y-12` for vertical spacing between child elements
+
+        <SamplePage>
+            <div class="border border-border rounded-md overflow-hidden">
+                <Page title="Layout Demo" subtitle="Shows container and spacing behavior">
+                    <div class="p-4 bg-primary/10 rounded-md">
+                        <p class="text-sm">Container content with automatic width constraints</p>
+                    </div>
+                    <div class="p-4 bg-secondary/10 rounded-md">
+                        <p class="text-sm">Automatic spacing between content blocks (space-y-12)</p>
+                    </div>
+                </Page>
+            </div>
+        </SamplePage>
+
+        ```tsx
+        <Page title="Layout Demo" subtitle="Shows container and spacing behavior">
+          <div>Container content with automatic width constraints</div>
+          <div>Automatic spacing between content blocks</div>
+        </Page>
+        ```
+
+        ### Header Layout
+        When a title is provided, PageHeader automatically handles responsive layout:
+
+        - **Mobile**: Title and actions stack vertically
+        - **Desktop**: Title and actions are side-by-side with `md:flex md:items-center md:justify-between`
+
+        <SamplePage>
+            <PageHeader title="Page with Actions" subtitle="Responsive header layout">
+                <div class="flex gap-2">
+                    <Button>Edit</Button>
+                    <Button clr="primary">Save</Button>
+                </div>
+            </PageHeader>
+        </SamplePage>
+
+        ```tsx
+        <PageHeader title="Page with Actions" subtitle="Responsive header layout">
+          <div className="flex gap-2">
+            <Button>Edit</Button>
+            <Button variant="primary">Save</Button>
+          </div>
+        </PageHeader>
+        ```
+    </Section>
+
+    <Section title="Usage Patterns">
+        ### Complete Page Layout
+        Using Page for a full page structure:
+
+        <SamplePage>
+            <Page title="Dashboard" subtitle="Overview of your account">
+                <Section title="Quick Stats" prose={false}>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div class="p-4 bg-muted rounded-md text-center">
+                            <div class="text-2xl font-bold">1,234</div>
+                            <div class="text-sm text-muted-foreground">Total Users</div>
+                        </div>
+                        <div class="p-4 bg-muted rounded-md text-center">
+                            <div class="text-2xl font-bold">56</div>
+                            <div class="text-sm text-muted-foreground">Active Projects</div>
+                        </div>
+                        <div class="p-4 bg-muted rounded-md text-center">
+                            <div class="text-2xl font-bold">89%</div>
+                            <div class="text-sm text-muted-foreground">Completion Rate</div>
+                        </div>
+                    </div>
+                </Section>
+                
+                <Section title="Recent Activity" prose={false}>
+                    <div class="space-y-3">
+                        <div class="p-3 bg-muted rounded-md text-sm">User John Doe completed Project Alpha</div>
+                        <div class="p-3 bg-muted rounded-md text-sm">New team member added to Beta Team</div>
+                        <div class="p-3 bg-muted rounded-md text-sm">Project Gamma reached 75% completion</div>
+                    </div>
+                </Section>
+            </Page>
+        </SamplePage>
+
+        ```tsx
+        <Page title="Dashboard" subtitle="Overview of your account">
+          <Section title="Quick Stats">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {/* Metric cards */}
+            </div>
+          </Section>
+          
+          <Section title="Recent Activity">
+            {/* Activity list */}
+          </Section>
+        </Page>
+        ```
+
+        ### Page with Header Actions
+        Including action buttons in the page header:
+
+        <SamplePage>
+            <Page title="User Settings" subtitle="Manage your account preferences">
+                <div slot="header-actions">
+                    <Button clr="primary">Save Changes</Button>
+                </div>
+                
+                <Section title="Profile Information" prose={false}>
+                    <div class="space-y-4">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div class="p-4 bg-muted rounded-md">
+                                <label class="block text-sm font-medium mb-2">First Name</label>
+                                <input type="text" class="w-full p-2 border border-border rounded-md" value="John" />
+                            </div>
+                            <div class="p-4 bg-muted rounded-md">
+                                <label class="block text-sm font-medium mb-2">Last Name</label>
+                                <input type="text" class="w-full p-2 border border-border rounded-md" value="Doe" />
+                            </div>
+                        </div>
+                    </div>
+                </Section>
+            </Page>
+        </SamplePage>
+
+        ```tsx
+        <Page title="User Settings" subtitle="Manage your account preferences">
+          <PageHeader title="User Settings" subtitle="Manage your account preferences">
+            <Button variant="primary">Save Changes</Button>
+          </PageHeader>
+          
+          <Section title="Profile Information">
+            {/* Form content */}
+          </Section>
+        </Page>
+        ```
+
+        ### Standalone PageHeader
+        Using PageHeader independently for custom layouts:
+
+        ```tsx
+        <div className="min-h-screen bg-background">
+          <PageHeader 
+            title="Custom Layout" 
+            subtitle="Using PageHeader independently"
+            wrapperClassName="bg-muted px-4 py-6"
+          >
+            <Button>Custom Action</Button>
+          </PageHeader>
+          
+          <main className="px-4 py-8">
+            {/* Custom content layout */}
+          </main>
+        </div>
+        ```
+    </Section>
+
+    <Section title="Responsive Behavior">
+        ### Breakpoint Behavior
+        Page components adapt to different screen sizes:
+
+        - **Mobile (< 640px)**: `px-4 py-6` padding
+        - **Small (≥ 640px)**: `px-6` horizontal padding  
+        - **Large (≥ 1024px)**: `px-8 py-8` increased padding
+
+        ### Header Responsiveness
+        PageHeader layout changes based on screen size:
+
+        - **Mobile**: Title and actions stack vertically
+        - **Medium and up**: Horizontal layout with title on left, actions on right
+
+        ### Container Width
+        The `max-w-container` class provides:
+
+        - Maximum width constraint (defined in your Tailwind config)
+        - Automatic horizontal centering with `mx-auto`
+        - Responsive behavior at different breakpoints
+    </Section>
+
+    <Section title="Accessibility">
+        The Page components follow semantic HTML and accessibility best practices:
+        
+        - Uses semantic `<header>` element for PageHeader
+        - Maintains proper heading hierarchy (h1 for page titles)
+        - Provides logical document structure and content flow
+        - Ensures adequate spacing for readability
+        
+        When implementing pages, ensure that:
+        
+        1. Page titles are descriptive and provide clear context
+        2. Content is organized logically within sections
+        3. Interactive elements (buttons, links) have proper focus states
+        4. Color contrast meets accessibility standards
+        5. Content remains readable and navigable at all screen sizes
+    </Section>
+
+    <Section title="Customization">
+        ### Custom Container Styling
+        Override default container behavior:
+
+        ```tsx
+        <Page 
+          className="max-w-4xl space-y-6" 
+          title="Custom Width"
+        >
+          <Section title="Narrower Container">
+            <p>Content with custom maximum width</p>
+          </Section>
+        </Page>
+        ```
+
+        ### Custom Header Styling
+        Apply custom styling to PageHeader:
+
+        ```tsx
+        <PageHeader 
+          title="Styled Header" 
+          subtitle="Custom appearance"
+          wrapperClassName="bg-gradient-to-r from-primary to-accent p-8 rounded-lg"
+          className="text-white"
+        >
+          <Button variant="secondary">Action</Button>
+        </PageHeader>
+        ```
+
+        ### Full-Width Sections
+        Combine Page with full-width elements:
+
+        ```tsx
+        <Page title="Mixed Layout">
+          <Section title="Regular Content">
+            <p>Standard container width</p>
+          </Section>
+        </Page>
+        
+        <div className="bg-muted py-12">
+          <div className="max-w-container mx-auto px-4 sm:px-6 lg:px-8">
+            <Section title="Full-Width Section">
+              <p>Full-width background with contained content</p>
+            </Section>
+          </div>
+        </div>
+        ```
+    </Section>
+
+    <Section title="Best Practices">
+        ### Page Structure
+        - Use Page as the top-level layout component for application pages
+        - Include descriptive titles and subtitles for better user orientation
+        - Organize content using Section components within the Page
+        - Place primary actions in the PageHeader for easy access
+
+        ### Content Organization
+        - Keep related content grouped within sections
+        - Use consistent spacing by relying on the built-in space-y-12
+        - Consider the visual hierarchy when structuring page content
+        - Ensure logical flow from page title through content sections
+
+        ### Performance Considerations
+        - Page components are lightweight wrappers with minimal performance impact
+        - Container constraints prevent content from becoming too wide on large screens
+        - Responsive padding reduces layout shift across different devices
+        - Use Page consistently across your application for predictable layouts
+
+        ### Layout Patterns
+        - Combine Page with Section components for structured content
+        - Use PageHeader actions for page-level functionality
+        - Consider mobile-first responsive design when planning page layouts
+        - Maintain consistent spacing and sizing across different page types
+    </Section>
+
+</BaseSidebar>

@@ -1,11 +1,23 @@
 ---
+import type { HTMLAttributes } from "astro/types"
 import { classNames } from "../utils/classNames"
+
+interface Props extends HTMLAttributes<'div'> {
+    className?: string;
+}
+
+const { 
+    className, 
+    ...props 
+} = Astro.props;
 ---
 <div class={classNames(
+                "space-y-8",
                 "prose dark:prose-invert",
                 "prose-h1:text-5xl prose-h1:font-bold prose-h1:text-neutral-800",
                 "prose-a:text-blue-600",
                 "max-w-none",
+                className
             )}>
     <slot />
 </div>
