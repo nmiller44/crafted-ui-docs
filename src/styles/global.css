@@ -4,6 +4,17 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
+    --container-container: 80rem;
+    --container-navbar: 4rem;
+    --container-sidebar: 12rem;
+
+    /* Status Color Indicators */
+    --danger: hsl(10 97% 40%);
+    --warning: hsl(45 98% 45%);
+    --success: hsl(142 71% 29%);
+    --info: hsl(210 100% 50%);
+
+  /* Semantic Color System */
     --background: hsl(121 33% 100%);
     --foreground: hsl(121 80% 4%);
     --muted: hsl(121 18% 91%);
@@ -62,6 +73,11 @@
     --container-container: 80rem;
     --container-navbar: 4rem;
     --container-sidebar: 12rem;
+
+    --color-danger: var(--danger);
+    --color-warning: var(--warning);
+    --color-success: var(--success);
+    --color-info: var(--info);
 
     --color-background: var(--background);
     --color-foreground: var(--foreground);
