@@ -1,0 +1,252 @@
+---
+title: 'Avatar'
+description: 'A versatile avatar component for displaying user profile images and fallback text.'
+---
+import BaseSidebar from "@/layouts/BaseSidebar.astro";
+import SamplePage from "@/components/SamplePage.astro";
+import Avatar from "@/components/avatar/Avatar.astro";
+
+import Prose from '@/components/Prose.astro';
+import Section from '@/components/Section.astro';
+import Heading3 from '@/components/heading/Heading3.astro';
+
+<BaseSidebar title={frontmatter.title} description={frontmatter.description}>
+
+    <SamplePage>
+        <div class="space-y-8">
+            <div class="flex flex-col space-y-4">
+                <Heading3 title="Size Variants" />
+                <div class="flex flex-wrap gap-4 items-center">
+                    <Avatar size="sm" fallback="SM" src="https://crafted-ui.com/favicon.svg" imgClassName="p-2" />
+                    <Avatar size="md" fallback="MD" src="https://crafted-ui.com/favicon.svg" imgClassName="p-3" />
+                    <Avatar size="lg" fallback="LG" src="https://crafted-ui.com/favicon.svg" imgClassName="p-3" />
+                    <Avatar size="xl" fallback="XL" src="https://crafted-ui.com/favicon.svg" imgClassName="p-3" />
+                </div>
+            </div>
+
+            <div class="flex flex-col space-y-4">
+                <Heading3 title="Fallback Text" />
+                <div class="flex flex-wrap gap-4 items-center">
+                    <Avatar size="sm" fallback="SM" />
+                    <Avatar size="md" fallback="MD" />
+                    <Avatar size="lg" fallback="LG" />
+                    <Avatar size="xl" fallback="XL" />
+                </div>
+            </div>
+
+            <div class="flex flex-col space-y-4">
+                <Heading3 title="Custom Styling" />
+                <div class="flex flex-wrap gap-4 items-center">
+                    <Avatar fallback="XX" className="bg-destructive text-destructive-foreground" />
+                    <Avatar fallback="YY" className="bg-secondary text-secondary-foreground" />
+                    <Avatar fallback="ZZ" className="bg-info text-foreground" />
+                </div>
+            </div>
+        </div>
+    </SamplePage>
+
+    <Section title="Overview">
+        The Avatar component is designed for displaying user profile images with automatic fallback support. When an image fails to load or is not provided, it gracefully displays fallback text. The component supports multiple sizes and can be customized with different color schemes.
+    </Section>
+
+    <Section title="Avatar">
+        ### Description
+        A circular avatar component that displays profile images with fallback text support and multiple size options.
+
+        ### Usage
+        ```tsx
+        import { Avatar } from "@crafted-ui/react";
+
+        <Avatar src="https://github.com/username.png" fallback="JD" />
+        ```
+
+        ### Props
+        The `Avatar` component accepts the following props:
+        
+        | Prop | Type | Default | Description |
+        | --- | --- | --- | --- |
+        | size | 'sm' \| 'md' \| 'lg' \| 'xl' | 'md' | Sets the avatar's size |
+        | fallback | string | undefined | Text to display when image is not available |
+        | src | string | undefined | Source URL for the avatar image |
+        | height | string | undefined | Custom height for the image |
+        | width | string | undefined | Custom width for the image |
+        | imgClassName | string | undefined | Additional CSS class names for the image |
+        | className | string | undefined | Additional CSS class names for the container |
+        | children | ReactNode | undefined | Custom content inside the avatar |
+
+        The component also accepts all standard HTML div attributes.
+    </Section>
+
+    <Section title="Size Variants">
+        ### Available Sizes
+        The Avatar component comes in four predefined sizes to fit different contexts.
+
+        <SamplePage>
+            <div class="flex flex-wrap gap-4 items-center">
+                <Avatar size="sm" fallback="SM" />
+                <Avatar size="md" fallback="MD" />
+                <Avatar size="lg" fallback="LG" />
+                <Avatar size="xl" fallback="XL" />
+            </div>
+        </SamplePage>
+
+        ```tsx
+        <Avatar size="sm" fallback="SM" src="https://github.com/username.png" />
+        <Avatar size="md" fallback="MD" src="https://github.com/username.png" />
+        <Avatar size="lg" fallback="LG" src="https://github.com/username.png" />
+        <Avatar size="xl" fallback="XL" src="https://github.com/username.png" />
+        ```
+
+        | Size | Dimensions | Use Case |
+        | --- | --- | --- |
+        | sm | 40x40px | Small lists, comments |
+        | md | 48x48px | Default size, general use |
+        | lg | 56x56px | Profile cards, larger lists |
+        | xl | 64x64px | Profile headers, main displays |
+    </Section>
+
+    <Section title="Fallback Support">
+        ### With Images
+        When a valid image source is provided, the avatar displays the image.
+
+        <SamplePage>
+            <div class="flex flex-wrap gap-4 items-center">
+                <Avatar fallback="NM" src="https://crafted-ui.com/favicon.svg" imgClassName="p-3" />
+                <Avatar fallback="JD" size="lg" src="https://crafted-ui.com/favicon.svg" imgClassName="p-3" />
+            </div>
+        </SamplePage>
+
+        ```tsx
+        <Avatar src="https://github.com/username.png" fallback="NM" />
+        <Avatar src="https://github.com/username.png" fallback="JD" size="lg" />
+        ```
+
+        ### Fallback Text Only
+        When no image is provided or the image fails to load, the fallback text is displayed.
+
+        <SamplePage>
+            <div class="flex flex-wrap gap-4 items-center">
+                <Avatar fallback="JD" />
+                <Avatar fallback="SM" size="sm" />
+                <Avatar fallback="LG" size="lg" />
+                <Avatar fallback="XL" size="xl" />
+            </div>
+        </SamplePage>
+
+        ```tsx
+        <Avatar fallback="JD" />
+        <Avatar fallback="SM" size="sm" />
+        <Avatar fallback="LG" size="lg" />
+        <Avatar fallback="XL" size="xl" />
+        ```
+    </Section>
+
+    <Section title="Custom Styling">
+        ### Color Variants
+        Use the `className` prop to apply custom color schemes that match your design system.
+
+        <SamplePage>
+            <div class="flex flex-wrap gap-4 items-center">
+                <Avatar fallback="A" />
+                <Avatar fallback="B" className="bg-destructive text-destructive-foreground" />
+                <Avatar fallback="C" className="bg-secondary text-secondary-foreground" />
+                <Avatar fallback="D" className="bg-accent text-accent-foreground" />
+                <Avatar fallback="E" className="bg-muted text-muted-foreground" />
+            </div>
+        </SamplePage>
+
+        ```tsx
+        <Avatar fallback="A" />
+        <Avatar fallback="B" className="bg-destructive text-destructive-foreground" />
+        <Avatar fallback="C" className="bg-secondary text-secondary-foreground" />
+        <Avatar fallback="D" className="bg-accent text-accent-foreground" />
+        <Avatar fallback="E" className="bg-muted text-muted-foreground" />
+        ```
+
+        ### Custom Image Styling
+        Use the `imgClassName` prop to style the image element specifically.
+
+        <SamplePage>
+            <div class="flex flex-wrap gap-4 items-center">
+                <Avatar fallback="A" src="https://crafted-ui.com/favicon.svg" imgClassName="p-3 grayscale" />
+                <Avatar fallback="B" src="https://crafted-ui.com/favicon.svg" imgClassName="p-3 sepia" />
+            </div>
+        </SamplePage>
+
+        ```tsx
+        <Avatar 
+          src="https://github.com/username.png" 
+          fallback="A" 
+          imgClassName="grayscale" 
+        />
+        <Avatar 
+          src="https://github.com/username.png" 
+          fallback="B" 
+          imgClassName="sepia" 
+        />
+        ```
+    </Section>
+
+    <Section title="Accessibility">
+        The Avatar component follows accessibility best practices:
+        
+        - Uses semantic HTML structure with proper image elements
+        - Provides fallback content when images are unavailable
+        - Maintains proper color contrast ratios in default states
+        - Uses `alt=""` for decorative avatar images (since context is provided by surrounding content)
+        
+        When implementing avatars, consider:
+        
+        1. **Context**: Ensure the avatar's purpose is clear from surrounding content
+        2. **Fallback**: Always provide meaningful fallback text (initials, first letter of name)
+        3. **Contrast**: Verify color combinations meet accessibility standards
+        4. **Size**: Choose appropriate sizes for the context and viewing distance
+    </Section>
+
+    <Section title="Examples">
+        ### Basic Avatar with Image
+        ```tsx
+        <Avatar 
+          src="https://github.com/username.png" 
+          fallback="JD" 
+        />
+        ```
+
+        ### Avatar with Custom Size
+        ```tsx
+        <Avatar 
+          src="https://github.com/username.png" 
+          fallback="JD" 
+          size="lg"
+        />
+        ```
+
+        ### Avatar Group
+        ```tsx
+        <div className="flex -space-x-2">
+          <Avatar src="https://github.com/user1.png" fallback="U1" />
+          <Avatar src="https://github.com/user2.png" fallback="U2" />
+          <Avatar src="https://github.com/user3.png" fallback="U3" />
+          <Avatar fallback="+5" className="bg-muted text-muted-foreground" />
+        </div>
+        ```
+
+        ### Avatar with Status Indicator
+        ```tsx
+        <div className="relative">
+          <Avatar src="https://github.com/username.png" fallback="JD" />
+          <span className="absolute bottom-0 right-0 h-3 w-3 rounded-full bg-green-500 ring-2 ring-white"></span>
+        </div>
+        ```
+
+        ### Custom Content Avatar
+        ```tsx
+        <Avatar>
+          <svg className="h-6 w-6" fill="currentColor" viewBox="0 0 20 20">
+            <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
+          </svg>
+        </Avatar>
+        ```
+    </Section>
+
+</BaseSidebar>
