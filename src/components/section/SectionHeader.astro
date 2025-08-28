@@ -1,40 +1,43 @@
 ---
-import { classNames } from "../../utils/classNames"
+import { classNames } from "@/utils/classNames"
 import type { HTMLAttributes } from "astro/types";
-import Heading1 from "../heading/Heading1.astro";
+import Heading2 from "../heading/Heading2.astro";
 
-interface Props extends HTMLAttributes<'header'> {
+interface Props extends HTMLAttributes<'div'> {
     title?: string;
     subtitle?: string;
-    className?: string;
+    lined?: boolean;
     wrapperClassName?: string;
+    className?: string;
 }
 
 const { 
     title, 
     subtitle, 
+    lined = false, 
     className, 
     wrapperClassName, 
     ...props 
 } = Astro.props;
 
 const classes = classNames(
+    !!lined ? "border-b border-border pb-3" : "",
     (!!title && Astro.slots.has('default')) ? "md:flex md:items-center md:justify-between" : "",
     wrapperClassName
 );
 ---
-<header class={classes} {...props}>
-    { !!title
-        ? <div class="space-y-6">
+<div class={classes} {...props}>
+    { !!title 
+        ? <>
             <div>
-                <Heading1 title={title} subtitle={subtitle} className={className} />
+                <Heading2 title={title} subtitle={subtitle} className={className} />
             </div>
             { Astro.slots.has('default') &&
-                <div>
-                    <slot />
-                </div>
+            <div>
+                <slot />
+            </div>
             }
-        </div>
+        </>
         : <slot />
     }
-</header>
+</div>

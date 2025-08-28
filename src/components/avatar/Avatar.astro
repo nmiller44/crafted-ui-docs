@@ -1,0 +1,58 @@
+---
+import { classNames } from "@utils/classNames";
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<'div'>{
+    size?: "sm" | "md" | "lg" | "xl";
+    fallback?: string;
+    src?: string;
+    height?: string;
+    width?: string;
+    imgClassName?: string;
+    className?: string;
+}
+
+const { 
+    size = "md", 
+    fallback,
+    src,
+    height,
+    width,
+    imgClassName,
+    className, 
+    ...props 
+} = Astro.props;
+
+const sizeClass = {
+    sm: "size-10",
+    md: "size-12",
+    lg: "size-14 text-lg",
+    xl: "size-16 text-xl font-semibold"
+}[size]
+
+const classes = classNames(
+    sizeClass,
+    "inline-flex items-center justify-center overflow-hidden", 
+    "rounded-full align-middle", 
+    "bg-primary text-primary-foreground",
+    "select-none",
+    className
+)
+---
+<div class={classes} {...props}>
+    {src && (
+        <img
+            src={src}
+            width={width || 48}
+            height={height || 48}
+            class={classNames("size-full object-cover bg-border", imgClassName)}
+            alt=""
+        />
+    )}
+    <slot />
+    {!src && fallback && (
+        <span class="flex size-full items-center justify-center">
+            {fallback}
+        </span>
+    )}
+</div>

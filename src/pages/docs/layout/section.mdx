@@ -1,0 +1,399 @@
+---
+title: 'Section'
+description: 'A structural component for organizing content into distinct sections with consistent spacing and optional headers.'
+---
+import BaseSidebar from "@/layouts/BaseSidebar.astro";
+import SamplePage from "@/components/SamplePage.astro";
+import Section from "@/components/section/Section.astro";
+import SectionHeader from "@/components/section/SectionHeader.astro";
+
+import Prose from '@/components/Prose.astro';
+import Heading3 from '@/components/heading/Heading3.astro';
+import Button from '@/components/button/Button.astro';
+
+<BaseSidebar title={frontmatter.title} description={frontmatter.description}>
+
+    <SamplePage>
+        <div class="space-y-0">
+            <Section title="First Section" subtitle="This is the first section with a subtitle">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="p-4 bg-muted rounded-md">
+                        <p>This is content in the first section. Notice how sections automatically handle spacing between each other.</p>
+                    </div>
+                    <div class="p-4 bg-muted rounded-md">
+                        <p>Multiple content blocks within a section are spaced using the internal space-y-8 utility.</p>
+                    </div>
+                </div>
+            </Section>
+            
+            <Section title="Second Section">
+                <div class="p-4 bg-accent/10 rounded-md">
+                    <p>This second section demonstrates automatic margin spacing. The first section above has no top margin, but this section has mt-12 applied automatically.</p>
+                </div>
+                <div class="flex gap-4">
+                    <Button>Action 1</Button>
+                    <Button clr="primary">Action 2</Button>
+                </div>
+            </Section>
+            
+            <Section>
+                <SectionHeader title="Custom Header" subtitle="Using SectionHeader component directly" lined />
+                <div class="p-4 bg-muted rounded-md">
+                    <p>This section shows using SectionHeader independently with the lined prop for a bottom border.</p>
+                </div>
+            </Section>
+        </div>
+    </SamplePage>
+
+    <Section title="Overview">
+        The Section component provides a semantic and visual way to organize content into distinct sections with consistent spacing. It automatically handles margins between multiple sections and provides internal spacing for content. Sections can include optional headers with titles and subtitles, making them perfect for structuring page layouts, documentation, and content organization.
+    </Section>
+
+    <Section title="Section">
+        ### Description
+        A structural component that wraps content in a `<section>` element with automatic spacing and optional header.
+
+        ### Usage
+        ```tsx
+        import { Section } from "@crafted-ui/react";
+
+        <Section title="My Section" subtitle="Optional subtitle">
+          <p>Section content goes here</p>
+        </Section>
+        ```
+
+        ### Props
+        The `Section` component accepts the following props:
+        
+        | Prop | Type | Description |
+        | --- | --- | --- |
+        | title | string | Optional section title that renders a SectionHeader |
+        | subtitle | string | Optional subtitle for the section header |
+        | className | string | Additional CSS class names |
+        | children | ReactNode | Content of the section |
+
+        The component also accepts all standard HTML section attributes.
+    </Section>
+
+    <Section title="SectionHeader">
+        ### Description
+        The SectionHeader component is used internally by Section but can also be used independently for more control over section styling.
+
+        ### Usage
+        ```tsx
+        import { SectionHeader } from "@crafted-ui/react";
+
+        <SectionHeader 
+          title="Custom Header" 
+          subtitle="With subtitle"
+          lined
+        />
+        ```
+
+        ### Props
+        The `SectionHeader` component accepts the following props:
+        
+        | Prop | Type | Default | Description |
+        | --- | --- | --- | --- |
+        | title | string | undefined | Header title text |
+        | subtitle | string | undefined | Optional subtitle text |
+        | lined | boolean | false | Adds a bottom border to the header |
+        | className | string | undefined | Additional CSS class names for the heading |
+        | wrapperClassName | string | undefined | Additional CSS class names for the wrapper div |
+        | children | ReactNode | undefined | Optional content to display alongside the header |
+
+        The component also accepts all standard HTML div attributes.
+    </Section>
+
+    <Section title="Spacing Behavior">
+        ### Automatic Section Margins
+        Sections automatically handle spacing between multiple sections using the CSS selector `[&:not(:first-child)]:mt-12`:
+
+        - **First section**: No top margin
+        - **Subsequent sections**: 48px (3rem) top margin
+
+        <SamplePage>
+            <div class="space-y-0">
+                <Section title="First Section">
+                    <div class="p-4 bg-primary/10 rounded-md">
+                        <p class="text-sm">First section - no top margin</p>
+                    </div>
+                </Section>
+                <Section title="Second Section">
+                    <div class="p-4 bg-secondary/10 rounded-md">
+                        <p class="text-sm">Second section - has mt-12 applied</p>
+                    </div>
+                </Section>
+                <Section title="Third Section">
+                    <div class="p-4 bg-accent/10 rounded-md">
+                        <p class="text-sm">Third section - also has mt-12 applied</p>
+                    </div>
+                </Section>
+            </div>
+        </SamplePage>
+
+        ```tsx
+        <Section title="First Section">
+          <p>No top margin</p>
+        </Section>
+        <Section title="Second Section">
+          <p>Automatic 48px top margin</p>
+        </Section>
+        <Section title="Third Section">
+          <p>Automatic 48px top margin</p>
+        </Section>
+        ```
+
+        ### Internal Content Spacing
+        Content within a section is spaced using `space-y-8`, providing 48px spacing between child elements:
+
+        <SamplePage>
+            <Section title="Internal Spacing Demo">
+                <div class="p-4 bg-muted rounded-md">
+                    <p>First content block</p>
+                </div>
+                <div class="p-4 bg-muted rounded-md">
+                    <p>Second content block - 48px spacing above</p>
+                </div>
+                <div class="p-4 bg-muted rounded-md">
+                    <p>Third content block - 48px spacing above</p>
+                </div>
+            </Section>
+        </SamplePage>
+
+        ```tsx
+        <Section title="Internal Spacing Demo">
+          <div>First content block</div>
+          <div>Second content block - 48px spacing above</div>
+          <div>Third content block - 48px spacing above</div>
+        </Section>
+        ```
+    </Section>
+
+    <Section title="Header Variants">
+        ### Basic Header
+        Simple title and subtitle combination:
+
+        <SamplePage>
+            <Section title="Basic Header" subtitle="This is a subtitle that provides additional context">
+                <div class="p-4 bg-muted rounded-md">
+                    <p>Section content goes here</p>
+                </div>
+            </Section>
+        </SamplePage>
+
+        ```tsx
+        <Section title="Basic Header" subtitle="This is a subtitle">
+          <p>Section content</p>
+        </Section>
+        ```
+
+        ### Lined Header
+        Header with a bottom border using SectionHeader directly:
+
+        <SamplePage>
+            <Section>
+                <SectionHeader title="Lined Header" subtitle="With bottom border" lined />
+                <div class="p-4 bg-muted rounded-md">
+                    <p>Content with a lined section header</p>
+                </div>
+            </Section>
+        </SamplePage>
+
+        ```tsx
+        <Section>
+          <SectionHeader title="Lined Header" subtitle="With bottom border" lined />
+          <p>Content with a lined section header</p>
+        </Section>
+        ```
+
+        ### Header with Actions
+        Section header with additional content like buttons or controls:
+
+        <SamplePage>
+            <Section>
+                <SectionHeader title="Header with Actions" subtitle="Includes action buttons">
+                    <div class="flex gap-2">
+                        <Button>Edit</Button>
+                        <Button clr="primary">Save</Button>
+                    </div>
+                </SectionHeader>
+                <div class="p-4 bg-muted rounded-md">
+                    <p>Section content with header actions</p>
+                </div>
+            </Section>
+        </SamplePage>
+
+        ```tsx
+        <Section>
+          <SectionHeader title="Header with Actions" subtitle="Includes action buttons">
+            <div className="flex gap-2">
+              <Button>Edit</Button>
+              <Button variant="primary">Save</Button>
+            </div>
+          </SectionHeader>
+          <p>Section content with header actions</p>
+        </Section>
+        ```
+    </Section>
+
+    <Section title="Layout Patterns">
+        ### Page Structure
+        Using sections to structure an entire page:
+
+        ```tsx
+        <main>
+          <Section title="Introduction" subtitle="Welcome to our platform">
+            <p>Opening content and overview</p>
+          </Section>
+          
+          <Section title="Features" subtitle="What we offer">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              <div>Feature 1</div>
+              <div>Feature 2</div>
+              <div>Feature 3</div>
+            </div>
+          </Section>
+          
+          <Section title="Getting Started">
+            <p>Step-by-step instructions</p>
+            <Button variant="primary">Start Now</Button>
+          </Section>
+        </main>
+        ```
+
+        ### Documentation Layout
+        Structuring documentation with consistent sections:
+
+        ```tsx
+        <article>
+          <Section title="Overview">
+            <p>Component description and purpose</p>
+          </Section>
+          
+          <Section title="API Reference">
+            <SectionHeader title="Props" lined />
+            <table>{/* Props table */}</table>
+            
+            <SectionHeader title="Methods" lined />
+            <table>{/* Methods table */}</table>
+          </Section>
+          
+          <Section title="Examples">
+            <p>Usage examples and code snippets</p>
+          </Section>
+        </article>
+        ```
+
+        ### Dashboard Sections
+        Organizing dashboard content into logical sections:
+
+        ```tsx
+        <div className="space-y-0">
+          <Section title="Analytics" subtitle="Performance metrics">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+              {/* Metric cards */}
+            </div>
+          </Section>
+          
+          <Section title="Recent Activity">
+            <SectionHeader title="Latest Updates" lined>
+              <Button>View All</Button>
+            </SectionHeader>
+            {/* Activity list */}
+          </Section>
+        </div>
+        ```
+    </Section>
+
+    <Section title="Accessibility">
+        The Section component follows semantic HTML and accessibility best practices:
+        
+        - Uses the native HTML `<section>` element for proper document structure
+        - Section headers use appropriate heading hierarchy (h2 for section titles)
+        - Maintains logical content organization and flow
+        - Provides clear visual and semantic separation between content areas
+        
+        When implementing sections, ensure that:
+        
+        1. Section titles are descriptive and provide clear context
+        2. Content within sections is logically organized
+        3. Heading hierarchy is maintained throughout the document
+        4. Related content is grouped together within appropriate sections
+    </Section>
+
+    <Section title="Customization">
+        ### Custom Spacing
+        Override default spacing with custom classes:
+
+        ```tsx
+        <Section className="space-y-6" title="Tighter Spacing">
+          <p>Content with reduced internal spacing</p>
+        </Section>
+        
+        <Section className="[&:not(:first-child)]:mt-24" title="Larger Margins">
+          <p>Section with increased top margin</p>
+        </Section>
+        ```
+
+        ### Custom Styling
+        Apply custom styling while maintaining spacing behavior:
+
+        ```tsx
+        <Section 
+          className="bg-muted/50 p-8 rounded-lg border border-border" 
+          title="Styled Section"
+        >
+          <p>Section with custom background and padding</p>
+        </Section>
+        ```
+
+        ### Nested Layout Components
+        Combine with other layout components:
+
+        ```tsx
+        <Container>
+          <Section title="Main Content">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              <div className="lg:col-span-2">
+                <Section title="Article" className="mt-0">
+                  <p>Main article content</p>
+                </Section>
+              </div>
+              <aside>
+                <Section title="Sidebar" className="mt-0">
+                  <p>Sidebar content</p>
+                </Section>
+              </aside>
+            </div>
+          </Section>
+        </Container>
+        ```
+    </Section>
+
+    <Section title="Best Practices">
+        ### Section Organization
+        - Use sections to create logical content groupings
+        - Provide descriptive titles that clearly indicate section purpose
+        - Keep section content focused and related
+        - Use subtitles to provide additional context when helpful
+
+        ### Spacing Considerations
+        - Rely on automatic spacing between sections rather than manual margins
+        - Use the internal `space-y-8` for content spacing within sections
+        - Override spacing only when necessary for specific design requirements
+        - Consider how sections will look when stacked vertically
+
+        ### Header Usage
+        - Use section titles for most content organization
+        - Apply the `lined` prop to create visual separation when needed
+        - Include action buttons in section headers for related functionality
+        - Maintain consistent header styling throughout your application
+
+        ### Performance
+        - Sections are lightweight semantic wrappers with minimal performance impact
+        - Use sections liberally to improve content organization and accessibility
+        - Consider the overall page structure when planning section hierarchy
+    </Section>
+
+</BaseSidebar>
