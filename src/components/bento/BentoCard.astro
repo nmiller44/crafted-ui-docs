@@ -1,0 +1,17 @@
+---
+import { classNames } from "@utils/classNames"
+import Card from "../card/Card.astro";
+
+interface Props {
+    title?: string;
+    subtitle?: string;
+    className?: string;
+}
+
+const { 
+    title, subtitle, className
+ } = Astro.props;
+---
+<Card title={title} subtitle={subtitle} body className={classNames("space-y-4 col-span-1", className)}>
+    <slot />
+</Card>

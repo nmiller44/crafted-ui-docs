@@ -1,0 +1,46 @@
+---
+import { classNames } from "@utils/classNames"
+import BentoCard from "@/components/bento/BentoCard.astro";
+import Button from '@/components/button/Button.astro'
+import Field from "@/components/field/Field.astro";
+import FieldLabel from "@/components/field/FieldLabel.astro";
+import Fieldset from "@/components/fieldset/Fieldset.astro";
+import Heading3 from "@/components/heading/Heading3.astro";
+import Input from "@/components/input/Input.astro";
+
+interface Props {
+    className?: string;
+}
+
+const { 
+    className
+ } = Astro.props;
+---
+<BentoCard className={classNames("", className)}>
+    <Heading3 title="Login to your account" />
+    <div class="text-sm text-muted-foreground">
+        Enter your email and password to access your account.
+    </div>
+    <Fieldset>
+        <Field>
+            <FieldLabel>Email address</FieldLabel>
+            <Input />        
+        </Field>
+        <Field>
+            <FieldLabel>Password</FieldLabel>
+            <Input />        
+        </Field>
+        <Button color="primary" className="w-full">Login</Button>
+    </Fieldset>
+    <div class="text-sm text-muted-foreground text-center">or continue with</div>
+    <div class="flex justify-between space-x-4">
+        <Button className="w-full">
+            <svg class="size-4 mr-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M0 32h214.6v214.6H0V32zm233.4 0H448v214.6H233.4V32zM0 265.4h214.6V480H0V265.4zm233.4 0H448V480H233.4V265.4z"/></svg>
+            Microsoft
+        </Button>
+        <Button className="w-full">
+            <svg class="size-4 mr-2" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 488 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc. --><path d="M488 261.8C488 403.3 391.1 504 248 504 110.8 504 0 393.2 0 256S110.8 8 248 8c66.8 0 123 24.5 166.3 64.9l-67.5 64.9C258.5 52.6 94.3 116.6 94.3 256c0 86.5 69.1 156.6 153.7 156.6 98.2 0 135-70.4 140.8-106.9H248v-85.3h236.1c2.3 12.7 3.9 24.9 3.9 41.4z"/></svg>
+            Google
+        </Button>
+    </div>
+</BentoCard>

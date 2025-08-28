@@ -1,0 +1,17 @@
+---
+import { classNames } from "@utils/classNames"
+
+interface Props {
+    className?: string;
+}
+
+const { 
+    className
+ } = Astro.props;
+---
+<div class={classNames( 
+                "grid grid-cols-1 md:grid-cols-4 lg:grid-cols-12 gap-4", 
+                className
+            )}>
+    <slot />
+</div>

@@ -1,30 +1,63 @@
 ---
-import Base from '../layouts/Base.astro'
-import Pane from '../components/Pane.astro'
-import Button from '../components/button/Button.astro'
+import Base from '@/layouts/Base.astro'
+import Pane from '@/components/Pane.astro'
+import Button from '@/components/button/Button.astro'
+import BentoGrid from '@/components/bento/BentoGrid.astro'
+import BentoLogin from '@/components/bento-examples/BentoLogin.astro'
+import BentoDownloads from '@/components/bento-examples/BentoDownloads.astro'
+import Card from '@/components/card/Card.astro'
+import BentoTestimonial from '@/components/bento-examples/BentoTestimonial.astro'
+import BentoSizeMetric from '@/components/bento-examples/BentoSizeMetric.astro'
+import BentoNewsletterForm from '@/components/bento-examples/BentoNewsletterForm.astro'
+import Heading3 from '@/components/heading/Heading3.astro'
 
 const title = 'Crafted UI Docs'
 const description = 'Documentation for the Crafted UI component library.'
 ---
 <Base title={title} description={description}>
-	<Pane>
-		<div class="mx-auto max-w-2xl px-4 py-32 flex">
-			<div class="max-w-xl">
+	<div class="min-h-screen w-full relative">
+		{/* Top Fade Grid Background */}
+		<div
+			class="absolute inset-0 -z-10 text-border"
+			style={{
+			backgroundImage: `
+				linear-gradient(to right, currentColor 1px, transparent 1px),
+				linear-gradient(to bottom, currentColor 1px, transparent 1px)
+			`,
+			backgroundSize: "20px 30px",
+			WebkitMaskImage:
+				"radial-gradient(ellipse 70% 60% at 50% 0%, #000 60%, transparent 100%)",
+			maskImage:
+				"radial-gradient(ellipse 70% 60% at 50% 0%, #000 60%, transparent 100%)",
+			}}
+		/>
+		<Pane>
+			<Card className="m-auto my-2 lg:my-16 max-w-3xl p-12">
 				<h1 class="text-5xl font-extrabold tracking-tight text-foreground">
 					Start crafting your next project.
 				</h1>
 				<p class="mt-4 text-lg text-foreground">
-					Crafted UI provided a great looking set of modern components that help you build faster.
+					Crafted UI provides a great looking set of modern components that help you build faster.
 				</p>
 				<div class="mt-8">
 					<Button type="button" clr="primary">
 						<a href="/docs/components">View Components</a>
 					</Button>
 				</div>
-			</div>
-			<div>
+			</Card>
+		</Pane>
 
+		<Pane>
+			<div class="container mx-auto px-4 flex flex-col space-y-6">
+				<Heading3 title="Examples" />
+				<BentoGrid>
+					<BentoDownloads className="md:col-span-2 lg:col-span-2" />
+					<BentoSizeMetric className="md:col-span-2 lg:col-span-2"/>
+					<BentoLogin className="md:col-span-4 lg:col-span-4 row-span-3"/>
+					<BentoNewsletterForm className="md:col-span-4 lg:col-span-4 lg:row-span-3"/>
+					<BentoTestimonial className="md:col-span-4 lg:col-span-4 lg:row-span-2"/>
+				</BentoGrid>
 			</div>
-		</div>
-	</Pane>
+		</Pane>
+	</div>
 </Base>

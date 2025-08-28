@@ -1,0 +1,53 @@
+---
+import { classNames } from "@utils/classNames"
+import BentoCard from "../bento/BentoCard.astro";
+import Metric from "../metric/Metric.astro";
+
+interface Props {
+    className?: string;
+}
+
+const { 
+    className
+ } = Astro.props;
+---
+<BentoCard className={classNames("space-y-12 p-6", className)}>
+    <div>
+        <Metric
+            className="sm:hidden"
+            title="Extra Small"
+            value="< 640px"
+            diff="xs"
+            dir="positive" />
+        <Metric
+            className="hidden sm:block md:hidden"
+            title="Small"
+            value="640px"
+            diff="sm"
+            dir="positive" />
+        <Metric
+            className="hidden md:block lg:hidden"
+            title="Medium"
+            value="768px"
+            diff="md"
+            dir="positive" />  
+        <Metric
+            className="hidden lg:block xl:hidden"
+            title="Large"
+            value="1024px"
+            diff="lg"
+            dir="positive" />  
+        <Metric
+            className="hidden xl:block 2xl:hidden"
+            title="Extra Large"
+            value="1280px"
+            diff="xl"
+            dir="positive" />
+        <Metric
+            className="hidden 2xl:block"
+            title="2X Large"
+            value="1536px"
+            diff="2xl"
+            dir="positive" />   
+    </div>   
+</BentoCard>
