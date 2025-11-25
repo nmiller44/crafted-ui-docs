@@ -35,7 +35,7 @@ const links = getLinks();
         </div>
       </div>
       <div class="grow">
-        <div class="hidden sm:ml-8 sm:block">
+        <div class="hidden lg:ml-8 lg:block">
           <Tablist>
             { links.map((link) => (
               <TablistItem>
@@ -64,7 +64,7 @@ const links = getLinks();
   </div>
 
   <!-- Mobile Menu -->
-  <div class="hidden sm:hidden" id="mobile-menu">
+  <div class="hidden lg:hidden" id="mobile-menu">
     <div class="space-y-1 px-2 pb-3 pt-2">
         { links.map((link) => (
             <a  href={link.href} 
