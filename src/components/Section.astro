@@ -12,13 +12,16 @@ interface Props {
 
 const { title, subtitle, prose = true, className } = Astro.props;
 ---
-<section class="[&:not(:first-child)]:mt-12 space-y-6">
+<section class={classNames(
+    "space-y-8",
+    className
+)}>
     { 
         !!title && (
         <HeaderSection title={title} subtitle={subtitle} />
         )
     }
-    <div class="mt-6">
+    <div>
         {
             prose
             ?   (<Prose >

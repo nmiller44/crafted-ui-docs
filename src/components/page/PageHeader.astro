@@ -17,15 +17,14 @@ const {
     wrapperClassName, 
     ...props 
 } = Astro.props;
-
-const classes = classNames(
-    (!!title && Astro.slots.has('default')) ? "md:flex md:items-center md:justify-between" : "",
-    wrapperClassName
-);
 ---
-<header class={classes} {...props}>
+<header class={classNames(
+            "max-w-container mr-auto",
+            "px-4 py-6 sm:px-6 lg:px-8 lg:py-8",
+            (!!title && Astro.slots.has('default')) ? "space-y-6 md:flex md:items-top md:justify-between" : "",
+            wrapperClassName)} {...props}>
     { !!title
-        ? <div class="space-y-6">
+        ?   <>
             <div>
                 <Heading1 title={title} subtitle={subtitle} className={className} />
             </div>
@@ -34,7 +33,7 @@ const classes = classNames(
                     <slot />
                 </div>
             }
-        </div>
+            </>
         : <slot />
     }
 </header>

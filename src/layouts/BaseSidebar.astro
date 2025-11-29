@@ -6,6 +6,7 @@ import Vertlist from "@components/vertlist/Vertlist.astro";
 import VertlistItem from "@components/vertlist/VertlistItem.astro";
 import VertlistHeader from "@components/vertlist/VertlistHeader.astro";
 import { sidebarLinks } from "@data/sidebar";
+import Page from "@/components/page/Page.astro";
 
 const pathname = new URL(Astro.request.url).pathname;
 
@@ -30,13 +31,9 @@ const {
                 ))}
             </Sidebar>
         </div>
-        <div class="grow max-w-3xl">
-            <main class="py-6 lg:py-8">
-                <HeaderPage title={ title } subtitle={ description } />
-                <div class="flex flex-col pt-8 pb-12">
-                    <slot />
-                </div>
-            </main>
-        </div>
+        <Page   title={ title } subtitle={ description }
+                class="max-w-3xl">
+            <slot />
+        </Page>
     </div>
 </Base>

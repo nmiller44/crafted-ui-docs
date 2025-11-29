@@ -2,6 +2,7 @@ export const sidebarComponents = {
     title: 'Components',
     items: [
         { title: 'Alert', href: '/docs/components/alert' },
+        { title: 'Avatar', href: '/docs/components/avatar' },
         { title: 'Button', href: '/docs/components/button' },
         { title: 'Card', href: '/docs/components/card' },
         { title: 'Container', href: '/docs/components/container' },
@@ -18,6 +19,7 @@ export const sidebarLinks = [
         items: [
             { title: 'Installation', href: '/docs/installation' },
             { title: 'Design Cues', href: '/docs/design-cues' },
+            { title: 'Color System', href: '/docs/color-system' },
             { title: 'Typography', href: '/docs/typography' },
         ]
     },
@@ -32,6 +34,7 @@ export const sidebarLinks = [
         title: 'Components',
         items: [
             { title: 'Alert', href: '/docs/components/alert' },
+            { title: 'Avatar', href: '/docs/components/avatar' },
             { title: 'Badge', href: '/docs/components/badge' },
             { title: 'Breadcrumb', href: '/docs/components/breadcrumb' },
             { title: 'Button', href: '/docs/components/button' },
@@ -45,8 +48,9 @@ export const sidebarLinks = [
     {
         title: 'Forms',
         items: [
-            { title: 'Form', href: '/docs/forms/form' },
+            { title: 'Checkbox', href: '/docs/forms/checkbox' },
             { title: 'Field', href: '/docs/forms/field' },
+            { title: 'Form', href: '/docs/forms/form' },
         ]
     }
 ]

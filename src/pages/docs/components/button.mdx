@@ -3,57 +3,40 @@ title: 'Button'
 description: 'A button styled component for user interaction.'
 ---
 import BaseSidebar from "@/layouts/BaseSidebar.astro";
-import SamplePage from "@/components/SamplePage.astro";
 import Button from "@/components/button/Button.astro";
 
 import Prose from '@/components/Prose.astro';
 import Section from '@/components/Section.astro';
 import Heading3 from '@/components/heading/Heading3.astro';
+import Code from '@/components/Code.astro';
+import Card from '@/components/card/Card.astro';
+import CardBody from '@/components/card/CardBody.astro';
+import CodeAlt from '@/components/CodeAlt.astro';
+import CodePreview from '@/components/CodePreview.astro';
 
 <BaseSidebar title={frontmatter.title} description={frontmatter.description}>
 
-    <SamplePage>
-        <div className="space-y-8">
-            {/* Color Variants */}
-            <div class="flex flex-col space-y-4">
-                <Heading3 title="Color Variants" />
-                <div className="flex flex-wrap gap-4">
-                    <Button>Default</Button>
-                    <Button clr="primary">Primary</Button>
-                    <Button clr="secondary">Secondary</Button>
-                    <Button clr="accent">Accent</Button>
-                    <Button clr="destructive">Destructive</Button>
-                    <Button clr="muted">Muted</Button>
-                    <Button clr="blank">Blank</Button>
-                </div>
-            </div>
-
-            <div class="flex flex-col space-y-4">
-                <Heading3 title="Color Options" />
-                <div className="flex flex-wrap gap-4">
-                    <Button clr="green">Green</Button>
-                    <Button clr="red">Red</Button>
-                    <Button clr="yellow">Yellow</Button>
-                    <Button clr="blue">Blue</Button>
-                    <Button clr="indigo">Indigo</Button>
-                    <Button clr="purple">Purple</Button>
-                    <Button clr="pink">Pink</Button>
-                </div>
-            </div>
-
-            <div class="flex flex-col space-y-4">
-                <Heading3 title="Outline Variants" />
-                <div className="flex flex-wrap gap-4">
-                    <Button outline>Default</Button>
-                    <Button clr="primary" outline>Primary</Button>
-                    <Button clr="secondary" outline>Secondary</Button>
-                    <Button clr="destructive" outline>Destructive</Button>
-                    <Button clr="red" outline>Red</Button>
-                    <Button clr="blue" outline>Blue</Button>
-                </div>
-            </div>
+    <CodePreview code={`
+        <div className="flex flex-wrap gap-4">
+            <Button>Default</Button>
+            <Button clr="primary">Primary</Button>
+            <Button clr="secondary">Secondary</Button>
+            <Button clr="accent">Accent</Button>
+            <Button clr="destructive">Destructive</Button>
+            <Button clr="muted">Muted</Button>
+            <Button clr="blank">Blank</Button>
         </div>
-    </SamplePage>
+        `}>
+        <div className="flex flex-wrap gap-4">
+            <Button>Default</Button>
+            <Button clr="primary">Primary</Button>
+            <Button clr="secondary">Secondary</Button>
+            <Button clr="accent">Accent</Button>
+            <Button clr="destructive">Destructive</Button>
+            <Button clr="muted">Muted</Button>
+            <Button clr="blank">Blank</Button>
+        </div>
+    </CodePreview>
 
     <Section title="Overview">
         The Button component provides a standardized way to create interactive buttons throughout your application. It comes with various color options, outline styles, and shape variants to support different visual hierarchies and usage contexts.
@@ -87,123 +70,132 @@ import Heading3 from '@/components/heading/Heading3.astro';
     </Section>
 
     <Section title="Color Variants">
+        The Button component offers multiple color schemes to support different visual hierarchies and semantic meanings in your interface.
+
         ### Design Cue Colors
         Standard buttons with colors based on design cue variables.
+    </Section>
 
-        <SamplePage>
-            <div className="flex flex-wrap gap-4">
-                <Button>Default</Button>
-                <Button clr="primary">Primary</Button>
-                <Button clr="secondary">Secondary</Button>
-                <Button clr="accent">Accent</Button>
-                <Button clr="destructive">Destructive</Button>
-                <Button clr="muted">Muted</Button>
-                <Button clr="blank">Blank</Button>
-            </div>
-        </SamplePage>
+    <CodePreview code={`
+        <div className="flex flex-wrap gap-4">
+            <Button>Default</Button>
+            <Button clr="primary">Primary</Button>
+            <Button clr="secondary">Secondary</Button>
+            <Button clr="accent">Accent</Button>
+            <Button clr="destructive">Destructive</Button>
+            <Button clr="muted">Muted</Button>
+            <Button clr="blank">Blank</Button>
+        </div>
+    `}>
+        <div className="flex flex-wrap gap-4">
+            <Button>Default</Button>
+            <Button clr="primary">Primary</Button>
+            <Button clr="secondary">Secondary</Button>
+            <Button clr="accent">Accent</Button>
+            <Button clr="destructive">Destructive</Button>
+            <Button clr="muted">Muted</Button>
+            <Button clr="blank">Blank</Button>
+        </div>
+    </CodePreview>
 
-        ```tsx
-        <Button>Default</Button>
-        <Button clr="primary">Primary</Button>
-        <Button clr="secondary">Secondary</Button>
-        <Button clr="accent">Accent</Button>
-        <Button clr="destructive">Destructive</Button>
-        <Button clr="muted">Muted</Button>
-        <Button clr="blank">Blank</Button>
-        ```
-
+    <Section>
         ### Color Variants
         Base colors for buttons with specific color choices.
+    </Section>
 
-        <SamplePage>
-            <div className="flex flex-wrap gap-4">
-                <Button clr="green">Green</Button>
-                <Button clr="red">Red</Button>
-                <Button clr="yellow">Yellow</Button>
-                <Button clr="blue">Blue</Button>
-                <Button clr="indigo">Indigo</Button>
-                <Button clr="purple">Purple</Button>
-                <Button clr="pink">Pink</Button>
-            </div>
-        </SamplePage>
+    <CodePreview code={`
+        <div className="flex flex-wrap gap-4">
+            <Button clr="green">Green</Button>
+            <Button clr="red">Red</Button>
+            <Button clr="yellow">Yellow</Button>
+            <Button clr="blue">Blue</Button>
+            <Button clr="indigo">Indigo</Button>
+            <Button clr="purple">Purple</Button>
+            <Button clr="pink">Pink</Button>
+        </div>
+    `}>
+        <div className="flex flex-wrap gap-4">
+            <Button clr="green">Green</Button>
+            <Button clr="red">Red</Button>
+            <Button clr="yellow">Yellow</Button>
+            <Button clr="blue">Blue</Button>
+            <Button clr="indigo">Indigo</Button>
+            <Button clr="purple">Purple</Button>
+            <Button clr="pink">Pink</Button>
+        </div>
+    </CodePreview>
 
-        ```tsx
-        <Button clr="green">Green</Button>
-        <Button clr="red">Red</Button>
-        <Button clr="yellow">Yellow</Button>
-        <Button clr="blue">Blue</Button>
-        <Button clr="indigo">Indigo</Button>
-        <Button clr="purple">Purple</Button>
-        <Button clr="pink">Pink</Button>
-        ```
-
+    <Section>
         ### Outline Variants
         All button colors offer outline variants.
-
-        <SamplePage>
-            <div className="flex flex-wrap gap-4">
-                <Button outline>Default</Button>
-                <Button clr="primary" outline>Primary</Button>
-                <Button clr="accent" outline>Accent</Button>
-                <Button clr="destructive" outline>Destructive</Button>
-                <Button clr="blue" outline>Blue</Button>
-                <Button clr="purple" outline>Purple</Button>
-            </div>
-
-        </SamplePage>
-
-        ```tsx
-        <Button outline>Default</Button>
-        <Button clr="primary" outline>Primary</Button>
-        <Button clr="accent" outline>Accent</Button>
-        <Button clr="destructive" outline>Destructive</Button>
-        <Button clr="blue" outline>Blue</Button>
-        <Button clr="purple" outline>Purple</Button>
-        ```
     </Section>
+
+    <CodePreview code={`
+        <div className="flex flex-wrap gap-4">
+            <Button outline>Default</Button>
+            <Button clr="primary" outline>Primary</Button>
+            <Button clr="accent" outline>Accent</Button>
+            <Button clr="destructive" outline>Destructive</Button>
+            <Button clr="blue" outline>Blue</Button>
+            <Button clr="purple" outline>Purple</Button>
+        </div>
+    `}>
+        <div className="flex flex-wrap gap-4">
+            <Button outline>Default</Button>
+            <Button clr="primary" outline>Primary</Button>
+            <Button clr="accent" outline>Accent</Button>
+            <Button clr="destructive" outline>Destructive</Button>
+            <Button clr="blue" outline>Blue</Button>
+            <Button clr="purple" outline>Purple</Button>
+        </div>
+    </CodePreview>
 
     <Section title="Style Variants">
+        The Button component includes additional style options that can be combined with color variants.
+
         ### Full Width
         Makes the button take up 100% of the available width.
+    </Section>
 
-        <SamplePage>
-            <div className="flex flex-wrap gap-4">
-                <Button full>Full Width Button</Button>
-            </div>
-        </SamplePage>
-        
-        ```tsx
-        <Button full>Full Width Button</Button>
-        ```
+    <CodePreview code={`
+        <div className="flex flex-wrap gap-4">
+            <Button full>Full Width Button</Button>
+        </div>
+    `}>
+        <div className="flex flex-wrap gap-4">
+            <Button full>Full Width Button</Button>
+        </div>
+    </CodePreview>
 
+    <Section>
         ### Rounded
         Applies fully rounded corners to the button.
+    </Section>
 
-        <SamplePage>
-            <div className="flex flex-wrap gap-4">
-                <Button rounded>Rounded Button</Button>
-            </div>
-        </SamplePage>
-        
-        ```tsx
-        <Button rounded>Rounded Button</Button>
-        ```
+    <CodePreview code={`
+        <div className="flex flex-wrap gap-4">
+            <Button rounded>Rounded Button</Button>
+        </div>
+    `}>
+        <div className="flex flex-wrap gap-4">
+            <Button rounded>Rounded Button</Button>
+        </div>
+    </CodePreview>
 
+    <Section>
         ### Combined Variants
         Variants can be combined for more specific styling:
-
-        <SamplePage>
-            <div className="flex flex-wrap gap-4">
-                <Button clr="primary" outline rounded>Primary Outlined Rounded</Button>
-            </div>
-        </SamplePage>
-        
-        ```tsx
-        <Button clr="primary" outline rounded>
-          Primary Outlined Rounded
-        </Button>
-        ```
     </Section>
+
+    <CodePreview code={`
+        <div className="flex flex-wrap gap-4">
+            <Button clr="primary" outline rounded>Primary Outlined Rounded</Button>
+        </div>
+    `}>
+        <div className="flex flex-wrap gap-4">
+            <Button clr="primary" outline rounded>Primary Outlined Rounded</Button>
+        </div>
+    </CodePreview>
 
     <Section title="Accessibility">
         The Button component follows accessibility best practices:

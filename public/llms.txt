@@ -1,0 +1,87 @@
+# Crafted UI Component Library
+
+> A package of reusable React components built to simplify the crafting of unique web applications. Open source, cleanly designed, and accessible.
+
+## Overview
+
+Crafted UI is a component library built with React 19, TypeScript, Tailwind CSS v4, and Base UI (headless accessible components from MUI). It can be installed via NPM or used as a starting point for your own component library. The library was designed to quickly build multiple web products with a consistent, evolving design system.
+
+## Getting Started
+
+- Installation: /docs/installation - How to install and set up Crafted UI
+- Design Cues: /docs/design-cues - Design principles and patterns
+- Color System: /docs/color-system - Semantic color system with primary, secondary, accent, destructive, and status colors
+- Colors: /docs/colors - Available color palette
+- Typography: /docs/typography - Typography system and text styles
+
+## Components
+
+### Layout Components
+- Page: /docs/layout/page - Full page layout wrapper with optional navbar and sidebar
+- Section: /docs/layout/section - Content section wrapper for organizing page content
+
+### UI Components
+- Alert: /docs/components/alert - Display important messages and notifications with color variants
+- Avatar: /docs/components/avatar - Display user profile images with size variants
+- Badge: /docs/components/badge - Display labels, statuses, and counts with color variants
+- Breadcrumb: /docs/components/breadcrumb - Show hierarchical navigation path
+- Button: /docs/components/button - Interactive button with full color palette (semantic, status, and base colors)
+- Card: /docs/components/card - Container for related content with header, body, and footer
+- Metric: /docs/components/metric - Display key metrics and statistics with optional trends
+- Pagination: /docs/components/pagination - Navigate through paginated data with customizable page ranges
+- Sidebar: /docs/components/sidebar - Navigation sidebar component for page layouts
+- Tablist: /docs/components/tablist - Tabbed interface component for organizing content
+- Vertlist: /docs/components/vertlist - Vertical list component for displaying items
+
+### Form Components
+- Checkbox: /docs/forms/checkbox - Checkbox input with sizes, labels, and subtitle support
+- Field: /docs/forms/field - Form input field wrapper with label and validation
+- Form: /docs/forms/form - Complete form component with validation support
+
+## Available Components (Library)
+
+The following components are exported from the Crafted UI library:
+
+**Layout**: page, section
+
+**UI Components**: alert, avatar, badge, breadcrumb, button, card, desclist (description list), empty, heading, menu, metric, modal, pagination, tablist, vertlist
+
+**Form Components**: checkbox, field, fieldset, form, input, radio, select
+
+**Utility Components**: table
+
+## Key Concepts
+
+### Technology Stack
+- **React 19** - Component library framework
+- **TypeScript** - Type safety and developer experience
+- **Tailwind CSS v4** - Utility-first styling
+- **Base UI Components** - Headless accessible primitives from MUI
+- **Vite** - Build tool and bundler
+- **Storybook** - Component development and documentation
+
+### Component Props Pattern
+- Use `type` instead of `interface` for component props
+- Extend base component props using intersection types (`&`)
+- Always allow consumers to override styles via `className` prop
+
+### Styling
+- Use the `classNames` utility for combining class strings
+- CSS custom properties defined in `vars.css` for theming
+- Apply `className` last in the `classNames()` call for proper override behavior
+
+### Theming
+- Color tokens: background, foreground, primary, secondary, accent, destructive, muted, border, ring, card, popover
+- Status colors: danger, warning, success, info
+- Layout tokens: container sizes, navbar height, sidebar width, border radius
+
+### Accessibility
+- Built on Base UI Components for accessible primitives
+- Keyboard navigation support
+- Proper ARIA attributes
+- Focus management
+- Dark mode support through CSS custom properties
+
+## Repository
+
+GitHub: https://github.com/nmiller44/crafted-ui
