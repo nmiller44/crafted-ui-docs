@@ -1,0 +1,112 @@
+---
+import type { HTMLAttributes } from "astro/types";
+import Card from "@/components/card/Card.astro";
+import Tablist from "@/components/tablist/Tablist.astro";
+import TablistItem from "@/components/tablist/TablistItem.astro";
+import Button from "@/components/button/Button.astro";
+import CopyIcon from "@/components/icons/CopyIcon.astro";
+import CheckIcon from "@/components/icons/CheckIcon.astro";
+import { codeToHtml } from 'shiki';
+
+interface Props extends HTMLAttributes<'div'> {
+    code: string;
+    className?: string;
+}
+
+const DEFAULT_LANG = 'tsx';
+
+const { 
+    code,
+    className,
+    ...props 
+} = Astro.props;
+
+const codeString = typeof code === 'string' ? code : String(code || '');
+
+// Trim empty lines from start and end
+const trimmedCode = codeString.replace(/^\s*\n|\n\s*$/g, '');
+
+// Normalize indentation - remove common leading whitespace
+const lines = trimmedCode.split('\n');
+const minIndent = lines
+    .filter(line => line.trim().length > 0)
+    .reduce((min, line) => {
+        const match = line.match(/^(\s*)/);
+        const indent = match ? match[1].length : 0;
+        return Math.min(min, indent);
+    }, Infinity);
+
+const normalizedCode = minIndent !== Infinity && minIndent > 0
+    ? lines.map(line => line.substring(minIndent)).join('\n')
+    : trimmedCode;
+
+const highlightedCode = await codeToHtml(normalizedCode, {
+    lang: DEFAULT_LANG,
+    theme: 'github-dark',
+    transformers: [{
+        pre(node) {
+            this.addClassToHast(node, 'overflow-x-auto');
+            this.addClassToHast(node, 'rounded-lg');
+            this.addClassToHast(node, 'p-4');
+        }
+    }]
+});
+---
+
+<div x-data={ `{ showCode: false, copied: false, code: ${JSON.stringify(normalizedCode)} }` }>
+    <Card body className={className}>
+        <div class="flex items-center justify-between">
+            <Tablist bordered>
+                <TablistItem>
+                    <a 
+                        href="#"
+                        :class="!showCode ? 'active' : ''"
+                        @click.prevent="showCode = false"
+                    >
+                        Preview
+                    </a>
+                </TablistItem>
+                <TablistItem>
+                    <a 
+                        href="#"
+                        :class="showCode ? 'active' : ''"
+                        @click.prevent="showCode = true"
+                    >
+                        Code
+                    </a>
+                </TablistItem>
+            </Tablist>
+            <Button
+                clr="blank"
+                x-show="showCode && !copied"
+                x-cloak
+                @click="navigator.clipboard.writeText(code); copied = true; setTimeout(() => copied = false, 2000)"
+                title="Copy code"
+            >
+                <CopyIcon />
+            </Button>
+            <Button
+                clr="blank"
+                x-show="showCode && copied"
+                x-cloak
+                title="Copied!"
+            >
+                <CheckIcon />
+            </Button>
+        </div>
+
+        <div class="flex flex-col">
+            <div x-show="!showCode" class="min-h-16 flex flex-col justify-center">
+                <slot />
+            </div>
+            
+            <div x-show="showCode" x-cloak>
+                <div set:html={highlightedCode}></div>
+            </div>
+        </div>
+    </Card>
+</div>
+
+<style>
+    [x-cloak] { display: none !important; }
+</style>

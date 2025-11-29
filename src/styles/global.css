@@ -4,7 +4,7 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 :root {
-    --container-container: 80rem;
+    --container-container: 56rem;
     --container-navbar: 4rem;
     --container-sidebar: 12rem;
 
@@ -70,9 +70,9 @@
   }
 
   @theme {
-    --container-container: 80rem;
-    --container-navbar: 4rem;
-    --container-sidebar: 12rem;
+    --container-container: var(--container-container);
+    --container-navbar: var(--container-navbar);
+    --container-sidebar: var(--container-sidebar);
 
     --color-danger: var(--danger);
     --color-warning: var(--warning);
@@ -105,3 +105,21 @@
     --color-chart-4: hsl(43 74% 66%);
     --color-chart-5: hsl(27 87% 67%);
   }
+
+@layer components {
+  button {
+    cursor: pointer;
+  }
+  [class*="border"] {
+    @apply border-border;
+  }
+  p {
+    @apply text-muted-foreground;
+  }
+}
+
+@layer base {
+  body {
+    @apply bg-background text-foreground min-w-xs min-h-screen;
+  }
+}

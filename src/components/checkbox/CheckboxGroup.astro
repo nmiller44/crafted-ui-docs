@@ -1,0 +1,13 @@
+---
+import { classNames } from "../../utils/classNames"
+
+interface Props {
+    className?: string;
+    horizontal?: boolean;
+}
+
+const { className, horizontal = false } = Astro.props;
+---
+<div class={classNames("flex space-y-3 space-x-6", horizontal ? "flex-row" : "flex-col", className)}>
+    <slot />
+</div>

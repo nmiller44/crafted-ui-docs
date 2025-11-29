@@ -1,0 +1,409 @@
+---
+title: 'Color System'
+description: 'Comprehensive color system including semantic colors, themes, and status indicators for Crafted UI components'
+---
+import BaseSidebar from "@layouts/BaseSidebar.astro";
+import Section from "@components/Section.astro";
+import Card from "@components/card/Card.astro";
+import CardHeader from "@components/card/CardHeader.astro";
+import CardBody from "@components/card/CardBody.astro";
+import ColorSample from "@/components/ColorSample.astro";
+import Alert from "@/components/alert/Alert.astro";
+
+<BaseSidebar title={frontmatter.title} description={frontmatter.description}>
+
+<Section title="Introduction">
+Colors are a critical aspect of our design system. Crafted UI uses a semantic color system that assigns meaning to colors beyond their visual appearance. This approach ensures consistent theming, accessibility, and maintainability across all components.
+
+Our color system is built on three main pillars:
+- **Semantic Colors**: Functional color names that describe purpose rather than appearance
+- **Status Colors**: Specialized colors for communicating state and feedback
+- **Base Colors**: Standard color palette for direct color usage
+- **Theme Support**: Automatic adaptation between light and dark themes
+</Section>
+
+<Section title="Semantic Colors">
+Rather than using color names like "green" or "blue," we use functional names that describe the purpose. This semantic approach allows for easy theming and ensures colors maintain their meaning across different visual styles.
+
+<div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6 not-prose">
+  <Card title="Background Colors" subtitle="Colors used for component and page backgrounds">
+    <CardBody>
+      <div className="space-y-3">
+        <ColorSample
+            color="background"
+            bgColor="bg-background"
+            textColor="text-foreground"
+            usage="Base container elements"
+        />
+        <ColorSample
+            color="muted"
+            bgColor="bg-muted"
+            textColor="text-muted-foreground"
+            usage="Secondary container elements"
+        />
+        <ColorSample
+            color="popover"
+            bgColor="bg-popover"
+            textColor="text-popover-foreground"
+            usage="Floating UI elements"
+        />
+        <ColorSample
+            color="card"
+            bgColor="bg-card"
+            textColor="text-card-foreground"
+            usage="Used for content containers"
+        />
+      </div>
+    </CardBody>
+  </Card>
+
+  <Card title="Foreground Colors" subtitle="Colors used for text and icons">
+    <CardBody>
+      <div className="space-y-3">
+        <ColorSample
+            color="foreground"
+            bgColor="bg-background"
+            textColor="text-foreground"
+            usage="Default text color"
+        />
+        <ColorSample
+            color="muted-foreground"
+            bgColor="bg-background"
+            textColor="text-muted-foreground"
+            usage="Secondary text content"
+        />
+        <ColorSample
+            color="popover"
+            bgColor="bg-background"
+            textColor="text-popover-foreground"
+            usage="Text on popovers"
+        />
+        <ColorSample
+            color="card"
+            bgColor="bg-background"
+            textColor="text-card-foreground"
+            usage="Text on card elements"
+        />
+      </div>
+    </CardBody>
+  </Card>
+
+  <Card title="Action Colors" subtitle="Colors used for interactive elements">
+    <CardBody>
+        <div className="space-y-3">
+            <ColorSample
+                color="primary"
+                bgColor="bg-primary"
+                textColor="text-primary-foreground"
+                usage="Main action buttons"
+            />
+            <ColorSample
+                color="primary-foreground"
+                bgColor="bg-primary-foreground"
+                textColor="text-primary"
+                usage="Main highlighted text"
+            />
+            <ColorSample
+                color="secondary"
+                bgColor="bg-secondary"
+                textColor="text-secondary-foreground"
+                usage="Alternative buttons"
+            />
+            <ColorSample
+                color="secondary-foreground"
+                bgColor="bg-background"
+                textColor="text-secondary-foreground"
+                usage="Secondary highlighted text"
+            />
+        </div>
+    </CardBody>
+  </Card>
+
+  <Card title="Accent & Destructive" subtitle="Colors used for highlights and warnings">
+    <CardBody>
+      <div className="space-y-3">
+           <ColorSample
+                color="accent"
+                bgColor="bg-accent"
+                textColor="text-accent-foreground"
+                usage="Highlighted UI elements"
+            />
+            <ColorSample
+                color="accent-foreground"
+                bgColor="bg-background"
+                textColor="text-accent-foreground"
+                usage="Text on highlighted areas"
+            />
+            <ColorSample
+                color="destructive"
+                bgColor="bg-destructive"
+                textColor="text-destructive-foreground"
+                usage="Destructive actions"
+            />
+            <ColorSample
+                color="destructive-foreground"
+                bgColor="bg-background"
+                textColor="text-destructive"
+                usage="Destructive action text"
+            />
+      </div>
+    </CardBody>
+  </Card>
+</div>
+
+### Borders & Focus Rings
+
+<div className="text-sm flex items-center">
+  <div className="font-mono border rounded-md p-4">--border</div>
+  <div className="text-muted-foreground pl-8">for component borders and dividers</div>
+</div>
+
+```html
+<div class="border border-border rounded-md p-4">
+  Element with border
+</div>
+```
+
+<div className="text-sm flex items-center">
+  <div className="font-mono ring-2 ring-ring rounded-md p-4">--ring</div>
+  <div className="text-muted-foreground pl-8">for focus indicators on interactive elements</div>
+</div>
+
+```html
+<button class="focus:ring-2 focus:ring-ring focus:ring-offset-2">
+  Focusable element
+</button>
+```
+
+### Using Semantic Colors
+
+You can access semantic colors through Tailwind utility classes:
+
+```html
+<div class="bg-primary text-primary-foreground border border-border">
+  This element uses semantic colors
+</div>
+```
+</Section>
+
+<Section title="Color Status Indicators">
+Crafted UI provides a set of specialized status colors for communicating different states and feedback to users. These colors are designed to be universally understood and accessible.
+
+<div className="mt-6 not-prose">
+  <Card title="Status Colors" subtitle="Colors for communicating state and feedback">
+    <CardBody>
+      <div className="space-y-6">
+        <div>
+          <div className="mb-3">
+            <div className="font-mono text-sm font-medium">--danger</div>
+            <div className="text-sm text-muted-foreground">Critical errors and destructive actions such as error messages and delete confirmations</div>
+          </div>
+          <Alert status="danger" title="Danger">
+            Something went wrong with your request
+          </Alert>
+        </div>
+        
+        <div>
+          <div className="mb-3">
+            <div className="font-mono text-sm font-medium">--warning</div>
+            <div className="text-sm text-muted-foreground">Caution and important notices such as validation warnings and important alerts</div>
+          </div>
+          <Alert status="warning" title="Warning">
+            Please review before proceeding
+          </Alert>
+        </div>
+        
+        <div>
+          <div className="mb-3">
+            <div className="font-mono text-sm font-medium">--success</div>
+            <div className="text-sm text-muted-foreground">Positive outcomes and confirmations such as success messages and completed actions</div>
+          </div>
+          <Alert status="success" title="Success">
+            Your changes have been saved
+          </Alert>
+        </div>
+        
+        <div>
+          <div className="mb-3">
+            <div className="font-mono text-sm font-medium">--info</div>
+            <div className="text-sm text-muted-foreground">Informational messages and tips such as help text and neutral notifications</div>
+          </div>
+          <Alert status="info" title="Info">
+            Here's some helpful information
+          </Alert>
+        </div>
+      </div>
+    </CardBody>
+  </Card>
+</div>
+
+### Using Status Colors
+
+Status colors are available as Tailwind utility classes and can be used directly in your markup:
+
+```html
+<p class="text-danger">Error message</p>
+<p class="text-warning">Warning message</p>
+<p class="text-success">Success message</p>
+<p class="text-info">Info message</p>
+```
+</Section>
+
+<Section title="Base Colors">
+In addition to semantic and status colors, Crafted UI supports standard base colors derived from Tailwind's color palette. These colors can be used directly when you need a specific color rather than a semantic one.
+
+<div className="space-y-2 mt-4">
+  <div>
+    <strong>Neutral Colors:</strong>{' '}
+    <span className="font-mono text-slate-600 dark:text-slate-400">slate</span>{', '}
+    <span className="font-mono text-gray-600 dark:text-gray-400">gray</span>{', '}
+    <span className="font-mono text-zinc-600 dark:text-zinc-400">zinc</span>{', '}
+    <span className="font-mono text-neutral-600 dark:text-neutral-400">neutral</span>{', '}
+    <span className="font-mono text-stone-600 dark:text-stone-400">stone</span>
+  </div>
+
+  <div>
+    <strong>Warm Colors:</strong>{' '}
+    <span className="font-mono text-red-600">red</span>{', '}
+    <span className="font-mono text-orange-600">orange</span>{', '}
+    <span className="font-mono text-amber-600">amber</span>{', '}
+    <span className="font-mono text-yellow-600">yellow</span>
+  </div>
+
+  <div>
+    <strong>Cool Colors:</strong>{' '}
+    <span className="font-mono text-lime-600">lime</span>{', '}
+    <span className="font-mono text-green-600">green</span>{', '}
+    <span className="font-mono text-emerald-600">emerald</span>{', '}
+    <span className="font-mono text-teal-600">teal</span>{', '}
+    <span className="font-mono text-cyan-600">cyan</span>{', '}
+    <span className="font-mono text-sky-600">sky</span>{', '}
+    <span className="font-mono text-blue-600">blue</span>{', '}
+    <span className="font-mono text-indigo-600">indigo</span>
+  </div>
+
+  <div>
+    <strong>Vibrant Colors:</strong>{' '}
+    <span className="font-mono text-violet-600">violet</span>{', '}
+    <span className="font-mono text-purple-600">purple</span>{', '}
+    <span className="font-mono text-fuchsia-600">fuchsia</span>{', '}
+    <span className="font-mono text-pink-600">pink</span>{', '}
+    <span className="font-mono text-rose-600">rose</span>
+  </div>
+</div>
+
+Base colors work the same as semantic colors and are available on components that accept the `clr` prop. Use them when you need a specific color for visual design purposes rather than semantic meaning.
+</Section>
+
+<Section title="Color Themes">
+Crafted UI supports both light and dark themes out of the box. All color variables automatically adapt to the current theme, ensuring consistent appearance and proper contrast in both modes.
+
+### Light Theme
+The light theme uses softer, more neutral colors with appropriate contrast for readability. Background colors are light with darker text, creating a clean and professional appearance suitable for most applications.
+
+### Dark Theme
+The dark theme inverts the color relationships, using dark backgrounds with light text. It maintains the same semantic color relationships while providing a comfortable viewing experience in low-light environments. Status colors remain consistent but may have adjusted opacity or brightness for optimal contrast.
+
+<div className="p-4 rounded-md border border-border mt-6">
+  <h4 className="font-medium mb-4">Theme Comparison</h4>
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div className="bg-white p-4 rounded-md border border-slate-200">
+      <div className="text-sm font-medium mb-2 text-slate-900">Light Theme</div>
+      <div className="space-y-2">
+        <div className="flex items-center gap-2">
+          <div className="w-8 h-8 rounded" style="background: hsl(121 33% 100%)"></div>
+          <div className="text-xs font-mono text-slate-700">--background</div>
+        </div>
+        <div className="flex items-center gap-2">
+          <div className="w-8 h-8 rounded" style="background: hsl(121 40% 34%)"></div>
+          <div className="text-xs font-mono text-slate-700">--primary</div>
+        </div>
+        <div className="flex items-center gap-2">
+          <div className="w-8 h-8 rounded" style="background: hsl(121 4% 84%)"></div>
+          <div className="text-xs font-mono text-slate-700">--secondary</div>
+        </div>
+        <div className="flex items-center gap-2">
+          <div className="w-8 h-8 rounded" style="background: hsl(121 80% 4%)"></div>
+          <div className="text-xs font-mono text-slate-700">--foreground</div>
+        </div>
+      </div>
+    </div>
+    <div className="bg-slate-900 p-4 rounded-md border border-slate-800">
+      <div className="text-sm font-medium mb-2 text-slate-100">Dark Theme</div>
+      <div className="space-y-2">
+        <div className="flex items-center gap-2">
+          <div className="w-8 h-8 rounded" style="background: hsl(121 50% 0%)"></div>
+          <div className="text-xs font-mono text-slate-300">--background</div>
+        </div>
+        <div className="flex items-center gap-2">
+          <div className="w-8 h-8 rounded" style="background: hsl(121 40% 34%)"></div>
+          <div className="text-xs font-mono text-slate-300">--primary</div>
+        </div>
+        <div className="flex items-center gap-2">
+          <div className="w-8 h-8 rounded" style="background: hsl(121 12% 17%)"></div>
+          <div className="text-xs font-mono text-slate-300">--secondary</div>
+        </div>
+        <div className="flex items-center gap-2">
+          <div className="w-8 h-8 rounded" style="background: hsl(121 16% 98%)"></div>
+          <div className="text-xs font-mono text-slate-300">--foreground</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+### Theme Implementation
+
+To implement theme switching in your application, toggle the `dark` class on your root element:
+
+```javascript
+// Toggle theme
+function toggleTheme() {
+  document.documentElement.classList.toggle('dark');
+}
+
+// Set theme based on user preference
+function setTheme(theme) {
+  if (theme === 'dark') {
+    document.documentElement.classList.add('dark');
+  } else {
+    document.documentElement.classList.remove('dark');
+  }
+}
+```
+
+All Crafted UI components will automatically adapt to the current theme without any additional configuration.
+</Section>
+
+<Section title="Customizing Colors">
+You can customize any of the color values to match your brand or design requirements. Override the CSS variables in your global styles:
+
+### Custom Semantic Colors
+```css
+:root {
+  --primary: hsl(240 100% 50%);     /* Custom blue */
+  --secondary: hsl(280 100% 50%);   /* Custom purple */
+  --accent: hsl(320 100% 50%);      /* Custom pink */
+}
+
+:root[class~="dark"] {
+  --primary: hsl(240 100% 60%);     /* Lighter blue for dark mode */
+  --secondary: hsl(280 100% 60%);   /* Lighter purple for dark mode */
+  --accent: hsl(320 100% 60%);      /* Lighter pink for dark mode */
+}
+```
+
+### Custom Status Colors
+```css
+:root {
+  --danger: hsl(0 84% 60%);         /* Custom red */
+  --warning: hsl(45 93% 47%);       /* Custom orange */
+  --success: hsl(120 60% 50%);      /* Custom green */
+  --info: hsl(200 100% 50%);        /* Custom blue */
+}
+```
+
+Remember to maintain proper contrast ratios for accessibility when customizing colors. Test your color combinations to ensure they meet WCAG guidelines for text contrast.
+</Section>
+
+</BaseSidebar>

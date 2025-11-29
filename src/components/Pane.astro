@@ -1,8 +1,17 @@
 ---
 import { classNames } from "../utils/classNames"
+
+interface Props {
+    className?: string;
+}
+
+const { 
+    className
+ } = Astro.props;
 ---
 <div class={classNames(
-    "max-w-screen-xl m-auto p-3 py-12 md:p-12"
+    "max-w-screen-xl m-auto p-3 py-12 md:p-12 z-10",
+    className
 )}>
     <slot />
 </div>
