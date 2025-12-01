@@ -7,6 +7,7 @@ import Button from "@/components/button/Button.astro";
 import CopyIcon from "@/components/icons/CopyIcon.astro";
 import CheckIcon from "@/components/icons/CheckIcon.astro";
 import { codeToHtml } from 'shiki';
+import { classNames } from "@/utils/classNames";
 
 interface Props extends HTMLAttributes<'div'> {
     code: string;
@@ -54,7 +55,7 @@ const highlightedCode = await codeToHtml(normalizedCode, {
 ---
 
 <div x-data={ `{ showCode: false, copied: false, code: ${JSON.stringify(normalizedCode)} }` }>
-    <Card body className={className}>
+    <Card body className={classNames("pt-6",className)}>
         <div class="flex items-center justify-between">
             <Tablist bordered>
                 <TablistItem>
@@ -76,23 +77,27 @@ const highlightedCode = await codeToHtml(normalizedCode, {
                     </a>
                 </TablistItem>
             </Tablist>
-            <Button
-                clr="blank"
-                x-show="showCode && !copied"
-                x-cloak
-                @click="navigator.clipboard.writeText(code); copied = true; setTimeout(() => copied = false, 2000)"
-                title="Copy code"
-            >
-                <CopyIcon />
-            </Button>
-            <Button
-                clr="blank"
-                x-show="showCode && copied"
-                x-cloak
-                title="Copied!"
-            >
-                <CheckIcon />
-            </Button>
+            <div class="min-h-10">
+                <Button
+                    clr="accent"
+                    outline
+                    x-show="showCode && !copied"
+                    x-cloak
+                    @click="navigator.clipboard.writeText(code); copied = true; setTimeout(() => copied = false, 2000)"
+                    title="Copy code"
+                >
+                    <CopyIcon />
+                </Button>
+                <Button
+                    clr="accent"
+                    outline
+                    x-show="showCode && copied"
+                    x-cloak
+                    title="Copied!"
+                >
+                    <CheckIcon />
+                </Button>
+            </div>
         </div>
 
         <div class="flex flex-col">

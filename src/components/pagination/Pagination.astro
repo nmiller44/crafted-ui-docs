@@ -1,0 +1,136 @@
+---
+import { classNames } from "@/utils/classNames";
+
+export type Props = {
+    totalItems: number;
+    itemsPerPage: number;
+    currentPage: number;
+    siblingCount?: number;
+    showInfo?: boolean;
+    class?: string;
+};
+
+const {
+    totalItems,
+    itemsPerPage,
+    currentPage,
+    siblingCount = 1,
+    showInfo = true,
+    class: className,
+    ...props
+} = Astro.props;
+
+const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+const maxDigits = totalPages.toString().length;
+const minWidth = maxDigits === 1 ? "min-w-[2.5rem]" : maxDigits === 2 ? "min-w-[3rem]" : "min-w-[3.5rem]";
+---
+
+{totalPages > 1 && (
+    <div 
+        x-data={`{ 
+            currentPage: ${currentPage}, 
+            totalPages: ${totalPages}, 
+            itemsPerPage: ${itemsPerPage}, 
+            totalItems: ${totalItems},
+            siblingCount: ${siblingCount},
+            get pageNumbers() {
+                const firstPage = 1;
+                const lastPage = this.totalPages;
+                
+                const leftSiblingIndex = Math.max(this.currentPage - this.siblingCount, firstPage);
+                const rightSiblingIndex = Math.min(this.currentPage + this.siblingCount, lastPage);
+                
+                const shouldShowLeftDots = leftSiblingIndex > firstPage + 1;
+                const shouldShowRightDots = rightSiblingIndex < lastPage - 1;
+                
+                const pageNumbers = [];
+                
+                if (firstPage < leftSiblingIndex) {
+                    pageNumbers.push(firstPage);
+                    if (shouldShowLeftDots) {
+                        pageNumbers.push('...');
+                    }
+                }
+                
+                for (let i = leftSiblingIndex; i <= rightSiblingIndex; i++) {
+                    pageNumbers.push(i);
+                }
+                
+                if (rightSiblingIndex < lastPage) {
+                    if (shouldShowRightDots) {
+                        pageNumbers.push('...');
+                    }
+                    if (rightSiblingIndex !== lastPage) {
+                        pageNumbers.push(lastPage);
+                    }
+                }
+                
+                return pageNumbers;
+            }
+        }`}
+        class={classNames("flex items-center justify-between border-t border-border py-3 px-4", className)} 
+        {...props}
+    >
+        {showInfo && (
+            <div>
+                <p class="text-sm text-muted-foreground">
+                    Showing <span class="font-medium" x-text="Math.min((currentPage - 1) * itemsPerPage + 1, totalItems)">{Math.min((currentPage - 1) * itemsPerPage + 1, totalItems)}</span> to{' '}
+                    <span class="font-medium" x-text="Math.min(currentPage * itemsPerPage, totalItems)">{Math.min(currentPage * itemsPerPage, totalItems)}</span> of{' '}
+                    <span class="font-medium" x-text="totalItems">{totalItems}</span> results
+                </p>
+            </div>
+        )}
+        <div></div>
+        <div>
+            <nav class="isolate inline-flex -space-x-px rounded-md shadow-sm" aria-label="Pagination">
+                <button
+                    @click="currentPage > 1 && currentPage--"
+                    :disabled="currentPage === 1"
+                    :class="currentPage === 1 && 'cursor-not-allowed opacity-50'"
+                    class="rounded-l-md rounded-r-none border border-border bg-card px-2 py-2 shadow-none focus:ring-0 focus:ring-offset-0 focus:z-10 focus:bg-muted"
+                >
+                    <span class="sr-only">Previous</span>
+                    <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M12.79 5.23a.75.75 0 01-.02 1.06L8.832 10l3.938 3.71a.75.75 0 11-1.04 1.08l-4.5-4.25a.75.75 0 010-1.08l4.5-4.25a.75.75 0 011.06.02z" clip-rule="evenodd" />
+                    </svg>
+                </button>
+                
+                <template x-for="(page, index) in pageNumbers" :key="index">
+                    <div>
+                        <span
+                            x-show="page === '...'"
+                            class="relative inline-flex items-center border border-border bg-card px-4 py-2 text-sm font-medium text-foreground"
+                        >
+                            ...
+                        </span>
+                        <button
+                            x-show="page !== '...'"
+                            @click="currentPage = page"
+                            :aria-current="currentPage === page ? 'page' : undefined"
+                            :class="currentPage === page ? 'border-primary bg-primary text-primary-foreground focus:bg-primary/90' : 'border-border bg-card focus:bg-muted'"
+                            class={classNames(
+                                "rounded-none border px-4 py-2 text-sm font-medium shadow-none focus:ring-0 focus:ring-offset-0 focus:z-10",
+                                minWidth
+                            )}
+                            x-text="page"
+                        >
+                        </button>
+                    </div>
+                </template>
+                
+                <button
+                    @click="currentPage < totalPages && currentPage++"
+                    :disabled="currentPage === totalPages"
+                    :class="currentPage === totalPages && 'cursor-not-allowed opacity-50'"
+                    class="rounded-l-none rounded-r-md border border-border bg-card px-2 py-2 shadow-none focus:ring-0 focus:ring-offset-0 focus:z-10 focus:bg-muted"
+                >
+                    <span class="sr-only">Next</span>
+                    <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clip-rule="evenodd" />
+                    </svg>
+                </button>
+            </nav>
+        </div>
+    </div>
+)}

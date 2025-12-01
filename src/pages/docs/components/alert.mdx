@@ -16,7 +16,7 @@ import Alert from '@components/alert/Alert.astro';
           This is a warning message. Please pay attention.
         </Alert>
         
-        <Alert title="Error Alert" status="error">
+        <Alert title="Danger Alert" status="danger">
           An error has occurred. Please try again.
         </Alert>
         
@@ -31,7 +31,7 @@ import Alert from '@components/alert/Alert.astro';
     </SamplePage>
 
     <Section title="Overview">
-        The Alert component provides a way to display important messages or notifications to users. It comes with several visual variants to denote different types of alerts: warning, error, success, and info. This component is designed to provide contextual feedback and capture the user's attention when necessary.
+        The Alert component provides a way to display important messages or notifications to users. It comes with several visual variants to denote different types of alerts: warning, danger, success, and info. This component is designed to provide contextual feedback and capture the user's attention when necessary.
     </Section>
 
     <Section title="Alert">
@@ -42,7 +42,7 @@ import Alert from '@components/alert/Alert.astro';
         ```tsx
         import { Alert } from "@crafted-ui/react";
 
-        <Alert title="Error Alert" status="error">
+        <Alert title="Danger Alert" status="danger">
           Something went wrong. Please try again.
         </Alert>
         ```
@@ -53,7 +53,7 @@ import Alert from '@components/alert/Alert.astro';
         | Prop | Type | Default | Description |
         | --- | --- | --- | --- |
         | title | string | required | The heading text for the alert |
-        | status | 'warning' \| 'error' \| 'success' \| 'info' | 'warning' | Determines the visual style of the alert |
+        | status | 'warning' \| 'danger' \| 'success' \| 'info' | 'warning' | Determines the visual style of the alert |
         | className | string | undefined | Additional CSS class names |
         | children | ReactNode | undefined | Content of the alert |
     </Section>
@@ -68,11 +68,11 @@ import Alert from '@components/alert/Alert.astro';
         </Alert>
         ```
 
-        ### Error
+        ### Danger
         Used to communicate error states or failures that need immediate attention.
         
         ```tsx
-        <Alert title="Error Alert" status="error">
+        <Alert title="Danger Alert" status="danger">
           An error occurred while processing your request.
         </Alert>
         ```
@@ -120,7 +120,7 @@ import Alert from '@components/alert/Alert.astro';
 
         ### Alert with List Content
         ```tsx
-        <Alert title="Validation Errors" status="error">
+        <Alert title="Validation Errors" status="danger">
           <ul>
             <li>Username is required</li>
             <li>Password must be at least 8 characters</li>
