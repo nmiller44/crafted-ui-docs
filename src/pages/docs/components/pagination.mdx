@@ -1,0 +1,246 @@
+---
+title: 'Pagination'
+description: 'A pagination component for navigating through large datasets.'
+---
+import BaseSidebar from "@/layouts/BaseSidebar.astro";
+import Pagination from "@/components/pagination/Pagination.astro";
+
+import Prose from '@/components/Prose.astro';
+import Section from '@/components/Section.astro';
+import Heading3 from '@/components/heading/Heading3.astro';
+import Card from '@/components/card/Card.astro';
+import CardBody from '@/components/card/CardBody.astro';
+import CodePreview from '@/components/CodePreview.astro';
+
+<BaseSidebar title={frontmatter.title} description={frontmatter.description}>
+
+    <CodePreview code={`
+        <Pagination
+            totalItems={100}
+            itemsPerPage={10}
+            currentPage={5}
+            onPageChange={(page) => console.log('Page changed to:', page)}
+        />
+        `}>
+        <Pagination
+            totalItems={100}
+            itemsPerPage={10}
+            currentPage={5}
+        />
+    </CodePreview>
+
+    <Section title="Overview">
+        The Pagination component provides an intuitive way to navigate through large datasets by dividing content into discrete pages. It features adaptive behavior that automatically adjusts its display based on the dataset size, showing fewer page numbers for small datasets and using ellipsis for large ones.
+    </Section>
+
+    <Section title="Pagination">
+        ### Description
+        A flexible pagination component that intelligently displays page numbers based on the current page and total number of pages, with support for customizable sibling counts and optional result information.
+
+        ### Usage
+        ```tsx
+        import { Pagination } from "@crafted-ui/react";
+
+        const [currentPage, setCurrentPage] = useState(1);
+
+        <Pagination
+            totalItems={250}
+            itemsPerPage={10}
+            currentPage={currentPage}
+            onPageChange={setCurrentPage}
+        />
+        ```
+
+        ### Props
+        The `Pagination` component accepts the following props:
+        
+        | Prop | Type | Default | Description |
+        | --- | --- | --- | --- |
+        | totalItems | number | required | Total number of items in the dataset |
+        | itemsPerPage | number | required | Number of items to display per page |
+        | currentPage | number | required | The currently active page (1-indexed) |
+        | onPageChange | (page: number) => void | required | Callback function when page changes |
+        | siblingCount | number | 1 | Number of page buttons to show on each side of current page |
+        | showInfo | boolean | true | Whether to display the "Showing X to Y of Z results" text |
+        | className | string | undefined | Additional CSS class names |
+
+        The component also accepts all standard HTML nav element attributes.
+    </Section>
+
+    <Section title="Adaptive Display">
+        The Pagination component automatically adapts its display based on the size of your dataset. For smaller datasets with fewer total pages, it displays all available pages, making it easy to navigate to any page with a single click. When dealing with larger datasets, the component uses ellipsis to indicate skipped pages, keeping the interface clean while still providing access to first, last, and nearby pages.
+    </Section>
+
+    <CodePreview code={`
+        {/* Small dataset - shows all pages */}
+        <Pagination
+            totalItems={30}
+            itemsPerPage={10}
+            currentPage={2}
+            onPageChange={(page) => console.log('Page changed to:', page)}
+        />
+
+        {/* Large dataset - uses ellipsis */}
+        <Pagination
+            totalItems={1000}
+            itemsPerPage={25}
+            currentPage={15}
+            onPageChange={(page) => console.log('Page changed to:', page)}
+        />
+    `}>
+        <div class="space-y-8">
+            <Pagination
+                totalItems={30}
+                itemsPerPage={10}
+                currentPage={2}
+            />
+            <Pagination
+                totalItems={1000}
+                itemsPerPage={25}
+                currentPage={15}
+            />
+        </div>
+    </CodePreview>
+
+    <Section title="Sibling Count">
+        The `siblingCount` prop controls how many page numbers are displayed on each side of the current page. This allows you to balance between showing more navigation options and keeping the interface compact. A siblingCount of 0 shows only the current page, first page, and last page with ellipsis (most compact). A siblingCount of 1 (default) shows one page number on each side of the current page, providing a balanced option for most use cases. A siblingCount of 2 shows two page numbers on each side, providing more navigation options at the cost of more space.
+    </Section>
+
+    <CodePreview code={`
+        <Pagination
+            totalItems={200}
+            currentPage={10}
+            siblingCount={0}
+        />
+
+        <Pagination
+            totalItems={200}
+            currentPage={10}
+            siblingCount={1}
+        />
+
+        <Pagination
+            totalItems={200}
+            currentPage={10}
+            siblingCount={2}
+        />
+    `}>
+        <div class="space-y-8">
+            <div>
+                <p class="text-sm font-mono mb-3">siblingCount={0}</p>
+                <Pagination
+                    totalItems={200}
+                    itemsPerPage={10}
+                    currentPage={10}
+                    siblingCount={0}
+                />
+            </div>
+            <div>
+                <p class="text-sm font-mono mb-3">siblingCount={1} // default</p>
+                <Pagination
+                    totalItems={200}
+                    itemsPerPage={10}
+                    currentPage={10}
+                    siblingCount={1}
+                />
+            </div>
+            <div>
+                <p class="text-sm font-mono mb-3">siblingCount={2}</p>
+                <Pagination
+                    totalItems={200}
+                    itemsPerPage={10}
+                    currentPage={10}
+                    siblingCount={2}
+                />
+            </div>
+        </div>
+    </CodePreview>
+
+    <Section title="Accessibility">
+        The Pagination component follows accessibility best practices:
+        
+        - Uses semantic HTML with `<nav>` element and proper ARIA labels
+        - Includes `aria-current="page"` on the active page button
+        - Previous/Next buttons include screen reader text via `sr-only` class
+        - Disabled states are properly indicated with `disabled` attribute
+        - Keyboard navigation is fully supported
+        - Maintains proper focus management
+        
+        When implementing pagination, ensure that:
+        
+        1. The `onPageChange` callback properly updates your data display
+        2. Loading states are communicated to screen readers when data is fetching
+        3. The current page is visually distinct with sufficient color contrast
+    </Section>
+
+    <Section title="Examples">
+        ### Basic Pagination with State
+        ```tsx
+        import { useState } from 'react';
+        import { Pagination } from '@crafted-ui/react';
+
+        function MyComponent() {
+            const [currentPage, setCurrentPage] = useState(1);
+            const items = [...]; // Your data array
+            const itemsPerPage = 10;
+
+            return (
+                <div>
+                    {/* Display current page items */}
+                    <Pagination
+                        totalItems={items.length}
+                        itemsPerPage={itemsPerPage}
+                        currentPage={currentPage}
+                        onPageChange={setCurrentPage}
+                    />
+                </div>
+            );
+        }
+        ```
+
+        ### Pagination with API Calls
+        ```tsx
+        import { useState, useEffect } from 'react';
+        import { Pagination } from '@crafted-ui/react';
+
+        function DataTable() {
+            const [currentPage, setCurrentPage] = useState(1);
+            const [data, setData] = useState([]);
+            const [totalItems, setTotalItems] = useState(0);
+            const itemsPerPage = 25;
+
+            useEffect(() => {
+                fetchData(currentPage, itemsPerPage).then(response => {
+                    setData(response.items);
+                    setTotalItems(response.total);
+                });
+            }, [currentPage]);
+
+            return (
+                <div>
+                    {/* Display data */}
+                    <Pagination
+                        totalItems={totalItems}
+                        itemsPerPage={itemsPerPage}
+                        currentPage={currentPage}
+                        onPageChange={setCurrentPage}
+                    />
+                </div>
+            );
+        }
+        ```
+
+        ### Compact Pagination for Mobile
+        ```tsx
+        <Pagination
+            totalItems={500}
+            itemsPerPage={20}
+            currentPage={currentPage}
+            onPageChange={setCurrentPage}
+            siblingCount={0}
+            showInfo={false}
+        />
+        ```
+    </Section>
+
+</BaseSidebar>

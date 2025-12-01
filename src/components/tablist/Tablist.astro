@@ -10,7 +10,7 @@ interface Props extends HTMLAttributes<"ul"> {
 const { bordered = false, className, ...props } = Astro.props;
 ---
 <ul class={classNames(  
-                bordered ? "group border-b border-border" : "",
+                bordered ? "group bordered border-b border-border" : "",
                 
                 // Handle full height in nav
                 "h-full items-center",

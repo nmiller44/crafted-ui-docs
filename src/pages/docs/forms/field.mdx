@@ -3,6 +3,7 @@ title: 'Field'
 description: 'A form field component set with label, error handling and inset capabilities.'
 ---
 import BaseSidebar from "@/layouts/BaseSidebar.astro";
+import CodePreview from "@/components/CodePreview.astro";
 import SamplePage from "@/components/SamplePage.astro";
 import Prose from '@/components/Prose.astro';
 import Section from '@/components/Section.astro';
@@ -14,22 +15,41 @@ import Input from '@/components/input/Input.astro';
 
 <BaseSidebar title={frontmatter.title} description={frontmatter.description}>
 
-    <SamplePage>
-      <div class="max-w-sm">
-        <Field>
-          <FieldLabel>Username</FieldLabel>
-          <input type="text" class="w-full rounded-md border border-neutral-300 px-3 py-1.5 text-sm shadow-sm" /> 
-        </Field>
-      </div>
+    <CodePreview code={`
+        <div className="flex flex-col gap-4">
+          <div className="max-w-sm">
+            <Field>
+              <FieldLabel>Username</FieldLabel>
+              <Input type="text" /> 
+            </Field>
+          </div>
 
-      <div class="max-w-sm">
-        <Field>
-          <FieldLabel>Password</FieldLabel>
-          <input type="text" class="w-full rounded-md border border-neutral-300 px-3 py-1.5 text-sm shadow-sm" /> 
-          <FieldError error="Password must be at least 8 characters" />
-        </Field>
+          <div className="max-w-sm">
+            <Field>
+              <FieldLabel>Password</FieldLabel>
+              <Input type="text" /> 
+              <FieldError error="Password must be at least 8 characters" />
+            </Field>
+          </div>
+        </div>
+    `}>
+      <div class="flex flex-col gap-4">
+        <div class="max-w-sm">
+          <Field>
+            <FieldLabel>Username</FieldLabel>
+            <Input type="text" /> 
+          </Field>
+        </div>
+
+        <div class="max-w-sm">
+          <Field>
+            <FieldLabel>Password</FieldLabel>
+            <Input type="text" /> 
+            <FieldError error="Password must be at least 8 characters" />
+          </Field>
+        </div>
       </div>
-    </SamplePage>
+    </CodePreview>
 
     <Section title="Overview">
         The Field component set provides a suite of components for building form fields with consistent styling, labels, error handling, and inset content. These components are built on top of the `@base-ui-components/react` Field primitive.
@@ -80,28 +100,6 @@ import Input from '@/components/input/Input.astro';
         ### Description
         A label component for the form field.
 
-        ### Example
-        <SamplePage>
-          <div class="max-w-sm">
-            <Field>
-              <FieldLabel>Username</FieldLabel>
-            </Field>
-          </div>
-        </SamplePage>
-
-        ### Usage
-        ```tsx
-        import { Field, FieldLabel } from "@crafted-ui/react";
-
-        <Field>
-          <FieldLabel>Email</FieldLabel>
-          <input 
-            type="email" 
-            className="w-full rounded-md border border-neutral-300 px-3 py-1.5 text-sm shadow-sm" 
-          />
-        </Field>
-        ```
-
         ### Props
         The `FieldLabel` component accepts all props from the `@base-ui-components/react` Field.Label component, plus:
         
@@ -114,30 +112,6 @@ import Input from '@/components/input/Input.astro';
     <Section title="FieldError">
         ### Description
         Displays validation error messages. This is automatically included in the Field component.
-
-        ### Example
-        <SamplePage>
-
-          <div class="max-w-sm">
-            <Field>
-              <FieldError error="Password must be at least 8 characters" />
-            </Field>
-          </div>
-        </SamplePage>
-
-        ### Usage
-        ```tsx
-        import { Field, FieldLabel, FieldError } from "@crafted-ui/react";
-
-        <Field>
-          <FieldLabel>Password</FieldLabel>
-          <input 
-            type="password" 
-            className="w-full rounded-md border border-neutral-300 px-3 py-1.5 text-sm shadow-sm" 
-          />
-          <FieldError>Password must be at least 8 characters</FieldError>
-        </Field>
-        ```
 
         ### Props
         The `FieldError` component accepts all props from the `@base-ui-components/react` Field.Error component, plus:
