@@ -1,0 +1,302 @@
+---
+title: 'Fieldset'
+description: 'A fieldset component for grouping related form fields with optional title, subtitle, and grid layout.'
+---
+import BaseSidebar from "@/layouts/BaseSidebar.astro";
+import CodePreview from "@/components/CodePreview.astro";
+import SamplePage from "@/components/SamplePage.astro";
+import Prose from '@/components/Prose.astro';
+import Section from '@/components/Section.astro';
+import Card from '@/components/card/Card.astro';
+import Field from '@/components/field/Field.astro';
+import FieldLabel from '@/components/field/FieldLabel.astro';
+import Fieldset from '@/components/fieldset/Fieldset.astro';
+import FieldsetButtons from '@/components/fieldset/FieldsetButtons.astro';
+import FieldsetLegend from '@/components/fieldset/FieldsetLegend.astro';
+import Input from '@/components/input/Input.astro';
+import Button from '@/components/button/Button.astro';
+
+<BaseSidebar title={frontmatter.title} description={frontmatter.description}>
+
+    <CodePreview code={`
+        <Fieldset title="Tap Room Reservation" subtitle="Book a table at our craft beer tasting room" grid>
+            <Field className="col-span-6">
+                <FieldLabel>First Name</FieldLabel>
+                <Input placeholder="John" required />
+            </Field>
+            <Field className="col-span-6">
+                <FieldLabel>Last Name</FieldLabel>
+                <Input placeholder="Brewer" required />
+            </Field>
+            <Field className="col-span-8">
+                <FieldLabel>Email Address</FieldLabel>
+                <Input type="email" placeholder="john@example.com" required />
+            </Field>
+            <Field className="col-span-4">
+                <FieldLabel>Phone</FieldLabel>
+                <Input type="tel" placeholder="(555) 123-4567" />
+            </Field>
+            <Field className="col-span-4">
+                <FieldLabel>Date</FieldLabel>
+                <Input type="date" required />
+            </Field>
+            <Field className="col-span-4">
+                <FieldLabel>Time</FieldLabel>
+                <Input type="time" required />
+            </Field>
+            <Field className="col-span-4">
+                <FieldLabel>Party Size</FieldLabel>
+                <Input type="number" placeholder="4" min="1" max="12" required />
+            </Field>
+            <Field className="col-span-full">
+                <FieldLabel>Special Requests</FieldLabel>
+                <Input placeholder="Beer preferences, dietary restrictions, etc." />
+            </Field>
+            <FieldsetButtons>
+                <Button outline clr="blank" type="button">Cancel</Button>
+                <Button type="submit" clr="primary">Reserve Table</Button>
+            </FieldsetButtons>
+        </Fieldset>
+    `}>
+        <div class="max-w-3xl">
+            <Fieldset title="Tap Room Reservation" subtitle="Book a table at our craft beer tasting room" grid>
+                <Field className="col-span-6">
+                    <FieldLabel>First Name</FieldLabel>
+                    <Input placeholder="John" required />
+                </Field>
+                <Field className="col-span-6">
+                    <FieldLabel>Last Name</FieldLabel>
+                    <Input placeholder="Brewer" required />
+                </Field>
+                <Field className="col-span-8">
+                    <FieldLabel>Email Address</FieldLabel>
+                    <Input type="email" placeholder="john@example.com" required />
+                </Field>
+                <Field className="col-span-4">
+                    <FieldLabel>Phone</FieldLabel>
+                    <Input type="tel" placeholder="(555) 123-4567" />
+                </Field>
+                <Field className="col-span-4">
+                    <FieldLabel>Date</FieldLabel>
+                    <Input type="date" required />
+                </Field>
+                <Field className="col-span-4">
+                    <FieldLabel>Time</FieldLabel>
+                    <Input type="time" required />
+                </Field>
+                <Field className="col-span-4">
+                    <FieldLabel>Party Size</FieldLabel>
+                    <Input type="number" placeholder="4" min="1" max="12" required />
+                </Field>
+                <Field className="col-span-full">
+                    <FieldLabel>Special Requests</FieldLabel>
+                    <Input placeholder="Beer preferences, dietary restrictions, etc." />
+                </Field>
+                <FieldsetButtons>
+                    <Button outline clr="blank">Cancel</Button>
+                    <Button type="submit" clr="primary">Reserve Table</Button>
+                </FieldsetButtons>
+            </Fieldset>
+        </div>
+    </CodePreview>
+
+    <Section title="Overview">
+        The Fieldset component provides a semantic way to group related form fields together. It includes support for titles, subtitles, grid layouts, and button groups. Built on top of the Base UI Fieldset primitive.
+    </Section>
+
+    <Section title="Fieldset">
+        ### Description
+        The root component that wraps a group of form fields. It automatically handles layout (flex or grid) and includes optional title and subtitle via the legend.
+    </Section>
+
+    <CodePreview code={`
+        <Fieldset title="Basic Form" subtitle="A simple form example.">
+            <Field>
+                <FieldLabel>Name</FieldLabel>
+                <Input />
+            </Field>
+            <Field>
+                <FieldLabel>Email</FieldLabel>
+                <Input type="email" />
+            </Field>
+        </Fieldset>
+    `}>
+        <div class="max-w-md">
+            <Fieldset title="Basic Form" subtitle="A simple form example.">
+                <Field>
+                    <FieldLabel>Name</FieldLabel>
+                    <Input />
+                </Field>
+                <Field>
+                    <FieldLabel>Email</FieldLabel>
+                    <Input type="email" />
+                </Field>
+            </Fieldset>
+        </div>
+    </CodePreview>
+
+    <Section>
+        ### Props
+        The `Fieldset` component accepts all props from the Base UI Fieldset.Root component, plus:
+        
+        | Prop | Type | Default | Description |
+        | --- | --- | --- | --- |
+        | title | string | - | Title text for the fieldset legend |
+        | subtitle | string | - | Subtitle text displayed below the title |
+        | grid | boolean | false | Use grid layout instead of flex column |
+        | className | string | - | Additional CSS class names |
+        | children | ReactNode | - | Form fields and content |
+    </Section>
+
+    <Section title="Grid Layout">
+        ### Description
+        Use the `grid` prop to enable a 12-column grid layout for more complex forms. Fields can span multiple columns using Tailwind's `col-span-*` utilities.
+    </Section>
+
+    <CodePreview code={`
+        <Fieldset title="New Brew Details" subtitle="Add a new craft beer to inventory." grid>
+            <Field className="col-span-8">
+                <FieldLabel>Beer Name</FieldLabel>
+                <Input placeholder="Hoppy IPA" />
+            </Field>
+            <Field className="col-span-4">
+                <FieldLabel>ABV %</FieldLabel>
+                <Input placeholder="6.5" />
+            </Field>
+            <Field className="col-span-6">
+                <FieldLabel>Style</FieldLabel>
+                <Input placeholder="IPA" />
+            </Field>
+            <Field className="col-span-6">
+                <FieldLabel>Brewery</FieldLabel>
+                <Input placeholder="Local Craft Co." />
+            </Field>
+            <Field className="col-span-4">
+                <FieldLabel>IBU</FieldLabel>
+                <Input placeholder="65" />
+            </Field>
+            <Field className="col-span-4">
+                <FieldLabel>Price</FieldLabel>
+                <Input placeholder="$8.99" />
+            </Field>
+            <Field className="col-span-4">
+                <FieldLabel>Volume (oz)</FieldLabel>
+                <Input placeholder="16" />
+            </Field>
+            <FieldsetButtons>
+                <Button outline clr="blank" type="button">Cancel</Button>
+                <Button type="submit" clr="primary">Add Beer</Button>
+            </FieldsetButtons>
+        </Fieldset>
+    `}>
+        <Fieldset title="New Brew Details" subtitle="Add a new craft beer to inventory." grid>
+            <Field className="col-span-8">
+                <FieldLabel>Beer Name</FieldLabel>
+                <Input placeholder="Hoppy IPA" />
+            </Field>
+            <Field className="col-span-4">
+                <FieldLabel>ABV %</FieldLabel>
+                <Input placeholder="6.5" />
+            </Field>
+            <Field className="col-span-6">
+                <FieldLabel>Style</FieldLabel>
+                <Input placeholder="IPA" />
+            </Field>
+            <Field className="col-span-6">
+                <FieldLabel>Brewery</FieldLabel>
+                <Input placeholder="Local Craft Co." />
+            </Field>
+            <Field className="col-span-4">
+                <FieldLabel>IBU</FieldLabel>
+                <Input placeholder="65" />
+            </Field>
+            <Field className="col-span-4">
+                <FieldLabel>Price</FieldLabel>
+                <Input placeholder="$8.99" />
+            </Field>
+            <Field className="col-span-4">
+                <FieldLabel>Volume (oz)</FieldLabel>
+                <Input placeholder="16" />
+            </Field>
+            <FieldsetButtons>
+                <Button outline clr="blank">Cancel</Button>
+                <Button type="submit" clr="primary">Add Beer</Button>
+            </FieldsetButtons>
+        </Fieldset>
+    </CodePreview>
+
+    <Section title="FieldsetLegend">
+        ### Description
+        The legend component for a fieldset. Typically used via the `title` and `subtitle` props on `Fieldset`, but can be used directly for custom legend content.
+
+        ### Props
+        The `FieldsetLegend` component accepts all props from the Base UI Fieldset.Legend component, plus:
+        
+        | Prop | Type | Default | Description |
+        | --- | --- | --- | --- |
+        | title | string | - | Title text for the legend |
+        | subtitle | string | - | Subtitle text displayed below the title |
+        | className | string | - | Additional CSS class names |
+        | children | ReactNode | - | Custom legend content |
+    </Section>
+
+    <Section title="FieldsetButtons">
+        ### Description
+        A container for action buttons at the bottom of a fieldset. Provides consistent spacing and alignment. 
+        Alignment options are available to control positioning of the buttons with right being the default.
+    </Section>
+
+    <CodePreview code={`
+        <Fieldset title="Update Settings">
+            <Field>
+                <FieldLabel>Notification Email</FieldLabel>
+                <Input type="email" />
+            </Field>
+            <FieldsetButtons>
+                <Button outline clr="blank" type="button">Cancel</Button>
+                <Button clr="primary" type="submit">Save Changes</Button>
+            </FieldsetButtons>
+        </Fieldset>
+    `}>
+        <div class="max-w-lg">
+            <Fieldset title="Update Settings">
+                <Field>
+                    <FieldLabel>Notification Email</FieldLabel>
+                    <Input type="email" />
+                </Field>
+                <FieldsetButtons>
+                    <Button outline clr="blank">Cancel</Button>
+                    <Button clr="primary" type="submit">Save Changes</Button>
+                </FieldsetButtons>
+            </Fieldset>
+        </div>
+    </CodePreview>
+
+    <Section>
+
+        ### Props
+        
+        | Prop | Type | Default | Description |
+        | --- | --- | --- | --- |
+        | align | "left" \| "center" \| "right" | "right" | Alignment of the buttons |
+        | className | string | - | Additional CSS class names |
+        | children | ReactNode | - | Button components |
+    </Section>
+
+    <Section title="Accessibility">
+        The Fieldset component follows accessibility best practices:
+        
+        - Uses the semantic HTML `<fieldset>` element for proper grouping
+        - Includes a `<legend>` element when title is provided for screen reader context
+        - Maintains proper focus order within form fields
+        - Grid layouts maintain logical tab order
+        
+        When implementing fieldsets:
+        
+        1. Use descriptive titles that clearly identify the purpose of the field group
+        2. Include subtitles to provide additional context when helpful
+        3. Ensure logical tab order, especially in grid layouts
+        4. Group related fields together for better user experience
+    </Section>
+
+</BaseSidebar>

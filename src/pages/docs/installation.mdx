@@ -6,6 +6,7 @@ import BaseSidebar from "../../layouts/BaseSidebar.astro";
 import Section from '../../components/section/Section.astro';
 import CodePreview from '../../components/CodePreview.astro';
 import Button from '../../components/button/Button.astro';
+import Fieldset from '../../components/fieldset/Fieldset.astro';
 import Field from '../../components/field/Field.astro';
 import Input from '../../components/input/Input.astro';
 import Heading3 from '../../components/heading/Heading3.astro';
@@ -40,55 +41,57 @@ import Heading3 from '../../components/heading/Heading3.astro';
     </Section>
 
     <CodePreview code={`
-import { Button, Field, Input } from 'crafted-ui';
+import { Button, Fieldset, Field, Input } from 'crafted-ui';
 
 function BreweryClubSignup() {
   return (
-    <form className="space-y-6 max-w-md mx-auto">
-      <h3 className="mb-2">🍺 Hoppy Kettle</h3>
-      <p className="text-muted-foreground">
-        Join our community for exclusive releases and events
-      </p>
-      
-      <Field label="Full Name">
-        <Input type="text" placeholder="Sam Snead" />
-      </Field>
-      
-      <Field label="Email address">
-        <Input type="email" placeholder="sam.snead@example.com" />
-      </Field>
-      
-      <Field label="Favorite Beer Style">
-        <Input type="text" placeholder="IPA, Stout, Lager..." />
-      </Field>
-      
-      <div className="flex gap-3">
-        <Button type="button" outline>Maybe Later</Button>
-        <Button type="submit" clr="primary">Join the Club</Button>
-      </div>
+    <form className="max-w-md mx-auto">
+      <Fieldset
+        title="🍺 Hoppy Kettle"
+        subtitle="Join our community for exclusive releases and events"
+      >
+        <Field label="Full Name">
+          <Input placeholder="Sam Snead" />
+        </Field>
+        
+        <Field label="Email address">
+          <Input type="email" placeholder="sam.snead@example.com" />
+        </Field>
+        
+        <Field label="Favorite Beer Style">
+          <Input placeholder="IPA, Stout, Lager..." />
+        </Field>
+        
+        <div className="flex gap-3">
+          <Button type="button" outline>Maybe Later</Button>
+          <Button type="submit" clr="primary">Join the Club</Button>
+        </div>
+      </Fieldset>
     </form>
   );
 }`}>
-            <form class="space-y-6 max-w-md mx-auto">
-                <Heading3 title="🍺 Hoppy Kettle" 
-                          subtitle="Join our community for exclusive releases and events" />
-                
-                <Field label="Full Name">
-                    <Input type="text" placeholder="Sam Snead" />
-                </Field>
-                
-                <Field label="Email address">
-                    <Input type="email" placeholder="sam.snead@example.com" />
-                </Field>
-                
-                <Field label="Favorite Beer Style">
-                    <Input type="text" placeholder="IPA, Stout, Lager..." />
-                </Field>
-                
-                <div class="flex gap-3">
-                    <Button type="button" clr="muted" outline>Maybe Later</Button>
-                    <Button type="submit" clr="primary">Join the Club</Button>
-                </div>
+            <form class="max-w-md mx-auto">
+                <Fieldset
+                    title="🍺 Hoppy Kettle"
+                    subtitle="Join our community for exclusive releases and events"
+                >
+                    <Field label="Full Name">
+                        <Input placeholder="Sam Snead" />
+                    </Field>
+                    
+                    <Field label="Email address">
+                        <Input type="email" placeholder="sam.snead@example.com" />
+                    </Field>
+                    
+                    <Field label="Favorite Beer Style">
+                        <Input placeholder="IPA, Stout, Lager..." />
+                    </Field>
+                    
+                    <div class="flex gap-3">
+                        <Button type="button" clr="muted" outline>Maybe Later</Button>
+                        <Button type="submit" clr="primary">Join the Club</Button>
+                    </div>
+                </Fieldset>
             </form>
         </CodePreview>
 

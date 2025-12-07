@@ -55,7 +55,7 @@ const highlightedCode = await codeToHtml(normalizedCode, {
 ---
 
 <div x-data={ `{ showCode: false, copied: false, code: ${JSON.stringify(normalizedCode)} }` }>
-    <Card body className={classNames("pt-6",className)}>
+    <Card body full>
         <div class="flex items-center justify-between">
             <Tablist bordered>
                 <TablistItem>

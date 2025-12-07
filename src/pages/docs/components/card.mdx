@@ -3,254 +3,265 @@ title: 'Card'
 description: 'A rounded card component with a shadow.'
 ---
 import BaseSidebar from "@layouts/BaseSidebar.astro";
-import SamplePage from "@components/SamplePage.astro";
+import CodePreview from "@components/CodePreview.astro";
 import Card from "@components/card/Card.astro";
 import CardBody from "@components/card/CardBody.astro";
 import CardHeader from "@components/card/CardHeader.astro";
 import CardFooter from "@components/card/CardFooter.astro";
-import Prose from '@components/Prose.astro';
+import Button from "@components/button/Button.astro";
+import Heading3 from "@components/heading/Heading3.astro";
+import Heading4 from "@components/heading/Heading4.astro";
 import Section from '@components/Section.astro';
 
 <BaseSidebar title={frontmatter.title} description={frontmatter.description}>
 
-    <SamplePage>
-        <div class="py-8 px-6">
-            <Card title={frontmatter.title} subtitle={frontmatter.description}>
-                <CardBody>
-                    <div>Card Content</div>
-                    <div>Add Content to the Main Card body.</div>
-                </CardBody>
-                <CardFooter>
-                    <div class="text-sm text-muted-foreground">Last updated: April 1, 2025</div>
-                </CardFooter>
-            </Card>
-        </div>
-    </SamplePage>
+<CodePreview code={`
+    <Card title="West Coast IPA" subtitle="American IPA - 7.2% ABV">
+        <CardBody>
+            <p className="text-sm text-muted-foreground mb-4">
+                Bold and bitter with pine and citrus hop character. Crisp, dry finish 
+                showcasing Cascade, Centennial, and Chinook hops.
+            </p>
+            <div className="flex gap-4 text-sm">
+                <div>
+                    <span className="font-medium">IBU:</span> 68
+                </div>
+                <div>
+                    <span className="font-medium">SRM:</span> 8
+                </div>
+            </div>
+        </CardBody>
+        <CardFooter>
+            <span className="text-sm text-muted-foreground">
+              Available in 16oz cans and on draft
+            </span>
+        </CardFooter>
+    </Card>
+`}>
+    <div class="max-w-lg">
+        <Card title="West Coast IPA" subtitle="American IPA - 7.2% ABV">
+            <CardBody>
+                <p class="text-sm text-muted-foreground mb-4">
+                    Bold and bitter with pine and citrus hop character. Crisp, dry finish 
+                    showcasing Cascade, Centennial, and Chinook hops.
+                </p>
+                <div class="flex gap-4 text-sm">
+                    <div>
+                        <span class="font-medium">IBU:</span> 68
+                    </div>
+                    <div>
+                        <span class="font-medium">SRM:</span> 8
+                    </div>
+                </div>
+            </CardBody>
+            <CardFooter>
+                <span class="text-sm text-muted-foreground">Available in 16oz cans and on draft</span>
+            </CardFooter>
+        </Card>
+    </div>
+</CodePreview>
 
     <Section title="Overview">
         The Card component set provides a flexible container for displaying content in a clear and concise way. It consists of four components: Card (main container), CardHeader (for titles and subtitles), CardBody (for main content), and CardFooter (for actions or metadata). These components are designed to be used together to create beautiful, consistent card layouts throughout your application.
     </Section>
 
-    <Section title="Import">
-        ```jsx
-        import { Card, CardHeader, CardBody, CardFooter } from "@crafted-ui/react";
-        ```
-    </Section>
-
     <Section title="Card">
         ### Description
         The main container component that wraps all card elements. It provides the card's visual styling including borders, shadows, and rounded corners.
+    </Section>
 
-        ### Usage
-        ```tsx
-        import { Card, CardBody } from "@crafted-ui/react";
-
-        // Basic usage with title and subtitle
+<CodePreview code={`
+    <Card title="Card Title" subtitle="Card description">
+        <CardBody>
+            Card content goes here
+        </CardBody>
+    </Card>
+`}>
+    <div class="max-w-md">
         <Card title="Card Title" subtitle="Card description">
-          <CardBody>
-            <p>Card content goes here</p>
-          </CardBody>
+            <CardBody>
+                Card content goes here
+            </CardBody>
         </Card>
+    </div>
+</CodePreview>
 
-        // Using with body flag for simple cards
-        <Card title="Simple Card" body>
-          <p>This card has padding without needing a CardBody component</p>
-        </Card>
-        ```
+    <Section>
 
         ### Props
         The `Card` component accepts the following props:
         
         | Prop | Type | Default | Description |
         | --- | --- | --- | --- |
-        | title | string | undefined | The card's title |
-        | subtitle | string | undefined | Additional descriptive text for the card |
+        | title | string | - | The card's title |
+        | subtitle | string | - | Additional descriptive text for the card |
         | body | boolean | false | When true, adds padding to the card without needing a CardBody |
-        | className | string | undefined | Additional CSS class names |
-        | children | ReactNode | undefined | Content of the card |
+        | full | boolean | false | When true, removes spacing/border/shadow/rounded corners on mobile |
+        | className | string | - | Additional CSS class names |
+        | children | ReactNode | - | Content of the card |
     </Section>
 
     <Section title="CardHeader">
         ### Description
         A component for displaying a title and optional subtitle at the top of a card. Uses Heading5 component for consistent typography.
+    </Section>
 
-        ### Usage
-        ```tsx
-        import { Card, CardHeader, CardBody } from "@crafted-ui/react";
-
-        // Basic usage with Card
+<CodePreview code={`
+    <Card>
+        <CardHeader title="Card Title" subtitle="Card description" />
+        <CardBody>
+            Card content goes here
+        </CardBody>
+    </Card>
+`}>
+    <div class="max-w-md">
         <Card>
-          <CardHeader title="Card Title" subtitle="Card description" />
-          <CardBody>
-            <p>Card content goes here</p>
-          </CardBody>
+            <CardHeader title="Card Title" subtitle="Card description" />
+            <CardBody>
+                Card content goes here
+            </CardBody>
         </Card>
+    </div>
+</CodePreview>
 
-        // Custom header content
-        <Card>
-          <CardHeader>
-            <div className="flex justify-between items-center">
-              <h3 className="text-lg font-semibold">Custom Header</h3>
-              <button className="px-2 py-1 bg-blue-500 text-white rounded-sm">Action</button>
-            </div>
-          </CardHeader>
-          <CardBody>Content goes here</CardBody>
-        </Card>
-        ```
+    <Section>
 
         ### Props
         The `CardHeader` component accepts the following props:
         
         | Prop | Type | Default | Description |
         | --- | --- | --- | --- |
-        | title | string | undefined | The header's title text |
-        | subtitle | string | undefined | Optional descriptive text |
-        | className | string | undefined | Additional CSS class names |
-        | children | ReactNode | undefined | Custom header content (used when not using title/subtitle) |
+        | title | string | - | The header's title text |
+        | subtitle | string | - | Optional descriptive text |
+        | className | string | - | Additional CSS class names |
+        | children | ReactNode | - | Custom header content (used when not using title/subtitle) |
     </Section>
 
     <Section title="CardBody">
         ### Description
         A container for the main content of a card with appropriate padding.
+    </Section>
 
-        ### Usage
-        ```tsx
-        import { Card, CardBody } from "@crafted-ui/react";
-
+<CodePreview code={`
+    <Card title="Card Title">
+        <CardBody>
+            This is the main content area of the card.
+            You can place any content here.
+        </CardBody>
+    </Card>
+`}>
+    <div class="max-w-md">
         <Card title="Card Title">
-          <CardBody>
-            <p>This is the main content area of the card.</p>
-            <p>You can place any content here.</p>
-          </CardBody>
+            <CardBody>
+                This is the main content area of the card.
+                You can place any content here.
+            </CardBody>
         </Card>
-        ```
+    </div>
+</CodePreview>
+
+    <Section>
 
         ### Props
         | Prop | Type | Default | Description |
         | --- | --- | --- | --- |
-        | className | string | undefined | Additional CSS class names |
-        | children | ReactNode | undefined | Content of the card body |
+        | className | string | - | Additional CSS class names |
+        | children | ReactNode | - | Content of the card body |
     </Section>
 
     <Section title="CardFooter">
         ### Description
         A component for displaying actions, metadata, or additional information at the bottom of a card.
+    </Section>
 
-        ### Usage
-        ```tsx
-        import { Card, CardBody, CardFooter } from "@crafted-ui/react";
-
-        <Card title="Card Title">
-          <CardBody>
-            <p>This is the main content area of the card.</p>
-          </CardBody>
-          <CardFooter>
+<CodePreview code={`
+    <Card title="Card Title">
+        <CardBody>
+            This is the main content area of the card.
+        </CardBody>
+        <CardFooter>
             <div className="flex justify-between items-center">
-              <span className="text-sm text-gray-500">Last updated: April 1, 2025</span>
-              <button className="text-sm text-blue-500">Read more</button>
+                <span className="text-sm text-muted-foreground">
+                  Last updated: April 1, 2025
+                </span>
+                <Button className="text-sm">Read more</Button>
             </div>
-          </CardFooter>
+        </CardFooter>
+    </Card>
+`}>
+    <div class="max-w-md">
+        <Card title="Card Title">
+            <CardBody>
+                This is the main content area of the card.
+            </CardBody>
+            <CardFooter>
+                <div class="flex justify-between items-center">
+                    <span class="text-sm text-muted-foreground">Last updated: April 1, 2025</span>
+                    <Button className="text-sm">Read more</Button>
+                </div>
+            </CardFooter>
         </Card>
-        ```
+    </div>
+</CodePreview>
+
+    <Section>
 
         ### Props
         | Prop | Type | Default | Description |
         | --- | --- | --- | --- |
-        | className | string | undefined | Additional CSS class names |
-        | children | ReactNode | undefined | Content of the card footer |
+        | className | string | - | Additional CSS class names |
+        | children | ReactNode | - | Content of the card footer |
     </Section>
 
-    <Section title="Examples">
-        ### Basic Card
-        ```tsx
-        <Card title="Basic Card" subtitle="A simple card with a title and subtitle">
-          <CardBody>
-            <p>This is a basic card with a title and subtitle.</p>
-          </CardBody>
-        </Card>
-        ```
-
+    <Section>
         ### Simple Card with Body Flag
-        ```tsx
-        <Card title="Simple Card" body>
-          <p>This card has padding without needing a CardBody component.</p>
-          <p>The body flag adds padding to the card container directly.</p>
-        </Card>
-        ```
-
-        ### Card with Custom Header
-        ```tsx
-        <Card>
-          <CardHeader>
-            <div className="flex items-center justify-between">
-              <h3 className="text-lg font-semibold">Custom Header</h3>
-              <button className="text-sm text-blue-500">Action</button>
-            </div>
-          </CardHeader>
-          <CardBody>
-            <p>This card has a custom header with an action button.</p>
-          </CardBody>
-        </Card>
-        ```
-
-        ### Card with Multiple Content Sections
-        ```tsx
-        <Card title="Content Card">
-          <CardBody>
-            <div className="space-y-4">
-              <div className="p-4 bg-gray-100 rounded">
-                <h4 className="font-medium">Section 1</h4>
-                <p>Content for section one</p>
-              </div>
-              <div className="p-4 bg-gray-100 rounded">
-                <h4 className="font-medium">Section 2</h4>
-                <p>Content for section two</p>
-              </div>
-            </div>
-          </CardBody>
-        </Card>
-        ```
-
-        ### Card with Footer
-        ```tsx
-        <Card title="Card with Footer">
-          <CardBody>
-            <p>This card includes a footer section for actions or metadata.</p>
-          </CardBody>
-          <CardFooter>
-            <div className="flex justify-between">
-              <span className="text-sm text-gray-500">Created: April 1, 2025</span>
-              <div className="space-x-2">
-                <button className="px-3 py-1 text-sm bg-blue-500 text-white rounded">Save</button>
-                <button className="px-3 py-1 text-sm border border-gray-300 rounded">Cancel</button>
-              </div>
-            </div>
-          </CardFooter>
-        </Card>
-        ```
-
-        ### Complete Card with All Sections
-        ```tsx
-        <Card>
-          <CardHeader title="Complete Card" subtitle="Using all card components together" />
-          <CardBody>
-            <p>This example demonstrates using all card components together to create a complete card layout.</p>
-            <ul className="mt-4 space-y-2">
-              <li>Card - Main container</li>
-              <li>CardHeader - Title and subtitle</li>
-              <li>CardBody - Main content</li>
-              <li>CardFooter - Actions and metadata</li>
-            </ul>
-          </CardBody>
-          <CardFooter>
-            <div className="flex justify-end space-x-2">
-              <button className="px-3 py-1 text-sm bg-gray-200 rounded">Cancel</button>
-              <button className="px-3 py-1 text-sm bg-blue-500 text-white rounded">Continue</button>
-            </div>
-          </CardFooter>
-        </Card>
-        ```
     </Section>
+
+<CodePreview code={`
+    <Card title="Simple Card" body>
+        This card has padding without needing a CardBody component.
+        The body flag adds padding to the card container directly.
+    </Card>
+`}>
+    <div class="max-w-md">
+        <Card title="Simple Card" body>
+            This card has padding without needing a CardBody component.
+            The body flag adds padding to the card container directly.
+        </Card>
+    </div>
+</CodePreview>
+
+    <Section>
+        ### Card with Custom Header
+    </Section>
+
+<CodePreview code={`
+    <Card>
+        <CardHeader>
+            <div className="flex items-center justify-between">
+                <Heading3>Custom Header</Heading3>
+                <Button className="text-sm">Action</Button>
+            </div>
+        </CardHeader>
+        <CardBody>
+            This card has a custom header with an action button.
+        </CardBody>
+    </Card>
+`}>
+    <div class="max-w-md">
+        <Card>
+            <CardHeader>
+                <div class="flex items-center justify-between">
+                    <Heading3>Custom Header</Heading3>
+                    <Button className="text-sm">Action</Button>
+                </div>
+            </CardHeader>
+            <CardBody>
+                This card has a custom header with an action button.
+            </CardBody>
+        </Card>
+    </div>
+</CodePreview>
 
     <Section title="Styling">
         The Card components use Tailwind CSS for styling. The default styles include:

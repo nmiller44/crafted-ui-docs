@@ -12,7 +12,7 @@ export default defineConfig({
   integrations: [mdx(), sitemap(), alpinejs()],
 
   redirects: {
-    '/docs/components': '/docs/components/badge'
+    '/docs/components': '/docs/components/alert'
   },
 
   vite: {

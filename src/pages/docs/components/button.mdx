@@ -11,6 +11,7 @@ import Heading3 from '@/components/heading/Heading3.astro';
 import Card from '@/components/card/Card.astro';
 import CardBody from '@/components/card/CardBody.astro';
 import CodePreview from '@/components/CodePreview.astro';
+import IconX from '@/components/icons/IconX.astro';
 
 <BaseSidebar title={frontmatter.title} description={frontmatter.description}>
 
@@ -58,6 +59,7 @@ import CodePreview from '@/components/CodePreview.astro';
         | --- | --- | --- | --- |
         | clr | 'blank' \| 'default' \| 'primary' \| 'muted' \| 'secondary' \| 'accent' \| 'destructive' \| 'green' \| 'red' \| 'yellow' \| 'blue' \| 'indigo' \| 'purple' \| 'pink' | 'default' | Sets the button's color scheme |
         | outline | boolean | false | When true, renders an outlined version of the button |
+        | ghost | boolean | false | When true, renders a minimal button with no border or background |
         | full | boolean | false | When true, makes the button take the full width of its container |
         | rounded | boolean | false | When true, applies fully rounded corners (border-radius) |
         | type | "button" \| "submit" \| "reset" | "button" | HTML button type attribute |
@@ -182,6 +184,31 @@ import CodePreview from '@/components/CodePreview.astro';
     </CodePreview>
 
     <Section>
+        ### Ghost
+        Minimal styling with no border or background, ideal for icon buttons and subtle actions.
+    </Section>
+
+    <CodePreview code={`
+        <div className="flex flex-wrap gap-4 items-center">
+            <Button ghost>Default</Button>
+            <Button clr="primary" ghost>Primary</Button>
+            <Button clr="destructive" ghost>Delete</Button>
+            <Button clr="destructive" ghost>
+                <IconX />
+            </Button>
+        </div>
+    `}>
+        <div className="flex flex-wrap gap-4 items-center">
+            <Button ghost>Default</Button>
+            <Button clr="primary" ghost>Primary</Button>
+            <Button clr="destructive" ghost>Delete</Button>
+            <Button clr="destructive" ghost>
+                <IconX />
+            </Button>
+        </div>
+    </CodePreview>
+
+    <Section>
         ### Combined Variants
         Variants can be combined for more specific styling:
     </Section>
@@ -225,9 +252,7 @@ import CodePreview from '@/components/CodePreview.astro';
         ### Button with Icon
         ```tsx
         <Button clr="primary">
-          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-            <path d="M8 0a8 8 0 1 0 0 16A8 8 0 0 0 8 0zm3.5 7.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
-          </svg>
+          <IconArrowLeft />
           <span>Back</span>
         </Button>
         ```

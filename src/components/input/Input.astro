@@ -3,32 +3,27 @@ import { classNames } from "@utils/classNames"
 import type { HTMLAttributes } from "astro/types";
 
 interface Props extends HTMLAttributes<'input'> {
-    className?: string;
+    class?: string;
 }
 
 const { 
     type = "text",
-    className,
+    class: className,
     ...props
  } = Astro.props;
 ---
-<div class={classNames("space-y-1.5", className)}>
-    <div class="relative">
-        <input type={ type } 
-                         class={classNames(
-                            "mt-1 block w-full py-2 px-3",
-                            "pl-3 pr-3",
-                            // hasLeftInsetChild ? "pl-7" : "pl-3",
-                            // hasRightInsetChild ? "pr-7" : "pr-3",
-                            "rounded-md border-0 ring-1 ring-inset ring-neutral-300 shadow-sm",
-                            "aria-[invalid=true]:ring-red-600",
-                            "text-sm text-neutral-900 placeholder:text-neutral-400", 
-                            "focus:ring-2 focus:ring-inset focus:border-neutral-800 focus:outline-none focus:ring-neutral-800",
-                            "disabled:opacity-50 disabled:cursor-not-allowed",
-                            className
-                            )}
-            { ...props }
-        /> 
-    <slot />
-</div>
-</div>
+<input type={ type } 
+    class={classNames(
+        "relative",
+        "mt-1 block w-full py-2 pl-3 pr-3",
+        "has-[~_.inset-left]:pl-6",
+        "has-[~_.inset-right]:pr-6",
+        "rounded-md border-0 ring-1 ring-inset ring-border shadow-sm",
+        "aria-[invalid=true]:ring-danger",
+        "text-sm text-foreground placeholder:text-muted-foreground", 
+        "focus:ring-2 focus:ring-inset focus:border-foreground focus:outline-none focus:ring-foreground",
+        "disabled:opacity-50 disabled:cursor-not-allowed",
+        className
+    )}
+    {...props}
+/>

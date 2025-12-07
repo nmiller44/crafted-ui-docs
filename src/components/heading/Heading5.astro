@@ -5,14 +5,16 @@ interface Props {
     title?: string;
     subtitle?: string;
     className?: string;
+    subtitleClass?: string;
+    wrapperClass?: string;
 }
 
-const { title, subtitle, className } = Astro.props;
+const { title, subtitle, className, subtitleClass, wrapperClass } = Astro.props;
 ---
-<div class="space-y-2">
+<div class={classNames("space-y-1.5", wrapperClass)}>
     { !!title
         ? <h5 class={classNames("text-lg font-bold tracking-tight", className)}>{ title }</h5>
         : <slot />
     }
-    { !!subtitle && <p class="text-sm text-muted-foreground">{ subtitle }</p> }
+    { !!subtitle && <p class={classNames("text-sm text-muted-foreground", subtitleClass)}>{ subtitle }</p> }
 </div>

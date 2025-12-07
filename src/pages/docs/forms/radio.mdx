@@ -1,0 +1,218 @@
+---
+title: 'Radio'
+description: 'A radio button component for selecting a single option from a group.'
+---
+import BaseSidebar from "@/layouts/BaseSidebar.astro";
+import CodePreview from "@/components/CodePreview.astro";
+import SamplePage from "@/components/SamplePage.astro";
+import Prose from '@/components/Prose.astro';
+import Section from '@/components/Section.astro';
+import Field from '@/components/field/Field.astro';
+import FieldLabel from '@/components/field/FieldLabel.astro';
+import Fieldset from '@/components/fieldset/Fieldset.astro';
+import Radio from '@/components/radio/Radio.astro';
+import RadioGroup from '@/components/radio/RadioGroup.astro';
+
+<BaseSidebar title={frontmatter.title} description={frontmatter.description}>
+
+    <CodePreview code={`
+        <Fieldset 
+            title="Beer Preference" 
+            subtitle="Choose your preferred beer type">
+            <Field>
+                <RadioGroup defaultValue="ale">
+                    <Radio value="ale">Ale</Radio>
+                    <Radio value="lager">Lager</Radio>
+                    <Radio value="na">Non-Alcoholic</Radio>
+                </RadioGroup>
+            </Field>
+        </Fieldset>
+    `}>
+      <Fieldset 
+        title="Beer Preference" 
+        subtitle="Choose your preferred beer type">
+        <Field>
+          <RadioGroup>
+            <Radio value="ale" name="beer-pref" checked>Ale</Radio>
+            <Radio value="lager" name="beer-pref">Lager</Radio>
+            <Radio value="na" name="beer-pref">Non-Alcoholic</Radio>
+          </RadioGroup>
+        </Field>
+      </Fieldset>
+    </CodePreview>
+
+    <Section title="Overview">
+        The Radio component provides a way for users to select a single option from a group of choices. It's designed to work within the RadioGroup component for proper grouping and works seamlessly with the Field component for labels and error handling.
+    </Section>
+
+    <Section title="Basic Usage">
+        ### Description
+        Radio can be used with or without labels, and supports standard states including disabled and error states.
+    </Section>
+
+    <CodePreview code={`
+        <div className="space-y-6 max-w-sm">
+          <Field>
+            <RadioGroup>
+              <Radio value="unlabeled">Unlabeled radio group</Radio>
+              <Radio value="option2">Option 2</Radio>
+            </RadioGroup>
+          </Field>
+
+          <Field>
+            <FieldLabel>With Label</FieldLabel>
+            <RadioGroup>
+              <Radio value="ipa">IPA</Radio>
+              <Radio value="stout">Stout</Radio>
+              <Radio value="pilsner">Pilsner</Radio>
+            </RadioGroup>
+          </Field>
+          
+          <Field>
+            <FieldLabel>With Error</FieldLabel>
+            <RadioGroup aria-invalid={true}>
+              <Radio value="option1">This radio group has an error</Radio>
+              <Radio value="option2">Option 2</Radio>
+            </RadioGroup>
+          </Field>
+          
+          <Field>
+            <FieldLabel>Disabled</FieldLabel>
+            <RadioGroup disabled defaultValue="disabled2">
+              <Radio value="disabled1">This radio is disabled</Radio>
+              <Radio value="disabled2">This is disabled and selected</Radio>
+            </RadioGroup>
+          </Field>
+        </div>
+    `}>
+      <div class="space-y-6 max-w-sm">
+        <Field>
+          <RadioGroup>
+            <Radio value="unlabeled" name="basic-1">Unlabeled radio group</Radio>
+            <Radio value="option2" name="basic-1">Option 2</Radio>
+          </RadioGroup>
+        </Field>
+
+        <Field>
+          <FieldLabel>With Label</FieldLabel>
+          <RadioGroup>
+            <Radio value="ipa" name="basic-2">IPA</Radio>
+            <Radio value="stout" name="basic-2">Stout</Radio>
+            <Radio value="pilsner" name="basic-2">Pilsner</Radio>
+          </RadioGroup>
+        </Field>
+        
+        <Field>
+          <FieldLabel>With Error</FieldLabel>
+          <RadioGroup aria-invalid={true}>
+            <Radio value="option1" name="basic-3">This radio group has an error</Radio>
+            <Radio value="option2" name="basic-3">Option 2</Radio>
+          </RadioGroup>
+        </Field>
+        
+        <Field>
+          <FieldLabel>Disabled</FieldLabel>
+          <RadioGroup>
+            <Radio value="disabled1" name="basic-4" disabled>This radio is disabled</Radio>
+            <Radio value="disabled2" name="basic-4" disabled checked>This is disabled and selected</Radio>
+          </RadioGroup>
+        </Field>
+      </div>
+    </CodePreview>
+
+    <Section title="Horizontal Layout">
+        ### Description
+        Display radio buttons in a horizontal row by customizing the RadioGroup's className.
+    </Section>
+
+    <CodePreview code={`
+        <Fieldset 
+            title="Serving Temperature" 
+            subtitle="Select your preferred serving temperature">
+            <Field>
+                <RadioGroup defaultValue="cold" className="flex-row space-x-6 space-y-0">
+                    <Radio value="cold">Cold</Radio>
+                    <Radio value="cool">Cool</Radio>
+                    <Radio value="cellar">Cellar Temp</Radio>
+                </RadioGroup>
+            </Field>
+        </Fieldset>
+    `}>
+      <Fieldset 
+        title="Serving Temperature" 
+        subtitle="Select your preferred serving temperature">
+        <Field>
+          <RadioGroup className="flex-row space-x-6 space-y-0">
+            <Radio value="cold" name="temp" checked>Cold</Radio>
+            <Radio value="cool" name="temp">Cool</Radio>
+            <Radio value="cellar" name="temp">Cellar Temp</Radio>
+          </RadioGroup>
+        </Field>
+      </Fieldset>
+    </CodePreview>
+
+    <Section title="Components">
+        ## Radio
+        
+        The individual radio button component.
+        
+        ### Props
+        
+        | Prop | Type | Default | Description |
+        | --- | --- | --- | --- |
+        | value | string | - | The value of this radio option |
+        | children | ReactNode | - | Label text for the radio button |
+        | className | string | - | Additional CSS class names |
+        | disabled | boolean | false | Disables the radio button (inherited from RadioGroup) |
+        
+        ## RadioGroup
+        
+        A container component for organizing multiple radio buttons.
+        
+        ### Props
+        
+        | Prop | Type | Default | Description |
+        | --- | --- | --- | --- |
+        | defaultValue | string | - | Initial selected value (uncontrolled) |
+        | value | string | - | Controlled selected value |
+        | disabled | boolean | false | Disables all radio buttons in the group |
+        | aria-invalid | boolean | false | Indicates validation error state for the group |
+        | className | string | - | Additional CSS class names for layout customization |
+        | children | ReactNode | - | Radio components to display |
+        
+        ### Additional Features
+        
+        - **Validation States**: Use `aria-invalid` on RadioGroup to show error styling on all radios
+        - **Focus States**: Automatic focus ring styling matching other form components
+        - **Dark Mode**: Fully themed with CSS custom properties
+        - **Keyboard Navigation**: Arrow keys navigate between options, Space selects
+        - **Custom Layout**: Use className to control spacing and direction (flex-row for horizontal)
+        
+        ### Usage Notes
+        
+        - Radio buttons should always be used within a RadioGroup
+        - Each Radio must have a unique `value` prop
+        - Only one radio can be selected at a time within a group
+        - Use FieldLabel or Fieldset title for the group label
+        - The disabled state applies to all radios when set on RadioGroup
+    </Section>
+
+    <Section title="Accessibility">
+        The Radio component follows accessibility best practices:
+        
+        - Uses semantic HTML with proper ARIA attributes
+        - Supports keyboard navigation (Arrow keys to move, Space to select)
+        - Maintains proper focus styles for keyboard users
+        - Provides visual feedback for selected/unselected states
+        - Ensures sufficient color contrast for the radio indicator
+        
+        When implementing radio buttons, ensure that:
+        
+        1. Radio groups have clear labels describing the choice
+        2. Each radio option has descriptive text
+        3. Related radios are grouped using RadioGroup
+        4. Form validation messages are clearly associated with radio groups
+        5. Only one radio can be selected at a time within a group
+    </Section>
+
+</BaseSidebar>
