@@ -2,158 +2,220 @@
 title: 'Forms'
 description: 'Crafted UI utilizes the Base UI Form component for flexible validation and error handling.'
 ---
-import BaseSidebar from "../../../layouts/BaseSidebar.astro";
-import SamplePage from "../../../components/SamplePage.astro";
-import HeaderPage from "../../../components/HeaderPage.astro";
-import Section from '../../../components/Section.astro';
-import Prose from '../../../components/Prose.astro';
-import Field from '../../../components/field/Field.astro';
-import FieldLabel from '../../../components/field/FieldLabel.astro';
-import FieldError from '../../../components/field/FieldError.astro';
-import Input from '../../../components/input/Input.astro';
-import Button from '../../../components/button/Button.astro';
-import Fieldset from '../../../components/fieldset/Fieldset.astro';
-import FieldsetButtons from '../../../components/fieldset/FieldsetButtons.astro';
+import BaseSidebar from "@/layouts/BaseSidebar.astro";
+import CodePreview from "@/components/CodePreview.astro";
+import Section from '@/components/Section.astro';
+import Field from '@/components/field/Field.astro';
+import FieldLabel from '@/components/field/FieldLabel.astro';
+import FieldError from '@/components/field/FieldError.astro';
+import Input from '@/components/input/Input.astro';
+import Button from '@/components/button/Button.astro';
+import Fieldset from '@/components/fieldset/Fieldset.astro';
+import FieldsetButtons from '@/components/fieldset/FieldsetButtons.astro';
 
 <BaseSidebar title={frontmatter.title} description={frontmatter.description}>
-    <SamplePage>
-        <div class="py-8 px-6 space-y-12">
-            <div>
-                <HeaderPage>Basic Form</HeaderPage>
-                <div class="max-w-2xl">
-                    <form>
-                        <Fieldset title="Contact Information" subtitle="Get in touch with us">
-                            <Field label="Full Name">
-                                <Input 
-                                    type="text" 
-                                    id="name" 
-                                />
-                            </Field>
-                            
-                            <Field label="Email">
-                                <Input 
-                                    type="email" 
-                                    id="email" 
-                                />
-                            </Field>
-                            
-                            <Field label="Message">
-                                <textarea 
-                                    id="message" 
-                                    rows={4} 
-                                    className="w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background" 
-                                ></textarea>
-                            </Field>
-                            <FieldsetButtons>
-                                <Button clr="primary">Send Message</Button>
-                            </FieldsetButtons>
-                        </Fieldset>
-                    </form>
-                </div>
-            </div>
-
-            <div>
-                <HeaderPage>Grid Layout Form</HeaderPage>
-                <div class="max-w-4xl">
-                    <form>
-                        <Fieldset title="User Registration" subtitle="Create your account" grid>
-                            <Field label="First Name" className="col-span-6">
-                                <Input type="text" />
-                            </Field>
-                            <Field label="Last Name" className="col-span-6">
-                                <Input type="text" />
-                            </Field>
-                            <Field label="Email Address">
-                                <Input type="email" />
-                            </Field>
-                            <Field label="Username" className="col-span-6">
-                                <Input type="text" />
-                            </Field>
-                            <Field label="Password" className="col-span-6">
-                                <Input type="password" />
-                            </Field>
-                            <Field label="Company" className="col-span-8">
-                                <Input type="text" />
-                            </Field>
-                            <Field label="Job Title" className="col-span-4">
-                                <Input type="text" />
-                            </Field>
-                            <FieldsetButtons>
-                                <Button outline clr="blank">Cancel</Button>
-                                <Button clr="primary">Create Account</Button>
-                            </FieldsetButtons>
-                        </Fieldset>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </SamplePage>
-
     <Section title="Overview">
         The Form component in Crafted UI is a thin wrapper around the Base UI Form component, providing a seamless integration with the rest of your application. It handles form submissions, validation, and error handling with a clean, accessible interface.
         
         Form is designed to work together with the Field, FieldLabel, FieldError, and Input components to create complete form experiences.
     </Section>
 
+<CodePreview code={`
+<Form>
+  <Fieldset title="User Registration" subtitle="Create your account" grid>
+    <Field label="First Name" className="col-span-6">
+      <Input />
+    </Field>
+    <Field label="Last Name" className="col-span-6">
+      <Input />
+    </Field>
+    <Field label="Email Address">
+      <Input type="email" />
+    </Field>
+    <Field label="Username" className="col-span-6">
+      <Input />
+    </Field>
+    <Field label="Password" className="col-span-6">
+      <Input type="password" />
+    </Field>
+    <Field label="Company" className="col-span-8">
+      <Input />
+    </Field>
+    <Field label="Job Title" className="col-span-4">
+      <Input />
+    </Field>
+    <FieldsetButtons>
+      <Button outline clr="blank">Cancel</Button>
+      <Button clr="primary">Create Account</Button>
+    </FieldsetButtons>
+  </Fieldset>
+</Form>
+`}>
+    <div class="max-w-4xl">
+      <form>
+        <Fieldset title="User Registration" subtitle="Create your account" grid>
+            <Field label="First Name" className="col-span-6">
+                <Input />
+            </Field>
+            <Field label="Last Name" className="col-span-6">
+                <Input />
+            </Field>
+            <Field label="Email Address">
+                <Input type="email" />
+            </Field>
+            <Field label="Username" className="col-span-6">
+                <Input />
+            </Field>
+            <Field label="Password" className="col-span-6">
+                <Input type="password" />
+            </Field>
+            <Field label="Company" className="col-span-8">
+                <Input />
+            </Field>
+            <Field label="Job Title" className="col-span-4">
+                <Input />
+            </Field>
+            <FieldsetButtons>
+                <Button outline clr="blank">Cancel</Button>
+                <Button clr="primary">Create Account</Button>
+            </FieldsetButtons>
+        </Fieldset>
+      </form>
+    </div>
+</CodePreview>
+
     <Section title="Usage">
         ### Basic Form
         
-        ```tsx
-        import { Form, Field, FieldLabel, Input, Button } from "@crafted-ui/react";
-
-        <Form onSubmit={(event) => {
-          event.preventDefault();
-          // Handle form submission
-        }}>
-          <Field>
-            <FieldLabel>Username</FieldLabel>
-            <Input name="username" required />
-          </Field>
-          
-          <Field>
-            <FieldLabel>Password</FieldLabel>
-            <Input type="password" name="password" required />
-          </Field>
-          
-          <Button type="submit">Sign In</Button>
-        </Form>
-        ```
-
-        ### Form with Modern Fieldset
-        
-        Use the enhanced Fieldset component with title, subtitle, and grid layout:
-        
-        ```tsx
-        import { Form, Fieldset, FieldsetButtons } from "@crafted-ui/react";
-        import { Field, Input, Button } from "@crafted-ui/react";
-
-        <Form onSubmit={handleSubmit}>
-          <Fieldset title="Personal Information" subtitle="Tell us about yourself" grid>
-            <Field label="First Name" className="col-span-6">
-              <Input name="firstName" required />
-            </Field>
-            
-            <Field label="Last Name" className="col-span-6">
-              <Input name="lastName" required />
-            </Field>
-            
-            <Field label="Email">
-              <Input name="email" type="email" required />
-            </Field>
-            
-            <FieldsetButtons>
-              <Button outline>Cancel</Button>
-              <Button clr="primary" type="submit">Save</Button>
-            </FieldsetButtons>
-          </Fieldset>
-        </Form>
-        ```
+        Forms combine the Field, FieldLabel, and Input components for complete form experiences.
     </Section>
 
-    <Section title="Grid Layout Forms">
-        The enhanced Fieldset component supports grid layouts for more complex forms. Use the `grid` prop to enable a 12-column grid system:
+<CodePreview code={`
+<Form>
+  <Field>
+    <FieldLabel>Username</FieldLabel>
+    <Input name="username" required />
+  </Field>
+  
+  <Field>
+    <FieldLabel>Password</FieldLabel>
+    <Input type="password" name="password" required />
+  </Field>
+  
+  <Button type="submit">Sign In</Button>
+</Form>
+`}>
+    <div class="max-w-md">
+      <form class="space-y-6">
+        <Field>
+          <FieldLabel>Username</FieldLabel>
+          <Input name="username" required />
+        </Field>
+        
+        <Field>
+          <FieldLabel>Password</FieldLabel>
+          <Input type="password" name="password" required />
+        </Field>
+        
+        <Button type="submit">Sign In</Button>
+      </form>
+    </div>
+</CodePreview>
 
-        ```tsx
+    <Section>
+        ### Form with Modern Fieldset
+        
+        Use the enhanced Fieldset component with title, subtitle, and grid layout.
+    </Section>
+
+<CodePreview code={`
+<Form>
+  <Fieldset title="Personal Information" subtitle="Tell us about yourself" grid>
+    <Field label="First Name" className="col-span-6">
+      <Input name="firstName" required />
+    </Field>
+    
+    <Field label="Last Name" className="col-span-6">
+      <Input name="lastName" required />
+    </Field>
+    
+    <Field label="Email">
+      <Input name="email" type="email" required />
+    </Field>
+    
+    <FieldsetButtons>
+      <Button outline>Cancel</Button>
+      <Button clr="primary" type="submit">Save</Button>
+    </FieldsetButtons>
+  </Fieldset>
+</Form>
+`}>
+    <div class="max-w-3xl">
+      <form>
+        <Fieldset title="Personal Information" subtitle="Tell us about yourself" grid>
+          <Field label="First Name" className="col-span-6">
+            <Input name="firstName" required />
+          </Field>
+          
+          <Field label="Last Name" className="col-span-6">
+            <Input name="lastName" required />
+          </Field>
+          
+          <Field label="Email">
+            <Input name="email" type="email" required />
+          </Field>
+          
+          <FieldsetButtons>
+            <Button outline>Cancel</Button>
+            <Button clr="primary" type="submit">Save</Button>
+          </FieldsetButtons>
+        </Fieldset>
+      </form>
+    </div>
+</CodePreview>
+
+    <Section title="Grid Layout Forms">
+        The enhanced Fieldset component supports grid layouts for more complex forms. Use 
+        the `grid` prop to enable a dynamic grid system by breakpoint. Fields are full spanned by default.
+
+        ### Grid Columns by Breakpoint
+        
+        The grid system uses different column counts based on screen size:
+        
+        | Breakpoint | Columns |
+        | --- | --- |
+        | Default (mobile) | 2 |
+        | md (≥768px) | 6 |
+        | lg (≥1024px) | 12 |
+        
+        Use `col-span-*` classes on Field components to control their width within the grid. For example, `col-span-6` will span half the grid on medium screens and above.
+    </Section>
+
+<CodePreview code={`
+<Fieldset title="Address Information" grid>
+  <Field label="Street Address">
+    <Input name="street" />
+  </Field>
+  
+  <Field label="City" className="col-span-6">
+    <Input name="city" />
+  </Field>
+  
+  <Field label="State" className="col-span-3">
+    <Input name="state" />
+  </Field>
+  
+  <Field label="ZIP" className="col-span-3">
+    <Input name="zip" />
+  </Field>
+  
+  <FieldsetButtons>
+    <Button clr="primary">Save Address</Button>
+  </FieldsetButtons>
+</Fieldset>
+`}>
+    <div class="max-w-3xl">
+      <form>
         <Fieldset title="Address Information" grid>
           <Field label="Street Address">
             <Input name="street" />
@@ -175,39 +237,12 @@ import FieldsetButtons from '../../../components/fieldset/FieldsetButtons.astro'
             <Button clr="primary">Save Address</Button>
           </FieldsetButtons>
         </Fieldset>
-        ```
-
-        ### Common Grid Patterns
-        - `col-span-6`: Half width (2 fields per row)
-        - `col-span-4`: One third width (3 fields per row)  
-        - `col-span-3`: One quarter width (4 fields per row)
-        - `col-span-full`: Full width (default)
-    </Section>
-
-    <Section title="Form Actions">
-        Use the `FieldsetButtons` component to create consistent button layouts within fieldsets:
-
-        ```tsx
-        // Right-aligned (default)
-        <FieldsetButtons>
-          <Button outline>Cancel</Button>
-          <Button clr="primary">Save</Button>
-        </FieldsetButtons>
-
-        // Left-aligned for destructive actions
-        <FieldsetButtons align="left">
-          <Button clr="destructive">Delete</Button>
-        </FieldsetButtons>
-
-        // Center-aligned for single actions
-        <FieldsetButtons align="center">
-          <Button clr="primary">Continue</Button>
-        </FieldsetButtons>
-        ```
-    </Section>
+      </form>
+    </div>
+</CodePreview>
 
     <Section title="Props">
-        The `Form` component accepts all standard HTML form attributes and props from the `@base-ui-components/react` Form component, plus:
+        The `Form` component accepts all standard HTML form attributes and props from the Base UI Form component, plus:
         
         | Prop | Type | Description |
         | --- | --- | --- |
@@ -241,8 +276,6 @@ import FieldsetButtons from '../../../components/fieldset/FieldsetButtons.astro'
         - Use meaningful validation messages for form errors
         - Include clear submission feedback
         - Use appropriate input types (email, tel, number, etc.)
-        - Consider using controlled components for complex forms
-        - Leverage form libraries like React Hook Form or Formik for complex validation scenarios
         - Use Field with label prop for simplified field creation
         - Maintain logical tab order, especially in grid layouts
     </Section>

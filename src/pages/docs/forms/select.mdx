@@ -1,0 +1,189 @@
+---
+title: 'Select'
+description: 'A dropdown select component for choosing from a list of options.'
+---
+import BaseSidebar from "@/layouts/BaseSidebar.astro";
+import CodePreview from "@/components/CodePreview.astro";
+import SamplePage from "@/components/SamplePage.astro";
+import Prose from '@/components/Prose.astro';
+import Section from '@/components/Section.astro';
+import Field from '@/components/field/Field.astro';
+import FieldLabel from '@/components/field/FieldLabel.astro';
+import Select from '@/components/select/Select.astro';
+
+<BaseSidebar title={frontmatter.title} description={frontmatter.description}>
+
+    <CodePreview code={`
+        <div className="max-w-lg space-y-6">
+          <Field>
+            <FieldLabel>Beer Style</FieldLabel>
+            <Select items={[
+              { value: 'ipa', label: 'IPA' },
+              { value: 'stout', label: 'Stout' },
+              { value: 'porter', label: 'Porter' },
+              { value: 'lager', label: 'Lager' },
+              { value: 'pilsner', label: 'Pilsner' },
+              { value: 'wheat', label: 'Wheat Beer' },
+              { value: 'saison', label: 'Saison' },
+            ]} defaultValue="ipa" />
+          </Field>
+          <Field>
+            <FieldLabel>Brewery Location</FieldLabel>
+            <Select items={[
+              { value: 'portland', label: 'Portland, OR' },
+              { value: 'denver', label: 'Denver, CO' },
+              { value: 'asheville', label: 'Asheville, NC' },
+              { value: 'san-diego', label: 'San Diego, CA' },
+            ]} />
+          </Field>
+        </div>
+    `}>
+      <div class="max-w-lg space-y-6">
+        <Field>
+          <FieldLabel>Beer Style</FieldLabel>
+          <Select items={[
+            { value: 'ipa', label: 'IPA' },
+            { value: 'stout', label: 'Stout' },
+            { value: 'porter', label: 'Porter' },
+            { value: 'lager', label: 'Lager' },
+            { value: 'pilsner', label: 'Pilsner' },
+            { value: 'wheat', label: 'Wheat Beer' },
+            { value: 'saison', label: 'Saison' },
+          ]} defaultValue="ipa" />
+        </Field>
+        <Field>
+          <FieldLabel>Brewery Location</FieldLabel>
+          <Select items={[
+            { value: 'portland', label: 'Portland, OR' },
+            { value: 'denver', label: 'Denver, CO' },
+            { value: 'asheville', label: 'Asheville, NC' },
+            { value: 'san-diego', label: 'San Diego, CA' },
+          ]} />
+        </Field>
+      </div>
+    </CodePreview>
+
+    <Section title="Overview">
+        The Select component provides a dropdown menu for choosing from a list of options. It extends the native HTML select element with consistent styling and theming, working seamlessly within the Field component for labels and error handling.
+    </Section>
+
+    <Section title="Basic Usage">
+        ### Description
+        Select can be used with or without labels, and supports all standard select states including disabled and error.
+    </Section>
+
+    <CodePreview code={`
+        <div className="space-y-6 max-w-sm">
+          <Field>
+            <Select items={beerStyles} placeholder="Unlabeled select" />
+          </Field>
+
+          <Field>
+            <FieldLabel>With Label</FieldLabel>
+            <Select items={beerStyles} placeholder="Choose a beer style..." />
+          </Field>
+          
+          <Field>
+            <FieldLabel>With Error</FieldLabel>
+            <Select items={beerStyles} aria-invalid={true} placeholder="This field has an error" />
+          </Field>
+          
+          <Field>
+            <FieldLabel>Disabled</FieldLabel>
+            <Select items={beerStyles} disabled defaultValue="stout" />
+          </Field>
+          
+          <Field>
+            <FieldLabel>With Default Value</FieldLabel>
+            <Select items={beerStyles} defaultValue="pilsner" />
+          </Field>
+        </div>
+    `}>
+      <div class="space-y-6 max-w-sm">
+        <Field>
+          <Select items={[
+            { value: 'ipa', label: 'IPA' },
+            { value: 'stout', label: 'Stout' },
+            { value: 'pilsner', label: 'Pilsner' },
+          ]} placeholder="Unlabeled select" />
+        </Field>
+
+        <Field>
+          <FieldLabel>With Label</FieldLabel>
+          <Select items={[
+            { value: 'ipa', label: 'IPA' },
+            { value: 'stout', label: 'Stout' },
+            { value: 'pilsner', label: 'Pilsner' },
+          ]} placeholder="Choose a beer style..." />
+        </Field>
+        
+        <Field>
+          <FieldLabel>With Error</FieldLabel>
+          <Select items={[
+            { value: 'ipa', label: 'IPA' },
+            { value: 'stout', label: 'Stout' },
+            { value: 'pilsner', label: 'Pilsner' },
+          ]} aria-invalid={true} placeholder="This field has an error" />
+        </Field>
+        
+        <Field>
+          <FieldLabel>Disabled</FieldLabel>
+          <Select items={[
+            { value: 'ipa', label: 'IPA' },
+            { value: 'stout', label: 'Stout' },
+            { value: 'pilsner', label: 'Pilsner' },
+          ]} disabled defaultValue="stout" />
+        </Field>
+        
+        <Field>
+          <FieldLabel>With Default Value</FieldLabel>
+          <Select items={[
+            { value: 'ipa', label: 'IPA' },
+            { value: 'stout', label: 'Stout' },
+            { value: 'pilsner', label: 'Pilsner' },
+          ]} defaultValue="pilsner" />
+        </Field>
+      </div>
+    </CodePreview>
+
+    <Section title="Props">
+        The `Select` component accepts the following props:
+        
+        | Prop | Type | Default | Description |
+        | --- | --- | --- | --- |
+        | items | SelectItemProp[] | [] | Array of options with value and label properties |
+        | placeholder | string | - | Placeholder text when no option is selected |
+        | align | 'start' \| 'center' \| 'end' | 'start' | Alignment of the dropdown menu |
+        | alignOffset | number | 0 | Offset for the dropdown menu alignment |
+        | defaultValue | unknown | - | Initial selected value (uncontrolled) |
+        | value | unknown | - | Controlled selected value |
+        | disabled | boolean | false | Disables the select |
+        | aria-invalid | boolean | false | Indicates validation error state |
+        | className | string | - | Additional CSS class names |
+        
+        ### SelectItemProp Type
+        
+        ```tsx
+        type SelectItemProp = {
+            value: unknown;
+            label: ReactNode;
+        };
+        ```
+        
+        ### Additional Features
+        
+        - **Validation States**: Use `aria-invalid` to show error styling
+        - **Focus States**: Automatic focus ring styling matching other form components
+        - **Dark Mode**: Fully themed with CSS custom properties
+        - **Keyboard Navigation**: Full keyboard support for accessibility
+        - **Custom Options**: Can use children to render custom option components
+        
+        ### Usage Notes
+        
+        - The `items` prop accepts an array of objects with `value` and `label` properties
+        - Values can be strings, numbers, arrays, or objects
+        - The dropdown automatically matches the width of the trigger
+        - Use `align` and `alignOffset` to position the dropdown menu
+    </Section>
+
+</BaseSidebar>

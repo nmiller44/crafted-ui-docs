@@ -36,7 +36,12 @@ Crafted UI is a component library built with React 19, TypeScript, Tailwind CSS 
 ### Form Components
 - Checkbox: /docs/forms/checkbox - Checkbox input with sizes, labels, and subtitle support
 - Field: /docs/forms/field - Form input field wrapper with label and validation
+- Fieldset: /docs/forms/fieldset - Group related form fields with optional title, subtitle, and grid layout
 - Form: /docs/forms/form - Complete form component with validation support
+- Input: /docs/forms/input - Single-line text input with support for various input types and insets
+- Radio: /docs/forms/radio - Radio button input for selecting a single option from a group
+- Select: /docs/forms/select - Dropdown select component for choosing from a list of options
+- Textarea: /docs/forms/textarea - Multi-line text input for longer form content
 
 ## Available Components (Library)
 
@@ -46,7 +51,7 @@ The following components are exported from the Crafted UI library:
 
 **UI Components**: alert, avatar, badge, breadcrumb, button, card, desclist (description list), empty, heading, menu, metric, modal, pagination, tablist, vertlist
 
-**Form Components**: checkbox, field, fieldset, form, input, radio, select
+**Form Components**: checkbox, field, fieldset, form, input, radio, select, textarea
 
 **Utility Components**: table
 

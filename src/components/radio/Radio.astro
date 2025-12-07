@@ -1,0 +1,49 @@
+---
+import { classNames } from "../../utils/classNames"
+
+interface Props {
+    value: string;
+    name?: string;
+    checked?: boolean;
+    disabled?: boolean;
+    className?: string;
+}
+
+const { 
+    value,
+    name,
+    checked = false,
+    disabled = false,
+    className
+} = Astro.props;
+---
+<label class={classNames(
+    "flex items-center gap-2",
+    "cursor-pointer group",
+    disabled ? "opacity-50 cursor-not-allowed" : "",
+    className
+)}>
+    <input 
+        type="radio" 
+        {name}
+        {value}
+        {checked}
+        {disabled}
+        class="sr-only peer"
+    />
+    <div class={classNames(
+        "text-foreground",
+        "size-4 rounded-full border-0 ring-1 ring-inset ring-border shadow-sm", 
+        "flex items-center justify-center",
+        "peer-checked:border-2 peer-checked:border-primary",
+        "group-aria-[invalid=true]:ring-2 group-aria-[invalid=true]:ring-danger",
+        "focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2",
+        "transition-colors duration-200",
+        "peer-checked:[&>div]:scale-100"
+    )}>
+        <div class="size-2 rounded-full bg-primary scale-0 transition-transform" />
+    </div>
+    <span class="text-sm text-neutral-700 select-none">
+        <slot />
+    </span>
+</label>

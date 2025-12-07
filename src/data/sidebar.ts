@@ -48,10 +48,15 @@ export const sidebarLinks = [
     },
     {
         title: 'Forms',
-        items: [
-            { title: 'Checkbox', href: '/docs/forms/checkbox' },
-            { title: 'Field', href: '/docs/forms/field' },
+        items: [  
             { title: 'Form', href: '/docs/forms/form' },
+            { title: 'Fieldset', href: '/docs/forms/fieldset' },
+            { title: 'Field', href: '/docs/forms/field' },
+            { title: 'Checkbox', href: '/docs/forms/checkbox' },
+            { title: 'Input', href: '/docs/forms/input' },
+            { title: 'Radio', href: '/docs/forms/radio' },
+            { title: 'Select', href: '/docs/forms/select' },
+            { title: 'Textarea', href: '/docs/forms/textarea' },
         ]
     }
 ]

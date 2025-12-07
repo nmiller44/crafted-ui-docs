@@ -8,6 +8,10 @@ import { sidebarLinks } from "@data/sidebar";
 import Page from "@/components/page/Page.astro";
 
 const pathname = new URL(Astro.request.url).pathname;
+// Normalize pathname by removing trailing slash for consistent comparison
+const normalizedPathname = pathname.endsWith('/') && pathname.length > 1 
+    ? pathname.slice(0, -1) 
+    : pathname;
 
 const { 
     title = "Crafted UI Docs", 
@@ -15,7 +19,7 @@ const {
 } = Astro.props;
 ---
 <Base title={title} description={description}>
-    <div class="lg:flex lg:gap-10 px-4 lg:px-6">
+    <div class="lg:flex lg:gap-10 lg:pl-4">
         <div class="hidden lg:block">
             <Sidebar className="space-y-8">
                 { sidebarLinks.map((sect) => (
@@ -23,7 +27,7 @@ const {
                         <VertlistHeader>{ sect.title }</VertlistHeader>
                             { sect.items.map((item) => (
                                 <VertlistItem>
-                                    <a href={item.href} class={pathname == item.href ? "active" : ""}>{item.title}</a>
+                                    <a href={item.href} class={normalizedPathname === item.href ? "active" : ""}>{item.title}</a>
                                 </VertlistItem>
                             ))}
                     </Vertlist>                       

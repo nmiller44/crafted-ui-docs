@@ -10,49 +10,69 @@ import Section from '@/components/Section.astro';
 import Field from '@/components/field/Field.astro';
 import FieldLabel from '@/components/field/FieldLabel.astro';
 import FieldError from '@/components/field/FieldError.astro';
+import FieldInset from '@/components/field/FieldInset.astro';
 import Fieldset from '@/components/fieldset/Fieldset.astro';
 import Input from '@/components/input/Input.astro';
+import IconSearch from '@/components/icons/IconSearch.astro';
 
 <BaseSidebar title={frontmatter.title} description={frontmatter.description}>
 
     <CodePreview code={`
-        <div className="flex flex-col gap-4">
-          <div className="max-w-sm">
+        <div className="max-w-lg">
+          <Fieldset title="Add New Beer" subtitle="Enter the beer details below.">
             <Field>
-              <FieldLabel>Username</FieldLabel>
-              <Input type="text" /> 
+              <FieldLabel>Beer Name</FieldLabel>
+              <Input placeholder="Hazy IPA" />
             </Field>
-          </div>
 
-          <div className="max-w-sm">
             <Field>
-              <FieldLabel>Password</FieldLabel>
-              <Input type="text" /> 
-              <FieldError error="Password must be at least 8 characters" />
+              <FieldLabel>Brewery</FieldLabel>
+              <Input placeholder="Hoppy Brewery" />
             </Field>
-          </div>
+
+            <Field>
+              <FieldLabel>ABV</FieldLabel>
+              <Input type="number" placeholder="6.5" />
+              <FieldInset text="%" />
+            </Field>
+
+            <Field>
+              <FieldLabel>Price</FieldLabel>
+              <Input type="number" placeholder="12.99" />
+              <FieldInset text="$" position="left" />
+            </Field>
+          </Fieldset>
         </div>
     `}>
-      <div class="flex flex-col gap-4">
-        <div class="max-w-sm">
+      <div class="max-w-lg">
+        <Fieldset title="Add New Beer" subtitle="Enter the beer details below.">
           <Field>
-            <FieldLabel>Username</FieldLabel>
-            <Input type="text" /> 
+            <FieldLabel>Beer Name</FieldLabel>
+            <Input placeholder="Hazy IPA" />
           </Field>
-        </div>
 
-        <div class="max-w-sm">
           <Field>
-            <FieldLabel>Password</FieldLabel>
-            <Input type="text" /> 
-            <FieldError error="Password must be at least 8 characters" />
+            <FieldLabel>Brewery</FieldLabel>
+            <Input placeholder="Hoppy Brewery" />
           </Field>
-        </div>
+
+          <Field>
+            <FieldLabel>ABV</FieldLabel>
+            <Input type="number" placeholder="6.5" />
+            <FieldInset text="%" />
+          </Field>
+
+          <Field>
+            <FieldLabel>Price</FieldLabel>
+            <Input type="number" placeholder="12.99" />
+            <FieldInset text="$" position="left" />
+          </Field>
+        </Fieldset>
       </div>
     </CodePreview>
 
     <Section title="Overview">
-        The Field component set provides a suite of components for building form fields with consistent styling, labels, error handling, and inset content. These components are built on top of the `@base-ui-components/react` Field primitive.
+        The Field component set provides a suite of components for building form fields with consistent styling, labels, error handling, and inset content. These components are built on top of the Base UI Field primitive.
     </Section>
 
     <Section title="Field">
@@ -60,40 +80,41 @@ import Input from '@/components/input/Input.astro';
         The root component that wraps the form field elements. It can automatically include a label via the `label` prop.
 
         ### Usage
-        <SamplePage>
-          <Fieldset>
-            <Field label="Label as Prop">
-              <Input type="text" />
-            </Field>
+    </Section>
 
-            <Field>
-              <FieldLabel>Standard Label</FieldLabel>
-              <Input type="text" />
-            </Field>
-          </Fieldset>
-        </SamplePage>
+    <CodePreview code={`
+        <div className="max-w-sm space-y-4">
+          <Field label="Label as Prop">
+            <Input />
+          </Field>
 
-        ```tsx
-        import { Field, Input } from "@crafted-ui/react";
-
-        <Field label="Username">
-          <Input type="text" />
+          <Field>
+            <FieldLabel>Standard Label</FieldLabel>
+            <Input />
+          </Field>
+        </div>
+    `}>
+      <div class="max-w-sm space-y-4">
+        <Field label="Label as Prop">
+          <Input />
         </Field>
 
         <Field>
-          <FieldLabel>Username</FieldLabel>
-          <Input type="text" />
+          <FieldLabel>Standard Label</FieldLabel>
+          <Input />
         </Field>
-        ```
+      </div>
+    </CodePreview>
 
+    <Section>
         ### Props
-        The `Field` component accepts all props from the `@base-ui-components/react` Field.Root component, plus:
+        The `Field` component accepts all props from the Base UI Field.Root component, plus:
         
-        | Prop | Type | Description |
-        | --- | --- | --- |
-        | label | string \| ReactNode | Label content (automatically renders a FieldLabel component) |
-        | className | string | Additional CSS class names |
-        | children | ReactNode | Content of the field |
+        | Prop | Type | Default | Description |
+        | --- | --- | --- | --- |
+        | label | string \| ReactNode | - | Label content (automatically renders a FieldLabel component) |
+        | className | string | - | Additional CSS class names |
+        | children | ReactNode | - | Content of the field |
     </Section>
 
     <Section title="FieldLabel">
@@ -101,84 +122,118 @@ import Input from '@/components/input/Input.astro';
         A label component for the form field.
 
         ### Props
-        The `FieldLabel` component accepts all props from the `@base-ui-components/react` Field.Label component, plus:
+        The `FieldLabel` component accepts all props from the Base UI Field.Label component, plus:
         
-        | Prop | Type | Description |
-        | --- | --- | --- |
-        | className | string | Additional CSS class names |
-        | children | ReactNode | Content of the label |
+        | Prop | Type | Default | Description |
+        | --- | --- | --- | --- |
+        | className | string | - | Additional CSS class names |
+        | children | ReactNode | - | Content of the label |
     </Section>
 
     <Section title="FieldError">
         ### Description
-        Displays validation error messages. This is automatically included in the Field component.
+        Displays validation error messages. This is automatically included in the Field component and will show errors based on field validation state.
 
         ### Props
-        The `FieldError` component accepts all props from the `@base-ui-components/react` Field.Error component, plus:
+        The `FieldError` component accepts all props from the Base UI Field.Error component, plus:
         
-        | Prop | Type | Description |
-        | --- | --- | --- |
-        | className | string | Additional CSS class names |
+        | Prop | Type | Default | Description |
+        | --- | --- | --- | --- |
+        | className | string | - | Additional CSS class names |
+        | children | ReactNode | - | Custom error content |
     </Section>
 
     <Section title="FieldInset">
         ### Description
-        Adds inset content to the input field, such as units or extra information.
+        Adds inset content to the input field, such as units, currency symbols, or icons. The component can display text via the `text` prop or custom content via children.
 
-        ### Example
-        ```tsx
-        <Field>
-          <FieldLabel>Amount</FieldLabel>
-          <div className="relative">
-            <input 
-              type="number" 
-              className="w-full rounded-md border border-neutral-300 px-3 py-1.5 text-sm shadow-sm" 
-            />
-            <FieldInset text="USD" position="right" />
+        ### Basic Usage
+    </Section>
+
+    <CodePreview code={`
+            <div className="max-w-sm">
+              <Field>
+                <FieldLabel>Price</FieldLabel>
+                <Input type="number" className="!pr-12" />
+                <FieldInset text="USD" position="right" />
+              </Field>
+            </div>
+        `}>
+          <div class="max-w-sm">
+            <Field>
+              <FieldLabel>Price</FieldLabel>
+              <Input type="number" class="!pr-12" />
+              <FieldInset text="USD" position="right" />
+            </Field>
           </div>
-        </Field>
-        ```
+        </CodePreview>
 
-        ### Usage with Text
-        ```tsx
-        import { Field, FieldLabel, FieldInset } from "@crafted-ui/react";
+    <Section>
+        ### Left Position
+        Use `position="left"` to place the inset content on the left side of the input.
+    </Section>
 
-        <Field>
-          <FieldLabel>Price</FieldLabel>
-          <div className="relative">
-            <input 
-              type="number" 
-              className="w-full rounded-md border border-neutral-300 px-3 py-1.5 text-sm shadow-sm" 
-            />
-            <FieldInset text="$" position="left" />
+    <CodePreview code={`
+            <div className="max-w-sm">
+              <Field>
+                <FieldLabel>Website</FieldLabel>
+                <Input className="!pl-20" />
+                <FieldInset text="https://" position="left" />
+              </Field>
+            </div>
+        `}>
+          <div class="max-w-sm">
+            <Field>
+              <FieldLabel>Website</FieldLabel>
+              <Input class="!pl-20" />
+              <FieldInset text="https://" position="left" />
+            </Field>
           </div>
-        </Field>
-        ```
+        </CodePreview>
 
-        ### Usage with Custom Content
-        ```tsx
-        import { Field, FieldLabel, FieldInset } from "@crafted-ui/react";
+    <Section>
+        ### Custom Content
+        Instead of using the `text` prop, you can pass custom content like icons as children.
+    </Section>
 
-        <Field>
-          <FieldLabel>Search</FieldLabel>
-          <div className="relative">
-            <input 
-              type="text" 
-              className="w-full rounded-md border border-neutral-300 px-3 py-1.5 text-sm shadow-sm" 
-            />
-            <FieldInset position="right">
-              <svg className="h-4 w-4 text-neutral-500" /* SVG properties */ />
-            </FieldInset>
+    <CodePreview code={`
+            <div className="max-w-sm">
+              <Field>
+                <FieldLabel>Search Beers</FieldLabel>
+                <Input className="!pr-10" placeholder="Search..." />
+                <FieldInset position="right">
+                  <IconSearch className="size-4 text-muted-foreground" />
+                </FieldInset>
+              </Field>
+            </div>
+        `}>
+          <div class="max-w-sm">
+            <Field>
+              <FieldLabel>Search Beers</FieldLabel>
+              <Input class="!pr-10" placeholder="Search..." />
+              <FieldInset position="right">
+                <IconSearch class="size-4 text-muted-foreground" />
+              </FieldInset>
+            </Field>
           </div>
-        </Field>
-        ```
+        </CodePreview>
 
+    <Section>
         ### Props
         | Prop | Type | Default | Description |
         | --- | --- | --- | --- |
-        | text | string | undefined | Text to display in the inset |
+        | text | string | - | Text to display in the inset |
         | position | "left" \| "right" | "right" | Position of the inset |
-        | children | ReactNode | undefined | Custom content to display in the inset |
+        | className | string | - | Additional CSS class names |
+        | children | ReactNode | - | Custom content to display in the inset |
+
+        ### Usage Notes
+        - Input automatically detects FieldInset and adds padding for standard single-character insets (`$`, `%`, etc.)
+        - For larger insets, override automatic padding using the `!` (important) modifier:
+          - Larger left insets: `className="!pl-16"` or `className="!pl-20"`
+          - Larger right insets: `className="!pr-10"` or `className="!pr-12"`
+        - Use the `text` prop for simple text insets
+        - Use children for custom content like icons or complex elements
     </Section>
 
 </BaseSidebar>

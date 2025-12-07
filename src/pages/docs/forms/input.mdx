@@ -1,0 +1,273 @@
+---
+title: 'Input'
+description: 'A versatile single-line text input component for forms.'
+---
+import BaseSidebar from "@/layouts/BaseSidebar.astro";
+import CodePreview from "@/components/CodePreview.astro";
+import SamplePage from "@/components/SamplePage.astro";
+import Prose from '@/components/Prose.astro';
+import Section from '@/components/Section.astro';
+import Field from '@/components/field/Field.astro';
+import FieldLabel from '@/components/field/FieldLabel.astro';
+import FieldInset from '@/components/field/FieldInset.astro';
+import Fieldset from '@/components/fieldset/Fieldset.astro';
+import Input from '@/components/input/Input.astro';
+
+<BaseSidebar title={frontmatter.title} description={frontmatter.description}>
+
+    <CodePreview code={`
+        <div className="max-w-lg space-y-6">
+          <Field>
+            <FieldLabel>Beer Name</FieldLabel>
+            <Input placeholder="Hazy IPA" />
+          </Field>
+          <Field>
+            <FieldLabel>ABV</FieldLabel>
+            <Input type="number" placeholder="6.5" />
+            <FieldInset text="%" />
+          </Field>
+          <Field>
+            <FieldLabel>Price</FieldLabel>
+            <Input type="number" placeholder="12.99" />
+            <FieldInset text="$" position="left" />
+          </Field>
+        </div>
+    `}>
+      <div class="max-w-lg space-y-6">
+        <Field>
+          <FieldLabel>Beer Name</FieldLabel>
+          <Input placeholder="Hazy IPA" />
+        </Field>
+        <Field>
+          <FieldLabel>ABV</FieldLabel>
+          <Input type="number" placeholder="6.5" />
+          <FieldInset text="%" />
+        </Field>
+        <Field>
+          <FieldLabel>Price</FieldLabel>
+          <Input type="number" placeholder="12.99" />
+          <FieldInset text="$" position="left" />
+        </Field>
+      </div>
+    </CodePreview>
+
+    <Section title="Overview">
+        The Input component is a single-line text input that extends the native HTML input element with consistent styling and theming. It's designed to work seamlessly within the Field component for labels and error handling.
+    </Section>
+
+    <Section title="Basic Usage">
+        ### Description
+        Input can be used with or without labels, and supports all standard input states including disabled and read-only.
+    </Section>
+
+    <CodePreview code={`
+        <div className="space-y-6 max-w-sm">
+          <Field>
+            <Input placeholder="Unlabeled input" />
+          </Field>
+
+          <Field>
+            <FieldLabel>With Label</FieldLabel>
+            <Input placeholder="Enter beer name..." />
+          </Field>
+          
+          <Field>
+            <FieldLabel>With Error</FieldLabel>
+            <Input aria-invalid placeholder="This field has an error" />
+          </Field>
+          
+          <Field>
+            <FieldLabel>Disabled</FieldLabel>
+            <Input disabled placeholder="This input is disabled" />
+          </Field>
+          
+          <Field>
+            <FieldLabel>Read Only</FieldLabel>
+            <Input 
+              readOnly 
+              value="This content cannot be edited"
+            />
+          </Field>
+        </div>
+    `}>
+      <div class="space-y-6 max-w-sm">
+        <Field>
+          <Input placeholder="Unlabeled input" />
+        </Field>
+        
+        <Field>
+          <FieldLabel>With Label</FieldLabel>
+          <Input placeholder="Enter beer name..." />
+        </Field>
+        
+        <Field>
+          <FieldLabel>With Error</FieldLabel>
+          <Input aria-invalid placeholder="This field has an error" />
+        </Field>
+        
+        <Field>
+          <FieldLabel>Disabled</FieldLabel>
+          <Input disabled placeholder="This input is disabled" />
+        </Field>
+        
+        <Field>
+          <FieldLabel>Read Only</FieldLabel>
+          <Input 
+            readonly 
+            value="This content cannot be edited"
+          />
+        </Field>
+      </div>
+    </CodePreview>
+
+    <Section title="Input Types">
+        ### Description
+        The Input component supports all standard HTML input types including text, email, password, number, date, and more.
+    </Section>
+
+    <CodePreview code={`
+        <div className="space-y-6 max-w-sm">
+          <Field>
+            <FieldLabel>Email</FieldLabel>
+            <Input type="email" placeholder="you@example.com" />
+          </Field>
+          
+          <Field>
+            <FieldLabel>Password</FieldLabel>
+            <Input type="password" placeholder="Enter password" />
+          </Field>
+          
+          <Field>
+            <FieldLabel>Number</FieldLabel>
+            <Input type="number" placeholder="42" />
+          </Field>
+          
+          <Field>
+            <FieldLabel>Date</FieldLabel>
+            <Input type="date" />
+          </Field>
+          
+          <Field>
+            <FieldLabel>Search</FieldLabel>
+            <Input type="search" placeholder="Search beers..." />
+          </Field>
+        </div>
+    `}>
+      <div class="space-y-6 max-w-sm">
+        <Field>
+          <FieldLabel>Email</FieldLabel>
+          <Input type="email" placeholder="you@example.com" />
+        </Field>
+        
+        <Field>
+          <FieldLabel>Password</FieldLabel>
+          <Input type="password" placeholder="Enter password" />
+        </Field>
+        
+        <Field>
+          <FieldLabel>Number</FieldLabel>
+          <Input type="number" placeholder="42" />
+        </Field>
+        
+        <Field>
+          <FieldLabel>Date</FieldLabel>
+          <Input type="date" />
+        </Field>
+        
+        <Field>
+          <FieldLabel>Search</FieldLabel>
+          <Input type="search" placeholder="Search beers..." />
+        </Field>
+      </div>
+    </CodePreview>
+
+    <Section title="With Insets">
+        ### Description
+        Use FieldInset components to add prefix or suffix content like currency symbols, units, or icons. Input automatically adjusts padding for standard single-character insets. For larger insets, use the `!` (important) modifier to override the automatic padding.
+    </Section>
+
+    <CodePreview code={`
+        <div className="space-y-6 max-w-sm">
+          <Field>
+            <FieldLabel>Price</FieldLabel>
+            <Input type="number" placeholder="12.99" />
+            <FieldInset text="$" position="left" />
+          </Field>
+          
+          <Field>
+            <FieldLabel>Percentage</FieldLabel>
+            <Input type="number" placeholder="75" />
+            <FieldInset text="%" />
+          </Field>
+          
+          <Field>
+            <FieldLabel>Website</FieldLabel>
+            <Input className="!pl-20" placeholder="example.com" />
+            <FieldInset text="https://" position="left" />
+          </Field>
+          
+          <Field>
+            <FieldLabel>Currency</FieldLabel>
+            <Input type="number" className="!pr-12" placeholder="2500" />
+            <FieldInset text="USD" />
+          </Field>
+        </div>
+    `}>
+      <div class="space-y-6 max-w-sm">
+        <Field>
+          <FieldLabel>Price</FieldLabel>
+          <Input type="number" placeholder="12.99" />
+          <FieldInset text="$" position="left" />
+        </Field>
+        
+        <Field>
+          <FieldLabel>Percentage</FieldLabel>
+          <Input type="number" placeholder="75" />
+          <FieldInset text="%" />
+        </Field>
+        
+        <Field>
+          <FieldLabel>Website</FieldLabel>
+          <Input class="!pl-20" placeholder="example.com" />
+          <FieldInset text="https://" position="left" />
+        </Field>
+        
+        <Field>
+          <FieldLabel>Currency</FieldLabel>
+          <Input type="number" class="!pr-12" placeholder="2500" />
+          <FieldInset text="USD" />
+        </Field>
+      </div>
+    </CodePreview>
+
+    <Section title="Props">
+        The `Input` component accepts all standard HTML input attributes, plus:
+        
+        | Prop | Type | Default | Description |
+        | --- | --- | --- | --- |
+        | type | string | "text" | Input type (text, email, password, number, date, etc.) |
+        | className | string | - | Additional CSS class names |
+        | placeholder | string | - | Placeholder text |
+        | disabled | boolean | false | Disables the input |
+        | readOnly | boolean | false | Makes the input read-only |
+        | aria-invalid | boolean | false | Indicates validation error state |
+        
+        ### Additional Features
+        
+        - **Validation States**: Use `aria-invalid` to show error styling
+        - **Focus States**: Automatic focus ring styling matching other form components
+        - **Dark Mode**: Fully themed with CSS custom properties
+        - **Automatic Inset Padding**: Automatically adds padding when FieldInset is detected
+        
+        ### Working with FieldInset
+        
+        Input automatically detects adjacent FieldInset components and applies appropriate padding (`pl-6` or `pr-6`) for standard single-character insets like `$` or `%`.
+        
+        **For larger insets** (e.g., `"https://"` or `"USD"`), you need to override the automatic padding using the `!` (important) modifier:
+        - Larger left inset: `className="!pl-16"` or `className="!pl-20"`
+        - Larger right inset: `className="!pr-12"` or `className="!pr-16"`
+        
+        The `!` modifier ensures your custom padding takes precedence over the automatic padding.
+    </Section>
+
+</BaseSidebar>

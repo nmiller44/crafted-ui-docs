@@ -16,64 +16,96 @@ import Heading3 from '@/components/heading/Heading3.astro';
 <BaseSidebar title={frontmatter.title} description={frontmatter.description}>
 
     <CodePreview code={`
-        <Fieldset 
-            title="Beer Styles" 
-            subtitle="Select your favorite craft beer styles">
-            <Field>
-                <CheckboxGroup horizontal>
-                    <Checkbox>IPA</Checkbox>
-                    <Checkbox defaultChecked>Stout</Checkbox>
-                    <Checkbox>Pilsner</Checkbox>
-                </CheckboxGroup>
-            </Field>
-        </Fieldset>
+        <Field label="Beer Preferences">
+            <CheckboxGroup>
+                <Checkbox defaultChecked>IPA</Checkbox>
+                <Checkbox>Stout</Checkbox>
+                <Checkbox title="Barrel-Aged" subtitle="Aged in oak barrels for complex flavors" />
+                <Checkbox title="Seasonal Releases" subtitle="Limited edition and experimental brews" defaultChecked />
+            </CheckboxGroup>
+        </Field>
     `}>
-        <Fieldset 
-            title="Beer Styles" 
-            subtitle="Select your favorite craft beer styles">
-            <Field>
-                <CheckboxGroup horizontal>
-                    <Checkbox>IPA</Checkbox>
-                    <Checkbox defaultChecked>Stout</Checkbox>
-                    <Checkbox>Pilsner</Checkbox>
-                </CheckboxGroup>
-            </Field>
-        </Fieldset>
+        <Field label="Beer Preferences">
+            <CheckboxGroup>
+                <Checkbox defaultChecked>IPA</Checkbox>
+                <Checkbox>Stout</Checkbox>
+                <Checkbox title="Barrel-Aged" subtitle="Aged in oak barrels for complex flavors" />
+                <Checkbox title="Seasonal Releases" subtitle="Limited edition and experimental brews" defaultChecked />
+            </CheckboxGroup>
+        </Field>
     </CodePreview>
 
     <Section title="Overview">
         The Checkbox component provides a way for users to select one or multiple options from a set. It supports various sizes, labels, and subtitles for additional context. Checkboxes are typically used in forms or settings where users need to toggle options on or off.
     </Section>
 
+    <Section title="Basic Usage">
+        ### Description
+        Checkbox can be used with or without labels, and supports standard states including disabled and error states.
+    </Section>
+
+    <CodePreview code={`
+        <div className="space-y-6 max-w-sm">
+          <Field label="With Label">
+            <CheckboxGroup>
+              <Checkbox>Pilsner</Checkbox>
+              <Checkbox defaultChecked>Lager</Checkbox>
+            </CheckboxGroup>
+          </Field>
+          
+          <Field label="With Error">
+            <CheckboxGroup>
+              <Checkbox aria-invalid>This checkbox has an error</Checkbox>
+            </CheckboxGroup>
+          </Field>
+          
+          <Field label="Disabled">
+            <CheckboxGroup>
+              <Checkbox disabled>This checkbox is disabled</Checkbox>
+              <Checkbox disabled defaultChecked>This is disabled and checked</Checkbox>
+            </CheckboxGroup>
+          </Field>
+        </div>
+    `}>
+      <div class="space-y-6 max-w-sm">
+        <Field label="With Label">
+          <CheckboxGroup>
+            <Checkbox>Pilsner</Checkbox>
+            <Checkbox defaultChecked>Lager</Checkbox>
+          </CheckboxGroup>
+        </Field>
+        
+        <Field label="With Error">
+          <CheckboxGroup>
+            <Checkbox aria-invalid>This checkbox has an error</Checkbox>
+          </CheckboxGroup>
+        </Field>
+        
+        <Field label="Disabled">
+          <CheckboxGroup>
+            <Checkbox disabled>This checkbox is disabled</Checkbox>
+            <Checkbox disabled defaultChecked>This is disabled and checked</Checkbox>
+          </CheckboxGroup>
+        </Field>
+      </div>
+    </CodePreview>
+
     <Section title="Checkbox">
         ### Description
         A flexible checkbox component that can be used individually or within a CheckboxGroup for managing multiple options.
-
-        ### Usage
-        ```tsx
-        import { Checkbox, CheckboxGroup, Field } from "@crafted-ui/react";
-
-        <Field>
-            <CheckboxGroup>
-                <Checkbox>IPA</Checkbox>
-                <Checkbox defaultChecked>Stout</Checkbox>
-                <Checkbox>Pilsner</Checkbox>
-            </CheckboxGroup>
-        </Field>
-        ```
 
         ### Props
         The `Checkbox` component accepts the following props:
         
         | Prop | Type | Default | Description |
         | --- | --- | --- | --- |
-        | title | string | undefined | The main label text for the checkbox |
-        | subtitle | string | undefined | Additional descriptive text displayed below the title |
+        | title | string | - | The main label text for the checkbox |
+        | subtitle | string | - | Additional descriptive text displayed below the title |
         | size | 'xs' \| 'sm' \| 'md' \| 'lg' \| 'xl' | 'md' | Size of the checkbox indicator |
         | defaultChecked | boolean | false | Initial checked state (uncontrolled) |
-        | checked | boolean | undefined | Controlled checked state |
-        | className | string | undefined | Additional CSS class names |
-        | children | ReactNode | undefined | Content to display as the label (used when title is not provided) |
+        | checked | boolean | - | Controlled checked state |
+        | className | string | - | Additional CSS class names |
+        | children | ReactNode | - | Content to display as the label (used when title is not provided) |
 
         The component also accepts all standard HTML input attributes for checkboxes.
     </Section>
@@ -81,58 +113,32 @@ import Heading3 from '@/components/heading/Heading3.astro';
     <Section title="CheckboxGroup">
         ### Description
         A container component for organizing multiple checkboxes with consistent spacing and layout.
+    </Section>
 
-        ### Usage
-        ```tsx
-        import { CheckboxGroup, Checkbox } from "@crafted-ui/react";
+<CodePreview code={`
+    <CheckboxGroup>
+        <Checkbox>IPA</Checkbox>
+        <Checkbox defaultChecked>Stout</Checkbox>
+        <Checkbox>Lager</Checkbox>
+    </CheckboxGroup>
+`}>
+    <CheckboxGroup>
+        <Checkbox>IPA</Checkbox>
+        <Checkbox defaultChecked>Stout</Checkbox>
+        <Checkbox>Lager</Checkbox>
+    </CheckboxGroup>
+</CodePreview>
 
-        <CheckboxGroup>
-            <Checkbox>Option 1</Checkbox>
-            <Checkbox>Option 2</Checkbox>
-            <Checkbox>Option 3</Checkbox>
-        </CheckboxGroup>
-        ```
-
+    <Section>
         ### Props
         The `CheckboxGroup` component accepts the following props:
         
         | Prop | Type | Default | Description |
         | --- | --- | --- | --- |
         | horizontal | boolean | false | Display checkboxes in a horizontal row instead of vertical column |
-        | className | string | undefined | Additional CSS class names for custom layout |
-        | children | ReactNode | undefined | Checkbox components to display |
+        | className | string | - | Additional CSS class names for custom layout |
+        | children | ReactNode | - | Checkbox components to display |
     </Section>
-
-    <Section title="Basic Usage">
-        ### Simple Checkboxes
-        Create a group of checkboxes for selecting beer styles.
-    </Section>
-
-    <CodePreview code={`
-        <Fieldset 
-            title="Beer Styles" 
-            subtitle="Select your favorite craft beer styles">
-            <Field>
-                <CheckboxGroup>
-                    <Checkbox>IPA</Checkbox>
-                    <Checkbox defaultChecked>Stout</Checkbox>
-                    <Checkbox>Pilsner</Checkbox>
-                </CheckboxGroup>
-            </Field>
-        </Fieldset>
-    `}>
-        <Fieldset 
-            title="Beer Styles" 
-            subtitle="Select your favorite craft beer styles">
-            <Field>
-                <CheckboxGroup>
-                    <Checkbox>IPA</Checkbox>
-                    <Checkbox defaultChecked>Stout</Checkbox>
-                    <Checkbox>Pilsner</Checkbox>
-                </CheckboxGroup>
-            </Field>
-        </Fieldset>
-    </CodePreview>
 
     <Section title="Horizontal Layout">
         ### Horizontal Checkboxes
@@ -140,29 +146,21 @@ import Heading3 from '@/components/heading/Heading3.astro';
     </Section>
 
     <CodePreview code={`
-        <Fieldset 
-            title="Hop Varieties" 
-            subtitle="Select your preferred hop profiles">
-            <Field>
-                <CheckboxGroup horizontal>
-                    <Checkbox>Citra</Checkbox>
-                    <Checkbox defaultChecked>Mosaic</Checkbox>
-                    <Checkbox>Cascade</Checkbox>
-                </CheckboxGroup>
-            </Field>
-        </Fieldset>
+        <Field label="Hop Varieties">
+            <CheckboxGroup horizontal>
+                <Checkbox>Citra</Checkbox>
+                <Checkbox defaultChecked>Mosaic</Checkbox>
+                <Checkbox>Cascade</Checkbox>
+            </CheckboxGroup>
+        </Field>
     `}>
-        <Fieldset 
-            title="Hop Varieties" 
-            subtitle="Select your preferred hop profiles">
-            <Field>
-                <CheckboxGroup horizontal>
-                    <Checkbox>Citra</Checkbox>
-                    <Checkbox defaultChecked>Mosaic</Checkbox>
-                    <Checkbox>Cascade</Checkbox>
-                </CheckboxGroup>
-            </Field>
-        </Fieldset>
+        <Field label="Hop Varieties">
+            <CheckboxGroup horizontal>
+                <Checkbox>Citra</Checkbox>
+                <Checkbox defaultChecked>Mosaic</Checkbox>
+                <Checkbox>Cascade</Checkbox>
+            </CheckboxGroup>
+        </Field>
     </CodePreview>
 
     <Section title="Sizes">
@@ -171,33 +169,25 @@ import Heading3 from '@/components/heading/Heading3.astro';
     </Section>
 
     <CodePreview code={`
-        <Fieldset 
-            title="Craft Beer Package Sizes" 
-            subtitle="Select your preferred packaging options">
-            <Field>
-                <CheckboxGroup>
-                    <Checkbox size="xs">Nip</Checkbox>
-                    <Checkbox size="sm">Sleek</Checkbox>
-                    <Checkbox size="md" defaultChecked>Tallboy</Checkbox>
-                    <Checkbox size="lg">Bomber</Checkbox>
-                    <Checkbox size="xl">Crowler</Checkbox>
-                </CheckboxGroup>
-            </Field>
-        </Fieldset>
+        <Field label="Craft Beer Package Sizes">
+            <CheckboxGroup>
+                <Checkbox size="xs">Nip</Checkbox>
+                <Checkbox size="sm">Sleek</Checkbox>
+                <Checkbox size="md" defaultChecked>Tallboy</Checkbox>
+                <Checkbox size="lg">Bomber</Checkbox>
+                <Checkbox size="xl">Crowler</Checkbox>
+            </CheckboxGroup>
+        </Field>
     `}>
-        <Fieldset 
-            title="Craft Beer Package Sizes" 
-            subtitle="Select your preferred packaging options">
-            <Field>
-                <CheckboxGroup>
-                    <Checkbox size="xs">Nip</Checkbox>
-                    <Checkbox size="sm">Sleek</Checkbox>
-                    <Checkbox size="md" defaultChecked>Tallboy</Checkbox>
-                    <Checkbox size="lg">Bomber</Checkbox>
-                    <Checkbox size="xl">Crowler</Checkbox>
-                </CheckboxGroup>
-            </Field>
-        </Fieldset>
+        <Field label="Craft Beer Package Sizes">
+            <CheckboxGroup>
+                <Checkbox size="xs">Nip</Checkbox>
+                <Checkbox size="sm">Sleek</Checkbox>
+                <Checkbox size="md" defaultChecked>Tallboy</Checkbox>
+                <Checkbox size="lg">Bomber</Checkbox>
+                <Checkbox size="xl">Crowler</Checkbox>
+            </CheckboxGroup>
+        </Field>
     </CodePreview>
 
     <Section title="Labels and Subtitles">
@@ -206,38 +196,30 @@ import Heading3 from '@/components/heading/Heading3.astro';
     </Section>
 
     <CodePreview code={`
-        <Fieldset 
-            title="Brewery Features" 
-            subtitle="Different ways to label checkboxes">
-            <Field>
-                <CheckboxGroup>
-                    <Checkbox>Taproom</Checkbox>
-                    <Checkbox title="Outdoor Seating" />
-                    <Checkbox 
-                        title="Flight Options" 
-                        subtitle="Sample multiple beers in smaller portions" 
-                    />
-                    <Checkbox 
-                        title="Seasonal Releases" 
-                        subtitle="Limited edition and experimental brews" 
-                        defaultChecked 
-                    />
-                </CheckboxGroup>
-            </Field>
-        </Fieldset>
+        <Field label="Brewery Features">
+            <CheckboxGroup>
+                <Checkbox>Taproom</Checkbox>
+                <Checkbox title="Outdoor Seating" />
+                <Checkbox 
+                    title="Flight Options" 
+                    subtitle="Sample multiple beers in smaller portions" 
+                />
+                <Checkbox 
+                    title="Seasonal Releases" 
+                    subtitle="Limited edition and experimental brews" 
+                    defaultChecked 
+                />
+            </CheckboxGroup>
+        </Field>
     `}>
-        <Fieldset 
-            title="Brewery Features" 
-            subtitle="Different ways to label checkboxes">
-            <Field>
-                <CheckboxGroup>
-                    <Checkbox>Taproom</Checkbox>
-                    <Checkbox title="Outdoor Seating" />
-                    <Checkbox title="Flight Options" subtitle="Sample multiple beers in smaller portions" />
-                    <Checkbox title="Seasonal Releases" subtitle="Limited edition and experimental brews" defaultChecked />
-                </CheckboxGroup>
-            </Field>
-        </Fieldset>
+        <Field label="Brewery Features">
+            <CheckboxGroup>
+                <Checkbox>Taproom</Checkbox>
+                <Checkbox title="Outdoor Seating" />
+                <Checkbox title="Flight Options" subtitle="Sample multiple beers in smaller portions" />
+                <Checkbox title="Seasonal Releases" subtitle="Limited edition and experimental brews" defaultChecked />
+            </CheckboxGroup>
+        </Field>
     </CodePreview>
 
     <Section title="Horizontal with Subtitles">
@@ -246,36 +228,28 @@ import Heading3 from '@/components/heading/Heading3.astro';
     </Section>
 
     <CodePreview code={`
-        <Fieldset 
-            title="Brewing Methods" 
-            subtitle="Select your preferred brewing techniques">
-            <Field>
-                <CheckboxGroup horizontal className="gap-6">
-                    <Checkbox title="Barrel-Aged" />
-                    <Checkbox 
-                        title="Dry-Hopped" 
-                        subtitle="Enhanced hop aroma and flavor" 
-                        defaultChecked 
-                    />
-                    <Checkbox 
-                        title="Sour Mash" 
-                        subtitle="Traditional acidic fermentation" 
-                    />
-                </CheckboxGroup>
-            </Field>
-        </Fieldset>
+        <Field label="Brewing Methods">
+            <CheckboxGroup horizontal className="gap-6">
+                <Checkbox title="Barrel-Aged" />
+                <Checkbox 
+                    title="Dry-Hopped" 
+                    subtitle="Enhanced hop aroma and flavor" 
+                    defaultChecked 
+                />
+                <Checkbox 
+                    title="Sour Mash" 
+                    subtitle="Traditional acidic fermentation" 
+                />
+            </CheckboxGroup>
+        </Field>
     `}>
-        <Fieldset 
-            title="Brewing Methods" 
-            subtitle="Select your preferred brewing techniques">
-            <Field>
-                <CheckboxGroup horizontal className="gap-6">
-                    <Checkbox title="Barrel-Aged" />
-                    <Checkbox title="Dry-Hopped" subtitle="Enhanced hop aroma and flavor" defaultChecked />
-                    <Checkbox title="Sour Mash" subtitle="Traditional acidic fermentation" />
-                </CheckboxGroup>
-            </Field>
-        </Fieldset>
+        <Field label="Brewing Methods">
+            <CheckboxGroup horizontal className="gap-6">
+                <Checkbox title="Barrel-Aged" />
+                <Checkbox title="Dry-Hopped" subtitle="Enhanced hop aroma and flavor" defaultChecked />
+                <Checkbox title="Sour Mash" subtitle="Traditional acidic fermentation" />
+            </CheckboxGroup>
+        </Field>
     </CodePreview>
 
     <Section title="Accessibility">
@@ -293,43 +267,6 @@ import Heading3 from '@/components/heading/Heading3.astro';
         2. Related checkboxes are grouped using CheckboxGroup
         3. Subtitles provide additional context when needed
         4. Form validation messages are clearly associated with checkbox groups
-    </Section>
-
-    <Section title="Examples">
-        ### Single Checkbox
-        ```tsx
-        <Checkbox>Accept terms and conditions</Checkbox>
-        ```
-
-        ### Controlled Checkbox
-        ```tsx
-        const [checked, setChecked] = useState(false);
-
-        <Checkbox 
-            checked={checked} 
-            onChange={(e) => setChecked(e.target.checked)}
-        >
-            Subscribe to newsletter
-        </Checkbox>
-        ```
-
-        ### Checkbox with Detailed Description
-        ```tsx
-        <Checkbox 
-            title="Marketing Communications" 
-            subtitle="Receive updates about new products and special offers"
-        />
-        ```
-
-        ### Custom Styled Group
-        ```tsx
-        <CheckboxGroup className="grid grid-cols-2 gap-4">
-            <Checkbox>Option 1</Checkbox>
-            <Checkbox>Option 2</Checkbox>
-            <Checkbox>Option 3</Checkbox>
-            <Checkbox>Option 4</Checkbox>
-        </CheckboxGroup>
-        ```
     </Section>
 
 </BaseSidebar>

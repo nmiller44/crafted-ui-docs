@@ -1,0 +1,58 @@
+---
+import { classNames } from "../../utils/classNames"
+import IconChevronDown from "../icons/IconChevronDown.astro";
+
+interface Props {
+    items?: Array<{ value: string; label: string }>;
+    placeholder?: string;
+    defaultValue?: string;
+    disabled?: boolean;
+    "aria-invalid"?: boolean;
+    className?: string;
+}
+
+const { 
+    items = [],
+    placeholder,
+    defaultValue,
+    disabled = false,
+    className
+} = Astro.props;
+
+const ariaInvalid = Astro.props["aria-invalid"];
+---
+<div class="mt-1">
+    <div class="relative">
+        <select 
+            class={classNames(
+                "flex items-center justify-between",
+                "w-full py-2 px-3 pr-10",
+                "rounded-md border-0 ring-1 ring-inset ring-border outline-0 shadow-sm",
+                "aria-[invalid=true]:ring-2 aria-[invalid=true]:ring-danger",
+                "text-sm text-foreground",
+                !defaultValue && placeholder ? "text-muted-foreground" : "",
+                "focus:ring-2 focus:ring-inset focus:border-foreground focus:outline-0 focus:ring-foreground",
+                "cursor-pointer",
+                "disabled:opacity-50 disabled:cursor-not-allowed",
+                "appearance-none bg-background",
+                "[&>option]:bg-background [&>option]:text-foreground [&>option]:py-1.5",
+                className
+            )}
+            aria-invalid={ariaInvalid}
+            {disabled}
+        >
+            {placeholder && <option value="" disabled selected={!defaultValue} hidden class="text-muted-foreground">{placeholder}</option>}
+            {items.map((item) => (
+            <option value={item.value} selected={defaultValue === item.value}>
+                {item.label}
+            </option>
+        ))}
+        </select>
+        <div class={classNames(
+            "pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3",
+            disabled ? "opacity-50" : ""
+        )}>
+            <IconChevronDown class="text-muted-foreground size-4" />
+        </div>
+    </div>
+</div>
