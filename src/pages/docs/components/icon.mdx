@@ -1,0 +1,163 @@
+---
+title: 'Icon'
+description: 'A collection of reusable SVG icons for common UI elements and actions.'
+---
+import BaseSidebar from "@/layouts/BaseSidebar.astro";
+import SamplePage from "@/components/SamplePage.astro";
+import CodeIcon from "@/components/code-icon/CodeIcon.astro";
+import IconArrowLeft from "@/components/icons/IconArrowLeft.astro";
+import IconArrowRight from "@/components/icons/IconArrowRight.astro";
+import IconBeer from "@/components/icons/IconBeer.astro";
+import IconCalendar from "@/components/icons/IconCalendar.astro";
+import IconCheck from "@/components/icons/IconCheck.astro";
+import IconChevronDown from "@/components/icons/IconChevronDown.astro";
+import IconChevronLeft from "@/components/icons/IconChevronLeft.astro";
+import IconChevronRight from "@/components/icons/IconChevronRight.astro";
+import IconChevronUp from "@/components/icons/IconChevronUp.astro";
+import IconCopy from "@/components/icons/IconCopy.astro";
+import IconLocation from "@/components/icons/IconLocation.astro";
+import IconMenu from "@/components/icons/IconMenu.astro";
+import IconMinus from "@/components/icons/IconMinus.astro";
+import IconPencil from "@/components/icons/IconPencil.astro";
+import IconPlus from "@/components/icons/IconPlus.astro";
+import IconSearch from "@/components/icons/IconSearch.astro";
+import IconShare from "@/components/icons/IconShare.astro";
+import IconTrash from "@/components/icons/IconTrash.astro";
+import IconX from "@/components/icons/IconX.astro";
+
+import Prose from '@/components/Prose.astro';
+import Section from '@/components/Section.astro';
+
+<BaseSidebar title={frontmatter.title} description={frontmatter.description}>
+
+    <Section title="Overview">
+        Icons are reusable SVG components that provide visual clarity and improve user interface navigation. The Crafted UI icon library includes a curated set of commonly used icons for actions, navigation, and content representation.
+    </Section>
+
+    <Section title="Icon System">
+        ### Description
+        Icons are implemented as React components that inherit `currentColor` for styling, making them easily themeable and customizable. They default to a medium size (5x5 units) but can be resized using Tailwind's `size` utilities.
+
+        ### Usage
+        ```tsx
+        import { IconSearch, IconChevronDown, IconLocation } from "crafted-ui";
+
+        <IconSearch />
+        <IconChevronDown className="size-6" />
+        <IconLocation className="text-primary" />
+        ```
+
+        ### Props
+        All icon components accept the following props:
+        
+        | Prop | Type | Default | Description |
+        | --- | --- | --- | --- |
+        | className | string | - | Additional CSS class names for styling |
+        | Any SVG prop | - | - | Standard SVG attributes (stroke, fill, etc.) |
+
+        Icons use `currentColor` by default, meaning they inherit the text color from their parent element.
+    </Section>
+
+    <Section title="Available Icons">
+        Click any icon card to copy its import code.
+    </Section>
+
+        <div class="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+            <CodeIcon iconName="IconArrowLeft" icon={IconArrowLeft} />
+            <CodeIcon iconName="IconArrowRight" icon={IconArrowRight} />
+            <CodeIcon iconName="IconBeer" icon={IconBeer} />
+            <CodeIcon iconName="IconCalendar" icon={IconCalendar} />
+            <CodeIcon iconName="IconCheck" icon={IconCheck} />
+            <CodeIcon iconName="IconChevronDown" icon={IconChevronDown} />
+            <CodeIcon iconName="IconChevronLeft" icon={IconChevronLeft} />
+            <CodeIcon iconName="IconChevronRight" icon={IconChevronRight} />
+            <CodeIcon iconName="IconChevronUp" icon={IconChevronUp} />
+            <CodeIcon iconName="IconCopy" icon={IconCopy} />
+            <CodeIcon iconName="IconLocation" icon={IconLocation} />
+            <CodeIcon iconName="IconMenu" icon={IconMenu} />
+            <CodeIcon iconName="IconMinus" icon={IconMinus} />
+            <CodeIcon iconName="IconPencil" icon={IconPencil} />
+            <CodeIcon iconName="IconPlus" icon={IconPlus} />
+            <CodeIcon iconName="IconSearch" icon={IconSearch} />
+            <CodeIcon iconName="IconShare" icon={IconShare} />
+            <CodeIcon iconName="IconTrash" icon={IconTrash} />
+            <CodeIcon iconName="IconX" icon={IconX} />
+        </div>
+
+    <Section title="Sizing">
+        ### Icon Sizes
+        Icons support multiple sizes through Tailwind's `size` utility. The default size is medium (size-5).
+
+        <SamplePage>
+            <div class="flex flex-wrap gap-8 items-center">
+                <div class="flex flex-col items-center gap-2">
+                    <IconSearch className="size-3" />
+                    <span className="text-xs text-muted-foreground">size-3</span>
+                </div>
+                <div class="flex flex-col items-center gap-2">
+                    <IconSearch className="size-4" />
+                    <span className="text-xs text-muted-foreground">size-4</span>
+                </div>
+                <div class="flex flex-col items-center gap-2">
+                    <IconSearch className="size-5" />
+                    <span className="text-xs text-muted-foreground">size-5 (default)</span>
+                </div>
+                <div class="flex flex-col items-center gap-2">
+                    <IconSearch className="size-6" />
+                    <span className="text-xs text-muted-foreground">size-6</span>
+                </div>
+                <div class="flex flex-col items-center gap-2">
+                    <IconSearch className="size-8" />
+                    <span className="text-xs text-muted-foreground">size-8</span>
+                </div>
+            </div>
+        </SamplePage>
+
+        ```tsx
+        <IconSearch className="size-3" />
+        <IconSearch className="size-4" />
+        <IconSearch />
+        <IconSearch className="size-6" />
+        <IconSearch className="size-8" />
+        ```
+    </Section>
+
+    <Section title="Styling">
+        ### Color Variants
+        Icons inherit their color from the parent text color, so they automatically adapt to different color schemes.
+
+        <SamplePage>
+            <div class="flex flex-wrap gap-6">
+                <div class="flex flex-col items-center gap-2">
+                    <IconSearch />
+                    <span className="text-xs text-muted-foreground">default</span>
+                </div>
+                <div class="flex flex-col items-center gap-2">
+                    <IconSearch className="text-primary" />
+                    <span className="text-xs text-muted-foreground">primary</span>
+                </div>
+                <div class="flex flex-col items-center gap-2">
+                    <IconSearch className="text-secondary" />
+                    <span className="text-xs text-muted-foreground">secondary</span>
+                </div>
+                <div class="flex flex-col items-center gap-2">
+                    <IconSearch className="text-destructive" />
+                    <span className="text-xs text-muted-foreground">destructive</span>
+                </div>
+                <div class="flex flex-col items-center gap-2">
+                    <IconSearch className="text-muted-foreground" />
+                    <span className="text-xs text-muted-foreground">muted</span>
+                </div>
+            </div>
+        </SamplePage>
+
+        ```tsx
+        <IconSearch />
+        <IconSearch className="text-primary" />
+        <IconSearch className="text-secondary" />
+        <IconSearch className="text-destructive" />
+        <IconSearch className="text-muted-foreground" />
+        ```
+    </Section>
+
+</BaseSidebar>

@@ -47,6 +47,12 @@ export const sidebarLinks = [
         ]
     },
     {
+        title: 'Icons',
+        items: [
+            { title: 'Icons', href: '/docs/components/icon' },
+        ]
+    },
+    {
         title: 'Forms',
         items: [  
             { title: 'Form', href: '/docs/forms/form' },

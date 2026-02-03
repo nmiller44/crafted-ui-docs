@@ -1,0 +1,129 @@
+---
+title: 'Container'
+description: 'A responsive container component with maximum width and horizontal padding.'
+---
+import BaseSidebar from "@layouts/BaseSidebar.astro";
+import SamplePage from "@components/SamplePage.astro";
+import Container from "@components/container/Container.astro";
+import Prose from '@components/Prose.astro';
+import Section from '@components/Section.astro';
+
+<BaseSidebar title={frontmatter.title} description={frontmatter.description}>
+
+    <SamplePage>
+        <div class="p-8 bg-background w-full flex justify-center">
+            <Container className="bg-muted p-4">
+                <div class="p-4 border border-border rounded-md flex justify-center items-center">
+                    <p>Content inside container</p>
+                </div>
+            </Container>
+        </div>
+    </SamplePage>
+
+    <Section title="Overview">
+        The Container component provides a responsive wrapper with a maximum width and consistent horizontal padding. It's commonly used to constrain content width and ensure consistent layouts across different screen sizes. The container automatically centers itself in the available space and adjusts its padding based on the viewport width.
+    </Section>
+
+    <Section title="Container">
+        ### Description
+        A responsive container component that provides consistent maximum width and horizontal padding.
+
+        ### Usage
+        ```tsx
+        import { Container } from "crafted-ui";
+
+        <Container>
+          <p>Your content here</p>
+        </Container>
+        ```
+
+        ### Props
+        The `Container` component accepts the following props:
+        
+        | Prop | Type | Description |
+        | --- | --- | --- |
+        | className | string | Additional CSS class names |
+        | children | ReactNode | Content to be contained |
+    </Section>
+
+    <Section title="Examples">
+        ### Basic Container
+        ```tsx
+        <Container>
+          <p>Your content here</p>
+        </Container>
+        ```
+
+        ### With Custom Classes
+        ```tsx
+        <Container className="bg-muted py-8">
+          <h2 className="text-2xl font-bold">Section Title</h2>
+          <p>This content is constrained by the container's max width and has consistent horizontal padding.</p>
+        </Container>
+        ```
+
+        ### Page Layout with Container
+        ```tsx
+        <div className="min-h-screen bg-background">
+          <header className="border-b border-border">
+            <Container className="py-4">
+              <nav>Navigation items</nav>
+            </Container>
+          </header>
+          
+          <main>
+            <Container className="py-8">
+              <h1 className="text-3xl font-bold">Page Title</h1>
+              <p>Main content area</p>
+            </Container>
+          </main>
+          
+          <footer className="bg-muted">
+            <Container className="py-6">
+              <p>Footer content</p>
+            </Container>
+          </footer>
+        </div>
+        ```
+
+        ### Nested Containers
+        In most cases, you should avoid nesting containers as it can lead to unexpected padding and layout issues. Instead, use other layout components within a single container.
+
+        ```tsx
+        <Container>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>Column 1 content</div>
+            <div>Column 2 content</div>
+          </div>
+        </Container>
+        ```
+    </Section>
+
+    <Section title="Styling">
+        The Container component applies the following default styles:
+        
+        - `mx-auto`: Centers the container horizontally
+        - `max-w-container`: Sets a maximum width (defined in your Tailwind configuration)
+        - `px-4 sm:px-6 lg:px-8`: Responsive horizontal padding that increases at larger breakpoints
+        
+        You can customize these styles by providing additional classes through the `className` prop.
+    </Section>
+
+    <Section title="Accessibility">
+        The Container component is primarily a layout utility and doesn't have specific accessibility concerns. However, when using the Container to structure your page:
+        
+        - Ensure logical content organization within the container
+        - Maintain appropriate spacing between content sections for readability
+        - Consider the responsive behavior of content inside the container at different screen sizes
+        - Ensure sufficient reading width for text content (not too wide on large screens, which can harm readability)
+    </Section>
+
+    <Section title="Best Practices">
+        - Use the Container component for main content areas to ensure consistent spacing and maximum width
+        - Apply the Container at the appropriate level in your component hierarchy (typically at the page or section level)
+        - Avoid nesting Containers within each other
+        - Consider how content inside the Container responds at different screen sizes
+        - For full-width sections with contained content, place the Container inside the full-width element
+    </Section>
+
+</BaseSidebar>

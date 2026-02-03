@@ -3,37 +3,59 @@ title: 'Page'
 description: 'A layout component for structuring page content with consistent spacing and container width.'
 ---
 import BaseSidebar from "@/layouts/BaseSidebar.astro";
+import CodePreview from "@/components/CodePreview.astro";
 import SamplePage from "@/components/SamplePage.astro";
 import Page from "@/components/page/Page.astro";
 import PageHeader from "@/components/page/PageHeader.astro";
 import Section from "@/components/section/Section.astro";
 
 import Prose from '@/components/Prose.astro';
+import Heading1 from '@/components/heading/Heading1.astro';
 import Heading3 from '@/components/heading/Heading3.astro';
 import Button from '@/components/button/Button.astro';
+import Badge from '@/components/badge/Badge.astro';
 
 <BaseSidebar title={frontmatter.title} description={frontmatter.description}>
 
-    <SamplePage>
-        <Page title="Sample Page" subtitle="This demonstrates a complete page layout with header and content">
-            <Section title="First Section" prose={false}>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="p-4 bg-muted rounded-md">
-                        <p>This content is automatically contained within the page container with responsive padding.</p>
-                    </div>
-                    <div class="p-4 bg-muted rounded-md">
-                        <p>Page components handle container width, spacing, and responsive behavior automatically.</p>
-                    </div>
+<CodePreview code={`
+<Page title="Sample Page" subtitle="This demonstrates a complete page layout with header and content">
+    <Section title="First Section">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="p-4 bg-muted rounded-md">
+                <p>This content is automatically contained within the page container with responsive padding.</p>
+            </div>
+            <div className="p-4 bg-muted rounded-md">
+                <p>Page components handle container width, spacing, and responsive behavior automatically.</p>
+            </div>
+        </div>
+    </Section>
+    
+    <Section title="Second Section">
+        <div className="p-4 bg-accent/10 rounded-md">
+            <p>Sections within a page are automatically spaced using space-y-12 for consistent vertical rhythm.</p>
+        </div>
+    </Section>
+</Page>
+`}>
+    <Page title="Sample Page" subtitle="This demonstrates a complete page layout with header and content">
+        <Section title="First Section" prose={false}>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="p-4 bg-muted rounded-md">
+                    <p>This content is automatically contained within the page container with responsive padding.</p>
                 </div>
-            </Section>
-            
-            <Section title="Second Section" prose={false}>
-                <div class="p-4 bg-accent/10 rounded-md">
-                    <p>Sections within a page are automatically spaced using space-y-12 for consistent vertical rhythm.</p>
+                <div class="p-4 bg-muted rounded-md">
+                    <p>Page components handle container width, spacing, and responsive behavior automatically.</p>
                 </div>
-            </Section>
-        </Page>
-    </SamplePage>
+            </div>
+        </Section>
+        
+        <Section title="Second Section" prose={false}>
+            <div class="p-4 bg-accent/10 rounded-md">
+                <p>Sections within a page are automatically spaced using space-y-12 for consistent vertical rhythm.</p>
+            </div>
+        </Section>
+    </Page>
+</CodePreview>
 
     <Section title="Overview">
         The Page component provides a complete page layout structure with automatic container sizing, responsive padding, and consistent spacing. It combines container functionality with page-specific styling and can optionally include a PageHeader for titles and actions. The Page component is designed to be the top-level layout component for your application pages.
@@ -42,17 +64,26 @@ import Button from '@/components/button/Button.astro';
     <Section title="Page">
         ### Description
         A layout component that wraps page content with consistent container sizing, padding, and spacing.
+    </Section>
 
-        ### Usage
-        ```tsx
-        import { Page } from "@crafted-ui/react";
+<CodePreview code={`
+import { Page } from "crafted-ui";
+import { Section } from "crafted-ui";
 
-        <Page title="My Page" subtitle="Page description">
-          <Section title="Content Section">
+<Page title="My Page" subtitle="Page description">
+  <Section title="Content Section">
+    <p>Page content goes here</p>
+  </Section>
+</Page>
+`}>
+    <Page title="My Page" subtitle="Page description">
+        <Section title="Content Section" prose={false}>
             <p>Page content goes here</p>
-          </Section>
-        </Page>
-        ```
+        </Section>
+    </Page>
+</CodePreview>
+
+    <Section>
 
         ### Props
         The `Page` component accepts the following props:
@@ -70,18 +101,28 @@ import Button from '@/components/button/Button.astro';
     <Section title="PageHeader">
         ### Description
         A header component specifically designed for page titles with optional actions and responsive layout.
+    </Section>
 
-        ### Usage
-        ```tsx
-        import { PageHeader } from "@crafted-ui/react";
+<CodePreview code={`
+import { PageHeader } from "crafted-ui";
+import { Button } from "crafted-ui";
 
-        <PageHeader 
-          title="Page Title" 
-          subtitle="Page description"
-        >
-          <Button>Action</Button>
-        </PageHeader>
-        ```
+<PageHeader 
+  title="Page Title" 
+  subtitle="Page description"
+>
+  <Button>Action</Button>
+</PageHeader>
+`}>
+    <PageHeader 
+      title="Page Title" 
+      subtitle="Page description"
+    >
+        <Button>Action</Button>
+    </PageHeader>
+</CodePreview>
+
+    <Section>
 
         ### Props
         The `PageHeader` component accepts the following props:
@@ -104,155 +145,194 @@ import Button from '@/components/button/Button.astro';
         - **Container width**: `max-w-container mx-auto` (centers content with maximum width)
         - **Responsive padding**: `px-4 py-6 sm:px-6 lg:px-8 lg:py-8`
         - **Content spacing**: `space-y-12` for vertical spacing between child elements
+    </Section>
 
-        <SamplePage>
-            <div class="border border-border rounded-md overflow-hidden">
-                <Page title="Layout Demo" subtitle="Shows container and spacing behavior">
-                    <div class="p-4 bg-primary/10 rounded-md">
-                        <p class="text-sm">Container content with automatic width constraints</p>
-                    </div>
-                    <div class="p-4 bg-secondary/10 rounded-md">
-                        <p class="text-sm">Automatic spacing between content blocks (space-y-12)</p>
-                    </div>
-                </Page>
-            </div>
-        </SamplePage>
-
-        ```tsx
+<CodePreview code={`
+<Page title="Layout Demo" subtitle="Shows container and spacing behavior">
+  <div className="p-4 bg-primary/10 rounded-md">
+    <p className="text-sm">Container content with automatic width constraints</p>
+  </div>
+  <div className="p-4 bg-secondary/10 rounded-md">
+    <p className="text-sm">Automatic spacing between content blocks (space-y-12)</p>
+  </div>
+</Page>
+`}>
+    <div class="border border-border rounded-md overflow-hidden">
         <Page title="Layout Demo" subtitle="Shows container and spacing behavior">
-          <div>Container content with automatic width constraints</div>
-          <div>Automatic spacing between content blocks</div>
+            <div class="p-4 bg-primary/10 rounded-md">
+                <p class="text-sm">Container content with automatic width constraints</p>
+            </div>
+            <div class="p-4 bg-secondary/10 rounded-md">
+                <p class="text-sm">Automatic spacing between content blocks (space-y-12)</p>
+            </div>
         </Page>
-        ```
+    </div>
+</CodePreview>
+
+    <Section>
 
         ### Header Layout
         When a title is provided, PageHeader automatically handles responsive layout:
 
         - **Mobile**: Title and actions stack vertically
         - **Desktop**: Title and actions are side-by-side with `md:flex md:items-center md:justify-between`
+    </Section>
 
-        <SamplePage>
-            <PageHeader title="Page with Actions" subtitle="Responsive header layout">
-                <div class="flex gap-2">
-                    <Button>Edit</Button>
-                    <Button clr="primary">Save</Button>
-                </div>
-            </PageHeader>
-        </SamplePage>
-
-        ```tsx
-        <PageHeader title="Page with Actions" subtitle="Responsive header layout">
-          <div className="flex gap-2">
+<CodePreview code={`
+<PageHeader title="Page with Actions" subtitle="Responsive header layout">
+  <div className="flex gap-2">
+    <Button>Edit</Button>
+    <Button clr="primary">Save</Button>
+  </div>
+</PageHeader>
+`}>
+    <PageHeader title="Page with Actions" subtitle="Responsive header layout">
+        <div class="flex gap-2">
             <Button>Edit</Button>
-            <Button variant="primary">Save</Button>
-          </div>
-        </PageHeader>
-        ```
+            <Button clr="primary">Save</Button>
+        </div>
+    </PageHeader>
+</CodePreview>
+
+    <Section>
+        ### Header with Badge and Actions
+        Combine a Badge with the header title and include action buttons using a custom header structure:
+    </Section>
+
+<CodePreview code={`
+import { PageHeader } from "crafted-ui";
+import { Badge } from "crafted-ui";
+import { Button } from "crafted-ui";
+
+<PageHeader subtitle="Manage your craft brewery inventory">
+  <div className="flex items-start gap-3">
+    <h1 className="text-4xl font-bold tracking-tight">Barrel Aged Collection</h1>
+    <Badge clr="warning">Limited</Badge>
+  </div>
+  <div className="flex gap-2">
+    <Button>View Details</Button>
+    <Button clr="primary">Add to Collection</Button>
+  </div>
+</PageHeader>
+`}>
+    <PageHeader>
+        <div class="flex items-start gap-3">
+            <Heading1 title="Barrel Aged Collection" 
+                      subtitle="Manage your craft brewery inventory" />
+            <Badge clr="warning">Limited</Badge>
+        </div>
+        <div class="flex gap-2">
+            <Button>View Details</Button>
+            <Button clr="primary">Add to Collection</Button>
+        </div>
+    </PageHeader>
+</CodePreview>
+
+    <Section>
     </Section>
 
     <Section title="Usage Patterns">
         ### Complete Page Layout
         Using Page for a full page structure:
+    </Section>
 
-        <SamplePage>
-            <Page title="Dashboard" subtitle="Overview of your account">
-                <Section title="Quick Stats" prose={false}>
-                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                        <div class="p-4 bg-muted rounded-md text-center">
-                            <div class="text-2xl font-bold">1,234</div>
-                            <div class="text-sm text-muted-foreground">Total Users</div>
-                        </div>
-                        <div class="p-4 bg-muted rounded-md text-center">
-                            <div class="text-2xl font-bold">56</div>
-                            <div class="text-sm text-muted-foreground">Active Projects</div>
-                        </div>
-                        <div class="p-4 bg-muted rounded-md text-center">
-                            <div class="text-2xl font-bold">89%</div>
-                            <div class="text-sm text-muted-foreground">Completion Rate</div>
-                        </div>
-                    </div>
-                </Section>
-                
-                <Section title="Recent Activity" prose={false}>
-                    <div class="space-y-3">
-                        <div class="p-3 bg-muted rounded-md text-sm">User John Doe completed Project Alpha</div>
-                        <div class="p-3 bg-muted rounded-md text-sm">New team member added to Beta Team</div>
-                        <div class="p-3 bg-muted rounded-md text-sm">Project Gamma reached 75% completion</div>
-                    </div>
-                </Section>
-            </Page>
-        </SamplePage>
-
-        ```tsx
-        <Page title="Dashboard" subtitle="Overview of your account">
-          <Section title="Quick Stats">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              {/* Metric cards */}
+<SamplePage>
+    <Page title="Dashboard" subtitle="Overview of your account">
+        <Section title="Quick Stats" prose={false}>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="p-4 bg-muted rounded-md text-center">
+                    <div class="text-2xl font-bold">1,234</div>
+                    <div class="text-sm text-muted-foreground">Total Users</div>
+                </div>
+                <div class="p-4 bg-muted rounded-md text-center">
+                    <div class="text-2xl font-bold">56</div>
+                    <div class="text-sm text-muted-foreground">Active Projects</div>
+                </div>
+                <div class="p-4 bg-muted rounded-md text-center">
+                    <div class="text-2xl font-bold">89%</div>
+                    <div class="text-sm text-muted-foreground">Completion Rate</div>
+                </div>
             </div>
-          </Section>
-          
-          <Section title="Recent Activity">
-            {/* Activity list */}
-          </Section>
-        </Page>
-        ```
+        </Section>
+        
+        <Section title="Recent Activity" prose={false}>
+            <div class="space-y-3">
+                <div class="p-3 bg-muted rounded-md text-sm">User John Doe completed Project Alpha</div>
+                <div class="p-3 bg-muted rounded-md text-sm">New team member added to Beta Team</div>
+                <div class="p-3 bg-muted rounded-md text-sm">Project Gamma reached 75% completion</div>
+            </div>
+        </Section>
+    </Page>
+</SamplePage>
+
+    <Section>
 
         ### Page with Header Actions
         Including action buttons in the page header:
+    </Section>
 
-        <SamplePage>
-            <Page title="User Settings" subtitle="Manage your account preferences">
-                <div slot="header-actions">
-                    <Button clr="primary">Save Changes</Button>
-                </div>
-                
-                <Section title="Profile Information" prose={false}>
-                    <div class="space-y-4">
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div class="p-4 bg-muted rounded-md">
-                                <label class="block text-sm font-medium mb-2">First Name</label>
-                                <input type="text" class="w-full p-2 border border-border rounded-md" value="John" />
-                            </div>
-                            <div class="p-4 bg-muted rounded-md">
-                                <label class="block text-sm font-medium mb-2">Last Name</label>
-                                <input type="text" class="w-full p-2 border border-border rounded-md" value="Doe" />
-                            </div>
-                        </div>
+<SamplePage>
+    <Page title="User Settings" subtitle="Manage your account preferences">
+        <div slot="header-actions">
+            <Button clr="primary">Save Changes</Button>
+        </div>
+        
+        <Section title="Profile Information" prose={false}>
+            <div class="space-y-4">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="p-4 bg-muted rounded-md">
+                        <label class="block text-sm font-medium mb-2">First Name</label>
+                        <input type="text" class="w-full p-2 border border-border rounded-md" value="John" />
                     </div>
-                </Section>
-            </Page>
-        </SamplePage>
+                    <div class="p-4 bg-muted rounded-md">
+                        <label class="block text-sm font-medium mb-2">Last Name</label>
+                        <input type="text" class="w-full p-2 border border-border rounded-md" value="Doe" />
+                    </div>
+                </div>
+            </div>
+        </Section>
+    </Page>
+</SamplePage>
 
-        ```tsx
-        <Page title="User Settings" subtitle="Manage your account preferences">
-          <PageHeader title="User Settings" subtitle="Manage your account preferences">
-            <Button variant="primary">Save Changes</Button>
-          </PageHeader>
-          
-          <Section title="Profile Information">
-            {/* Form content */}
-          </Section>
-        </Page>
-        ```
+    <Section>
 
         ### Standalone PageHeader
         Using PageHeader independently for custom layouts:
+    </Section>
 
-        ```tsx
-        <div className="min-h-screen bg-background">
-          <PageHeader 
-            title="Custom Layout" 
-            subtitle="Using PageHeader independently"
-            wrapperClassName="bg-muted px-4 py-6"
-          >
+<CodePreview code={`
+<div>
+  <PageHeader 
+    title="Custom Layout" 
+    subtitle="Using PageHeader independently"
+    wrapperClassName="bg-muted px-4 py-6"
+  >
+    <Button>Custom Action</Button>
+  </PageHeader>
+  
+  <main className="px-4 py-8">
+    {/* Custom content layout */}
+  </main>
+</div>
+`}>
+    <div>
+        <PageHeader 
+          title="Custom Layout" 
+          subtitle="Using PageHeader independently"
+          wrapperClassName="bg-muted px-4 py-6"
+        >
             <Button>Custom Action</Button>
-          </PageHeader>
-          
-          <main className="px-4 py-8">
-            {/* Custom content layout */}
-          </main>
-        </div>
-        ```
+        </PageHeader>
+        
+        <main class="px-4 py-8">
+            <div class="p-4 bg-muted/50 rounded-md">
+                <p>Custom content layout</p>
+            </div>
+        </main>
+    </div>
+</CodePreview>
+
+    <Section>
     </Section>
 
     <Section title="Responsive Behavior">
@@ -297,50 +377,93 @@ import Button from '@/components/button/Button.astro';
     <Section title="Customization">
         ### Custom Container Styling
         Override default container behavior:
+    </Section>
 
-        ```tsx
-        <Page 
-          className="max-w-4xl space-y-6" 
-          title="Custom Width"
-        >
-          <Section title="Narrower Container">
+<CodePreview code={`
+<Page 
+  className="max-w-4xl space-y-6" 
+  title="Custom Width"
+>
+  <Section title="Narrower Container">
+    <p>Content with custom maximum width</p>
+  </Section>
+</Page>
+`}>
+    <Page 
+      className="max-w-4xl space-y-6" 
+      title="Custom Width"
+    >
+        <Section title="Narrower Container" prose={false}>
             <p>Content with custom maximum width</p>
-          </Section>
-        </Page>
-        ```
+        </Section>
+    </Page>
+</CodePreview>
+
+    <Section>
 
         ### Custom Header Styling
         Apply custom styling to PageHeader:
+    </Section>
 
-        ```tsx
-        <PageHeader 
-          title="Styled Header" 
-          subtitle="Custom appearance"
-          wrapperClassName="bg-gradient-to-r from-primary to-accent p-8 rounded-lg"
-          className="text-white"
-        >
-          <Button variant="secondary">Action</Button>
-        </PageHeader>
-        ```
+<CodePreview code={`
+<PageHeader 
+  title="Styled Header" 
+  subtitle="Custom appearance"
+  wrapperClassName="bg-gradient-to-r from-primary to-accent p-8 rounded-lg"
+  className="text-white"
+>
+  <Button clr="secondary">Action</Button>
+</PageHeader>
+`}>
+    <PageHeader 
+      title="Styled Header" 
+      subtitle="Custom appearance"
+      wrapperClassName="bg-gradient-to-r from-primary to-accent p-8 rounded-lg"
+      className="text-white"
+    >
+        <Button clr="secondary">Action</Button>
+    </PageHeader>
+</CodePreview>
+
+    <Section>
 
         ### Full-Width Sections
         Combine Page with full-width elements:
+    </Section>
 
-        ```tsx
+<CodePreview code={`
+<Page title="Mixed Layout">
+  <Section title="Regular Content">
+    <p>Standard container width</p>
+  </Section>
+</Page>
+
+<div className="bg-muted py-12">
+  <div className="max-w-container mx-auto px-4 sm:px-6 lg:px-8">
+    <Section title="Full-Width Section">
+      <p>Full-width background with contained content</p>
+    </Section>
+  </div>
+</div>
+`}>
+    <div class="space-y-0">
         <Page title="Mixed Layout">
-          <Section title="Regular Content">
-            <p>Standard container width</p>
-          </Section>
+            <Section title="Regular Content" prose={false}>
+                <p>Standard container width</p>
+            </Section>
         </Page>
         
-        <div className="bg-muted py-12">
-          <div className="max-w-container mx-auto px-4 sm:px-6 lg:px-8">
-            <Section title="Full-Width Section">
-              <p>Full-width background with contained content</p>
-            </Section>
-          </div>
+        <div class="bg-muted py-12">
+            <div class="max-w-container mx-auto px-4 sm:px-6 lg:px-8">
+                <Section title="Full-Width Section" prose={false}>
+                    <p>Full-width background with contained content</p>
+                </Section>
+            </div>
         </div>
-        ```
+    </div>
+</CodePreview>
+
+    <Section>
     </Section>
 
     <Section title="Best Practices">

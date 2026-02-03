@@ -29,11 +29,11 @@ import Heading3 from '../../components/heading/Heading3.astro';
         Import the Crafted UI styles in your application's main CSS file:
 
         ```css
-        @import 'tailwindcss';
-        @import 'crafted-ui/styles';
+        @import "tailwindcss";
+        @import "crafted-ui/styles" layer(components);
         ```
 
-        This will include all the necessary CSS for the Crafted UI components.
+        This will include all the necessary CSS for the Crafted UI components. **NOTE:** The `layer(components)` directive ensures that Crafted UI styles are properly layered, allowing your custom utility classes to override component defaults.
     </Section>
 
     <Section title="Use Crafted UI">
