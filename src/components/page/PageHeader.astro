@@ -19,9 +19,9 @@ const {
 } = Astro.props;
 ---
 <header class={classNames(
-            "max-w-container mr-auto",
+            "max-w-container mr-auto w-full",
             "px-6 lg:px-8",
-            (!!title && Astro.slots.has('default')) ? "space-y-6 md:flex md:items-top md:justify-between" : "",
+            "space-y-6 md:flex md:items-start md:justify-between",
             wrapperClassName)} {...props}>
     { !!title
         ?   <>
