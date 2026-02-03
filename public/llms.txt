@@ -27,6 +27,7 @@ Crafted UI is a component library built with React 19, TypeScript, Tailwind CSS 
 - Breadcrumb: /docs/components/breadcrumb - Show hierarchical navigation path
 - Button: /docs/components/button - Interactive button with full color palette (semantic, status, and base colors)
 - Card: /docs/components/card - Container for related content with header, body, and footer
+- Icon: /docs/components/icon - Reusable SVG icons for common UI elements and actions
 - Metric: /docs/components/metric - Display key metrics and statistics with optional trends
 - Pagination: /docs/components/pagination - Navigate through paginated data with customizable page ranges
 - Sidebar: /docs/components/sidebar - Navigation sidebar component for page layouts
@@ -49,7 +50,7 @@ The following components are exported from the Crafted UI library:
 
 **Layout**: page, section
 
-**UI Components**: alert, avatar, badge, breadcrumb, button, card, desclist (description list), empty, heading, menu, metric, modal, pagination, tablist, vertlist
+**UI Components**: alert, avatar, badge, breadcrumb, button, card, desclist (description list), empty, heading, icon, menu, metric, modal, pagination, tablist, vertlist
 
 **Form Components**: checkbox, field, fieldset, form, input, radio, select, textarea
 
