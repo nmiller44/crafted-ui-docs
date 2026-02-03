@@ -1,0 +1,13 @@
+---
+import { classNames } from "../../utils/classNames";
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<'button'> {
+}
+
+const { class: className, ...props } = Astro.props;
+---
+
+<button class={classNames("", className)} {...props}>
+    <slot />
+</button>

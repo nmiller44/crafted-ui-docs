@@ -1,0 +1,13 @@
+---
+import { classNames } from "../../utils/classNames";
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<'p'> {
+}
+
+const { class: className, ...props } = Astro.props;
+---
+
+<p class={classNames("text-sm text-muted-foreground", className)} {...props}>
+    <slot />
+</p>

@@ -1,0 +1,39 @@
+---
+import { classNames } from "../../utils/classNames";
+import type { HTMLAttributes } from "astro/types";
+import ModalTitle from "./ModalTitle.astro";
+
+interface Props extends HTMLAttributes<'div'> {
+    title?: string;
+    subtitle?: string;
+    size?: "sm" | "md" | "lg" | "xl";
+    static?: boolean;
+}
+
+const { title, subtitle, size = "md", static: isStatic = false, class: className, ...props } = Astro.props;
+
+const sizeClass = {
+    sm: "w-96",      // 384px - compact content
+    md: "w-[32rem]", // 512px - forms with 1-2 columns
+    lg: "w-[40rem]", // 640px - wider forms or data tables
+    xl: "w-[48rem]", // 768px - complex layouts
+}[size];
+---
+
+{!isStatic && <div class="fixed inset-0 bg-black opacity-20 dark:opacity-70"></div>}
+<div 
+    class={classNames(
+        "flex flex-col space-y-8",
+        isStatic ? "" : "fixed top-1/2 left-1/2 -mt-8",
+        "max-w-[calc(100vw-3rem)]", 
+        sizeClass,
+        isStatic ? "" : "-translate-x-1/2 -translate-y-1/2",
+        "p-6",
+        "rounded-lg bg-card outline outline-1 outline-border",
+        className
+    )} 
+    {...props}
+>
+    {title && <ModalTitle title={title} subtitle={subtitle} />}
+    <slot />
+</div>

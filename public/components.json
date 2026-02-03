@@ -1,0 +1,29 @@
+[
+  {
+    "name": "Alert",
+    "description": "Displays important messages for the user.",
+    "docs": "https://crafted-ui.com/docs/components/alert/",
+    "storybook": "https://storybook/crafted-ui.com/?path=/story/craftedui-components-alert",
+    "status": "stable",
+    "category": "feedback",
+    "accessibility": "WCAG 2.1 AA",
+    "baseUI": false,
+    "hasStorybook": false,
+    "hasDocs": true,
+    "tags": ["error", "info", "success", "warning"]
+  },
+  {
+    "name": "Button",
+    "description": "A versatile button for user actions.",
+    "docs": "https://crafted-ui.com/docs/components/button/",
+    "storybook": "https://storybook/crafted-ui.com/?path=/story/craftedui-components-button",
+    "status": "stable",
+    "category": "action",
+    "accessibility": "WCAG 2.1 AA",
+    "baseUI": false,
+    "hasStorybook": false,
+    "hasDocs": true,
+    "tags": ["primary", "secondary", "destructive"]
+  }
+  // Add more components as needed
+]

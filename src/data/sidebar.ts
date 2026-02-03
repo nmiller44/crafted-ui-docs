@@ -40,6 +40,7 @@ export const sidebarLinks = [
             { title: 'Button', href: '/docs/components/button' },
             { title: 'Card', href: '/docs/components/card' },
             { title: 'Metric', href: '/docs/components/metric' },
+            { title: 'Modal', href: '/docs/components/modal' },
             { title: 'Pagination', href: '/docs/components/pagination' },
             { title: 'Sidebar', href: '/docs/components/sidebar' },
             { title: 'Tablist', href: '/docs/components/tablist' },

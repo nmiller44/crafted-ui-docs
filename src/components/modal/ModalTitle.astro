@@ -1,0 +1,24 @@
+---
+import { classNames } from "../../utils/classNames";
+import type { HTMLAttributes } from "astro/types";
+import Heading5 from "../heading/Heading5.astro";
+import ModalClose from "./ModalClose.astro";
+
+interface Props extends HTMLAttributes<'div'> {
+    title?: string;
+    subtitle?: string;
+}
+
+const { title, subtitle, class: className, ...props } = Astro.props;
+---
+
+<div class={classNames("", className)} {...props}>
+    {title ? (
+        <div class="flex items-top justify-between">
+            <div><Heading5 title={title} subtitle={subtitle} /></div>
+            <div><ModalClose>X</ModalClose></div>
+        </div>
+    ) : (
+        <slot />
+    )}
+</div>
