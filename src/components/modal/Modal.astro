@@ -1,0 +1,17 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+interface Props extends HTMLAttributes<'div'> {
+    open?: boolean;
+}
+
+const { open = false, ...props } = Astro.props;
+---
+
+<div 
+    x-data={`{ open: ${open} }`}
+    @keydown.escape.window="open = false"
+    {...props}
+>
+    <slot />
+</div>

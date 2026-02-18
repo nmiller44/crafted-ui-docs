@@ -1,0 +1,60 @@
+---
+import { classNames } from "../../utils/classNames";
+import type { HTMLAttributes } from "astro/types";
+import ModalTitle from "./ModalTitle.astro";
+
+interface Props extends HTMLAttributes<'div'> {
+    title?: string;
+    subtitle?: string;
+    size?: "sm" | "md" | "lg" | "xl";
+    static?: boolean;
+}
+
+const { title, subtitle, size = "md", static: isStatic = false, class: className, ...props } = Astro.props;
+
+const sizeClass = {
+    sm: "w-96",      // 384px - compact content
+    md: "w-[32rem]", // 512px - forms with 1-2 columns
+    lg: "w-[40rem]", // 640px - wider forms or data tables
+    xl: "w-[48rem]", // 768px - complex layouts
+}[size];
+---
+
+{!isStatic && (
+    <div 
+        x-show="open"
+        x-transition:enter="transition ease-out duration-200"
+        x-transition:enter-start="opacity-0"
+        x-transition:enter-end="opacity-100"
+        x-transition:leave="transition ease-in duration-150"
+        x-transition:leave-start="opacity-100"
+        x-transition:leave-end="opacity-0"
+        class="fixed inset-0 bg-black/20 dark:bg-black/70"
+        x-cloak
+    ></div>
+)}
+<div 
+    x-show="open"
+    x-transition:enter="transition ease-out duration-200"
+    x-transition:enter-start="opacity-0 scale-95"
+    x-transition:enter-end="opacity-100 scale-100"
+    x-transition:leave="transition ease-in duration-150"
+    x-transition:leave-start="opacity-100 scale-100"
+    x-transition:leave-end="opacity-0 scale-95"
+    @click.outside="open = false"
+    x-cloak
+    class={classNames(
+        "flex flex-col space-y-8",
+        isStatic ? "" : "fixed top-1/2 left-1/2 -mt-8 z-50",
+        "max-w-[calc(100vw-3rem)]", 
+        sizeClass,
+        isStatic ? "" : "-translate-x-1/2 -translate-y-1/2",
+        "p-6",
+        "rounded-lg bg-card outline outline-1 outline-border",
+        className
+    )} 
+    {...props}
+>
+    {title && <ModalTitle title={title} subtitle={subtitle} />}
+    <slot />
+</div>

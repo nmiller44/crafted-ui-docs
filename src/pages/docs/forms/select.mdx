@@ -64,7 +64,85 @@ import Select from '@/components/select/Select.astro';
     </CodePreview>
 
     <Section title="Overview">
-        The Select component provides a dropdown menu for choosing from a list of options. It extends the native HTML select element with consistent styling and theming, working seamlessly within the Field component for labels and error handling.
+        The Select component provides a dropdown menu for choosing from a list of options. It **automatically generates dropdown options** from the `items` prop - you don't need to manually define SelectOption children for simple lists.
+        
+        Pass an array of options to `items`, and Select handles the rest. Manual SelectOption children are only needed for custom rendering like badges, icons, or complex layouts.
+        
+        **The `items` prop is essential for proper functionality.** While technically optional, omitting it will cause selected values to display as raw strings instead of formatted labels, resulting in a broken user experience.
+    </Section>
+
+    <Section title="Usage Patterns">
+        The Select component supports two patterns for providing options:
+        
+        ### Standard Pattern (Recommended)
+        
+        Pass an array of options to the `items` prop:
+        
+        ```tsx
+        <Select items={[
+          { value: 'option1', label: 'Option 1' },
+          { value: 'option2', label: 'Option 2' }
+        ]} />
+        ```
+        
+        ### Advanced Pattern (Custom Rendering)
+        
+        Use `SelectOption` children for custom option rendering. **The `items` prop is still required** to provide labels for selected values:
+        
+        ```tsx
+        <Select items={[
+          { value: 'pro', label: 'Professional Plan' },
+          { value: 'basic', label: 'Basic Plan' }
+        ]}>
+          <SelectOption value="pro">
+            <Badge>Pro</Badge> Professional - $99/mo
+          </SelectOption>
+          <SelectOption value="basic">
+            Basic - $9/mo
+          </SelectOption>
+        </Select>
+        ```
+        
+        When children are provided, they render in the dropdown while `items` provides the selected value display.
+    </Section>
+
+    <Section title="When to Use Each Pattern">
+        Choose the right pattern based on your dropdown option complexity:
+        
+        ### Use items prop only (99% of use cases)
+        
+        - Simple dropdown lists where options show plain text
+        - No custom styling, icons, or badges needed in dropdown
+        - Let Select auto-generate options automatically
+        - **This is the recommended default pattern**
+        
+        ```tsx
+        <Select items={[
+          { value: 'option1', label: 'Option 1' },
+          { value: 'option2', label: 'Option 2' }
+        ]} />
+        ```
+        
+        ### Use items + SelectOption children (rare customization)
+        
+        - Adding badges, icons, or avatars to dropdown options
+        - Complex layouts within dropdown items (multi-line, supporting text)
+        - Custom styling or interactive elements in options
+        - **Always include items prop** even when using children
+        
+        ```tsx
+        <Select items={[
+          { value: 'pro', label: 'Professional' },
+          { value: 'basic', label: 'Basic' }
+        ]}>
+          <SelectOption value="pro">
+            <Badge>Pro</Badge> Professional - $99/mo
+          </SelectOption>
+          <SelectOption value="basic">Basic - $9/mo</SelectOption>
+        </Select>
+        ```
+        
+        **Rule of thumb:** If your dropdown options are just text, use only the `items` prop.
     </Section>
 
     <Section title="Basic Usage">
@@ -146,12 +224,141 @@ import Select from '@/components/select/Select.astro';
       </div>
     </CodePreview>
 
+    <Section title="Custom Options">
+        ### Description
+        When you need custom rendering in dropdown options (badges, icons, complex layouts), use SelectOption children. The `items` prop is still required to provide labels for selected values.
+    </Section>
+
+    <CodePreview code={`
+        <div className="space-y-6 max-w-sm">
+          <Field>
+            <FieldLabel>Subscription Plan</FieldLabel>
+            <Select 
+              items={[
+                { value: 'pro', label: 'Professional Plan' },
+                { value: 'business', label: 'Business Plan' },
+                { value: 'basic', label: 'Basic Plan' }
+              ]}
+              defaultValue="pro"
+            >
+              <SelectOption value="pro">
+                <Badge clr="primary">Pro</Badge> Professional - $99/mo
+              </SelectOption>
+              <SelectOption value="business">
+                <Badge clr="secondary">Business</Badge> Business - $199/mo
+              </SelectOption>
+              <SelectOption value="basic">
+                Basic - $9/mo
+              </SelectOption>
+            </Select>
+          </Field>
+          
+          <Field>
+            <FieldLabel>Brewery (with emoji icons)</FieldLabel>
+            <Select 
+              items={[
+                { value: 'local', label: 'Local Brewery' },
+                { value: 'regional', label: 'Regional Brewery' },
+                { value: 'national', label: 'National Brewery' }
+              ]}
+            >
+              <SelectOption value="local">🍺 Local Brewery</SelectOption>
+              <SelectOption value="regional">🏭 Regional Brewery</SelectOption>
+              <SelectOption value="national">🌎 National Brewery</SelectOption>
+            </Select>
+          </Field>
+        </div>
+    `}>
+      <div class="space-y-6 max-w-sm">
+        <Field>
+          <FieldLabel>Subscription Plan</FieldLabel>
+          <Select 
+            items={[
+              { value: 'pro', label: 'Professional Plan' },
+              { value: 'business', label: 'Business Plan' },
+              { value: 'basic', label: 'Basic Plan' }
+            ]}
+            defaultValue="pro"
+          />
+        </Field>
+        
+        <Field>
+          <FieldLabel>Brewery Type</FieldLabel>
+          <Select 
+            items={[
+              { value: 'local', label: 'Local Brewery' },
+              { value: 'regional', label: 'Regional Brewery' },
+              { value: 'national', label: 'National Brewery' }
+            ]}
+          />
+        </Field>
+      </div>
+    </CodePreview>
+
+    <Section title="Common Mistakes">
+        ### Omitting the items prop
+        
+        While the `items` prop is technically optional in TypeScript, omitting it results in broken functionality where selected values display as raw strings instead of formatted labels.
+        
+        ❌ **Incorrect** - No items array:
+        ```tsx
+        <Select placeholder="Choose...">
+          <SelectOption value="option1">Option 1</SelectOption>
+          <SelectOption value="option2">Option 2</SelectOption>
+        </Select>
+        ```
+        Result: When a user selects an option, the trigger shows "option1" instead of "Option 1".
+        
+        ✅ **Correct** - Items array provided:
+        ```tsx
+        <Select 
+          items={[
+            { value: 'option1', label: 'Option 1' },
+            { value: 'option2', label: 'Option 2' }
+          ]}
+          placeholder="Choose..."
+        />
+        ```
+        
+        ### Manually defining SelectOption for simple lists
+        
+        Don't manually define SelectOption children when you just need simple text options. Use the `items` prop and let Select auto-generate the options.
+        
+        ❌ **Incorrect** - Unnecessary manual SelectOption:
+        ```tsx
+        <Select items={[
+          { value: 'ipa', label: 'IPA' },
+          { value: 'stout', label: 'Stout' }
+        ]}>
+          <SelectOption value="ipa">IPA</SelectOption>
+          <SelectOption value="stout">Stout</SelectOption>
+        </Select>
+        ```
+        
+        ✅ **Correct** - Let Select auto-generate options:
+        ```tsx
+        <Select items={[
+          { value: 'ipa', label: 'IPA' },
+          { value: 'stout', label: 'Stout' }
+        ]} />
+        ```
+        
+        ### Empty Select states
+        
+        When the items array is empty or not provided, the Select automatically disables itself to prevent confusing interactions:
+        
+        ```tsx
+        <Select items={[]} placeholder="No options" />
+        // Automatically disabled
+        ```
+    </Section>
+
     <Section title="Props">
         The `Select` component accepts the following props:
         
         | Prop | Type | Default | Description |
         | --- | --- | --- | --- |
-        | items | SelectItemProp[] | [] | Array of options with value and label properties |
+        | items | SelectItemProp[] | [] | **Essential for proper functionality.** Array of options with value and label properties. Without this, selected values display as raw strings. |
         | placeholder | string | - | Placeholder text when no option is selected |
         | align | 'start' \| 'center' \| 'end' | 'start' | Alignment of the dropdown menu |
         | alignOffset | number | 0 | Offset for the dropdown menu alignment |
@@ -177,6 +384,7 @@ import Select from '@/components/select/Select.astro';
         - **Dark Mode**: Fully themed with CSS custom properties
         - **Keyboard Navigation**: Full keyboard support for accessibility
         - **Custom Options**: Can use children to render custom option components
+        - **Auto-disable**: Automatically disables when items array is empty or not provided
         
         ### Usage Notes
         
@@ -184,6 +392,7 @@ import Select from '@/components/select/Select.astro';
         - Values can be strings, numbers, arrays, or objects
         - The dropdown automatically matches the width of the trigger
         - Use `align` and `alignOffset` to position the dropdown menu
+        - When items is empty or omitted, the Select automatically disables to prevent broken UX
     </Section>
 
 </BaseSidebar>

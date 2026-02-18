@@ -1,0 +1,384 @@
+---
+title: 'Modal'
+description: 'A dialog component for displaying content that requires user interaction or attention.'
+---
+import BaseSidebar from "@/layouts/BaseSidebar.astro";
+import Modal from "@/components/modal/Modal.astro";
+import ModalTrigger from "@/components/modal/ModalTrigger.astro";
+import ModalContent from "@/components/modal/ModalContent.astro";
+import ModalClose from "@/components/modal/ModalClose.astro";
+import ModalDescription from "@/components/modal/ModalDescription.astro";
+
+import Button from "@/components/button/Button.astro";
+import Field from "@/components/field/Field.astro";
+import FieldLabel from "@/components/field/FieldLabel.astro";
+import Fieldset from "@/components/fieldset/Fieldset.astro";
+import FieldsetButtons from "@/components/fieldset/FieldsetButtons.astro";
+import Input from "@/components/input/Input.astro";
+import Textarea from "@/components/textarea/Textarea.astro";
+
+import Section from '@/components/Section.astro';
+import CodePreview from '@/components/CodePreview.astro';
+
+<BaseSidebar title={frontmatter.title} description={frontmatter.description}>
+
+<CodePreview code={`
+<Modal>
+    <ModalTrigger>
+        <Button>Open Modal</Button>
+    </ModalTrigger>
+    <ModalContent title="Brewery Tour Confirmation" subtitle="January 20, 2026">
+        <ModalDescription>
+            Your tour has been confirmed for 2:00 PM. Please arrive 10 minutes early.
+        </ModalDescription>
+        <Fieldset>
+            <FieldsetButtons>
+                <ModalClose>
+                    <Button clr="secondary" outline>Close</Button>
+                </ModalClose>
+                <Button clr="primary">Add to Calendar</Button>
+            </FieldsetButtons>
+        </Fieldset>
+    </ModalContent>
+</Modal>
+`}>
+    <div class="flex items-center justify-center py-8">
+        <Modal>
+            <ModalTrigger>
+                <Button>Open Modal</Button>
+            </ModalTrigger>
+            <ModalContent title="Brewery Tour Confirmation" subtitle="January 20, 2026">
+                <ModalDescription>
+                    Your tour has been confirmed for 2:00 PM. Please arrive 10 minutes early. You'll explore our brewing facility, barrel room, and enjoy samples of our seasonal releases.
+                </ModalDescription>
+                <Fieldset>
+                    <FieldsetButtons>
+                        <ModalClose>
+                            <Button clr="secondary" outline>Close</Button>
+                        </ModalClose>
+                        <Button clr="primary">Add to Calendar</Button>
+                    </FieldsetButtons>
+                </Fieldset>
+            </ModalContent>
+        </Modal>
+    </div>
+</CodePreview>
+
+<Section title="Overview">
+    The Modal component provides a dialog interface for displaying content that overlays the main application. It's built on Base UI's Dialog primitive, offering full accessibility support with proper focus management, keyboard navigation, and ARIA attributes.
+    
+    The Modal component is composable, consisting of several sub-components that work together to create complete dialog experiences.
+</Section>
+
+<Section title="Components">
+    ### Modal
+    
+    The root component that manages the modal state and wraps all other modal components.
+    
+    **Usage:**
+    ```tsx
+    import { Modal } from "crafted-ui";
+    
+    <Modal>
+        {/* Modal sub-components */}
+    </Modal>
+    ```
+    
+    **Props:**
+    
+    | Prop | Type | Default | Description |
+    | --- | --- | --- | --- |
+    | open | boolean | - | Controlled open state |
+    | defaultOpen | boolean | false | Uncontrolled default open state |
+    | onOpenChange | (open: boolean) => void | - | Callback when open state changes |
+    | className | string | - | Additional CSS class names |
+    
+    Accepts all props from the Base UI Dialog.Root component.
+    
+    ### ModalTrigger
+    
+    A button that opens the modal when clicked.
+    
+    **Usage:**
+    ```tsx
+    import { ModalTrigger } from "crafted-ui";
+    
+    <ModalTrigger>
+        <Button>Open Modal</Button>
+    </ModalTrigger>
+    ```
+    
+    **Props:**
+    
+    | Prop | Type | Default | Description |
+    | --- | --- | --- | --- |
+    | className | string | - | Additional CSS class names |
+    | children | ReactNode | - | Content of the trigger (typically a Button) |
+    
+    Accepts all props from the Base UI Dialog.Trigger component.
+    
+    ### ModalContent
+    
+    The main modal dialog container that displays the modal content with optional title and subtitle.
+    
+    **Usage:**
+    ```tsx
+    import { ModalContent } from "crafted-ui";
+    
+    <ModalContent title="Modal Title" subtitle="Optional subtitle">
+        {/* Modal content */}
+    </ModalContent>
+    ```
+    
+    **Props:**
+    
+    | Prop | Type | Default | Description |
+    | --- | --- | --- | --- |
+    | title | string | - | Modal title (automatically includes close button) |
+    | subtitle | string | - | Optional subtitle text |
+    | size | "sm" \| "md" \| "lg" \| "xl" | "md" | Width of the modal dialog |
+    | className | string | - | Additional CSS class names |
+    | children | ReactNode | - | Content of the modal |
+    
+    Accepts all props from the Base UI Dialog.Popup component.
+    
+    ### ModalTitle
+    
+    Component for rendering the modal title with optional close button. Usually not needed if you pass `title` prop to ModalContent.
+    
+    **Props:**
+    
+    | Prop | Type | Default | Description |
+    | --- | --- | --- | --- |
+    | title | string | - | Title text |
+    | subtitle | string | - | Optional subtitle text |
+    | className | string | - | Additional CSS class names |
+    
+    ### ModalDescription
+    
+    Descriptive text for the modal content with accessible styling.
+    
+    **Usage:**
+    ```tsx
+    import { ModalDescription } from "crafted-ui";
+    
+    <ModalDescription>
+        This modal contains important information...
+    </ModalDescription>
+    ```
+    
+    **Props:**
+    
+    | Prop | Type | Default | Description |
+    | --- | --- | --- | --- |
+    | className | string | - | Additional CSS class names |
+    | children | ReactNode | - | Description text |
+    
+    ### ModalClose
+    
+    A button that closes the modal when clicked. Wrap around any button or interactive element.
+    
+    **Usage:**
+    ```tsx
+    import { ModalClose } from "crafted-ui";
+    
+    <ModalClose>
+        <Button>Cancel</Button>
+    </ModalClose>
+    ```
+    
+    **Props:**
+    
+    | Prop | Type | Default | Description |
+    | --- | --- | --- | --- |
+    | className | string | - | Additional CSS class names |
+    | children | ReactNode | - | Content (typically a Button) |
+</Section>
+
+<Section title="Modal Sizes">
+    The Modal supports four size options that control the width of the dialog:
+    
+    - **sm** (384px) - Compact content, simple confirmations
+    - **md** (512px) - Forms with 1-2 columns (default)
+    - **lg** (640px) - Wider forms or data tables
+    - **xl** (768px) - Complex layouts with multiple sections
+    
+    All modals are responsive and have a maximum width of `calc(100vw - 3rem)` to ensure proper display on smaller screens.
+</Section>
+
+<CodePreview code={`
+<Modal>
+    <ModalTrigger>
+        <Button>Large Modal Example</Button>
+    </ModalTrigger>
+    <ModalContent title="Tasting Flight Ratings" subtitle="Rate your experience" size="lg">
+        <ModalDescription>
+            Rate each beer in your flight on a scale of 1-5 stars.
+        </ModalDescription>
+        <Fieldset>
+            <div className="grid grid-cols-2 gap-4">
+                <div>
+                    <div className="font-medium text-sm mb-1">Hazy IPA</div>
+                    <div className="text-sm text-muted-foreground">7.2% ABV</div>
+                </div>
+                <div className="flex items-center justify-end gap-1">
+                    {[1, 2, 3, 4, 5].map((star) => (
+                        <button key={star}>★</button>
+                    ))}
+                </div>
+            </div>
+            <Field>
+                <FieldLabel>Additional Comments</FieldLabel>
+                <Textarea placeholder="Share your thoughts..." rows={3} />
+            </Field>
+            <FieldsetButtons>
+                <ModalClose>
+                    <Button clr="secondary" outline>Skip</Button>
+                </ModalClose>
+                <Button clr="primary">Submit Ratings</Button>
+            </FieldsetButtons>
+        </Fieldset>
+    </ModalContent>
+</Modal>
+`}>
+    <div class="flex items-center justify-center py-8">
+        <Modal>
+            <ModalTrigger>
+                <Button>Large Modal Example</Button>
+            </ModalTrigger>
+            <ModalContent title="Tasting Flight Ratings" subtitle="Rate your experience" size="lg">
+            <ModalDescription>
+                Rate each beer in your flight on a scale of 1-5 stars. Your feedback helps us improve our brewing process.
+            </ModalDescription>
+            <Fieldset>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="font-medium text-sm mb-1">Hazy IPA</div>
+                        <div class="text-sm text-muted-foreground">7.2% ABV</div>
+                    </div>
+                    <div class="flex items-center justify-end gap-1">
+                        <button class="text-yellow-500 hover:text-yellow-600">★</button>
+                        <button class="text-yellow-500 hover:text-yellow-600">★</button>
+                        <button class="text-yellow-500 hover:text-yellow-600">★</button>
+                        <button class="text-yellow-500 hover:text-yellow-600">★</button>
+                        <button class="text-yellow-500 hover:text-yellow-600">★</button>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <div class="font-medium text-sm mb-1">Belgian Tripel</div>
+                        <div class="text-sm text-muted-foreground">9.1% ABV</div>
+                    </div>
+                    <div class="flex items-center justify-end gap-1">
+                        <button class="text-yellow-500 hover:text-yellow-600">★</button>
+                        <button class="text-yellow-500 hover:text-yellow-600">★</button>
+                        <button class="text-yellow-500 hover:text-yellow-600">★</button>
+                        <button class="text-yellow-500 hover:text-yellow-600">★</button>
+                        <button class="text-yellow-500 hover:text-yellow-600">★</button>
+                    </div>
+                </div>
+                <Field>
+                    <FieldLabel>Additional Comments</FieldLabel>
+                    <Textarea placeholder="Share your thoughts..." rows={3} />
+                </Field>
+                <FieldsetButtons>
+                    <ModalClose>
+                        <Button clr="secondary" outline>Skip</Button>
+                    </ModalClose>
+                    <Button clr="primary">Submit Ratings</Button>
+                </FieldsetButtons>
+            </Fieldset>
+            </ModalContent>
+        </Modal>
+    </div>
+</CodePreview>
+
+<Section title="With Form">
+    Modals work seamlessly with Fieldset components for form layouts. Use the `grid` prop on Fieldset for multi-column forms.
+</Section>
+
+<CodePreview code={`
+<Modal>
+    <ModalTrigger>
+        <Button clr="primary">Submit Your Recipe</Button>
+    </ModalTrigger>
+    <ModalContent title="Homebrew Recipe Contest" size="lg">
+        <ModalDescription>
+            Enter our annual homebrew competition. Winners will have their beer brewed at our facility.
+        </ModalDescription>
+        <Fieldset grid>
+            <Field className="col-span-full">
+                <FieldLabel>Recipe Name</FieldLabel>
+                <Input placeholder="e.g., Hoppy Trail IPA" />
+            </Field>
+            <Field className="col-span-8">
+                <FieldLabel>Beer Style</FieldLabel>
+                <Input placeholder="e.g., West Coast IPA" />
+            </Field>
+            <Field className="col-span-4">
+                <FieldLabel>ABV (%)</FieldLabel>
+                <Input type="number" placeholder="6.5" />
+            </Field>
+            <Field className="col-span-full">
+                <FieldLabel>Recipe Description</FieldLabel>
+                <Textarea placeholder="Describe your recipe..." rows={4} />
+            </Field>
+            <FieldsetButtons>
+                <ModalClose>
+                    <Button clr="secondary" outline>Cancel</Button>
+                </ModalClose>
+                <Button clr="primary">Submit Recipe</Button>
+            </FieldsetButtons>
+        </Fieldset>
+    </ModalContent>
+</Modal>
+`}>
+    <div class="flex items-center justify-center py-8">
+        <Modal>
+            <ModalTrigger>
+                <Button clr="primary">Submit Your Recipe</Button>
+            </ModalTrigger>
+            <ModalContent title="Homebrew Recipe Contest" size="lg">
+            <ModalDescription>
+                Enter our annual homebrew competition by submitting your recipe. Winners will have their beer brewed at our facility and featured in our taproom.
+            </ModalDescription>
+            <Fieldset grid>
+                <Field class="col-span-full">
+                    <FieldLabel>Recipe Name</FieldLabel>
+                    <Input placeholder="e.g., Hoppy Trail IPA" />
+                </Field>
+                <Field class="col-span-8">
+                    <FieldLabel>Beer Style</FieldLabel>
+                    <Input placeholder="e.g., West Coast IPA" />
+                </Field>
+                <Field class="col-span-4">
+                    <FieldLabel>ABV (%)</FieldLabel>
+                    <Input type="number" placeholder="6.5" />
+                </Field>
+                <Field class="col-span-full">
+                    <FieldLabel>Recipe Description</FieldLabel>
+                    <Textarea placeholder="Describe your recipe, ingredients, and brewing process..." rows={4} />
+                </Field>
+                <FieldsetButtons>
+                    <ModalClose>
+                        <Button clr="secondary" outline>Cancel</Button>
+                    </ModalClose>
+                    <Button clr="primary">Submit Recipe</Button>
+                </FieldsetButtons>
+            </Fieldset>
+            </ModalContent>
+        </Modal>
+    </div>
+</CodePreview>
+
+<Section title="Accessibility">
+    The Modal component is built on Base UI's Dialog primitive and includes comprehensive accessibility features:
+    
+    - **Focus Management** - Focus is trapped within the modal while open and returned to the trigger when closed
+    - **Keyboard Navigation** - `Escape` key closes the modal, `Tab` cycles through focusable elements
+    - **ARIA Attributes** - Proper `role`, `aria-labelledby`, and `aria-describedby` attributes
+    - **Screen Reader Support** - Announces modal state and content appropriately
+    - **Backdrop Click** - Clicking outside the modal closes it (customizable)
+</Section>
+
+</BaseSidebar>

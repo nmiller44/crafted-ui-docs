@@ -1,0 +1,21 @@
+---
+import { classNames } from "@/utils/classNames";
+
+export interface Props {
+    class?: string;
+    colspan?: number;
+}
+
+const { class: className, colspan, ...props } = Astro.props;
+---
+
+<th 
+    colSpan={colspan}
+    class={classNames(
+        "p-4 pt-3 font-medium text-muted-foreground text-left border-b border-border",
+        className
+    )}
+    {...props}
+>
+    <slot />
+</th>

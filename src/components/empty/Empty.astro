@@ -1,0 +1,34 @@
+---
+import { classNames } from "@/utils/classNames";
+import Heading3 from "@/components/heading/Heading3.astro";
+
+export interface Props {
+    title?: string;
+    subtitle?: string;
+    class?: string;
+}
+
+const { title, subtitle, class: className, ...props } = Astro.props;
+const hasSlot = await Astro.slots.has('default');
+---
+
+<div 
+    class={classNames(
+        "max-w-xl mx-auto", 
+        "rounded-lg border border-muted-foreground border-2 border-dashed", 
+        "px-10 py-12 text-center",
+        "space-y-6",
+        className
+    )} 
+    {...props}
+>
+    {title && (
+        <Heading3 
+            title={title} 
+            subtitle={subtitle} 
+            className="text-muted-foreground" 
+            subtitleClass="text-muted-foreground" 
+        />
+    )}
+    <slot />
+</div>

@@ -1,0 +1,191 @@
+---
+title: 'Empty'
+description: 'Placeholder for empty states with optional icon and message.'
+---
+import BaseSidebar from "@/layouts/BaseSidebar.astro";
+import CodePreview from "@/components/CodePreview.astro";
+import Section from '@/components/Section.astro';
+import Empty from '@/components/empty/Empty.astro';
+import Button from '@/components/button/Button.astro';
+
+<BaseSidebar title={frontmatter.title} description={frontmatter.description}>
+
+    <CodePreview code={`
+        <Empty title="No Beers on Tap" subtitle="Add your first beer to get started." />
+    `}>
+      <Empty title="No Beers on Tap" subtitle="Add your first beer to get started." />
+    </CodePreview>
+
+    <Section title="Overview">
+        The Empty component displays placeholder content when there's no data to show. It features a centered layout with a dashed border, making it visually distinct as an empty state. Use it for empty lists, search results with no matches, or any scenario where you need to indicate the absence of content.
+        
+        The component provides a clean, consistent way to handle empty states across your application, improving user experience by clearly communicating when and why content is missing.
+    </Section>
+
+    <Section title="Basic Usage">
+        ### Simple Empty State
+        Use the `title` and `subtitle` props for a standard empty state message.
+    </Section>
+
+    <CodePreview code={`
+        <Empty 
+          title="Empty Inventory" 
+          subtitle="Start adding products to your inventory." 
+        />
+    `}>
+      <Empty 
+        title="Empty Inventory" 
+        subtitle="Start adding products to your inventory." 
+      />
+    </CodePreview>
+
+    <Section title="With Actions">
+        ### Adding Interactive Elements
+        Use children to add buttons, links, or other interactive elements to guide users.
+    </Section>
+
+    <CodePreview code={`
+        <Empty title="No Items Found" subtitle="Try adjusting your filters or search terms.">
+          <div className="flex gap-3 justify-center mt-6">
+            <Button clr="primary">Clear Filters</Button>
+            <Button outline>View All Items</Button>
+          </div>
+        </Empty>
+    `}>
+      <Empty title="No Items Found" subtitle="Try adjusting your filters or search terms.">
+        <div class="flex gap-3 justify-center mt-6">
+          <Button clr="primary">Clear Filters</Button>
+          <Button outline>View All Items</Button>
+        </div>
+      </Empty>
+    </CodePreview>
+
+    <Section title="Custom Content">
+        ### Fully Custom Empty State
+        Omit the `title` prop and use children for complete control over the content.
+    </Section>
+
+    <CodePreview code={`
+        <Empty>
+          <div className="space-y-4">
+            <div className="text-6xl">🍺</div>
+            <div>
+              <h3 className="text-lg font-semibold text-foreground">Empty Tap Line</h3>
+              <p className="text-sm text-muted-foreground mt-1">
+                Your keg lineup is looking a bit dry. Time to tap a fresh one!
+              </p>
+            </div>
+            <Button clr="primary">Add Beer</Button>
+          </div>
+        </Empty>
+    `}>
+      <Empty>
+        <div class="space-y-4">
+          <div class="text-6xl">🍺</div>
+          <div>
+            <h3 class="text-lg font-semibold text-foreground">Empty Tap Line</h3>
+            <p class="text-sm text-muted-foreground mt-1">
+              Your keg lineup is looking a bit dry. Time to tap a fresh one!
+            </p>
+          </div>
+          <Button clr="primary">Add Beer</Button>
+        </div>
+      </Empty>
+    </CodePreview>
+
+    <Section title="Common Use Cases">
+        ### Different Empty State Scenarios
+        Examples of how to use Empty for various situations.
+    </Section>
+
+    <CodePreview code={`
+        <div className="space-y-8">
+          <Empty 
+            title="No Search Results" 
+            subtitle="We couldn't find anything matching 'unicorn beer'." 
+          />
+          
+          <Empty 
+            title="Cart is Empty" 
+            subtitle="Looks like you haven't added any items yet." 
+          />
+          
+          <Empty 
+            title="No Favorites" 
+            subtitle="Start favoriting beers to see them here." 
+          />
+        </div>
+    `}>
+      <div class="space-y-8">
+        <Empty 
+          title="No Search Results" 
+          subtitle="We couldn't find anything matching 'unicorn beer'." 
+        />
+        
+        <Empty 
+          title="Cart is Empty" 
+          subtitle="Looks like you haven't added any items yet." 
+        />
+        
+        <Empty 
+          title="No Favorites" 
+          subtitle="Start favoriting beers to see them here." 
+        />
+      </div>
+    </CodePreview>
+
+    <Section title="Props">
+        The `Empty` component accepts the following props:
+        
+        | Prop | Type | Default | Description |
+        | --- | --- | --- | --- |
+        | title | string | - | Primary heading for the empty state |
+        | subtitle | string | - | Supporting text below the title |
+        | children | React.ReactNode | - | Custom content (used instead of title/subtitle when title is omitted) |
+        | className | string | - | Additional CSS classes for customization |
+        
+        ### Behavior
+        - When `title` is provided, it displays with optional `subtitle` using the Heading3 component
+        - When `title` is omitted, children content is displayed instead
+        - Cannot use both `title` and `children` simultaneously - title takes precedence
+        
+        ### Styling Features
+        - Centered layout with max-width constraint
+        - Dashed border in muted color for visual distinction
+        - Rounded corners for modern appearance
+        - Generous padding for comfortable spacing
+        - Muted text colors for empty state aesthetics
+    </Section>
+
+    <Section title="Accessibility">
+        - Uses semantic heading structure (Heading3) when title is provided
+        - Text colors meet WCAG AA contrast requirements
+        - Central positioning makes content easily discoverable
+        - Clear messaging helps users understand the empty state
+    </Section>
+
+    <Section title="Best Practices">
+        ### Messaging Guidelines
+        - **Be specific**: Explain why the state is empty ("No search results" vs "Empty")
+        - **Provide guidance**: Suggest what users can do next
+        - **Stay positive**: Frame messages constructively
+        - **Be concise**: Keep titles short, use subtitle for details
+        
+        ### When to Use
+        - Empty search or filter results
+        - New user states (no data yet)
+        - Fully cleared lists or collections
+        - Error states with no fallback content
+        
+        ### Action Buttons
+        - Primary action: Most common next step (e.g., "Add Item")
+        - Secondary action: Alternative options (e.g., "Clear Filters")
+        - Place buttons below the message for natural flow
+        
+        ### Visual Enhancements
+        - Consider adding icons or emoji for personality
+        - Use illustrations for important empty states
+        - Keep custom content centered and balanced
+    </Section>
+
+</BaseSidebar>

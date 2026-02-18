@@ -27,9 +27,15 @@ Crafted UI is a component library built with React 19, TypeScript, Tailwind CSS 
 - Breadcrumb: /docs/components/breadcrumb - Show hierarchical navigation path
 - Button: /docs/components/button - Interactive button with full color palette (semantic, status, and base colors)
 - Card: /docs/components/card - Container for related content with header, body, and footer
+- DescList: /docs/components/desclist - Display key-value pairs in structured description list format
+- Empty: /docs/components/empty - Placeholder for empty states with optional icon and message
+- Heading: /docs/components/heading - Typography components for page and section headings (H1-H5) with optional subtitles
+- Menu: /docs/components/menu - Dropdown menu for actions, navigation, and contextual options
 - Metric: /docs/components/metric - Display key metrics and statistics with optional trends
+- Modal: /docs/components/modal - Dialog component for displaying content that requires user interaction
 - Pagination: /docs/components/pagination - Navigate through paginated data with customizable page ranges
 - Sidebar: /docs/components/sidebar - Navigation sidebar component for page layouts
+- Table: /docs/components/table - Display structured data in rows and columns with header support
 - Tablist: /docs/components/tablist - Tabbed interface component for organizing content
 - Vertlist: /docs/components/vertlist - Vertical list component for displaying items
 
@@ -45,6 +51,10 @@ Crafted UI is a component library built with React 19, TypeScript, Tailwind CSS 
 
 ### Icons
 - Icon: /docs/components/icon - Reusable SVG icons for common UI elements and actions
+
+## Reference
+
+- Component Status: /docs/component-status - Track implementation status and completeness of all components
 
 ## Available Components (Library)
 
@@ -89,6 +99,46 @@ The following components are exported from the Crafted UI library:
 - Proper ARIA attributes
 - Focus management
 - Dark mode support through CSS custom properties
+
+### Form Patterns
+
+**CRITICAL: Always use Fieldset to wrap groups of Fields in forms.**
+
+Fieldset provides essential layout, spacing, and semantic grouping for form fields. Use it whenever you have multiple Fields together.
+
+**When to use Fieldset:**
+- Wrapping 2 or more related Fields
+- Forms that need structured layout
+- When you need a title/subtitle for field groups
+- For grid layouts with the `grid` prop
+- To group Fields with FieldsetButtons for actions
+
+**Key Features:**
+- `title` and `subtitle` props for semantic legends
+- `grid` prop enables responsive 12-column layout
+- Works with `FieldsetButtons` for consistent action button placement
+- Provides proper spacing between Fields
+- Semantic HTML `<fieldset>` and `<legend>` for accessibility
+
+**Example:**
+```tsx
+<Fieldset title="User Information" subtitle="Enter your details">
+  <Field>
+    <FieldLabel>Name</FieldLabel>
+    <Input />
+  </Field>
+  <Field>
+    <FieldLabel>Email</FieldLabel>
+    <Input type="email" />
+  </Field>
+  <FieldsetButtons>
+    <Button outline clr="blank">Cancel</Button>
+    <Button clr="primary" type="submit">Save</Button>
+  </FieldsetButtons>
+</Fieldset>
+```
+
+**DO NOT create forms with multiple Fields without a Fieldset wrapper.**
 
 ## Repository
 

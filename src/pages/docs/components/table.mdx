@@ -1,0 +1,349 @@
+---
+title: Table
+description: A flexible table component for displaying structured data in rows and columns.
+---
+import BaseSidebar from "@/layouts/BaseSidebar.astro";
+import Section from "@/components/Section.astro";
+import CodePreview from "@/components/CodePreview.astro";
+import Table from "@/components/table/Table.astro";
+import TableHead from "@/components/table/TableHead.astro";
+import TableHeadCell from "@/components/table/TableHeadCell.astro";
+import TableBody from "@/components/table/TableBody.astro";
+import TableRow from "@/components/table/TableRow.astro";
+import TableCell from "@/components/table/TableCell.astro";
+import Card from "@/components/card/Card.astro";
+import CardBody from "@/components/card/CardBody.astro";
+
+<BaseSidebar title={frontmatter.title} description={frontmatter.description}>
+
+<Section>
+    ### Overview
+    The Table component provides a structured way to display data in rows and columns. It's composed of six parts that work together to create accessible, styled tables.
+
+    The Table component parts:
+    - **Table**: The root wrapper component
+    - **TableHead**: The table header section (automatically wraps content in a `<tr>`)
+    - **TableHeadCell**: Individual header cells
+    - **TableBody**: The table body section
+    - **TableRow**: Individual rows in the body
+    - **TableCell**: Individual data cells
+</Section>
+
+<CodePreview code={`
+<Table>
+    <TableHead>
+        <TableHeadCell>Brew Name</TableHeadCell>
+        <TableHeadCell>Style</TableHeadCell>
+        <TableHeadCell>ABV</TableHeadCell>
+        <TableHeadCell>Status</TableHeadCell>
+    </TableHead>
+    <TableBody>
+        <TableRow>
+            <TableCell>Hazy IPA</TableCell>
+            <TableCell>IPA</TableCell>
+            <TableCell>6.5%</TableCell>
+            <TableCell>Fermenting</TableCell>
+        </TableRow>
+        <TableRow>
+            <TableCell>Bourbon Stout</TableCell>
+            <TableCell>Stout</TableCell>
+            <TableCell>9.2%</TableCell>
+            <TableCell>Aging</TableCell>
+        </TableRow>
+        <TableRow>
+            <TableCell>Golden Ale</TableCell>
+            <TableCell>Ale</TableCell>
+            <TableCell>4.8%</TableCell>
+            <TableCell>Ready</TableCell>
+        </TableRow>
+    </TableBody>
+</Table>
+`}>
+    <div class="max-w-3xl">
+        <Table>
+            <TableHead>
+                <TableHeadCell>Brew Name</TableHeadCell>
+                <TableHeadCell>Style</TableHeadCell>
+                <TableHeadCell>ABV</TableHeadCell>
+                <TableHeadCell>Status</TableHeadCell>
+            </TableHead>
+            <TableBody>
+                <TableRow>
+                    <TableCell>Hazy IPA</TableCell>
+                    <TableCell>IPA</TableCell>
+                    <TableCell>6.5%</TableCell>
+                    <TableCell>Fermenting</TableCell>
+                </TableRow>
+                <TableRow>
+                    <TableCell>Bourbon Stout</TableCell>
+                    <TableCell>Stout</TableCell>
+                    <TableCell>9.2%</TableCell>
+                    <TableCell>Aging</TableCell>
+                </TableRow>
+                <TableRow>
+                    <TableCell>Golden Ale</TableCell>
+                    <TableCell>Ale</TableCell>
+                    <TableCell>4.8%</TableCell>
+                    <TableCell>Ready</TableCell>
+                </TableRow>
+            </TableBody>
+        </Table>
+    </div>
+</CodePreview>
+
+<Section>
+    ### In Card
+    Tables are commonly placed inside Card components for visual structure.
+</Section>
+
+<CodePreview code={`
+<Card>
+    <CardBody>
+        <Table>
+            <TableHead>
+                <TableHeadCell>Product</TableHeadCell>
+                <TableHeadCell>Category</TableHeadCell>
+                <TableHeadCell>Price</TableHeadCell>
+                <TableHeadCell>Stock</TableHeadCell>
+            </TableHead>
+            <TableBody>
+                <TableRow>
+                    <TableCell className="font-medium">Crisp Apple Cider</TableCell>
+                    <TableCell>Cider</TableCell>
+                    <TableCell>$12.99</TableCell>
+                    <TableCell>In Stock</TableCell>
+                </TableRow>
+                <TableRow>
+                    <TableCell className="font-medium">Raspberry Sour</TableCell>
+                    <TableCell>Beer</TableCell>
+                    <TableCell>$13.99</TableCell>
+                    <TableCell>In Stock</TableCell>
+                </TableRow>
+                <TableRow>
+                    <TableCell className="font-medium">Imperial Stout</TableCell>
+                    <TableCell>Beer</TableCell>
+                    <TableCell>$18.99</TableCell>
+                    <TableCell>Low Stock</TableCell>
+                </TableRow>
+            </TableBody>
+        </Table>
+    </CardBody>
+</Card>
+`}>
+    <div class="max-w-3xl">
+        <Card>
+            <CardBody>
+                <Table>
+                    <TableHead>
+                        <TableHeadCell>Product</TableHeadCell>
+                        <TableHeadCell>Category</TableHeadCell>
+                        <TableHeadCell>Price</TableHeadCell>
+                        <TableHeadCell>Stock</TableHeadCell>
+                    </TableHead>
+                    <TableBody>
+                        <TableRow>
+                            <TableCell class="font-medium">Crisp Apple Cider</TableCell>
+                            <TableCell>Cider</TableCell>
+                            <TableCell>$12.99</TableCell>
+                            <TableCell>In Stock</TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell class="font-medium">Raspberry Sour</TableCell>
+                            <TableCell>Beer</TableCell>
+                            <TableCell>$13.99</TableCell>
+                            <TableCell>In Stock</TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell class="font-medium">Imperial Stout</TableCell>
+                            <TableCell>Beer</TableCell>
+                            <TableCell>$18.99</TableCell>
+                            <TableCell>Low Stock</TableCell>
+                        </TableRow>
+                    </TableBody>
+                </Table>
+            </CardBody>
+        </Card>
+    </div>
+</CodePreview>
+
+<Section>
+    ### Column Spanning
+    Use the `colspan` prop on TableHeadCell or TableCell to span multiple columns.
+</Section>
+
+<CodePreview code={`
+<Table>
+    <TableHead>
+        <TableHeadCell>Batch</TableHeadCell>
+        <TableHeadCell colspan={2}>Details</TableHeadCell>
+        <TableHeadCell>Volume</TableHeadCell>
+    </TableHead>
+    <TableBody>
+        <TableRow>
+            <TableCell>#2024-001</TableCell>
+            <TableCell colspan={2}>West Coast IPA - Primary fermentation</TableCell>
+            <TableCell>15 gal</TableCell>
+        </TableRow>
+        <TableRow>
+            <TableCell>#2024-002</TableCell>
+            <TableCell>Belgian Dubbel</TableCell>
+            <TableCell>Secondary fermentation</TableCell>
+            <TableCell>10 gal</TableCell>
+        </TableRow>
+        <TableRow>
+            <TableCell colspan={3}>Total Production</TableCell>
+            <TableCell className="font-bold">25 gal</TableCell>
+        </TableRow>
+    </TableBody>
+</Table>
+`}>
+    <div class="max-w-3xl">
+        <Table>
+            <TableHead>
+                <TableHeadCell>Batch</TableHeadCell>
+                <TableHeadCell colspan={2}>Details</TableHeadCell>
+                <TableHeadCell>Volume</TableHeadCell>
+            </TableHead>
+            <TableBody>
+                <TableRow>
+                    <TableCell>#2024-001</TableCell>
+                    <TableCell colspan={2}>West Coast IPA - Primary fermentation</TableCell>
+                    <TableCell>15 gal</TableCell>
+                </TableRow>
+                <TableRow>
+                    <TableCell>#2024-002</TableCell>
+                    <TableCell>Belgian Dubbel</TableCell>
+                    <TableCell>Secondary fermentation</TableCell>
+                    <TableCell>10 gal</TableCell>
+                </TableRow>
+                <TableRow>
+                    <TableCell colspan={3}>Total Production</TableCell>
+                    <TableCell class="font-bold">25 gal</TableCell>
+                </TableRow>
+            </TableBody>
+        </Table>
+    </div>
+</CodePreview>
+
+<Section>
+    ### Custom Styling
+    All table components accept `className` for custom styling.
+</Section>
+
+<CodePreview code={`
+<Table>
+    <TableHead className="bg-primary/10">
+        <TableHeadCell className="text-primary">Ingredient</TableHeadCell>
+        <TableHeadCell className="text-primary">Amount</TableHeadCell>
+        <TableHeadCell className="text-primary">Cost</TableHeadCell>
+    </TableHead>
+    <TableBody>
+        <TableRow className="hover:bg-muted/50">
+            <TableCell className="font-medium">Pale Malt</TableCell>
+            <TableCell>10 lbs</TableCell>
+            <TableCell>$15.00</TableCell>
+        </TableRow>
+        <TableRow className="hover:bg-muted/50">
+            <TableCell className="font-medium">Cascade Hops</TableCell>
+            <TableCell>2 oz</TableCell>
+            <TableCell>$4.50</TableCell>
+        </TableRow>
+        <TableRow className="hover:bg-muted/50">
+            <TableCell className="font-medium">US-05 Yeast</TableCell>
+            <TableCell>1 pack</TableCell>
+            <TableCell>$7.00</TableCell>
+        </TableRow>
+    </TableBody>
+</Table>
+`}>
+    <div class="max-w-3xl">
+        <Table>
+            <TableHead class="bg-primary/10">
+                <TableHeadCell class="text-primary">Ingredient</TableHeadCell>
+                <TableHeadCell class="text-primary">Amount</TableHeadCell>
+                <TableHeadCell class="text-primary">Cost</TableHeadCell>
+            </TableHead>
+            <TableBody>
+                <TableRow class="hover:bg-muted/50">
+                    <TableCell class="font-medium">Pale Malt</TableCell>
+                    <TableCell>10 lbs</TableCell>
+                    <TableCell>$15.00</TableCell>
+                </TableRow>
+                <TableRow class="hover:bg-muted/50">
+                    <TableCell class="font-medium">Cascade Hops</TableCell>
+                    <TableCell>2 oz</TableCell>
+                    <TableCell>$4.50</TableCell>
+                </TableRow>
+                <TableRow class="hover:bg-muted/50">
+                    <TableCell class="font-medium">US-05 Yeast</TableCell>
+                    <TableCell>1 pack</TableCell>
+                    <TableCell>$7.00</TableCell>
+                </TableRow>
+            </TableBody>
+        </Table>
+    </div>
+</CodePreview>
+
+<Section>
+    ### Props
+
+    #### Table
+    Accepts all props from the native `<table>` element.
+
+    | Prop | Type | Default | Description |
+    |------|------|---------|-------------|
+    | className | string | - | Additional CSS classes |
+
+    #### TableHead
+    Accepts all props from the native `<thead>` element. Automatically wraps children in a `<tr>`.
+
+    | Prop | Type | Default | Description |
+    |------|------|---------|-------------|
+    | className | string | - | Additional CSS classes |
+
+    #### TableHeadCell
+    Accepts all props from the native `<th>` element.
+
+    | Prop | Type | Default | Description |
+    |------|------|---------|-------------|
+    | className | string | - | Additional CSS classes |
+    | colspan | number | - | Number of columns to span |
+
+    #### TableBody
+    Accepts all props from the native `<tbody>` element.
+
+    | Prop | Type | Default | Description |
+    |------|------|---------|-------------|
+    | className | string | - | Additional CSS classes |
+
+    #### TableRow
+    Accepts all props from the native `<tr>` element.
+
+    | Prop | Type | Default | Description |
+    |------|------|---------|-------------|
+    | className | string | - | Additional CSS classes |
+
+    #### TableCell
+    Accepts all props from the native `<td>` element.
+
+    | Prop | Type | Default | Description |
+    |------|------|---------|-------------|
+    | className | string | - | Additional CSS classes |
+    | colspan | number | - | Number of columns to span |
+
+    ### Accessibility
+    - Semantic HTML table elements for proper structure
+    - TableHead provides proper `<thead>` semantics
+    - Column headers use `<th>` elements for screen readers
+    - Left-aligned text for better readability
+
+    ### Best Practices
+    - Use TableHead for column headers
+    - Place tables inside Card components for visual structure
+    - Use colspan sparingly for complex layouts
+    - Add hover states with `hover:bg-muted/50` on TableRow
+    - Make key columns bold with `font-medium` or `font-bold`
+    - Keep column widths consistent for better scanning
+</Section>
+
+</BaseSidebar>

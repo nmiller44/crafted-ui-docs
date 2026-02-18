@@ -1,0 +1,160 @@
+---
+title: Heading
+description: Typography components for page and section headings with optional subtitles.
+---
+import BaseSidebar from "@/layouts/BaseSidebar.astro";
+import Section from "@/components/Section.astro";
+import CodePreview from "@/components/CodePreview.astro";
+import Heading1 from "@/components/heading/Heading1.astro";
+import Heading2 from "@/components/heading/Heading2.astro";
+import Heading3 from "@/components/heading/Heading3.astro";
+import Heading4 from "@/components/heading/Heading4.astro";
+import Heading5 from "@/components/heading/Heading5.astro";
+
+<BaseSidebar title={frontmatter.title} description={frontmatter.description}>
+
+<Section>
+    ### Overview
+    The Heading components provide five levels of semantic headings (H1-H5) with consistent styling and optional subtitles. Each heading level has appropriate font sizing and spacing for clear visual hierarchy.
+
+    All heading components share the same props and can be used either with the `title` prop or by passing children directly.
+</Section>
+
+<CodePreview code={`
+<Heading1 title="Brewing Process" subtitle="From grain to glass" />
+<Heading2 title="Fermentation Stage" subtitle="Primary and secondary fermentation" />
+<Heading3 title="Temperature Control" subtitle="Maintaining optimal conditions" />
+<Heading4 title="Gravity Readings" subtitle="Tracking fermentation progress" />
+<Heading5 title="Final Steps" subtitle="Bottling and carbonation" />
+`}>
+    <div class="space-y-8">
+        <Heading1 title="Brewing Process" subtitle="From grain to glass" />
+        <Heading2 title="Fermentation Stage" subtitle="Primary and secondary fermentation" />
+        <Heading3 title="Temperature Control" subtitle="Maintaining optimal conditions" />
+        <Heading4 title="Gravity Readings" subtitle="Tracking fermentation progress" />
+        <Heading5 title="Final Steps" subtitle="Bottling and carbonation" />
+    </div>
+</CodePreview>
+
+<Section>
+    ### Using Children Instead of Title Prop
+    You can pass custom content as children instead of using the `title` prop for more flexibility.
+</Section>
+
+<CodePreview code={`
+<Heading1>
+    <h1>Custom <span className="text-primary">Styled</span> Heading</h1>
+</Heading1>
+
+<Heading2 subtitle="With a subtitle">
+    <h2>Mash Schedule</h2>
+</Heading2>
+
+<Heading3>
+    <h3>Step 1: Heat Water</h3>
+</Heading3>
+`}>
+    <div class="space-y-8">
+        <Heading1>
+            <h1>Custom <span class="text-primary">Styled</span> Heading</h1>
+        </Heading1>
+        
+        <Heading2 subtitle="With a subtitle">
+            <h2>Mash Schedule</h2>
+        </Heading2>
+        
+        <Heading3>
+            <h3>Step 1: Heat Water</h3>
+        </Heading3>
+    </div>
+</CodePreview>
+
+<Section>
+    ### Font Sizes
+    Each heading level uses a specific font size for clear hierarchy.
+</Section>
+
+<CodePreview code={`
+<Heading1 title="Heading 1 (4xl)" subtitle="text-4xl - Page titles" />
+<Heading2 title="Heading 2 (3xl)" subtitle="text-3xl - Major sections" />
+<Heading3 title="Heading 3 (2xl)" subtitle="text-2xl - Subsections" />
+<Heading4 title="Heading 4 (xl)" subtitle="text-xl - Minor headings" />
+<Heading5 title="Heading 5 (lg)" subtitle="text-lg - Smallest headings" />
+`}>
+    <div class="space-y-6">
+        <Heading1 title="Heading 1 (4xl)" subtitle="text-4xl - Page titles" />
+        <Heading2 title="Heading 2 (3xl)" subtitle="text-3xl - Major sections" />
+        <Heading3 title="Heading 3 (2xl)" subtitle="text-2xl - Subsections" />
+        <Heading4 title="Heading 4 (xl)" subtitle="text-xl - Minor headings" />
+        <Heading5 title="Heading 5 (lg)" subtitle="text-lg - Smallest headings" />
+    </div>
+</CodePreview>
+
+<Section>
+    ### Custom Styling
+    Use `className`, `subtitleClass`, and `wrapperClass` props to customize styling.
+</Section>
+
+<CodePreview code={`
+<Heading1 
+    title="Imperial Stout" 
+    subtitle="Rich, bold, and complex"
+    className="text-primary"
+    subtitleClass="text-lg"
+    wrapperClass="space-y-3"
+/>
+
+<Heading3 
+    title="Recipe Details" 
+    subtitle="ABV: 9.2% • IBU: 65"
+    className="font-normal tracking-normal"
+/>
+`}>
+    <div class="space-y-8">
+        <Heading1 
+            title="Imperial Stout" 
+            subtitle="Rich, bold, and complex"
+            class="text-primary"
+            subtitleClass="text-lg"
+            wrapperClass="space-y-3"
+        />
+        
+        <Heading3 
+            title="Recipe Details" 
+            subtitle="ABV: 9.2% • IBU: 65"
+            class="font-normal tracking-normal"
+        />
+    </div>
+</CodePreview>
+
+<Section>
+    ### Props
+
+    All heading components (Heading1-5) share the same props:
+
+    | Prop | Type | Default | Description |
+    |------|------|---------|-------------|
+    | title | string | - | Heading text (alternative to children) |
+    | subtitle | string | - | Optional subtitle text |
+    | className | string | - | Additional CSS classes for the heading element |
+    | subtitleClass | string | - | Additional CSS classes for the subtitle |
+    | wrapperClass | string | - | Additional CSS classes for the wrapper div |
+    | children | ReactNode | - | Custom heading content (alternative to title prop) |
+
+    ### Accessibility
+    - Uses semantic HTML heading elements (h1-h5)
+    - Maintains proper heading hierarchy
+    - Bold font weight for clear visual distinction
+    - Subtitle uses muted color for visual hierarchy
+    - Tight tracking for improved readability
+
+    ### Best Practices
+    - Use Heading1 for page titles
+    - Maintain logical heading hierarchy (don't skip levels)
+    - Use subtitles to provide context without cluttering the main heading
+    - Use children when you need custom styling or complex content
+    - Keep headings concise and descriptive
+    - Don't overuse subtitles - only when they add meaningful context
+</Section>
+
+</BaseSidebar>

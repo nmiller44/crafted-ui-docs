@@ -1,0 +1,24 @@
+---
+import { classNames } from "@/utils/classNames";
+
+export interface Props {
+    class?: string;
+}
+
+const { class: className, ...props } = Astro.props;
+---
+
+<div 
+    class={classNames(
+        "px-4 py-2",
+        "outline-none select-none cursor-pointer",
+        "text-sm",
+        "first:rounded-t-md last:rounded-b-md",
+        "hover:bg-secondary hover:text-secondary-foreground",
+        className
+    )}
+    @click="open = false"
+    {...props}
+>
+    <slot />
+</div>

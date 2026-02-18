@@ -1,0 +1,21 @@
+---
+import { classNames } from "@/utils/classNames";
+
+export interface Props {
+    class?: string;
+    colspan?: number;
+}
+
+const { class: className, colspan, ...props } = Astro.props;
+---
+
+<td 
+    colSpan={colspan}
+    class={classNames(
+        "px-4 py-5 border-b border-border",
+        className
+    )}
+    {...props}
+>
+    <slot />
+</td>
