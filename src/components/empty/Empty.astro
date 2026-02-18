@@ -9,7 +9,6 @@ export interface Props {
 }
 
 const { title, subtitle, class: className, ...props } = Astro.props;
-const hasSlot = await Astro.slots.has('default');
 ---
 
 <div 

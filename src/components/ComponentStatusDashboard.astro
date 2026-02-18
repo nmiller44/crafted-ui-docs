@@ -17,12 +17,10 @@ const betaComponents = componentsData.filter((c: any) => c.status === 'beta').le
 const withDocs = componentsData.filter((c: any) => c.hasDocs).length;
 const withStorybook = componentsData.filter((c: any) => c.hasStorybook).length;
 const withAstro = componentsData.filter((c: any) => c.hasAstro).length;
-const withJSDoc = componentsData.filter((c: any) => c.hasJSDoc).length;
 
 const stablePercent = Math.round((stableComponents / totalComponents) * 100);
 const docsPercent = Math.round((withDocs / totalComponents) * 100);
 const storybookPercent = Math.round((withStorybook / totalComponents) * 100);
-const astroPercent = Math.round((withAstro / totalComponents) * 100);
 
 // Group by category
 const categories = [...new Set(componentsData.map((c: any) => c.category))].sort();
