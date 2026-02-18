@@ -33,7 +33,7 @@ const { iconName, icon: IconComponent, class: className } = Astro.props;
   </Card>
 </div>
 
-<script define:vars={{ iconName }}>
+<script is:inline define:vars={{ iconName }}>
   document.addEventListener("DOMContentLoaded", () => {
     const cards = document.querySelectorAll("[data-icon-name]");
     

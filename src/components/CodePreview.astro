@@ -7,7 +7,6 @@ import Button from "@/components/button/Button.astro";
 import CopyIcon from "@/components/icons/CopyIcon.astro";
 import CheckIcon from "@/components/icons/CheckIcon.astro";
 import { codeToHtml } from 'shiki';
-import { classNames } from "@/utils/classNames";
 
 interface Props extends HTMLAttributes<'div'> {
     code: string;
@@ -18,8 +17,7 @@ const DEFAULT_LANG = 'tsx';
 
 const { 
     code,
-    className,
-    ...props 
+    className
 } = Astro.props;
 
 const codeString = typeof code === 'string' ? code : String(code || '');

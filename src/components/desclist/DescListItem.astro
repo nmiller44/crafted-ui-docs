@@ -9,7 +9,7 @@ export interface Props {
 }
 
 const { label, value, class: className, ...props } = Astro.props;
-const hasSlot = await Astro.slots.has('default');
+const hasSlot = Astro.slots.has('default');
 ---
 
 <div class={classNames("space-y-2", "col-span-full", className)} {...props}>
