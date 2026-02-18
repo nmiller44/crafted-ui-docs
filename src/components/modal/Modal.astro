@@ -8,6 +8,10 @@ interface Props extends HTMLAttributes<'div'> {
 const { open = false, ...props } = Astro.props;
 ---
 
-<div {...props}>
+<div 
+    x-data={`{ open: ${open} }`}
+    @keydown.escape.window="open = false"
+    {...props}
+>
     <slot />
 </div>

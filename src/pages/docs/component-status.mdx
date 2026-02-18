@@ -1,0 +1,74 @@
+---
+title: Component Status
+description: Track the implementation status and completeness of all Crafted UI components.
+---
+import BaseSidebar from "@/layouts/BaseSidebar.astro";
+import ComponentStatusDashboard from "@/components/ComponentStatusDashboard.astro";
+import Section from '@/components/Section.astro';
+import Heading3 from '@/components/heading/Heading3.astro';
+
+<BaseSidebar title={frontmatter.title} description={frontmatter.description}>
+
+<Section>
+
+This page provides a comprehensive overview of all Crafted UI components, their implementation status, and completeness metrics. Use this dashboard to identify which components are stable, which need documentation, and where Astro equivalents are available.
+
+### What Makes a Component "Stable"?
+
+A component achieves **stable** status when it meets all of these criteria:
+
+- ✅ Exported from the library's main entry point
+- ✅ Complete TypeScript implementation with proper types
+- ✅ JSDoc comments on all exports
+- ✅ Storybook stories demonstrating usage
+- ✅ Documentation page with props, examples, and accessibility info
+- ✅ Listed in navigation and AI/LLM registry
+- ✅ Meets WCAG 2.1 AA accessibility standards
+
+Components marked as **beta** are functional but may be missing documentation, stories, or undergoing API changes.
+
+</Section>
+
+<ComponentStatusDashboard />
+
+<Section title="Understanding the Metrics">
+
+<Heading3>Completion Checklist</Heading3>
+
+- **Exported** - Available in the public API
+- **Storybook** - Has interactive stories for development
+- **Docs** - Has documentation page with usage guide
+- **Astro** - Has equivalent component for the docs site
+- **JSDoc** - Props and components have JSDoc comments
+
+<Heading3>Categories</Heading3>
+
+- **Action** - Interactive elements (buttons, links)
+- **Feedback** - User notifications (alerts, toasts)
+- **Form** - Input elements and form components
+- **Layout** - Page structure components
+- **Data Display** - Cards, tables, lists, metrics
+- **Navigation** - Menus, tabs, pagination, breadcrumbs
+- **Typography** - Heading components
+- **Utility** - Icons and helper components
+- **Interactive** - Modals, dialogs, overlays
+
+</Section>
+
+<Section title="Contributing">
+
+See the [Component Status Checklist](https://github.com/neilgamb/crafted-ui/blob/main/docs/component-status-checklist.md) for detailed standards and requirements. When contributing:
+
+1. Follow the established component patterns
+2. Create Storybook stories before documentation
+3. Write comprehensive JSDoc comments
+4. Update `components.json` after completion (not during development)
+5. Ensure accessibility with WCAG 2.1 AA compliance
+
+---
+
+**Status Data Source:** See [components.json](https://github.com/neilgamb/crafted-ui-docs/blob/main/public/components.json) for the raw data.
+
+</Section>
+
+</BaseSidebar>

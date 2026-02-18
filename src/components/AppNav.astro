@@ -13,6 +13,7 @@ import { getLinks } from "@data/links";
 import { sidebarLinks } from "@data/sidebar";
 
 const links = getLinks();
+const currentPath = Astro.url.pathname;
 ---  
 <Navbar> 
     <div class="relative flex items-center justify-between py-2">
@@ -38,8 +39,8 @@ const links = getLinks();
           <Tablist>
             { links.map((link) => (
               <TablistItem>
-                <a  href={link.href}>
-                        { link.title }
+                <a href={link.href} class={currentPath.startsWith(link.href) ? "active" : ""}>
+                  {link.title}
                 </a>  
               </TablistItem>
             ))}            
@@ -67,9 +68,11 @@ const links = getLinks();
   <div class="hidden lg:hidden" id="mobile-menu">
     <div class="space-y-1 px-2 pb-3 pt-2">
         { links.map((link) => (
-            <a  href={link.href} 
-                class="block rounded-md px-3 py-2 text-base font-medium text-primary hover:bg-secondary hover:text-secondary-foreground">
-                    { link.title }
+            <a href={link.href} 
+               class={currentPath.startsWith(link.href) 
+                 ? "block rounded-md px-3 py-2 text-base font-medium bg-secondary text-secondary-foreground"
+                 : "block rounded-md px-3 py-2 text-base font-medium text-primary hover:bg-secondary hover:text-secondary-foreground"}>
+              {link.title}
             </a>  
             )
         )}

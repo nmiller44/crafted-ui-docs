@@ -1,0 +1,229 @@
+---
+title: 'DescList'
+description: 'Displays key-value pairs in a structured description list format.'
+---
+import BaseSidebar from "@/layouts/BaseSidebar.astro";
+import CodePreview from "@/components/CodePreview.astro";
+import Section from '@/components/Section.astro';
+import DescList from '@/components/desclist/DescList.astro';
+import DescListItem from '@/components/desclist/DescListItem.astro';
+import Badge from '@/components/badge/Badge.astro';
+
+<BaseSidebar title={frontmatter.title} description={frontmatter.description}>
+
+    <CodePreview code={`
+        <DescList title="Brewery Information" subtitle="Details about the craft brewery">
+          <DescListItem label="Brewery Name" value="Hoppy Hills Brewing Co." />
+          <DescListItem label="Location" value="Portland, Oregon" />
+          <DescListItem label="Founded" value="2015" />
+          <DescListItem label="Style Focus" value="West Coast IPAs" />
+          <DescListItem 
+            label="About" 
+            value="A small batch brewery focused on traditional West Coast style IPAs with bold hop profiles and clean finishes."
+          />
+        </DescList>
+    `}>
+      <div class="max-w-3xl">
+        <DescList title="Brewery Information" subtitle="Details about the craft brewery">
+          <DescListItem label="Brewery Name" value="Hoppy Hills Brewing Co." />
+          <DescListItem label="Location" value="Portland, Oregon" />
+          <DescListItem label="Founded" value="2015" />
+          <DescListItem label="Style Focus" value="West Coast IPAs" />
+          <DescListItem 
+            label="About" 
+            value="A small batch brewery focused on traditional West Coast style IPAs with bold hop profiles and clean finishes."
+          />
+        </DescList>
+      </div>
+    </CodePreview>
+
+    <Section title="Overview">
+        The DescList component displays key-value pairs in a structured description list format using semantic HTML (`<dl>`, `<dt>`, `<dd>`). It's ideal for presenting metadata, product details, user profiles, or any structured information where labels and values need to be clearly associated.
+        
+        The component uses a responsive grid layout that adapts from single column on mobile to a 12-column grid on desktop, making it easy to create complex layouts with varying column spans.
+    </Section>
+
+    <Section title="Basic Usage">
+        ### Simple Description List
+        Use DescList with DescListItem for basic key-value pairs. The `label` and `value` props provide a clean API for simple lists.
+    </Section>
+
+    <CodePreview code={`
+        <DescList>
+          <DescListItem label="Beer Name" value="Hazy Sunset IPA" />
+          <DescListItem label="Style" value="New England IPA" />
+          <DescListItem label="ABV" value="7.2%" />
+          <DescListItem label="IBU" value="45" />
+        </DescList>
+    `}>
+      <div class="max-w-3xl">
+        <DescList>
+          <DescListItem label="Beer Name" value="Hazy Sunset IPA" />
+          <DescListItem label="Style" value="New England IPA" />
+          <DescListItem label="ABV" value="7.2%" />
+          <DescListItem label="IBU" value="45" />
+        </DescList>
+      </div>
+    </CodePreview>
+
+    <Section title="With Header">
+        ### Title and Subtitle
+        Add `title` and `subtitle` props to DescList to display a header above the list.
+    </Section>
+
+    <CodePreview code={`
+        <DescList title="Product Details" subtitle="Specifications and information">
+          <DescListItem label="Name" value="Hoppy IPA" />
+          <DescListItem label="Category" value="India Pale Ale" />
+          <DescListItem label="Type" value="Flagship" />
+          <DescListItem label="ABV" value="6.5%" />
+          <DescListItem label="IBU" value="65" />
+        </DescList>
+    `}>
+      <div class="max-w-3xl">
+        <DescList title="Product Details" subtitle="Specifications and information">
+          <DescListItem label="Name" value="Hoppy IPA" />
+          <DescListItem label="Category" value="India Pale Ale" />
+          <DescListItem label="Type" value="Flagship" />
+          <DescListItem label="ABV" value="6.5%" />
+          <DescListItem label="IBU" value="65" />
+        </DescList>
+      </div>
+    </CodePreview>
+
+    <Section title="Custom Content">
+        ### Complex Values
+        Use children instead of the `value` prop for custom content like badges, links, or complex layouts.
+    </Section>
+
+    <CodePreview code={`
+        <DescList title="Beer Status">
+          <DescListItem label="Status">
+            <Badge clr="success">Active</Badge>
+          </DescListItem>
+          <DescListItem label="Availability">
+            <Badge clr="primary">Year-Round</Badge>
+          </DescListItem>
+          <DescListItem label="Distribution">
+            <span className="text-sm">Available in: OR, WA, CA</span>
+          </DescListItem>
+        </DescList>
+    `}>
+      <div class="max-w-3xl">
+        <DescList title="Beer Status">
+          <DescListItem label="Status">
+            <Badge clr="success">Active</Badge>
+          </DescListItem>
+          <DescListItem label="Availability">
+            <Badge clr="primary">Year-Round</Badge>
+          </DescListItem>
+          <DescListItem label="Distribution">
+            <span class="text-sm">Available in: OR, WA, CA</span>
+          </DescListItem>
+        </DescList>
+      </div>
+    </CodePreview>
+
+    <Section title="Grid Layouts">
+        ### Custom Column Spans
+        Use Tailwind grid classes to control how items span across the 12-column grid on different breakpoints.
+    </Section>
+
+    <CodePreview code={`
+        <DescList title="Brewery Specifications">
+          <DescListItem label="Name" value="Cascade Brewing" className="md:col-span-6" />
+          <DescListItem label="Type" value="Microbrewery" className="md:col-span-6" />
+          <DescListItem label="Founded" value="2015" className="md:col-span-4" />
+          <DescListItem label="Capacity" value="5000 BBL/year" className="md:col-span-4" />
+          <DescListItem label="Taproom" value="Open Daily" className="md:col-span-4" />
+          <DescListItem 
+            label="Description" 
+            value="A family-owned microbrewery specializing in Belgian-inspired ales and experimental hop varieties."
+          />
+        </DescList>
+    `}>
+      <div class="max-w-3xl">
+        <DescList title="Brewery Specifications">
+          <DescListItem label="Name" value="Cascade Brewing" class="md:col-span-6" />
+          <DescListItem label="Type" value="Microbrewery" class="md:col-span-6" />
+          <DescListItem label="Founded" value="2015" class="md:col-span-4" />
+          <DescListItem label="Capacity" value="5000 BBL/year" class="md:col-span-4" />
+          <DescListItem label="Taproom" value="Open Daily" class="md:col-span-4" />
+          <DescListItem 
+            label="Description" 
+            value="A family-owned microbrewery specializing in Belgian-inspired ales and experimental hop varieties."
+          />
+        </DescList>
+      </div>
+    </CodePreview>
+
+    <Section title="Components">
+        ### DescList
+        Main wrapper component for the description list.
+        
+        | Prop | Type | Default | Description |
+        | --- | --- | --- | --- |
+        | title | string | - | Optional title displayed in the header |
+        | subtitle | string | - | Optional subtitle displayed below the title |
+        | wrapperClassName | string | - | Additional classes for the outer wrapper div |
+        | className | string | - | Additional classes for the `<dl>` element |
+        
+        ### DescListItem
+        Individual key-value pair in the description list.
+        
+        | Prop | Type | Default | Description |
+        | --- | --- | --- | --- |
+        | label | string | - | Label text displayed as the key |
+        | value | React.ReactNode | - | Value content, can be string or React elements |
+        | className | string | - | Additional classes (use for grid column spans) |
+        | children | React.ReactNode | - | Alternative to `value` for custom content |
+        
+        **Note:** By default, each DescListItem spans the full width (`col-span-full`). Use `className` with Tailwind grid utilities like `md:col-span-6` or `md:col-span-4` to create multi-column layouts.
+        
+        ### DescListHeader
+        Header component with title and subtitle (automatically included when using `title` prop on DescList).
+        
+        | Prop | Type | Default | Description |
+        | --- | --- | --- | --- |
+        | title | string | - | Header title |
+        | subtitle | string | - | Header subtitle |
+        | className | string | - | Additional classes |
+        
+        ### DescListLabel
+        Label component for the key in key-value pairs (automatically used by DescListItem).
+        
+        | Prop | Type | Default | Description |
+        | --- | --- | --- | --- |
+        | children | React.ReactNode | - | Label content |
+        | className | string | - | Additional classes |
+    </Section>
+
+    <Section title="Accessibility">
+        - Uses semantic HTML (`<dl>`, `<dt>`, `<dd>`) for proper structure
+        - Screen readers announce the relationship between terms and definitions
+        - Responsive grid layout maintains readability across devices
+        - Follows WCAG 2.1 AA guidelines
+    </Section>
+
+    <Section title="Best Practices">
+        ### When to Use
+        - Displaying metadata or specifications
+        - User profile information
+        - Product details and attributes
+        - Configuration settings
+        - Any structured key-value data
+        
+        ### Column Span Guidelines
+        - Short values (numbers, dates): `md:col-span-3` or `md:col-span-4`
+        - Medium values (names, categories): `md:col-span-6`
+        - Long descriptions: `col-span-full` (default)
+        - Adjust based on content length and layout needs
+        
+        ### Content Patterns
+        - Keep labels concise (1-3 words when possible)
+        - Use consistent terminology across related lists
+        - Consider using badges for status indicators
+        - Group related items visually using column spans
+    </Section>
+
+</BaseSidebar>

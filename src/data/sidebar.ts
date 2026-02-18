@@ -39,10 +39,15 @@ export const sidebarLinks = [
             { title: 'Breadcrumb', href: '/docs/components/breadcrumb' },
             { title: 'Button', href: '/docs/components/button' },
             { title: 'Card', href: '/docs/components/card' },
+            { title: 'DescList', href: '/docs/components/desclist' },
+            { title: 'Empty', href: '/docs/components/empty' },
+            { title: 'Heading', href: '/docs/components/heading' },
+            { title: 'Menu', href: '/docs/components/menu' },
             { title: 'Metric', href: '/docs/components/metric' },
             { title: 'Modal', href: '/docs/components/modal' },
             { title: 'Pagination', href: '/docs/components/pagination' },
             { title: 'Sidebar', href: '/docs/components/sidebar' },
+            { title: 'Table', href: '/docs/components/table' },
             { title: 'Tablist', href: '/docs/components/tablist' },
             { title: 'Vertlist', href: '/docs/components/vertlist' },
         ]
@@ -64,6 +69,12 @@ export const sidebarLinks = [
             { title: 'Radio', href: '/docs/forms/radio' },
             { title: 'Select', href: '/docs/forms/select' },
             { title: 'Textarea', href: '/docs/forms/textarea' },
+        ]
+    },
+    {
+        title: 'Reference',
+        items: [
+            { title: 'Component Status', href: '/docs/component-status' },
         ]
     }
 ]

@@ -1,0 +1,16 @@
+---
+export interface Props {
+    class?: string;
+}
+
+const { class: className, ...props } = Astro.props;
+---
+
+<div 
+    class={className} 
+    x-data="{ open: false }" 
+    @keydown.escape.window="open = false"
+    {...props}
+>
+    <slot />
+</div>

@@ -1,58 +1,149 @@
 ---
-import { classNames } from "../../utils/classNames"
+import { classNames } from "../../utils/classNames";
 import IconChevronDown from "../icons/IconChevronDown.astro";
 
+type SelectItem = {
+    value: string;
+    label: string;
+};
+
 interface Props {
-    items?: Array<{ value: string; label: string }>;
-    placeholder?: string;
+    items?: SelectItem[];
     defaultValue?: string;
+    placeholder?: string;
     disabled?: boolean;
     "aria-invalid"?: boolean;
-    className?: string;
+    class?: string;
 }
 
-const { 
+const {
     items = [],
-    placeholder,
-    defaultValue,
+    defaultValue = "",
+    placeholder = "Select an option",
     disabled = false,
-    className
+    "aria-invalid": ariaInvalid = false,
+    class: className,
+    ...props
 } = Astro.props;
 
-const ariaInvalid = Astro.props["aria-invalid"];
+// Auto-disable when items is empty
+const isEmpty = !items || items.length === 0;
+const shouldDisable = disabled || isEmpty;
+
+// Find the default label
+const defaultLabel = items.find(item => item.value === defaultValue)?.label || placeholder;
 ---
-<div class="mt-1">
-    <div class="relative">
-        <select 
-            class={classNames(
-                "flex items-center justify-between",
-                "w-full py-2 px-3 pr-10",
-                "rounded-md border-0 ring-1 ring-inset ring-border outline-0 shadow-sm",
-                "aria-[invalid=true]:ring-2 aria-[invalid=true]:ring-danger",
-                "text-sm text-foreground",
-                !defaultValue && placeholder ? "text-muted-foreground" : "",
-                "focus:ring-2 focus:ring-inset focus:border-foreground focus:outline-0 focus:ring-foreground",
-                "cursor-pointer",
-                "disabled:opacity-50 disabled:cursor-not-allowed",
-                "appearance-none bg-background",
-                "[&>option]:bg-background [&>option]:text-foreground [&>option]:py-1.5",
-                className
-            )}
-            aria-invalid={ariaInvalid}
-            {disabled}
-        >
-            {placeholder && <option value="" disabled selected={!defaultValue} hidden class="text-muted-foreground">{placeholder}</option>}
-            {items.map((item) => (
-            <option value={item.value} selected={defaultValue === item.value}>
-                {item.label}
-            </option>
+
+<div 
+    class="mt-1 relative"
+    x-data={`{ 
+        open: false, 
+        selectedValue: '${defaultValue}',
+        selectedLabel: '${defaultLabel}',
+        focusedIndex: -1,
+        selectItem(value, label) {
+            this.selectedValue = value;
+            this.selectedLabel = label;
+            this.open = false;
+            this.focusedIndex = -1;
+        },
+        handleKeydown(event) {
+            if (!this.open) {
+                if (event.key === 'ArrowDown' || event.key === 'ArrowUp' || event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    this.open = true;
+                    this.focusedIndex = 0;
+                }
+                return;
+            }
+            
+            const itemCount = ${items.length};
+            
+            if (event.key === 'ArrowDown') {
+                event.preventDefault();
+                this.focusedIndex = (this.focusedIndex + 1) % itemCount;
+            } else if (event.key === 'ArrowUp') {
+                event.preventDefault();
+                this.focusedIndex = this.focusedIndex <= 0 ? itemCount - 1 : this.focusedIndex - 1;
+            } else if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                if (this.focusedIndex >= 0) {
+                    const items = ${JSON.stringify(items)};
+                    const item = items[this.focusedIndex];
+                    this.selectItem(item.value, item.label);
+                }
+            } else if (event.key === 'Escape') {
+                this.open = false;
+                this.focusedIndex = -1;
+            }
+        }
+    }`}
+    @keydown.window="handleKeydown($event)"
+>
+    <button
+        type="button"
+        @click="open = !open"
+        aria-expanded="false"
+        :aria-expanded="open"
+        aria-invalid={ariaInvalid}
+        disabled={shouldDisable}
+        class={classNames(
+            "flex items-center justify-between",
+            "w-full py-2 px-3",
+            "rounded-t-md border-0 ring-1 ring-inset ring-border outline-0 shadow-sm",
+            "aria-[expanded=false]:rounded-b-md",
+            ariaInvalid && "ring-2 ring-danger",
+            "text-sm text-foreground placeholder:text-muted-foreground",
+            "focus:ring-2 focus:ring-inset focus:border-foreground focus:outline-0 focus:ring-foreground",
+            "cursor-pointer",
+            shouldDisable && "opacity-50 cursor-not-allowed",
+            className
+        )}
+        {...props}
+    >
+        <span x-text="selectedLabel" class="truncate">{defaultLabel}</span>
+        <IconChevronDown class="size-4 text-muted-foreground flex-shrink-0" />
+    </button>
+
+    <div
+        x-show="open"
+        x-transition:enter="transition ease-out duration-100"
+        x-transition:enter-start="opacity-0 scale-95"
+        x-transition:enter-end="opacity-100 scale-100"
+        x-transition:leave="transition ease-in duration-75"
+        x-transition:leave-start="opacity-100 scale-100"
+        x-transition:leave-end="opacity-0 scale-95"
+        @click.outside="open = false"
+        x-cloak
+        class="absolute z-50 w-full bg-popover text-popover-foreground rounded-b-md border-0 ring-1 ring-border shadow-sm outline-0"
+        style="max-height: 300px; overflow-y: auto;"
+    >
+        {items.map((item, index) => (
+            <div
+                @click={`selectItem('${item.value}', '${item.label}')`}
+                :class={`focusedIndex === ${index} && 'bg-accent'`}
+                class={classNames(
+                    "flex gap-x-2 items-center px-3 py-0.5",
+                    "cursor-pointer",
+                    "hover:bg-accent hover:outline-0",
+                    "active:outline-0",
+                    "text-sm"
+                )}
+            >
+                <div class="size-3">
+                    <svg 
+                        x-show={`selectedValue === '${item.value}'`}
+                        fill="currentcolor" 
+                        width="10" 
+                        height="10" 
+                        viewBox="0 0 10 10" 
+                        class="size-full"
+                    >
+                        <path d="M9.1603 1.12218C9.50684 1.34873 9.60427 1.81354 9.37792 2.16038L5.13603 8.66012C5.01614 8.8438 4.82192 8.96576 4.60451 8.99384C4.3871 9.02194 4.1683 8.95335 4.00574 8.80615L1.24664 6.30769C0.939709 6.02975 0.916013 5.55541 1.19372 5.24822C1.47142 4.94102 1.94536 4.91731 2.2523 5.19524L4.36085 7.10461L8.12299 1.33999C8.34934 0.993152 8.81376 0.895638 9.1603 1.12218Z" />
+                    </svg>
+                </div>
+                <span>{item.label}</span>
+            </div>
         ))}
-        </select>
-        <div class={classNames(
-            "pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3",
-            disabled ? "opacity-50" : ""
-        )}>
-            <IconChevronDown class="text-muted-foreground size-4" />
-        </div>
     </div>
 </div>

@@ -1,0 +1,168 @@
+---
+title: Menu
+description: A dropdown menu component for displaying actions, navigation, and contextual options.
+---
+import BaseSidebar from "@/layouts/BaseSidebar.astro";
+import Section from "@/components/Section.astro";
+import CodePreview from "@/components/CodePreview.astro";
+import Menu from "@/components/menu/Menu.astro";
+import MenuTrigger from "@/components/menu/MenuTrigger.astro";
+import MenuContent from "@/components/menu/MenuContent.astro";
+import MenuItem from "@/components/menu/MenuItem.astro";
+import Button from "@/components/button/Button.astro";
+import Avatar from "@/components/avatar/Avatar.astro";
+
+<BaseSidebar title={frontmatter.title} description={frontmatter.description}>
+
+<Section>
+    ### Overview
+    The Menu component provides a dropdown menu for actions, navigation, and contextual options. It's built on Base UI Menu primitives and includes support for custom triggers, keyboard navigation, and focus management.
+
+    The Menu component is composed of four parts:
+    - **Menu**: The root wrapper component
+    - **MenuTrigger**: The button or element that opens the menu
+    - **MenuContent**: The dropdown container for menu items
+    - **MenuItem**: Individual items within the menu
+</Section>
+
+<CodePreview code={`
+<Menu>
+    <MenuTrigger>
+        <Button>Open Menu</Button>
+    </MenuTrigger>
+    <MenuContent>
+        <MenuItem>View Profile</MenuItem>
+        <MenuItem>Settings</MenuItem>
+        <MenuItem>Sign Out</MenuItem>
+    </MenuContent>
+</Menu>
+`}>
+    <div class="flex gap-4">
+        <Menu>
+            <MenuTrigger>
+                <Button>Open Menu</Button>
+            </MenuTrigger>
+            <MenuContent>
+                <MenuItem>View Profile</MenuItem>
+                <MenuItem>Settings</MenuItem>
+                <MenuItem>Sign Out</MenuItem>
+            </MenuContent>
+        </Menu>
+    </div>
+</CodePreview>
+
+<Section>
+    ### Custom Triggers
+    The MenuTrigger accepts any child component. Common patterns include buttons, avatars, or icon buttons.
+</Section>
+
+<CodePreview code={`
+<Menu>
+    <MenuTrigger>
+        <Avatar fallback="UI" />
+    </MenuTrigger>
+    <MenuContent>
+        <MenuItem>View Profile</MenuItem>
+        <MenuItem>Account Settings</MenuItem>
+        <MenuItem>Billing</MenuItem>
+        <MenuItem>Sign Out</MenuItem>
+    </MenuContent>
+</Menu>
+`}>
+    <div class="flex gap-4">
+        <Menu>
+            <MenuTrigger>
+                <Avatar fallback="UI" />
+            </MenuTrigger>
+            <MenuContent>
+                <MenuItem>View Profile</MenuItem>
+                <MenuItem>Account Settings</MenuItem>
+                <MenuItem>Billing</MenuItem>
+                <MenuItem>Sign Out</MenuItem>
+            </MenuContent>
+        </Menu>
+    </div>
+</CodePreview>
+
+<Section>
+    ### Positioning
+    MenuContent automatically positions itself relative to the trigger using Base UI's positioning system. It includes a backdrop, shadow, and smooth animations.
+</Section>
+
+<CodePreview code={`
+<Menu>
+    <MenuTrigger>
+        <Button clr="primary">Actions</Button>
+    </MenuTrigger>
+    <MenuContent>
+        <MenuItem>New Document</MenuItem>
+        <MenuItem>Open</MenuItem>
+        <MenuItem>Save</MenuItem>
+        <MenuItem>Save As...</MenuItem>
+        <MenuItem>Export</MenuItem>
+    </MenuContent>
+</Menu>
+`}>
+    <div class="flex gap-4">
+        <Menu>
+            <MenuTrigger>
+                <Button clr="primary">Actions</Button>
+            </MenuTrigger>
+            <MenuContent>
+                <MenuItem>New Document</MenuItem>
+                <MenuItem>Open</MenuItem>
+                <MenuItem>Save</MenuItem>
+                <MenuItem>Save As...</MenuItem>
+                <MenuItem>Export</MenuItem>
+            </MenuContent>
+        </Menu>
+    </div>
+</CodePreview>
+
+<Section>
+    ### Props
+
+    #### Menu
+    Accepts all props from the Base UI Menu.Root component.
+
+    | Prop | Type | Default | Description |
+    |------|------|---------|-------------|
+    | className | string | - | Additional CSS classes |
+
+    #### MenuTrigger
+    Accepts all props from the Base UI Menu.Trigger component.
+
+    | Prop | Type | Default | Description |
+    |------|------|---------|-------------|
+    | className | string | - | Additional CSS classes |
+
+    #### MenuContent
+    Accepts all props from the Base UI Menu.Portal, Menu.Positioner, and Menu.Popup components.
+
+    | Prop | Type | Default | Description |
+    |------|------|---------|-------------|
+    | className | string | - | Additional CSS classes |
+
+    #### MenuItem
+    Accepts all props from the Base UI Menu.Item component.
+
+    | Prop | Type | Default | Description |
+    |------|------|---------|-------------|
+    | className | string | - | Additional CSS classes |
+
+    ### Accessibility
+    - Keyboard navigation with arrow keys
+    - Escape key closes the menu
+    - Focus management when opening/closing
+    - Click outside to close
+    - Proper ARIA attributes from Base UI
+
+    ### Best Practices
+    - Use Menu for contextual actions and navigation
+    - Keep menu items concise and actionable
+    - Use consistent trigger patterns (buttons, avatars, icons)
+    - Avoid nesting menus more than one level deep
+    - Consider grouping related items with visual separators
+</Section>
+
+</BaseSidebar>

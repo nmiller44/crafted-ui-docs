@@ -1,0 +1,185 @@
+---
+import Badge from "@/components/badge/Badge.astro";
+import Card from "@/components/card/Card.astro";
+import CardBody from "@/components/card/CardBody.astro";
+import CardHeader from "@/components/card/CardHeader.astro";
+import IconAstro from "@/components/icons/IconAstro.astro";
+import IconStorybook from "@/components/icons/IconStorybook.astro";
+import IconComponent from "@/components/icons/IconComponent.astro";
+import IconCode from "@/components/icons/IconCode.astro";
+import Heading3 from "@/components/heading/Heading3.astro";
+import componentsData from "../../public/components.json";
+
+// Calculate metrics
+const totalComponents = componentsData.length;
+const stableComponents = componentsData.filter((c: any) => c.status === 'stable').length;
+const betaComponents = componentsData.filter((c: any) => c.status === 'beta').length;
+const withDocs = componentsData.filter((c: any) => c.hasDocs).length;
+const withStorybook = componentsData.filter((c: any) => c.hasStorybook).length;
+const withAstro = componentsData.filter((c: any) => c.hasAstro).length;
+const withJSDoc = componentsData.filter((c: any) => c.hasJSDoc).length;
+
+const stablePercent = Math.round((stableComponents / totalComponents) * 100);
+const docsPercent = Math.round((withDocs / totalComponents) * 100);
+const storybookPercent = Math.round((withStorybook / totalComponents) * 100);
+const astroPercent = Math.round((withAstro / totalComponents) * 100);
+
+// Group by category
+const categories = [...new Set(componentsData.map((c: any) => c.category))].sort();
+---
+
+<div class="my-8 space-y-8">
+  <!-- Metrics Overview -->
+  <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+    <Card>
+      <CardBody>
+        <div class="text-center">
+          <div class="text-3xl font-bold text-primary">{stableComponents}</div>
+          <div class="text-sm text-muted-foreground mt-1">Stable Components</div>
+          <div class="text-xs text-muted-foreground">{stablePercent}% of total</div>
+        </div>
+      </CardBody>
+    </Card>
+    
+    <Card>
+      <CardBody>
+        <div class="text-center">
+          <div class="text-3xl font-bold text-secondary">{betaComponents}</div>
+          <div class="text-sm text-muted-foreground mt-1">Beta Components</div>
+          <div class="text-xs text-muted-foreground">{Math.round((betaComponents / totalComponents) * 100)}% of total</div>
+        </div>
+      </CardBody>
+    </Card>
+    
+    <Card>
+      <CardBody>
+        <div class="text-center">
+          <div class="text-3xl font-bold text-accent">{withDocs}</div>
+          <div class="text-sm text-muted-foreground mt-1">With Docs</div>
+          <div class="text-xs text-muted-foreground">{docsPercent}% coverage</div>
+        </div>
+      </CardBody>
+    </Card>
+    
+    <Card>
+      <CardBody>
+        <div class="text-center">
+          <div class="text-3xl font-bold text-blue-600">{withStorybook}</div>
+          <div class="text-sm text-muted-foreground mt-1">With Stories</div>
+          <div class="text-xs text-muted-foreground">{storybookPercent}% coverage</div>
+        </div>
+      </CardBody>
+    </Card>
+  </div>
+
+  <!-- Table View -->
+  <div class="space-y-4">
+    <Heading3>All Components</Heading3>
+    <div class="overflow-x-auto">
+      <table class="w-full border-collapse">
+        <thead>
+          <tr class="border-b border-border bg-muted/50">
+            <th class="text-left p-3 font-semibold text-sm">Component</th>
+            <th class="text-left p-3 font-semibold text-sm">Category</th>
+            <th class="text-center p-3 font-semibold text-sm">Status</th>
+            <th class="text-center p-3 font-semibold text-sm">Docs</th>
+            <th class="text-center p-3 font-semibold text-sm">Stories</th>
+            <th class="text-center p-3 font-semibold text-sm">Astro</th>
+            <th class="text-center p-3 font-semibold text-sm">JSDoc</th>
+            <th class="text-center p-3 font-semibold text-sm">Base UI</th>
+          </tr>
+        </thead>
+        <tbody>
+          {componentsData.map((component: any, index: number) => (
+            <tr class:list={["border-b border-border hover:bg-muted/30 transition-colors", index % 2 ? "bg-background" : "bg-muted/20"]}>
+              <td class="p-3">
+                <div class="flex flex-col gap-1">
+                  <div class="font-medium">{component.name}</div>
+                  {component.subComponents.length > 0 && (
+                    <div class="text-xs text-muted-foreground pl-4">
+                      └ {component.subComponents.join(", ")}
+                    </div>
+                  )}
+                </div>
+              </td>
+              <td class="p-3 text-sm capitalize">{component.category}</td>
+              <td class="p-3 text-center">
+                <Badge clr={component.status === 'stable' ? 'green' : component.status === 'beta' ? 'yellow' : 'blank'}>
+                  {component.status}
+                </Badge>
+              </td>
+              <td class="p-3 text-center">
+                {component.hasDocs ? (
+                  <a href={component.docs} class="text-green-600 hover:underline text-lg">✓</a>
+                ) : (
+                  <span class="text-muted-foreground">—</span>
+                )}
+              </td>
+              <td class="p-3 text-center">
+                {component.hasStorybook ? (
+                  <IconStorybook className="inline-block size-5 text-foreground" />
+                ) : (
+                  <span class="text-muted-foreground">—</span>
+                )}
+              </td>
+              <td class="p-3 text-center">
+                {component.hasAstro ? (
+                  <IconAstro className="inline-block size-5 text-foreground" />
+                ) : (
+                  <span class="text-muted-foreground">—</span>
+                )}
+              </td>
+              <td class="p-3 text-center">
+                {component.hasJSDoc ? (
+                  <IconCode className="inline-block size-5 text-blue-600" />
+                ) : (
+                  <span class="text-muted-foreground">—</span>
+                )}
+              </td>
+              <td class="p-3 text-center">
+                {component.baseUI ? (
+                  <IconComponent className="inline-block size-5 text-purple-600" />
+                ) : (
+                  <span class="text-muted-foreground">—</span>
+                )}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Category Breakdown -->
+  <Card>
+    <CardHeader>
+      <Heading3>Coverage by Category</Heading3>
+    </CardHeader>
+    <CardBody>
+      <div class="space-y-3">
+        {categories.map((category) => {
+          const categoryComponents = componentsData.filter((c: any) => c.category === category);
+          const categoryStable = categoryComponents.filter((c: any) => c.status === 'stable').length;
+          const categoryPercent = Math.round((categoryStable / categoryComponents.length) * 100);
+          
+          return (
+            <div>
+              <div class="flex items-center justify-between mb-1">
+                <span class="text-sm font-medium capitalize">{category}</span>
+                <span class="text-sm text-muted-foreground">
+                  {categoryStable}/{categoryComponents.length} stable ({categoryPercent}%)
+                </span>
+              </div>
+              <div class="w-full bg-muted rounded-full h-2">
+                <div 
+                  class="bg-primary rounded-full h-2 transition-all" 
+                  style={`width: ${categoryPercent}%`}
+                ></div>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </CardBody>
+  </Card>
+</div>

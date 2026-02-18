@@ -1,0 +1,20 @@
+---
+import { classNames } from "@/utils/classNames";
+import DescListHeader from "./DescListHeader.astro";
+
+export interface Props {
+    title?: string;
+    subtitle?: string;
+    wrapperClassName?: string;
+    class?: string;
+}
+
+const { title, subtitle, wrapperClassName, class: className, ...props } = Astro.props;
+---
+
+<div class={classNames("space-y-8", wrapperClassName)}>
+    {title && <DescListHeader title={title} subtitle={subtitle} />}
+    <dl class={classNames("grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-x-6 gap-y-8", className)} {...props}>
+        <slot />
+    </dl>
+</div>

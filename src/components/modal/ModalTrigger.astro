@@ -1,12 +1,12 @@
 ---
 import type { HTMLAttributes } from "astro/types";
 
-interface Props extends HTMLAttributes<'button'> {
+interface Props extends HTMLAttributes<'div'> {
 }
 
 const { ...props } = Astro.props;
 ---
 
-<button {...props}>
+<div @click="open = true" class="inline-block" {...props}>
     <slot />
-</button>
+</div>

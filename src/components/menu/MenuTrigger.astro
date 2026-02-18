@@ -1,0 +1,17 @@
+---
+import { classNames } from "@/utils/classNames";
+
+export interface Props {
+    class?: string;
+}
+
+const { class: className, ...props } = Astro.props;
+---
+
+<div 
+    class={classNames("outline-none select-none inline-block", className)}
+    @click="open = !open"
+    {...props}
+>
+    <slot />
+</div>

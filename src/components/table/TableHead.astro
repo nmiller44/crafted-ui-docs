@@ -1,0 +1,15 @@
+---
+import { classNames } from "@/utils/classNames";
+
+export interface Props {
+    class?: string;
+}
+
+const { class: className, ...props } = Astro.props;
+---
+
+<thead class={classNames("bg-muted/50 text-xs", className)} {...props}>
+    <tr>
+        <slot />
+    </tr>
+</thead>

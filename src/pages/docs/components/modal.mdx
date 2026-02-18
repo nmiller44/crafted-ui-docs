@@ -3,7 +3,10 @@ title: 'Modal'
 description: 'A dialog component for displaying content that requires user interaction or attention.'
 ---
 import BaseSidebar from "@/layouts/BaseSidebar.astro";
+import Modal from "@/components/modal/Modal.astro";
+import ModalTrigger from "@/components/modal/ModalTrigger.astro";
 import ModalContent from "@/components/modal/ModalContent.astro";
+import ModalClose from "@/components/modal/ModalClose.astro";
 import ModalDescription from "@/components/modal/ModalDescription.astro";
 
 import Button from "@/components/button/Button.astro";
@@ -39,18 +42,25 @@ import CodePreview from '@/components/CodePreview.astro';
     </ModalContent>
 </Modal>
 `}>
-    <div class="min-h-96 flex items-center justify-center bg-black/10 dark:bg-black/50 rounded-lg py-8">
-        <ModalContent title="Brewery Tour Confirmation" subtitle="January 20, 2026" static>
-            <ModalDescription>
-                Your tour has been confirmed for 2:00 PM. Please arrive 10 minutes early. You'll explore our brewing facility, barrel room, and enjoy samples of our seasonal releases.
-            </ModalDescription>
-            <Fieldset>
-                <FieldsetButtons>
-                    <Button clr="secondary" outline>Close</Button>
-                    <Button clr="primary">Add to Calendar</Button>
-                </FieldsetButtons>
-            </Fieldset>
-        </ModalContent>
+    <div class="flex items-center justify-center py-8">
+        <Modal>
+            <ModalTrigger>
+                <Button>Open Modal</Button>
+            </ModalTrigger>
+            <ModalContent title="Brewery Tour Confirmation" subtitle="January 20, 2026">
+                <ModalDescription>
+                    Your tour has been confirmed for 2:00 PM. Please arrive 10 minutes early. You'll explore our brewing facility, barrel room, and enjoy samples of our seasonal releases.
+                </ModalDescription>
+                <Fieldset>
+                    <FieldsetButtons>
+                        <ModalClose>
+                            <Button clr="secondary" outline>Close</Button>
+                        </ModalClose>
+                        <Button clr="primary">Add to Calendar</Button>
+                    </FieldsetButtons>
+                </Fieldset>
+            </ModalContent>
+        </Modal>
     </div>
 </CodePreview>
 
@@ -231,8 +241,12 @@ import CodePreview from '@/components/CodePreview.astro';
     </ModalContent>
 </Modal>
 `}>
-    <div class="min-h-[32rem] flex items-center justify-center bg-black/10 dark:bg-black/50 rounded-lg py-8">
-        <ModalContent title="Tasting Flight Ratings" subtitle="Rate your experience" size="lg" static>
+    <div class="flex items-center justify-center py-8">
+        <Modal>
+            <ModalTrigger>
+                <Button>Large Modal Example</Button>
+            </ModalTrigger>
+            <ModalContent title="Tasting Flight Ratings" subtitle="Rate your experience" size="lg">
             <ModalDescription>
                 Rate each beer in your flight on a scale of 1-5 stars. Your feedback helps us improve our brewing process.
             </ModalDescription>
@@ -268,11 +282,14 @@ import CodePreview from '@/components/CodePreview.astro';
                     <Textarea placeholder="Share your thoughts..." rows={3} />
                 </Field>
                 <FieldsetButtons>
-                    <Button clr="secondary" outline>Skip</Button>
+                    <ModalClose>
+                        <Button clr="secondary" outline>Skip</Button>
+                    </ModalClose>
                     <Button clr="primary">Submit Ratings</Button>
                 </FieldsetButtons>
             </Fieldset>
-        </ModalContent>
+            </ModalContent>
+        </Modal>
     </div>
 </CodePreview>
 
@@ -316,8 +333,12 @@ import CodePreview from '@/components/CodePreview.astro';
     </ModalContent>
 </Modal>
 `}>
-    <div class="min-h-[36rem] flex items-center justify-center bg-black/10 dark:bg-black/50 rounded-lg py-8">
-        <ModalContent title="Homebrew Recipe Contest" size="lg" static>
+    <div class="flex items-center justify-center py-8">
+        <Modal>
+            <ModalTrigger>
+                <Button clr="primary">Submit Your Recipe</Button>
+            </ModalTrigger>
+            <ModalContent title="Homebrew Recipe Contest" size="lg">
             <ModalDescription>
                 Enter our annual homebrew competition by submitting your recipe. Winners will have their beer brewed at our facility and featured in our taproom.
             </ModalDescription>
@@ -339,11 +360,14 @@ import CodePreview from '@/components/CodePreview.astro';
                     <Textarea placeholder="Describe your recipe, ingredients, and brewing process..." rows={4} />
                 </Field>
                 <FieldsetButtons>
-                    <Button clr="secondary" outline>Cancel</Button>
+                    <ModalClose>
+                        <Button clr="secondary" outline>Cancel</Button>
+                    </ModalClose>
                     <Button clr="primary">Submit Recipe</Button>
                 </FieldsetButtons>
             </Fieldset>
-        </ModalContent>
+            </ModalContent>
+        </Modal>
     </div>
 </CodePreview>
 
