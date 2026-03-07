@@ -10,11 +10,17 @@ interface Props {
 }
 
 const { title, subtitle, className, subtitleClass, wrapperClass } = Astro.props;
+const rawSlotContent = Astro.slots.has("default") ? await Astro.slots.render("default") : "";
+const slotContent = rawSlotContent.trim();
+const hasCustomMarkup = /<[^>]+>/.test(slotContent);
+const shouldRenderTextAsHeading = !title && !!slotContent && !hasCustomMarkup;
 ---
 <div class={classNames("space-y-1.5", wrapperClass)}>
     { !!title
         ? <h4 class={classNames("text-xl font-bold tracking-tight", className)}>{ title }</h4>
-        : <slot />
+        : shouldRenderTextAsHeading
+            ? <h4 class={classNames("text-xl font-bold tracking-tight", className)}>{ slotContent }</h4>
+            : <slot />
     }
     { !!subtitle && <p class={classNames("text-sm text-muted-foreground", subtitleClass)}>{ subtitle }</p> }
 </div>

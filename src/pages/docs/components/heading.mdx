@@ -37,35 +37,39 @@ import Heading5 from "@/components/heading/Heading5.astro";
 </CodePreview>
 
 <Section>
-    ### Using Children Instead of Title Prop
-    You can pass custom content as children instead of using the `title` prop for more flexibility.
+    ### Heading Usage Options
+    All heading components (Heading1-5) support the same rendering behavior:
+
+    - Use `title` for the default styled heading text
+    - Pass plain text as `children` to get the same styled semantic heading
+    - Pass custom elements as `children` to render your markup as-is
 </Section>
 
 <CodePreview code={`
-<Heading1>
-    <h1>Custom <span className="text-primary">Styled</span> Heading</h1>
+<Heading1 title="Pale Ale Tasting Notes" subtitle="Bright citrus aroma with a crisp finish" />
+
+<Heading1 subtitle="Children passed as plain text is auto-styled as h1">
+    Session IPA Profile
 </Heading1>
 
-<Heading2 subtitle="With a subtitle">
-    <h2>Mash Schedule</h2>
-</Heading2>
-
-<Heading3>
-    <h3>Step 1: Heat Water</h3>
-</Heading3>
+<Heading1 subtitle="Children passed as custom elements render as-is">
+    <h1 className="text-4xl font-bold tracking-tight flex items-center gap-2">
+        <span>🍺</span>
+        <span>Custom Heading Layout</span>
+    </h1>
+</Heading1>
 `}>
     <div class="space-y-8">
-        <Heading1>
-            <h1>Custom <span class="text-primary">Styled</span> Heading</h1>
+        <Heading1 title="Pale Ale Tasting Notes" subtitle="Bright citrus aroma with a crisp finish" />
+
+        <Heading1 subtitle="Children passed as plain text is auto-styled as h1">Session IPA Profile</Heading1>
+
+        <Heading1 subtitle="Children passed as custom elements render as-is">
+            <h1 class="text-4xl font-bold tracking-tight flex items-center gap-2">
+                <span>🍺</span>
+                <span>Custom Heading Layout</span>
+            </h1>
         </Heading1>
-        
-        <Heading2 subtitle="With a subtitle">
-            <h2>Mash Schedule</h2>
-        </Heading2>
-        
-        <Heading3>
-            <h3>Step 1: Heat Water</h3>
-        </Heading3>
     </div>
 </CodePreview>
 
@@ -139,7 +143,7 @@ import Heading5 from "@/components/heading/Heading5.astro";
     | className | string | - | Additional CSS classes for the heading element |
     | subtitleClass | string | - | Additional CSS classes for the subtitle |
     | wrapperClass | string | - | Additional CSS classes for the wrapper div |
-    | children | ReactNode | - | Custom heading content (alternative to title prop) |
+    | children | ReactNode | - | Alternative to `title`; text-only children are auto-wrapped in the matching styled heading tag, custom elements render as-is |
 
     ### Accessibility
     - Uses semantic HTML heading elements (h1-h5)
