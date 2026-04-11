@@ -223,6 +223,26 @@ import IconX from '@/components/icons/IconX.astro';
         </div>
     </CodePreview>
 
+    <Section title="Using with Links">
+        ### Stretched Links
+        
+        Button supports stretched links for navigation. Place a single `<a>` tag as a child to make the 
+        entire button clickable. This is useful for navigation actions styled as buttons.
+
+        ```tsx
+        <Button clr="primary">
+          <a href="/dashboard">Go to Dashboard</a>
+        </Button>
+
+        <Button clr="secondary" ghost>
+          <a href="/settings">Settings</a>
+        </Button>
+        ```
+
+        The link's clickable area automatically expands to cover the entire button, providing a larger 
+        hit target while maintaining semantic HTML. Only use one link per button.
+    </Section>
+
     <Section title="Accessibility">
         The Button component follows accessibility best practices:
         

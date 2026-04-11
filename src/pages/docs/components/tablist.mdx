@@ -244,6 +244,30 @@ import TablistItem from '@components/tablist/TablistItem.astro';
         Plus all standard HTML props for the `li` element.
     </Section>
 
+    <Section title="Navigation Links">
+        ### Stretched Links
+        
+        TablistItem supports stretched links, which means placing a single `<a>` tag as a child makes 
+        the entire tab item clickable. This is the recommended pattern for tab navigation:
+
+        ```tsx
+        <Tablist>
+          <TablistItem>
+            <a href="#overview">Overview</a>
+          </TablistItem>
+          <TablistItem>
+            <a href="#features" className="active">Features</a>
+          </TablistItem>
+          <TablistItem>
+            <a href="#usage">Usage</a>
+          </TablistItem>
+        </Tablist>
+        ```
+
+        The link's clickable area automatically expands to cover the entire tab, providing a larger 
+        hit target for better usability. This pattern is commonly used for navigation lists.
+    </Section>
+
     <Section title="Accessibility">
         The Tablist component follows accessibility best practices by using semantic HTML elements:
         

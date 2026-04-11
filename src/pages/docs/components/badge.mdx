@@ -206,6 +206,26 @@ import Heading3 from '@/components/heading/Heading3.astro';
         ```
     </Section>
 
+    <Section title="Using with Links">
+        ### Stretched Links
+        
+        Badge supports stretched links for clickable tags. Place a single `<a>` tag as a child to make 
+        the entire badge clickable. This is useful for filter chips, category navigation, and clickable tags.
+
+        ```tsx
+        <Badge clr="primary">
+          <a href="/filter/ipa">IPA</a>
+        </Badge>
+
+        <Badge clr="green" outline>
+          <a href="/status/available">Available</a>
+        </Badge>
+        ```
+
+        The link's clickable area automatically expands to cover the entire badge, providing better 
+        usability for small UI elements. Only use one link per badge.
+    </Section>
+
     <Section title="Accessibility">
         The Badge component follows accessibility best practices:
         
