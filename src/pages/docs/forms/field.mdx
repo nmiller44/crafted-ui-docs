@@ -78,11 +78,9 @@ import IconSearch from '@/components/icons/IconSearch.astro';
     <Section title="Field">
         ### Description
         The root component that wraps the form field elements. It can automatically include a label via the `label` prop.
-
-        ### Usage
     </Section>
 
-    <CodePreview code={`
+    <CodePreview title="Usage" code={`
         <div className="max-w-sm space-y-4">
           <Field label="Label as Prop">
             <Input />
@@ -146,11 +144,9 @@ import IconSearch from '@/components/icons/IconSearch.astro';
     <Section title="FieldInset">
         ### Description
         Adds inset content to the input field, such as units, currency symbols, or icons. The component can display text via the `text` prop or custom content via children.
-
-        ### Basic Usage
     </Section>
 
-    <CodePreview code={`
+    <CodePreview title="Basic Usage" code={`
             <div className="max-w-sm">
               <Field>
                 <FieldLabel>Price</FieldLabel>
@@ -168,12 +164,10 @@ import IconSearch from '@/components/icons/IconSearch.astro';
           </div>
         </CodePreview>
 
-    <Section>
-        ### Left Position
-        Use `position="left"` to place the inset content on the left side of the input.
-    </Section>
-
-    <CodePreview code={`
+    <CodePreview
+      title="Left Position"
+      subtitle='Use position="left" to place the inset content on the left side of the input.'
+      code={`
             <div className="max-w-sm">
               <Field>
                 <FieldLabel>Website</FieldLabel>
@@ -191,12 +185,10 @@ import IconSearch from '@/components/icons/IconSearch.astro';
           </div>
         </CodePreview>
 
-    <Section>
-        ### Custom Content
-        Instead of using the `text` prop, you can pass custom content like icons as children.
-    </Section>
-
-    <CodePreview code={`
+    <CodePreview
+      title="Custom Content"
+      subtitle="Instead of using the text prop, you can pass custom content like icons as children."
+      code={`
             <div className="max-w-sm">
               <Field>
                 <FieldLabel>Search Beers</FieldLabel>

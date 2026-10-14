@@ -19,7 +19,7 @@ import Badge from '@/components/badge/Badge.astro';
           <DescListItem label="Style Focus" value="West Coast IPAs" />
           <DescListItem 
             label="About" 
-            value="A small batch brewery focused on traditional West Coast style IPAs with bold hop profiles and clean finishes."
+            value="A small batch brewery focused on ... clean finishes."
           />
         </DescList>
     `}>
@@ -157,6 +157,73 @@ import Badge from '@/components/badge/Badge.astro';
       </div>
     </CodePreview>
 
+    <Section title="Advanced API">
+      ### Inline Layout
+      Use `inline` on `DescList` to place labels and values on the same row.
+    </Section>
+
+    <CodePreview code={`
+      <DescList inline>
+        <DescListItem label="API" value="ok" />
+        <DescListItem label="Database" value="ok" />
+        <DescListItem label="Latency" value="19 ms" />
+      </DescList>
+    `}>
+      <div class="max-w-3xl">
+        <DescList inline>
+          <DescListItem label="API" value="ok" />
+          <DescListItem label="Database" value="ok" />
+          <DescListItem label="Latency" value="19 ms" />
+        </DescList>
+      </div>
+    </CodePreview>
+
+    <Section>
+      ### Empty Fallbacks
+      Use `emptyValue` on each `DescListItem` to define string fallback values for empty rows in Astro previews.
+    </Section>
+
+    <CodePreview code={`
+      <DescList>
+        <DescListItem label="Zero" value="0" />
+        <DescListItem label="Empty" value="" emptyValue="Not provided" />
+        <DescListItem label="Custom" value="" emptyValue="N/A" />
+      </DescList>
+    `}>
+      <div class="max-w-3xl">
+        <DescList>
+          <DescListItem label="Zero" value="0" />
+          <DescListItem label="Empty" value="" emptyValue="Not provided" />
+          <DescListItem label="Custom" value="" emptyValue="N/A" />
+        </DescList>
+      </div>
+    </CodePreview>
+
+    <Section>
+      ### Overriding Label Color
+      `DescListLabel` is muted by default, so row color may not recolor the label. Use the same row override pattern as Storybook: apply row-level color/weight, then target `dt` for label color.
+    </Section>
+
+    <CodePreview code={`
+      <DescList inline>
+        <DescListItem
+          label="Status"
+          value="ok"
+          className="font-bold text-success [&>dt]:text-success"
+        />
+      </DescList>
+    `}>
+      <div class="max-w-3xl">
+        <DescList inline>
+          <DescListItem
+            label="Status"
+            value="ok"
+            class="font-bold text-success [&>dt]:text-success"
+          />
+        </DescList>
+      </div>
+    </CodePreview>
+
     <Section title="Components">
         ### DescList
         Main wrapper component for the description list.
@@ -165,6 +232,8 @@ import Badge from '@/components/badge/Badge.astro';
         | --- | --- | --- | --- |
         | title | string | - | Optional title displayed in the header |
         | subtitle | string | - | Optional subtitle displayed below the title |
+        | inline | boolean | false | Displays all labels and values on a single line per row |
+        | emptyValue | React.ReactNode | - | Default fallback for empty, missing, or null item values |
         | wrapperClassName | string | - | Additional classes for the outer wrapper div |
         | className | string | - | Additional classes for the `<dl>` element |
         
@@ -175,6 +244,9 @@ import Badge from '@/components/badge/Badge.astro';
         | --- | --- | --- | --- |
         | label | string | - | Label text displayed as the key |
         | value | React.ReactNode | - | Value content, can be string or React elements |
+        | inline | boolean | inherits from `DescList` | Overrides inline behavior for a specific row |
+        | nocolon | boolean | false | Disables the automatic colon after inline labels |
+        | emptyValue | React.ReactNode | inherits from `DescList` | Row-level empty value fallback override |
         | className | string | - | Additional classes (use for grid column spans) |
         | children | React.ReactNode | - | Alternative to `value` for custom content |
         
@@ -195,6 +267,8 @@ import Badge from '@/components/badge/Badge.astro';
         | Prop | Type | Default | Description |
         | --- | --- | --- | --- |
         | children | React.ReactNode | - | Label content |
+        | inline | boolean | false | Enables inline label styling and optional colon behavior |
+        | nocolon | boolean | false | Removes the automatic colon in inline mode |
         | className | string | - | Additional classes |
     </Section>
 

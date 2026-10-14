@@ -255,9 +255,9 @@ import Heading3 from '@/components/heading/Heading3.astro';
     <Section title="Accessibility">
         The Checkbox component follows accessibility best practices:
         
-        - Uses semantic HTML with proper label associations
+        - Automatically associates its visible `title` or children with the checkbox as its accessible name when no explicit `aria-label` or `aria-labelledby` is provided
         - Supports keyboard navigation (Space to toggle)
-        - Maintains proper focus styles for keyboard users
+        - Provides a visible focus indicator, with invalid-state styling when an invalid checkbox receives focus
         - Provides visual feedback for checked/unchecked states
         - Ensures sufficient color contrast for the checkbox indicator
         

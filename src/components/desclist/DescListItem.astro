@@ -5,16 +5,32 @@ import DescListLabel from "./DescListLabel.astro";
 export interface Props {
     label?: string;
     value?: string;
+    emptyValue?: string;
+    inline?: boolean;
+    nocolon?: boolean;
     class?: string;
 }
 
-const { label, value, class: className, ...props } = Astro.props;
+const { label, value, emptyValue = "-", inline, nocolon = false, class: className, ...props } = Astro.props;
 const hasSlot = Astro.slots.has('default');
+const valueIsEmptyString = typeof value === "string" && value.trim() === "";
+const hasValue = value !== undefined && value !== null && !valueIsEmptyString;
+const renderedValue = hasValue ? value : hasSlot ? undefined : emptyValue;
 ---
 
-<div class={classNames("space-y-2", "col-span-full", className)} {...props}>
-    {label && <DescListLabel>{label}</DescListLabel>}
-    <dd class="text-sm text-foreground leading-6">
-        {value || (hasSlot && <slot />)}
+<div
+    data-desclist-item
+    class={classNames(
+        inline === true ? "flex items-center gap-x-2 [&>dt]:after:content-[':'] [&>dt]:flex-shrink-0 [&>dt]:text-muted-foreground [&>dt]:font-normal [&>dd]:flex-1" : "space-y-1.5",
+        inline === false ? "!block !space-y-1.5 [&>dt]:after:content-none [&>dd]:!flex-none" : "",
+        nocolon ? "[&>dt]:after:content-none" : "",
+        "col-span-full",
+        className
+    )}
+    {...props}
+>
+    {label && <DescListLabel inline={inline === true} nocolon={nocolon}>{label}</DescListLabel>}
+    <dd>
+        {renderedValue ?? (hasSlot && <slot />)}
     </dd>
 </div>

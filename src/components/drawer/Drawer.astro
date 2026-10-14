@@ -1,0 +1,23 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+type DrawerSide = "left" | "right" | "top" | "bottom";
+
+interface Props extends HTMLAttributes<"div"> {
+    side?: DrawerSide;
+    nomotion?: boolean;
+    handle?: string;
+}
+
+const { side = "right", nomotion, handle, ...props } = Astro.props;
+const state = { open: false, side, nomotion: nomotion ?? false };
+---
+
+<div
+    x-data={JSON.stringify(state)}
+    @keydown.escape.window="open = false"
+    @crafted-drawer-open.window={handle ? `if ($event.detail === ${JSON.stringify(handle)}) open = true` : undefined}
+    {...props}
+>
+    <slot />
+</div>

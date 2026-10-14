@@ -1,5 +1,6 @@
 ---
 import { classNames } from "@utils/classNames"
+import CardBody from "@components/card/CardBody.astro";
 import CardHeader from "@components/card/CardHeader.astro";
 
 interface Props {
@@ -7,10 +8,11 @@ interface Props {
     subtitle?: string;
     className?: string;
     body?: boolean;
+    slim?: boolean;
     full?: boolean;
 }
 
-const { title, subtitle, className, body = false, full = false } = Astro.props;
+const { title, subtitle, className, body = false, slim = false, full = false } = Astro.props;
 ---
 <div class={classNames( 
                 "flex flex-col",
@@ -22,11 +24,13 @@ const { title, subtitle, className, body = false, full = false } = Astro.props;
         !!title &&
             <CardHeader title={title} subtitle={subtitle} />
     }
-    <div class={classNames(
-                "space-y-6",
-                body    ? full ? "p-0 md:px-8 md:py-10" :  "px-8 py-10"
-                        : ""
-            )}>
-        <slot />
-    </div>
+    { body || slim
+        ? <CardBody className={
+                    body    ? full ? "p-0 md:px-8 md:py-10" : undefined
+                            : full ? "p-0 md:p-4" : "p-4"
+            }>
+            <slot />
+          </CardBody>
+        : <slot />
+    }
 </div>

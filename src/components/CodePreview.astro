@@ -1,6 +1,7 @@
 ---
 import type { HTMLAttributes } from "astro/types";
 import Card from "@/components/card/Card.astro";
+import Heading3 from "@/components/heading/Heading3.astro";
 import Tablist from "@/components/tablist/Tablist.astro";
 import TablistItem from "@/components/tablist/TablistItem.astro";
 import Button from "@/components/button/Button.astro";
@@ -10,6 +11,8 @@ import { codeToHtml } from 'shiki';
 
 interface Props extends HTMLAttributes<'div'> {
     code: string;
+    title?: string;
+    subtitle?: string;
     className?: string;
 }
 
@@ -17,6 +20,8 @@ const DEFAULT_LANG = 'tsx';
 
 const { 
     code,
+    title,
+    subtitle,
     className
 } = Astro.props;
 
@@ -52,7 +57,8 @@ const highlightedCode = await codeToHtml(normalizedCode, {
 });
 ---
 
-<div x-data={ `{ showCode: false, copied: false, code: ${JSON.stringify(normalizedCode)} }` }>
+<div class:list={{ 'flex flex-col gap-6': title || subtitle }} x-data={ `{ showCode: false, copied: false, code: ${JSON.stringify(normalizedCode)} }` }>
+    { (title || subtitle) && <Heading3 title={title} subtitle={subtitle} /> }
     <Card body full>
         <div class="flex items-center justify-between">
             <Tablist bordered>
@@ -78,7 +84,7 @@ const highlightedCode = await codeToHtml(normalizedCode, {
             <div class="min-h-10">
                 <Button
                     clr="accent"
-                    outline
+                    ghost
                     x-show="showCode && !copied"
                     x-cloak
                     @click="navigator.clipboard.writeText(code); copied = true; setTimeout(() => copied = false, 2000)"
@@ -88,7 +94,7 @@ const highlightedCode = await codeToHtml(normalizedCode, {
                 </Button>
                 <Button
                     clr="accent"
-                    outline
+                    ghost
                     x-show="showCode && copied"
                     x-cloak
                     title="Copied!"

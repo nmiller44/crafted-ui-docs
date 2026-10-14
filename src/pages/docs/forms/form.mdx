@@ -18,6 +18,8 @@ import FieldsetButtons from '@/components/fieldset/FieldsetButtons.astro';
         The Form component in Crafted UI is a thin wrapper around the Base UI Form component, providing a seamless integration with the rest of your application. It handles form submissions, validation, and error handling with a clean, accessible interface.
         
         Form is designed to work together with the Field, FieldLabel, FieldError, and Input components to create complete form experiences.
+
+      Forms use consistent vertical spacing between their contents. When a form-level alert is displayed, its spacing is adjusted so the first form section stays visually connected to the message.
     </Section>
 
 <CodePreview code={`
@@ -250,6 +252,20 @@ import FieldsetButtons from '@/components/fieldset/FieldsetButtons.astro';
         | children | ReactNode | The content of the form |
         | onSubmit | (event: React.FormEvent) => void | Form submission handler function |
         | ref | React.Ref | Reference to the underlying form element |
+        | errors | object | Field-level errors and optional form-level feedback described below |
+    </Section>
+
+    <Section title="Validation Feedback">
+        Pass field errors by field name. Use the reserved `_form` key for a form-level message; a string displays an error alert, while an object can set the alert `message`, `status`, and `title`. Other entries are passed to their matching Field components.
+
+        ```tsx
+        <Form errors={{
+          email: ["Enter a valid email address"],
+          _form: { status: "warning", title: "Review details", message: "Some information needs attention." },
+        }}>
+          {/* Fields */}
+        </Form>
+        ```
     </Section>
 
     <Section title="Accessibility">

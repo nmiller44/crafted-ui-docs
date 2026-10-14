@@ -1,0 +1,100 @@
+---
+import { classNames } from "@/utils/classNames";
+import Button from "@/components/button/Button.astro";
+import type { HTMLAttributes } from "astro/types";
+
+type DrawerSide = "left" | "right" | "top" | "bottom";
+type DrawerSize = "sm" | "md" | "lg" | "xl";
+
+interface Props extends HTMLAttributes<"div"> {
+    side?: DrawerSide;
+    title?: string;
+    subtitle?: string;
+    size?: DrawerSize;
+    hideClose?: boolean;
+    "aria-label"?: string;
+}
+
+const {
+    side = "right",
+    title,
+    subtitle,
+    size = "md",
+    hideClose = false,
+    "aria-label": ariaLabel,
+    class: className,
+    ...props
+} = Astro.props;
+
+const horizontal = side === "left" || side === "right";
+const edgeClasses = {
+    left: "inset-y-0 left-0 h-full rounded-r-md border-r",
+    right: "inset-y-0 right-0 h-full rounded-l-md border-l",
+    top: "inset-x-0 top-0 w-full rounded-b-md border-b",
+    bottom: "inset-x-0 bottom-0 w-full rounded-t-md border-t",
+} satisfies Record<DrawerSide, string>;
+const sizeClasses: Record<DrawerSize, string> = horizontal
+    ? { sm: "w-96", md: "w-[32rem]", lg: "w-[40rem]", xl: "w-[48rem]" }
+    : { sm: "h-96", md: "h-[32rem]", lg: "h-[40rem]", xl: "h-[48rem]" };
+const enterClass = {
+    left: "-translate-x-full",
+    right: "translate-x-full",
+    top: "-translate-y-full",
+    bottom: "translate-y-full",
+}[side];
+---
+
+<div
+    x-show="open"
+    x-transition:enter="transition ease-out duration-150"
+    x-transition:enter-start="opacity-0"
+    x-transition:enter-end="opacity-100"
+    x-transition:leave="transition ease-out duration-150"
+    x-transition:leave-start="opacity-100"
+    x-transition:leave-end="opacity-0"
+    :class="nomotion && '!transition-none'"
+    @click.self="open = false"
+    x-cloak
+    class="fixed inset-0 z-40 flex bg-black/20 opacity-100 dark:bg-black/70 motion-reduce:!transition-none"
+>
+    <section
+        role="dialog"
+        aria-modal="true"
+        aria-label={ariaLabel ?? title}
+        class={classNames(
+            "fixed z-50 flex min-h-0 min-w-0 flex-col border-border bg-card text-card-foreground shadow-md outline-none motion-reduce:!transition-none",
+            edgeClasses[side],
+            sizeClasses[size],
+            "max-w-[calc(100vw-3rem)]",
+            side === "top" || side === "bottom" ? "max-h-[calc(100dvh-3rem)]" : "",
+            className
+        )}
+        x-transition:enter="transition ease-out duration-150"
+        x-transition:enter-start={enterClass}
+        x-transition:enter-end="translate-x-0 translate-y-0"
+        x-transition:leave="transition ease-out duration-150"
+        x-transition:leave-start="translate-x-0 translate-y-0"
+        x-transition:leave-end={enterClass}
+        :class="nomotion && '!transition-none'"
+        {...props}
+    >
+        <div class="flex min-h-0 flex-1 flex-col gap-6 p-6">
+            {(title || subtitle || !hideClose) && (
+                <header class="flex shrink-0 items-start justify-between gap-4">
+                    <div class="min-w-0 space-y-1.5 break-words">
+                        {title && <h2 class="text-lg font-bold">{title}</h2>}
+                        {subtitle && <p class="text-sm text-muted-foreground">{subtitle}</p>}
+                    </div>
+                    {!hideClose && (
+                        <Button clr="blank" ghost aria-label="Close drawer" title="Close drawer" className="size-8 shrink-0" @click="open = false">
+                            <span aria-hidden="true">×</span>
+                        </Button>
+                    )}
+                </header>
+            )}
+            <div class="min-h-0 flex-1 space-y-6 overflow-y-auto">
+                <slot />
+            </div>
+        </div>
+    </section>
+</div>

@@ -1,0 +1,141 @@
+---
+import { classNames } from "@/utils/classNames";
+import IconChevronDown from "@/components/icons/IconChevronDown.astro";
+import type { HTMLAttributes } from "astro/types";
+
+type ComboboxItem = { value: string; label: string };
+
+interface Props extends HTMLAttributes<"div"> {
+    items?: ComboboxItem[];
+    defaultValue?: ComboboxItem | null;
+    placeholder?: string;
+    disabled?: boolean;
+    nomotion?: boolean;
+    "aria-label"?: string;
+    "aria-labelledby"?: string;
+}
+
+const {
+    items = [],
+    defaultValue,
+    placeholder = "Search options...",
+    disabled = false,
+    nomotion,
+    "aria-label": ariaLabel,
+    "aria-labelledby": ariaLabelledby,
+    class: className,
+    ...props
+} = Astro.props;
+
+const xData = `{
+    items: ${JSON.stringify(items)},
+    open: false,
+    query: ${JSON.stringify(defaultValue?.label ?? "")},
+    selectedValue: ${JSON.stringify(defaultValue?.value ?? "")},
+    focusedIndex: -1,
+    ${nomotion === undefined ? "" : `nomotion: ${nomotion},`}
+    get filteredItems() {
+        const query = this.query.trim().toLowerCase();
+        return this.items.filter((item) => item.label.toLowerCase().includes(query));
+    },
+    choose(item) {
+        this.query = item.label;
+        this.selectedValue = item.value;
+        this.open = false;
+        this.focusedIndex = -1;
+    },
+    handleKeydown(event) {
+        if (event.key === 'ArrowDown' || event.key === 'ArrowUp') {
+            event.preventDefault();
+            this.open = true;
+            const count = this.filteredItems.length;
+            if (!count) return;
+            const direction = event.key === 'ArrowDown' ? 1 : -1;
+            this.focusedIndex = this.focusedIndex < 0
+                ? (direction > 0 ? 0 : count - 1)
+                : (this.focusedIndex + direction + count) % count;
+        } else if (event.key === 'Enter' && this.open && this.filteredItems[this.focusedIndex]) {
+            event.preventDefault();
+            this.choose(this.filteredItems[this.focusedIndex]);
+        } else if (event.key === 'Escape') {
+            this.open = false;
+            this.focusedIndex = -1;
+        }
+    }
+}`;
+
+const isDisabled = disabled || items.length === 0;
+---
+
+<div
+    x-data={xData}
+    x-id="['combobox-list', 'combobox-option']"
+    class="relative mt-1"
+    @click.outside="open = false; focusedIndex = -1"
+    {...props}
+>
+    <div class={classNames(
+        "flex items-center rounded-md ring-1 ring-inset ring-border shadow-sm",
+        "focus-within:ring-2 focus-within:ring-foreground",
+        "data-[disabled]:cursor-not-allowed data-[disabled]:opacity-50",
+        "bg-background",
+        className
+    )} data-disabled={isDisabled || undefined}>
+        <input
+            type="text"
+            role="combobox"
+            aria-label={ariaLabel}
+            aria-labelledby={ariaLabelledby}
+            aria-autocomplete="list"
+            aria-haspopup="listbox"
+            aria-expanded="false"
+            :aria-expanded="open"
+            :aria-controls="$id('combobox-list')"
+            :aria-activedescendant="focusedIndex >= 0 ? $id('combobox-option', focusedIndex) : null"
+            x-model="query"
+            @focus="open = true"
+            @input="open = true; focusedIndex = -1"
+            @keydown="handleKeydown($event)"
+            placeholder={placeholder}
+            disabled={isDisabled}
+            class="min-w-0 flex-1 border-0 bg-transparent px-3 py-2 text-sm text-foreground outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed"
+        />
+        <IconChevronDown className="mr-3 size-4 shrink-0 text-muted-foreground" aria-hidden="true" />
+    </div>
+
+    <div
+        x-show="open && filteredItems.length > 0"
+        :id="$id('combobox-list')"
+        role="listbox"
+        x-transition:enter="transition ease-out duration-150"
+        x-transition:enter-start="scale-95 opacity-0"
+        x-transition:enter-end="scale-100 opacity-100"
+        x-transition:leave="transition ease-out duration-150"
+        x-transition:leave-start="scale-100 opacity-100"
+        x-transition:leave-end="scale-95 opacity-0"
+        :class="nomotion && '!transition-none'"
+        x-cloak
+        class="absolute z-50 mt-px max-h-72 w-full overflow-y-auto rounded-b-md bg-popover text-popover-foreground shadow-sm ring-1 ring-border motion-reduce:!transition-none"
+    >
+        <template x-for="(item, index) in filteredItems" :key="item.value">
+            <button
+                type="button"
+                role="option"
+                :id="$id('combobox-option', index)"
+                :aria-selected="selectedValue === item.value"
+                :class="focusedIndex === index ? 'bg-accent' : ''"
+                @mousedown.prevent
+                @click="choose(item)"
+                x-text="item.label"
+                class="block w-full cursor-pointer px-3 py-2 text-left text-sm hover:bg-accent"
+            ></button>
+        </template>
+    </div>
+
+    <div
+        x-show="open && filteredItems.length === 0"
+        x-cloak
+        class="absolute z-50 mt-px w-full rounded-b-md bg-popover px-3 py-2 text-sm text-muted-foreground shadow-sm ring-1 ring-border"
+        role="status"
+    >No results found</div>
+</div>

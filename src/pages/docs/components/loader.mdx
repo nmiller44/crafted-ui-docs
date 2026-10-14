@@ -1,0 +1,178 @@
+---
+title: 'Loader'
+description: 'Lightweight circular loading spinner for asynchronous states.'
+---
+import BaseSidebar from "@/layouts/BaseSidebar.astro";
+import Section from "@/components/Section.astro";
+import CodePreview from "@/components/CodePreview.astro";
+import Loader from "@/components/loader/Loader.astro";
+import Button from "@/components/button/Button.astro";
+import Table from "@/components/table/Table.astro";
+import TableHead from "@/components/table/TableHead.astro";
+import TableHeadCell from "@/components/table/TableHeadCell.astro";
+import TableBody from "@/components/table/TableBody.astro";
+import TableRow from "@/components/table/TableRow.astro";
+import TableCell from "@/components/table/TableCell.astro";
+
+<BaseSidebar title={frontmatter.title} description={frontmatter.description}>
+
+<Section title="Overview">
+    Loader is a lightweight spinner for communicating in-progress asynchronous work. It is inline-friendly by default, so it can be placed in text flows, buttons, cards, and data grids without extra layout wrappers.
+
+    The React component exposes semantic size and color variants, while preserving all native span attributes for composition.
+</Section>
+
+<CodePreview code={`
+<Loader />
+`}>
+    <Loader />
+</CodePreview>
+
+<Section title="Basic Usage">
+    Use Loader by itself for compact loading indicators, or pair it with text for clearer progress messaging.
+</Section>
+
+<CodePreview code={`
+<div className="flex flex-col gap-4">
+    <div className="flex items-center gap-2 text-sm text-muted-foreground">
+        <Loader size="xs" />
+        <span>Syncing keg inventory...</span>
+    </div>
+
+    <div className="flex items-center gap-2 text-sm text-muted-foreground">
+        <Loader />
+        <span>Loading taproom metrics...</span>
+    </div>
+</div>
+`}>
+    <div class="flex flex-col gap-4">
+        <div class="flex items-center gap-2 text-sm text-muted-foreground">
+            <Loader size="xs" />
+            <span>Syncing keg inventory...</span>
+        </div>
+
+        <div class="flex items-center gap-2 text-sm text-muted-foreground">
+            <Loader />
+            <span>Loading taproom metrics...</span>
+        </div>
+    </div>
+</CodePreview>
+
+<Section title="Sizes and Colors">
+    Loader supports four sizes and semantic color tokens so it can blend with local context while remaining consistent with the design system.
+</Section>
+
+<CodePreview code={`
+<div className="space-y-5">
+    <div className="flex items-center gap-4">
+        <Loader size="xs" />
+        <Loader size="sm" />
+        <Loader />
+        <Loader size="lg" />
+    </div>
+
+    <div className="flex items-center gap-4">
+        <Loader clr="foreground" />
+        <Loader clr="primary" />
+        <Loader clr="muted" />
+        <Loader clr="accent" />
+        <Loader clr="destructive" />
+        <Loader clr="success" />
+    </div>
+</div>
+`}>
+    <div class="space-y-5">
+        <div class="flex items-center gap-4">
+            <Loader size="xs" />
+            <Loader size="sm" />
+            <Loader />
+            <Loader size="lg" />
+        </div>
+
+        <div class="flex items-center gap-4">
+            <Loader clr="foreground" />
+            <Loader clr="primary" />
+            <Loader clr="muted" />
+            <Loader clr="accent" />
+            <Loader clr="destructive" />
+            <Loader clr="success" />
+        </div>
+    </div>
+</CodePreview>
+
+<Section title="Common Patterns">
+    Loader works well inside buttons and tabular placeholders where users expect short-lived loading states.
+</Section>
+
+<CodePreview code={`
+<div className="space-y-6 max-w-2xl">
+    <Button clr="primary" disabled>
+        <Loader size="sm" label="Saving brew recipe" />
+        <span>Saving Recipe</span>
+    </Button>
+
+    <Table>
+        <TableHead>
+            <TableHeadCell>Beer</TableHeadCell>
+            <TableHeadCell>Style</TableHeadCell>
+            <TableHeadCell>ABV</TableHeadCell>
+            <TableHeadCell>Status</TableHeadCell>
+        </TableHead>
+        <TableBody>
+            <TableRow>
+                <TableCell colspan={4}>
+                    <div className="flex items-center justify-center gap-3 py-10 text-sm text-muted-foreground">
+                        <Loader label="Loading inventory rows" />
+                        <span>Loading inventory rows...</span>
+                    </div>
+                </TableCell>
+            </TableRow>
+        </TableBody>
+    </Table>
+</div>
+`}>
+    <div class="space-y-6 max-w-2xl">
+        <Button clr="primary" disabled>
+            <Loader size="sm" label="Saving brew recipe" />
+            <span>Saving Recipe</span>
+        </Button>
+
+        <Table>
+            <TableHead>
+                <TableHeadCell>Beer</TableHeadCell>
+                <TableHeadCell>Style</TableHeadCell>
+                <TableHeadCell>ABV</TableHeadCell>
+                <TableHeadCell>Status</TableHeadCell>
+            </TableHead>
+            <TableBody>
+                <TableRow>
+                    <TableCell colspan={4}>
+                        <div class="flex items-center justify-center gap-3 py-10 text-sm text-muted-foreground">
+                            <Loader label="Loading inventory rows" />
+                            <span>Loading inventory rows...</span>
+                        </div>
+                    </TableCell>
+                </TableRow>
+            </TableBody>
+        </Table>
+    </div>
+</CodePreview>
+
+<Section title="Props">
+    | Prop | Type | Default | Description |
+    | --- | --- | --- | --- |
+    | size | "xs" \| "sm" \| "md" \| "lg" | "md" | Controls spinner dimensions and border thickness |
+    | clr | "current" \| "foreground" \| "primary" \| "muted" \| "secondary" \| "accent" \| "destructive" \| "danger" \| "warning" \| "success" \| "info" | "current" | Controls spinner color token |
+    | label | string | "Loading" | Screen-reader label announced in live region updates |
+    | className | string | - | Additional CSS classes |
+
+    Loader also accepts all standard HTML span attributes.
+</Section>
+
+<Section title="Accessibility">
+    - Uses `role="status"` and `aria-live="polite"` for non-intrusive progress announcements
+    - Includes screen-reader text via the `label` prop (defaults to "Loading")
+    - For icon-only loading states, provide contextual labels like "Saving profile" or "Loading table rows"
+</Section>
+
+</BaseSidebar>

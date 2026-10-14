@@ -2,12 +2,18 @@
 import { classNames } from "@/utils/classNames";
 
 export interface Props {
+    inline?: boolean;
+    nocolon?: boolean;
     class?: string;
 }
 
-const { class: className, ...props } = Astro.props;
+const { inline = false, nocolon = false, class: className, ...props } = Astro.props;
 ---
 
-<dt class={classNames("text-sm font-semibold text-foreground", className)} {...props}>
+<dt class={classNames(
+    "text-muted-foreground",
+    inline ? (nocolon ? "" : "after:content-[':']") : "font-semibold",
+    className
+)} {...props}>
     <slot />
 </dt>
