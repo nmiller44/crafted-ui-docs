@@ -9,6 +9,7 @@ import Section from '@components/Section.astro';
 import Breadcrumb from '@components/breadcrumb/Breadcrumb.astro';
 import BreadcrumbList from '@components/breadcrumb/BreadcrumbList.astro';
 import BreadcrumbListItem from '@components/breadcrumb/BreadcrumbListItem.astro';
+import BreadcrumbSeparator from '@components/breadcrumb/BreadcrumbSeparator.astro';
 
 <BaseSidebar title={frontmatter.title} description={frontmatter.description}>
 
@@ -19,23 +20,13 @@ import BreadcrumbListItem from '@components/breadcrumb/BreadcrumbListItem.astro'
             <BreadcrumbListItem>
               <a href="/">Home</a>
             </BreadcrumbListItem>
-            <BreadcrumbListItem>
-              <svg    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" 
-                      className="size-3 mt-1">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
-              </svg>
-            </BreadcrumbListItem>
+            <BreadcrumbSeparator />
             <BreadcrumbListItem>
               <a href="/docs">Docs</a>
             </BreadcrumbListItem>
+            <BreadcrumbSeparator />
             <BreadcrumbListItem>
-              <svg    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" 
-                      className="size-3 mt-1">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" />
-              </svg>
-            </BreadcrumbListItem>
-            <BreadcrumbListItem isActive={true}>
-              <div class="active">Breadcrumb</div>
+              <span class="active" aria-current="page">Breadcrumb</span>
             </BreadcrumbListItem>
           </BreadcrumbList>
         </Breadcrumb>
@@ -54,16 +45,17 @@ import BreadcrumbListItem from '@components/breadcrumb/BreadcrumbListItem.astro'
         ```tsx
         import {  Breadcrumb, 
                   BreadcrumbList, 
-                  BreadcrumbListItem } from "crafted-ui";
+                  BreadcrumbListItem,
+                  BreadcrumbSeparator } from "crafted-ui";
 
         <Breadcrumb>
           <BreadcrumbList>
             <BreadcrumbListItem>
               <a href="/">Home</a>
             </BreadcrumbListItem>
-            <span>/</span>
-            <BreadcrumbListItem isActive={true}>
-              Current Page
+            <BreadcrumbSeparator />
+            <BreadcrumbListItem>
+              <span className="active" aria-current="page">Current Page</span>
             </BreadcrumbListItem>
           </BreadcrumbList>
         </Breadcrumb>
@@ -108,16 +100,16 @@ import BreadcrumbListItem from '@components/breadcrumb/BreadcrumbListItem.astro'
 
         ### Usage with Links
         ```tsx
-        import { Breadcrumb, BreadcrumbList, BreadcrumbListItem } from "crafted-ui";
+        import { Breadcrumb, BreadcrumbList, BreadcrumbListItem, BreadcrumbSeparator } from "crafted-ui";
 
         <Breadcrumb>
           <BreadcrumbList>
             <BreadcrumbListItem>
               <a href="/">Home</a>
             </BreadcrumbListItem>
-            <span>/</span>
-            <BreadcrumbListItem isActive={true}>
-              Current Page
+            <BreadcrumbSeparator />
+            <BreadcrumbListItem>
+              <span className="active" aria-current="page">Current Page</span>
             </BreadcrumbListItem>
           </BreadcrumbList>
         </Breadcrumb>
@@ -125,20 +117,20 @@ import BreadcrumbListItem from '@components/breadcrumb/BreadcrumbListItem.astro'
 
         ### Usage with Custom Separators
         ```tsx
-        import { Breadcrumb, BreadcrumbList, BreadcrumbListItem } from "crafted-ui";
+        import { Breadcrumb, BreadcrumbList, BreadcrumbListItem, BreadcrumbSeparator } from "crafted-ui";
 
         <Breadcrumb>
           <BreadcrumbList>
             <BreadcrumbListItem>
               <a href="/">Home</a>
             </BreadcrumbListItem>
-            <span>→</span>
+            <BreadcrumbSeparator>→</BreadcrumbSeparator>
             <BreadcrumbListItem>
               <a href="/docs">Documentation</a>
             </BreadcrumbListItem>
-            <span>→</span>
-            <BreadcrumbListItem isActive={true}>
-              Components
+            <BreadcrumbSeparator>→</BreadcrumbSeparator>
+            <BreadcrumbListItem>
+              <span className="active" aria-current="page">Components</span>
             </BreadcrumbListItem>
           </BreadcrumbList>
         </Breadcrumb>
@@ -147,9 +139,9 @@ import BreadcrumbListItem from '@components/breadcrumb/BreadcrumbListItem.astro'
         ### Props
         | Prop | Type | Default | Description |
         | --- | --- | --- | --- |
-        | className | string | undefined | Additional CSS class names |
-        | isActive | boolean | false | Whether the item represents the current page |
-        | children | ReactNode | undefined | Content of the breadcrumb item |
+        | className | string | - | Additional CSS class names |
+        | label | string | - | Optional aria-label override for icon-only links |
+        | children | ReactNode | - | Content of the breadcrumb item |
     </Section>
 
     <Section title="Accessibility">
@@ -162,7 +154,7 @@ import BreadcrumbListItem from '@components/breadcrumb/BreadcrumbListItem.astro'
         When implementing breadcrumbs, ensure that:
         
         1. Links have meaningful text (avoid "click here")
-        2. The current page item should not be a link but should be marked with `isActive={true}`
+        2. The current page item should not be a link and should use `aria-current="page"`
         3. Separators are visually distinct and can be customized as needed
     </Section>
 

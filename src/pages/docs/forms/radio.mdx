@@ -183,7 +183,8 @@ import RadioGroup from '@/components/radio/RadioGroup.astro';
         ### Additional Features
         
         - **Validation States**: Use `aria-invalid` on RadioGroup to show error styling on all radios
-        - **Focus States**: Automatic focus ring styling matching other form components
+        - **Accessible Names**: Each radio uses its visible children as its accessible name unless `aria-label` or `aria-labelledby` is provided
+        - **Focus States**: Keyboard focus is visible on the radio control, with invalid-state styling when an invalid radio receives focus
         - **Dark Mode**: Fully themed with CSS custom properties
         - **Keyboard Navigation**: Arrow keys navigate between options, Space selects
         - **Custom Layout**: Use className to control spacing and direction (flex-row for horizontal)
