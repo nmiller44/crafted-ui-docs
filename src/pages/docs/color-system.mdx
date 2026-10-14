@@ -10,6 +10,7 @@ import CardBody from "@components/card/CardBody.astro";
 import ColorSample from "@/components/ColorSample.astro";
 import Alert from "@/components/alert/Alert.astro";
 import CodePreview from "@/components/CodePreview.astro";
+import ContrastSample from "@/components/ContrastSample.astro";
 
 <BaseSidebar title={frontmatter.title} description={frontmatter.description}>
 
@@ -166,6 +167,8 @@ Rather than using color names like "green" or "blue," we use functional names th
     <button className="mt-3 rounded-md border border-border px-3 py-2 text-sm ring-2 ring-ring ring-offset-2 ring-offset-background">Focus sample</button>
   </div>
 </div>
+
+<ContrastSample />
 </Section>
 
 <Section title="Base Colors">

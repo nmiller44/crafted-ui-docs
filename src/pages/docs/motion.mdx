@@ -1,0 +1,200 @@
+---
+title: 'Motion'
+description: 'Motion standards, opt-out behavior, and reduced-motion support in Crafted UI.'
+---
+import BaseSidebar from "@/layouts/BaseSidebar.astro";
+import Section from "@/components/Section.astro";
+import CodePreview from "@/components/CodePreview.astro";
+import Button from "@/components/button/Button.astro";
+import Menu from "@/components/menu/Menu.astro";
+import MenuTrigger from "@/components/menu/MenuTrigger.astro";
+import MenuContent from "@/components/menu/MenuContent.astro";
+import MenuItem from "@/components/menu/MenuItem.astro";
+import Heading5 from "@/components/heading/Heading5.astro";
+import Modal from "@/components/modal/Modal.astro";
+import ModalTrigger from "@/components/modal/ModalTrigger.astro";
+import ModalContent from "@/components/modal/ModalContent.astro";
+import ModalClose from "@/components/modal/ModalClose.astro";
+import Select from "@/components/select/Select.astro";
+
+<BaseSidebar title={frontmatter.title} description={frontmatter.description}>
+
+<Section title="Motion Strategy">
+Crafted UI uses brief transitions to communicate component state changes, such as a popup opening or closing. The shared motion utility applies a 150 ms duration with ease-out easing to supported transitions.
+
+This policy currently applies to Drawer, Menu, Modal, Select, and Combobox. Their transitions reflect the interaction: Drawer panels slide with a fading backdrop, while popup-style components use scale and opacity changes. Motion is supplemental; opening, closing, selection, keyboard behavior, and dismissal do not depend on an animation completing.
+</Section>
+
+<CodePreview title="Menu Motion"
+code={`
+<div className="grid gap-6 sm:grid-cols-2">
+  <div>
+    <Heading5 title="Motion" />
+    <Menu>
+      <MenuTrigger><Button>Open actions</Button></MenuTrigger>
+      <MenuContent>
+        <MenuItem>View today's batches</MenuItem>
+        <MenuItem>Manage ingredients</MenuItem>
+        <MenuItem>Export report</MenuItem>
+      </MenuContent>
+    </Menu>
+  </div>
+  <div>
+    <Heading5 title="No Motion" />
+    <Menu nomotion>
+      <MenuTrigger><Button>Open actions</Button></MenuTrigger>
+      <MenuContent>
+        <MenuItem>View today's batches</MenuItem>
+        <MenuItem>Manage ingredients</MenuItem>
+        <MenuItem>Export report</MenuItem>
+      </MenuContent>
+    </Menu>
+  </div>
+</div>
+`}>
+    <div class="grid min-h-40 gap-8 sm:grid-cols-2">
+        <div class="relative space-y-4">
+            <Heading5 title="Motion" />
+            <Menu class="relative">
+                <MenuTrigger><Button>Open actions</Button></MenuTrigger>
+                <MenuContent>
+                    <MenuItem>View today's batches</MenuItem>
+                    <MenuItem>Manage ingredients</MenuItem>
+                    <MenuItem>Export report</MenuItem>
+                </MenuContent>
+            </Menu>
+        </div>
+        <div class="relative space-y-4">
+            <Heading5 title="No Motion" />
+            <Menu class="relative" nomotion>
+                <MenuTrigger><Button>Open actions</Button></MenuTrigger>
+                <MenuContent>
+                    <MenuItem>View today's batches</MenuItem>
+                    <MenuItem>Manage ingredients</MenuItem>
+                    <MenuItem>Export report</MenuItem>
+                </MenuContent>
+            </Menu>
+        </div>
+    </div>
+</CodePreview>
+
+<Section>
+Open each menu to compare the standard transition with `nomotion`. Reduced-motion preferences also suppress the transition automatically.
+</Section>
+
+<CodePreview title="Modal Motion"
+code={`
+<div className="grid gap-6 sm:grid-cols-2">
+  <div>
+    <Heading5 title="Motion" />
+    <Modal>
+      <ModalTrigger><Button>Review release</Button></ModalTrigger>
+      <ModalContent title="Release ready">
+        <p>The seasonal pale ale is ready to publish.</p>
+        <ModalClose><Button outline>Close</Button></ModalClose>
+      </ModalContent>
+    </Modal>
+  </div>
+  <div>
+    <Heading5 title="No Motion" />
+    <Modal nomotion>
+      <ModalTrigger><Button>Review release</Button></ModalTrigger>
+      <ModalContent title="Release ready">
+        <p>The seasonal pale ale is ready to publish.</p>
+        <ModalClose><Button outline>Close</Button></ModalClose>
+      </ModalContent>
+    </Modal>
+  </div>
+</div>
+`}>
+    <div class="grid min-h-40 gap-8 sm:grid-cols-2">
+        <div class="relative space-y-4">
+            <Heading5 title="Motion" />
+            <Modal>
+                <ModalTrigger><Button>Review release</Button></ModalTrigger>
+                <ModalContent title="Release ready">
+                    <p>The seasonal pale ale is ready to publish.</p>
+                    <ModalClose><Button outline>Close</Button></ModalClose>
+                </ModalContent>
+            </Modal>
+        </div>
+        <div class="relative space-y-4">
+            <Heading5 title="No Motion" />
+            <Modal nomotion>
+                <ModalTrigger><Button>Review release</Button></ModalTrigger>
+                <ModalContent title="Release ready">
+                    <p>The seasonal pale ale is ready to publish.</p>
+                    <ModalClose><Button outline>Close</Button></ModalClose>
+                </ModalContent>
+            </Modal>
+        </div>
+    </div>
+</CodePreview>
+
+<CodePreview title="Select Motion"
+code={`
+<div className="grid gap-6 sm:grid-cols-2">
+  <div>
+    <Heading5 title="Motion" />
+    <Select aria-label="Choose a beer style" items={[
+      { value: 'ipa', label: 'IPA' },
+      { value: 'stout', label: 'Stout' },
+      { value: 'lager', label: 'Lager' },
+    ]} placeholder="Choose a style..." />
+  </div>
+  <div>
+    <Heading5 title="No Motion" />
+    <Select nomotion aria-label="Choose a beer style" items={[
+      { value: 'ipa', label: 'IPA' },
+      { value: 'stout', label: 'Stout' },
+      { value: 'lager', label: 'Lager' },
+    ]} placeholder="Choose a style..." />
+  </div>
+</div>
+`}>
+    <div class="grid min-h-40 gap-8 sm:grid-cols-2">
+        <div class="relative space-y-4">
+            <Heading5 title="Motion" />
+            <Select aria-label="Choose a beer style" items={[
+                { value: "ipa", label: "IPA" },
+                { value: "stout", label: "Stout" },
+                { value: "lager", label: "Lager" },
+            ]} placeholder="Choose a style..." />
+        </div>
+        <div class="relative space-y-4">
+            <Heading5 title="No Motion" />
+            <Select nomotion aria-label="Choose a beer style" items={[
+                { value: "ipa", label: "IPA" },
+                { value: "stout", label: "Stout" },
+                { value: "lager", label: "Lager" },
+            ]} placeholder="Choose a style..." />
+        </div>
+    </div>
+</CodePreview>
+
+<Section title="No Motion">
+Set `nomotion` on a supported component to remove its opening and closing transitions:
+
+```tsx
+<Drawer nomotion>
+  <DrawerTrigger>
+    <Button>Open navigation</Button>
+  </DrawerTrigger>
+  <DrawerContent title="Brewery navigation">
+    <Vertlist>{/* Navigation items */}</Vertlist>
+  </DrawerContent>
+</Drawer>
+```
+
+`nomotion` is inherited by nested motion-aware components. An explicit `nomotion={false}` overrides an inherited `true` when the system preference allows motion. Without an inherited value, the default is motion enabled.
+
+Disabling transitions does not disable component interactions or direct gestures. For example, Drawer can still be swiped even when `nomotion` is set; its swipe movement is not an opening or closing transition.
+</Section>
+
+<Section title="Reduced Motion">
+Supported transitions respect the operating system or browser `prefers-reduced-motion: reduce` preference. When that preference is active, the transitions are removed automatically, including when a component explicitly sets `nomotion={false}`. A component prop does not override the user's system preference.
+
+This documents the reduced-motion behavior of the shared transitions, not every possible animation in an application. Consumer-defined animations and other components should independently honor reduced-motion preferences. This behavior is one accessibility consideration, not a claim of blanket WCAG compliance.
+</Section>
+
+</BaseSidebar>

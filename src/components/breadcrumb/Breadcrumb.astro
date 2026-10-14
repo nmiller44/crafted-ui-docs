@@ -9,6 +9,6 @@ const {
     className
  } = Astro.props;
 ---
-<nav class={classNames("", className)}>
+<nav aria-label="Breadcrumb" class={classNames("", className)}>
     <slot />
 </nav>

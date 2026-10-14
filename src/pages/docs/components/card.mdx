@@ -96,6 +96,7 @@ import Section from '@components/Section.astro';
         | title | string | - | The card's title |
         | subtitle | string | - | Additional descriptive text for the card |
         | body | boolean | false | When true, adds padding to the card without needing a CardBody |
+        | slim | boolean | false | When true, adds reduced padding without needing a CardBody. Ignored if `body` is set |
         | full | boolean | false | When true, removes spacing/border/shadow/rounded corners on mobile |
         | className | string | - | Additional CSS class names |
         | children | ReactNode | - | Content of the card |
@@ -213,11 +214,7 @@ import Section from '@components/Section.astro';
         | children | ReactNode | - | Content of the card footer |
     </Section>
 
-    <Section>
-        ### Simple Card with Body Flag
-    </Section>
-
-<CodePreview code={`
+<CodePreview title="Simple Card with Body Flag" code={`
     <Card title="Simple Card" body>
         This card has padding without needing a CardBody component.
         The body flag adds padding to the card container directly.
@@ -231,11 +228,22 @@ import Section from '@components/Section.astro';
     </div>
 </CodePreview>
 
-    <Section>
-        ### Card with Custom Header
-    </Section>
+<CodePreview
+    title="Card with Slim Padding"
+    subtitle="Use slim for compact cards such as metric tiles. If both body and slim are set, body wins."
+    code={`
+    <Card slim>
+        A slim card uses reduced padding, keeping compact content tight to the edges.
+    </Card>
+`}>
+    <div class="max-w-md">
+        <Card slim>
+            A slim card uses reduced padding, keeping compact content tight to the edges.
+        </Card>
+    </div>
+</CodePreview>
 
-<CodePreview code={`
+<CodePreview title="Card with Custom Header" code={`
     <Card>
         <CardHeader>
             <div className="flex items-center justify-between">

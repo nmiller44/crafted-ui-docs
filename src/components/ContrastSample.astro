@@ -1,0 +1,67 @@
+<div class="mt-6 rounded-md border border-border p-4 not-prose" data-contrast-check>
+  <div class="font-medium">Muted text on shaded surfaces</div>
+  <p class="mt-1 text-sm text-muted-foreground">
+    `text-muted-foreground` is intended for secondary text, including table headers on `bg-muted/50`.
+    This pairing must maintain a WCAG AA contrast ratio of at least 4.5:1 in every theme.
+  </p>
+  <div class="mt-4 flex flex-wrap items-center gap-4">
+    <div class="flex size-16 items-center justify-center rounded border border-border bg-muted/50 text-muted-foreground text-lg font-bold">
+      Aa
+    </div>
+    <div class="text-sm">
+      <div class="font-mono">text-muted-foreground / bg-muted/50</div>
+      <div class="mt-1 text-muted-foreground" data-contrast-result>Calculating contrast...</div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const parseHsl = (value: string) => {
+    const match = value.match(/hsl\(\s*([\d.]+)(?:deg)?\s+([\d.]+)%\s+([\d.]+)%/i);
+    if (!match) return null;
+
+    const hue = Number(match[1]) / 360;
+    const saturation = Number(match[2]) / 100;
+    const lightness = Number(match[3]) / 100;
+    const channel = (n: number) => {
+      const k = (n + hue * 12) % 12;
+      const color = lightness - saturation * Math.min(lightness, 1 - lightness) * Math.max(-1, Math.min(k - 3, 9 - k, 1));
+      return color;
+    };
+
+    return [channel(0), channel(8), channel(4)];
+  };
+
+  const luminance = (rgb: number[]) => rgb.reduce((total, channel, index) => {
+    const linear = channel <= 0.03928 ? channel / 12.92 : ((channel + 0.055) / 1.055) ** 2.4;
+    return total + linear * [0.2126, 0.7152, 0.0722][index];
+  }, 0);
+
+  const updateContrast = () => {
+    const check = document.querySelector<HTMLElement>('[data-contrast-check]');
+    const result = check?.querySelector<HTMLElement>('[data-contrast-result]');
+    if (!check || !result) return;
+
+    const styles = getComputedStyle(check);
+    const foreground = parseHsl(styles.getPropertyValue('--muted-foreground').trim());
+    const muted = parseHsl(styles.getPropertyValue('--muted').trim());
+    const background = parseHsl(styles.getPropertyValue('--background').trim());
+    if (!foreground || !muted || !background) return;
+
+    const shadedBackground = muted.map((channel, index) => channel * 0.5 + background[index] * 0.5);
+    const foregroundLuminance = luminance(foreground);
+    const backgroundLuminance = luminance(shadedBackground);
+    const ratio = (Math.max(foregroundLuminance, backgroundLuminance) + 0.05) / (Math.min(foregroundLuminance, backgroundLuminance) + 0.05);
+    const passes = ratio >= 4.5;
+    result.textContent = `${ratio.toFixed(2)}:1 contrast ratio - ${passes ? 'Passes' : 'Does not pass'} WCAG AA (4.5:1 minimum)`;
+    result.classList.toggle('text-success', passes);
+    result.classList.toggle('text-danger', !passes);
+  };
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', updateContrast, { once: true });
+  } else {
+    updateContrast();
+  }
+  new MutationObserver(updateContrast).observe(document.documentElement, { attributes: true, attributeFilter: ['class'] });
+</script>

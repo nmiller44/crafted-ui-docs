@@ -12,6 +12,7 @@ Crafted UI is a component library built with React 19, TypeScript, Tailwind CSS 
 - Design Cues: /docs/design-cues - Design principles and patterns
 - Color System: /docs/color-system - Semantic color system with primary, secondary, accent, destructive, and status colors
 - Colors: /docs/colors - Available color palette
+- Motion: /docs/motion - Component transitions, nomotion inheritance, and reduced-motion preferences
 - Typography: /docs/typography - Typography system and text styles
 
 ## Components
@@ -28,8 +29,10 @@ Crafted UI is a component library built with React 19, TypeScript, Tailwind CSS 
 - Button: /docs/components/button - Interactive button with full color palette (semantic, status, and base colors)
 - Card: /docs/components/card - Container for related content with header, body, and footer
 - DescList: /docs/components/desclist - Display key-value pairs in structured description list format
+- Drawer: /docs/components/drawer - Accessible edge panel with swipe dismissal, detached triggers, and reduced-motion support
 - Empty: /docs/components/empty - Placeholder for empty states with optional icon and message
 - Heading: /docs/components/heading - Typography components for page and section headings (H1-H5) with optional subtitles
+- Loader: /docs/components/loader - Lightweight circular loading spinner for asynchronous states
 - Menu: /docs/components/menu - Dropdown menu for actions, navigation, and contextual options
 - Metric: /docs/components/metric - Display key metrics and statistics with optional trends
 - Modal: /docs/components/modal - Dialog component for displaying content that requires user interaction
@@ -41,6 +44,7 @@ Crafted UI is a component library built with React 19, TypeScript, Tailwind CSS 
 
 ### Form Components
 - Checkbox: /docs/forms/checkbox - Checkbox input with sizes, labels, and subtitle support
+- Combobox: /docs/forms/combobox - Searchable list of options with filtering, keyboard navigation, and selection
 - Field: /docs/forms/field - Form input field wrapper with label and validation
 - Fieldset: /docs/forms/fieldset - Group related form fields with optional title, subtitle, and grid layout
 - Form: /docs/forms/form - Complete form component with validation support
@@ -62,9 +66,9 @@ The following components are exported from the Crafted UI library:
 
 **Layout**: page, section
 
-**UI Components**: alert, avatar, badge, breadcrumb, button, card, desclist (description list), empty, heading, icon, menu, metric, modal, pagination, tablist, vertlist
+**UI Components**: alert, avatar, badge, breadcrumb, button, card, desclist (description list), drawer, empty, heading, icon, loader, menu, metric, modal, pagination, tablist, vertlist
 
-**Form Components**: checkbox, field, fieldset, form, input, radio, select, textarea
+**Form Components**: checkbox, combobox, field, fieldset, form, input, radio, select, textarea
 
 **Utility Components**: table
 

@@ -1,14 +1,15 @@
 ---
 export interface Props {
     class?: string;
+    nomotion?: boolean;
 }
 
-const { class: className, ...props } = Astro.props;
+const { class: className, nomotion, ...props } = Astro.props;
 ---
 
 <div 
     class={className} 
-    x-data="{ open: false }" 
+    x-data={`{ open: false, ${nomotion === undefined ? "" : `nomotion: ${nomotion},`} }`}
     @keydown.escape.window="open = false"
     {...props}
 >

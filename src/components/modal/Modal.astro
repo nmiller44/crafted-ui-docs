@@ -3,13 +3,14 @@ import type { HTMLAttributes } from "astro/types";
 
 interface Props extends HTMLAttributes<'div'> {
     open?: boolean;
+    nomotion?: boolean;
 }
 
-const { open = false, ...props } = Astro.props;
+const { open = false, nomotion, ...props } = Astro.props;
 ---
 
 <div 
-    x-data={`{ open: ${open} }`}
+    x-data={`{ open: ${open}, ${nomotion === undefined ? "" : `nomotion: ${nomotion},`} }`}
     @keydown.escape.window="open = false"
     {...props}
 >

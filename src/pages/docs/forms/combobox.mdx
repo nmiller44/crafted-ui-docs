@@ -1,0 +1,189 @@
+---
+title: 'Combobox'
+description: 'A searchable list of options with keyboard-accessible selection.'
+---
+import BaseSidebar from "@/layouts/BaseSidebar.astro";
+import Section from "@/components/Section.astro";
+import CodePreview from "@/components/CodePreview.astro";
+import Field from "@/components/field/Field.astro";
+import FieldLabel from "@/components/field/FieldLabel.astro";
+import Fieldset from "@/components/fieldset/Fieldset.astro";
+import Combobox from "@/components/combobox/Combobox.astro";
+import Heading5 from "@/components/heading/Heading5.astro";
+
+<BaseSidebar title={frontmatter.title} description={frontmatter.description}>
+
+<Section title="Overview">
+Combobox combines a text input with a filterable list of options. Users can type to narrow the list, then select an option with the pointer or keyboard. It is built on Base UI's accessible Combobox primitives.
+
+Pass `items` as objects with `value` and `label` properties. The input displays the selected label while the component tracks the selected value. Provide a visible field label and an accessible name for the input.
+</Section>
+
+<CodePreview title="Searchable Options"
+code={`
+const beerStyles = [
+  { value: 'ipa', label: 'IPA' },
+  { value: 'stout', label: 'Stout' },
+  { value: 'pilsner', label: 'Pilsner' },
+]
+
+<Fieldset title="Release details">
+  <Field>
+    <FieldLabel>Beer style</FieldLabel>
+    <Combobox
+      aria-label="Beer style"
+      items={beerStyles}
+      placeholder="Type to search..."
+    />
+  </Field>
+</Fieldset>
+`}>
+    <div class="max-w-lg">
+        <Fieldset title="Release details">
+            <Field>
+                <FieldLabel>Beer style</FieldLabel>
+                <Combobox
+                    aria-label="Beer style"
+                    items={[
+                        { value: "ipa", label: "IPA" },
+                        { value: "stout", label: "Stout" },
+                        { value: "pilsner", label: "Pilsner" },
+                    ]}
+                    placeholder="Type to search..."
+                />
+            </Field>
+        </Fieldset>
+    </div>
+</CodePreview>
+
+<Section title="Filtering And Selection">
+The default option list filters against the labels as the user types. Arrow Up and Arrow Down move the active option, Enter selects it, and Escape closes the list. When no items match the query, the popup reports that there are no results.
+
+For controlled usage, provide `value` and `onValueChange`; use `inputValue` and `onInputValueChange` to control the query independently. `defaultValue` accepts an item object for an initial selection.
+
+```tsx
+const beerStyles = [
+  { value: 'ipa', label: 'IPA' },
+  { value: 'stout', label: 'Stout' },
+]
+const [value, setValue] = useState(beerStyles[0])
+const [inputValue, setInputValue] = useState('')
+
+<Field>
+  <FieldLabel>Controlled beer style</FieldLabel>
+  <Combobox
+    aria-label="Controlled beer style"
+    items={beerStyles}
+    value={value}
+    onValueChange={setValue}
+    inputValue={inputValue}
+    onInputValueChange={setInputValue}
+    placeholder="Search styles..."
+  />
+</Field>
+```
+</Section>
+
+<CodePreview title="Search Breweries"
+code={`
+const breweries = [
+  { value: 'deschutes', label: 'Deschutes Brewery' },
+  { value: 'sierra-nevada', label: 'Sierra Nevada' },
+  { value: 'stone', label: 'Stone Brewing' },
+]
+
+<Field>
+  <FieldLabel>Brewery</FieldLabel>
+  <Combobox
+    aria-label="Brewery"
+    items={breweries}
+    placeholder="Find a brewery..."
+  />
+</Field>
+`}>
+    <div class="max-w-lg">
+        <Field>
+            <FieldLabel>Brewery</FieldLabel>
+            <Combobox
+                aria-label="Brewery"
+                items={[
+                    { value: "deschutes", label: "Deschutes Brewery" },
+                    { value: "sierra-nevada", label: "Sierra Nevada" },
+                    { value: "stone", label: "Stone Brewing" },
+                ]}
+                placeholder="Find a brewery..."
+            />
+        </Field>
+    </div>
+</CodePreview>
+
+<Section title="No Motion">
+Set `nomotion` to remove the popup's opening and closing transitions. Keyboard interaction, filtering, and selection remain available. If the operating system or browser requests reduced motion, the transition is suppressed automatically. An omitted value is inherited from the nearest motion-aware ancestor; otherwise motion is enabled. Explicit `nomotion={false}` does not override the system preference.
+
+See [Motion](/docs/motion) for the shared transition policy.
+</Section>
+
+<CodePreview title="Combobox Motion"
+code={`
+const beerStyles = [
+  { value: 'ipa', label: 'IPA' },
+  { value: 'stout', label: 'Stout' },
+  { value: 'pilsner', label: 'Pilsner' },
+]
+
+<div className="grid gap-6 sm:grid-cols-2">
+  <div>
+    <Heading5 title="Motion" />
+    <Combobox aria-label="Beer style" items={beerStyles} placeholder="Search styles..." />
+  </div>
+  <div>
+    <Heading5 title="No Motion" />
+    <Combobox nomotion aria-label="Beer style" items={beerStyles} placeholder="Search styles..." />
+  </div>
+</div>
+`}>
+    <div class="grid min-h-40 gap-8 sm:grid-cols-2">
+        <div class="space-y-4">
+            <Heading5 title="Motion" />
+            <Combobox aria-label="Beer style" items={[
+                { value: "ipa", label: "IPA" },
+                { value: "stout", label: "Stout" },
+                { value: "pilsner", label: "Pilsner" },
+            ]} placeholder="Search styles..." />
+        </div>
+        <div class="space-y-4">
+            <Heading5 title="No Motion" />
+            <Combobox nomotion aria-label="Beer style" items={[
+                { value: "ipa", label: "IPA" },
+                { value: "stout", label: "Stout" },
+                { value: "pilsner", label: "Pilsner" },
+            ]} placeholder="Search styles..." />
+        </div>
+    </div>
+</CodePreview>
+
+<Section title="Custom Options">
+For options with custom layouts, render `ComboboxOption` children. Each option receives its item object as `value`; provide `items` as well so the component can resolve selected values and labels. This advanced rendering path is for React; the interactive Astro preview on this page demonstrates the standard `items` API.
+</Section>
+
+<Section title="Props">
+Combobox accepts the Base UI Combobox.Root props in addition to these Crafted UI props.
+
+| Prop | Type | Default | Description |
+| --- | --- | --- | --- |
+| `items` | `ComboboxItemProp[]` | `[]` | Options to filter and display |
+| `placeholder` | `string` | - | Input placeholder |
+| `align` | `"start" \| "center" \| "end"` | `"start"` | Popup alignment relative to the input |
+| `alignOffset` | `number` | `0` | Popup alignment offset in pixels |
+| `nomotion` | `boolean` | Inherited, otherwise `false` | Disables popup transitions |
+| `disabled` | `boolean` | `false` | Disables the Combobox |
+| `value` | `ComboboxItemProp \| null` | - | Controlled selected item |
+| `defaultValue` | `ComboboxItemProp \| null` | - | Initial selected item |
+| `onValueChange` | `(value) => void` | - | Called when selection changes |
+| `inputValue` | `string` | - | Controlled query text |
+| `onInputValueChange` | `(value) => void` | - | Called when query text changes |
+
+`ComboboxItemProp` contains `value: string` and `label: ReactNode`. `ComboboxOption` provides custom option rendering.
+</Section>
+
+</BaseSidebar>

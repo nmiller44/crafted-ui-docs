@@ -20,12 +20,14 @@ export const sidebarLinks = [
             { title: 'Installation', href: '/docs/installation' },
             { title: 'Design Cues', href: '/docs/design-cues' },
             { title: 'Color System', href: '/docs/color-system' },
+            { title: 'Motion', href: '/docs/motion' },
             { title: 'Typography', href: '/docs/typography' },
         ]
     },
     {
         title: 'Layout',
         items: [
+            { title: 'Breadcrumb', href: '/docs/layout/breadcrumb' },
             { title: 'Page', href: '/docs/layout/page' },
             { title: 'Section', href: '/docs/layout/section' },
         ]
@@ -36,12 +38,13 @@ export const sidebarLinks = [
             { title: 'Alert', href: '/docs/components/alert' },
             { title: 'Avatar', href: '/docs/components/avatar' },
             { title: 'Badge', href: '/docs/components/badge' },
-            { title: 'Breadcrumb', href: '/docs/components/breadcrumb' },
             { title: 'Button', href: '/docs/components/button' },
             { title: 'Card', href: '/docs/components/card' },
             { title: 'DescList', href: '/docs/components/desclist' },
+            { title: 'Drawer', href: '/docs/components/drawer' },
             { title: 'Empty', href: '/docs/components/empty' },
             { title: 'Heading', href: '/docs/components/heading' },
+            { title: 'Loader', href: '/docs/components/loader' },
             { title: 'Menu', href: '/docs/components/menu' },
             { title: 'Metric', href: '/docs/components/metric' },
             { title: 'Modal', href: '/docs/components/modal' },
@@ -61,10 +64,11 @@ export const sidebarLinks = [
     {
         title: 'Forms',
         items: [  
-            { title: 'Form', href: '/docs/forms/form' },
-            { title: 'Fieldset', href: '/docs/forms/fieldset' },
-            { title: 'Field', href: '/docs/forms/field' },
             { title: 'Checkbox', href: '/docs/forms/checkbox' },
+            { title: 'Combobox', href: '/docs/forms/combobox' },
+            { title: 'Field', href: '/docs/forms/field' },
+            { title: 'Fieldset', href: '/docs/forms/fieldset' },
+            { title: 'Form', href: '/docs/forms/form' },
             { title: 'Input', href: '/docs/forms/input' },
             { title: 'Radio', href: '/docs/forms/radio' },
             { title: 'Select', href: '/docs/forms/select' },

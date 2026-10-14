@@ -12,6 +12,7 @@ interface Props {
     defaultValue?: string;
     placeholder?: string;
     disabled?: boolean;
+    nomotion?: boolean;
     "aria-invalid"?: boolean;
     class?: string;
 }
@@ -21,6 +22,7 @@ const {
     defaultValue = "",
     placeholder = "Select an option",
     disabled = false,
+    nomotion,
     "aria-invalid": ariaInvalid = false,
     class: className,
     ...props
@@ -37,6 +39,7 @@ const defaultLabel = items.find(item => item.value === defaultValue)?.label || p
 <div 
     class="mt-1 relative"
     x-data={`{ 
+        ${nomotion === undefined ? "" : `nomotion: ${nomotion},`}
         open: false, 
         selectedValue: '${defaultValue}',
         selectedLabel: '${defaultLabel}',
@@ -107,15 +110,16 @@ const defaultLabel = items.find(item => item.value === defaultValue)?.label || p
 
     <div
         x-show="open"
-        x-transition:enter="transition ease-out duration-100"
+        x-transition:enter="transition ease-out duration-150"
         x-transition:enter-start="opacity-0 scale-95"
         x-transition:enter-end="opacity-100 scale-100"
-        x-transition:leave="transition ease-in duration-75"
+        x-transition:leave="transition ease-out duration-150"
         x-transition:leave-start="opacity-100 scale-100"
         x-transition:leave-end="opacity-0 scale-95"
+        :class="nomotion && '!transition-none'"
         @click.outside="open = false"
         x-cloak
-        class="absolute z-50 w-full bg-popover text-popover-foreground rounded-b-md border-0 ring-1 ring-border shadow-sm outline-0"
+        class="absolute z-50 w-full bg-popover text-popover-foreground rounded-b-md border-0 ring-1 ring-border shadow-sm outline-0 motion-reduce:!transition-none"
         style="max-height: 300px; overflow-y: auto;"
     >
         {items.map((item, index) => (

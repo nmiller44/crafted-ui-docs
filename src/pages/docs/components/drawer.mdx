@@ -1,0 +1,206 @@
+---
+title: 'Drawer'
+description: 'An accessible edge panel for navigation, details, and focused workflows.'
+---
+import BaseSidebar from "@/layouts/BaseSidebar.astro";
+import Section from "@/components/Section.astro";
+import CodePreview from "@/components/CodePreview.astro";
+import Button from "@/components/button/Button.astro";
+import Drawer from "@/components/drawer/Drawer.astro";
+import DrawerTrigger from "@/components/drawer/DrawerTrigger.astro";
+import DrawerContent from "@/components/drawer/DrawerContent.astro";
+import DrawerClose from "@/components/drawer/DrawerClose.astro";
+import Vertlist from "@/components/vertlist/Vertlist.astro";
+import VertlistItem from "@/components/vertlist/VertlistItem.astro";
+
+<BaseSidebar title={frontmatter.title} description={frontmatter.description}>
+
+<Section title="Overview">
+Drawer presents modal content from an edge of the viewport. It supports right, left, top, and bottom placement, swipe dismissal, focus containment, and focus restoration. Use it for navigation or a focused task that benefits from keeping the current page in context.
+
+The component is composable: `Drawer` owns state and placement, `DrawerTrigger` opens it, `DrawerContent` provides the panel and accessible name, and `DrawerClose` wraps an additional dismissal control.
+</Section>
+
+<CodePreview title="Drawer Feature"
+code={`
+<Drawer side="left">
+  <DrawerTrigger>
+    <Button>Open brewery navigation</Button>
+  </DrawerTrigger>
+  <DrawerContent title="Brewery navigation" subtitle="Explore the brewery">
+    <nav aria-label="Brewery">
+      <Vertlist>
+        <VertlistItem><a href="#our-beers">Our beers</a></VertlistItem>
+        <VertlistItem><a href="#taprooms">Taprooms</a></VertlistItem>
+        <VertlistItem><a href="#events">Events</a></VertlistItem>
+      </Vertlist>
+    </nav>
+  </DrawerContent>
+</Drawer>
+`}>
+    <div class="flex min-h-40 items-center justify-center">
+        <Drawer side="left">
+            <DrawerTrigger><Button>Open brewery navigation</Button></DrawerTrigger>
+            <DrawerContent side="left" title="Brewery navigation" subtitle="Explore the brewery">
+              <nav aria-label="Brewery">
+                <Vertlist>
+                  <VertlistItem><a href="#our-beers">Our beers</a></VertlistItem>
+                  <VertlistItem><a href="#taprooms">Taprooms</a></VertlistItem>
+                  <VertlistItem><a href="#events">Events</a></VertlistItem>
+                </Vertlist>
+                </nav>
+            </DrawerContent>
+        </Drawer>
+    </div>
+</CodePreview>
+
+<Section title="Placement And Size">
+The `side` prop selects the viewport edge and matching swipe-dismiss direction. It defaults to `"right"`. Left and right drawers size by width; top and bottom drawers size by height. `size` defaults to `"md"` and accepts `"sm"`, `"md"`, `"lg"`, or `"xl"`, corresponding to 24, 32, 40, or 48 rem on the relevant axis. The panel constrains itself to the viewport.
+</Section>
+
+<CodePreview title="Drawer Edges"
+code={`
+<Drawer>
+  <DrawerTrigger><Button>Right</Button></DrawerTrigger>
+  <DrawerContent title="Right panel">Panel content</DrawerContent>
+</Drawer>
+
+<Drawer side="left">
+  <DrawerTrigger><Button>Left</Button></DrawerTrigger>
+  <DrawerContent side="left" title="Left panel">Panel content</DrawerContent>
+</Drawer>
+
+<Drawer side="top">
+  <DrawerTrigger><Button>Top</Button></DrawerTrigger>
+  <DrawerContent side="top" title="Top panel" size="sm">Panel content</DrawerContent>
+</Drawer>
+
+<Drawer side="bottom">
+  <DrawerTrigger><Button>Bottom</Button></DrawerTrigger>
+  <DrawerContent side="bottom" title="Bottom panel" size="sm">Panel content</DrawerContent>
+</Drawer>
+`}>
+    <div class="flex min-h-40 flex-wrap items-center justify-center gap-3">
+        <Drawer>
+            <DrawerTrigger><Button>Right</Button></DrawerTrigger>
+            <DrawerContent title="Right panel">Panel content</DrawerContent>
+        </Drawer>
+        <Drawer side="left">
+            <DrawerTrigger><Button>Left</Button></DrawerTrigger>
+            <DrawerContent side="left" title="Left panel">Panel content</DrawerContent>
+        </Drawer>
+        <Drawer side="top">
+            <DrawerTrigger><Button>Top</Button></DrawerTrigger>
+            <DrawerContent side="top" title="Top panel" size="sm">Panel content</DrawerContent>
+        </Drawer>
+        <Drawer side="bottom">
+            <DrawerTrigger><Button>Bottom</Button></DrawerTrigger>
+            <DrawerContent side="bottom" title="Bottom panel" size="sm">Panel content</DrawerContent>
+        </Drawer>
+    </div>
+</CodePreview>
+
+<Section title="Detached Triggers">
+A trigger can live outside the Drawer subtree. Create one handle and pass it to both `DrawerTrigger` and `Drawer`; the Drawer still restores focus to the trigger when it closes.
+</Section>
+
+<CodePreview title="Detached Trigger"
+code={`
+const drawerHandle = createDrawerHandle()
+
+<DrawerTrigger handle={drawerHandle}>
+  <Button>Open release details</Button>
+</DrawerTrigger>
+
+<Drawer handle={drawerHandle}>
+  <DrawerContent title="Release details">
+    The seasonal pale ale is ready to publish.
+  </DrawerContent>
+</Drawer>
+`}>
+    <div class="flex min-h-40 items-center justify-center gap-4">
+        <DrawerTrigger handle="release-details">
+            <Button>Open release details</Button>
+        </DrawerTrigger>
+        <Drawer handle="release-details">
+            <DrawerContent title="Release details">
+                The seasonal pale ale is ready to publish.
+            </DrawerContent>
+        </Drawer>
+    </div>
+</CodePreview>
+
+<Section title="Accessible Content And Dismissal">
+Provide `title`, `aria-label`, or `aria-labelledby` on `DrawerContent` so the dialog has an accessible name. A visible title is optional when another accessible name is supplied. `subtitle` adds supporting text. The default close button is visible unless `hideClose` is set; when hiding it, include another clear dismissal control.
+
+The Drawer preserves Base UI's modal behavior: Escape and backdrop interaction dismiss it, keyboard focus stays within the open panel, and closing returns focus to its trigger. `initialFocus` and `finalFocus` can be used to customize focus targets. When navigation changes, close the Drawer and manage route-change focus in the consuming application.
+
+The panel header remains visible while its body scrolls. Use `contentClassName` and `bodyClassName` to customize those regions.
+
+For a custom heading structure, use the exported `DrawerTitle` and `DrawerDescription` primitives inside `DrawerContent`. The `title` and `subtitle` props provide the common pre-styled header without needing to compose those parts yourself.
+</Section>
+
+<Section title="Exported Parts">
+
+| Export | Purpose |
+| --- | --- |
+| `Drawer` | State, placement, modality, and shared handle root |
+| `DrawerTrigger` | Opens the Drawer, including from outside the root when given the same handle |
+| `DrawerContent` | Panel, backdrop, optional convenience header, close button, and scrollable body |
+| `DrawerClose` | Closes the Drawer from a custom control |
+| `DrawerTitle` | Accessible title primitive for custom header composition |
+| `DrawerDescription` | Accessible descriptive text primitive |
+| `createDrawerHandle` | Creates a typed handle for detached triggers |
+
+Related types include `DrawerProps`, `DrawerHandle<Payload>`, `DrawerSide`, `DrawerTriggerProps`, `DrawerContentProps`, `DrawerCloseProps`, `DrawerTitleProps`, and `DrawerDescriptionProps`.
+</Section>
+
+<Section title="No Motion">
+Set `nomotion` on `Drawer` to disable its opening and closing transitions. This does not disable dismissal, focus management, or swipe gestures. Drawer transitions also respect the user's reduced-motion preference. See [Motion](/docs/motion) for the shared policy and inheritance behavior.
+</Section>
+
+<CodePreview title="Drawer Without Motion"
+code={`
+<Drawer nomotion>
+  <DrawerTrigger><Button>Open details</Button></DrawerTrigger>
+  <DrawerContent title="Brew details">
+    <p>A citrus-forward pale ale.</p>
+    <DrawerClose><Button outline>Done</Button></DrawerClose>
+  </DrawerContent>
+</Drawer>
+`}>
+    <div class="flex min-h-40 items-center justify-center">
+        <Drawer nomotion>
+            <DrawerTrigger><Button>Open details</Button></DrawerTrigger>
+            <DrawerContent title="Brew details">
+                <p>A citrus-forward pale ale.</p>
+                <DrawerClose><Button outline>Done</Button></DrawerClose>
+            </DrawerContent>
+        </Drawer>
+    </div>
+</CodePreview>
+
+<Section title="Props">
+All components accept their corresponding Base UI Drawer props unless noted.
+
+| Component | Prop | Type | Default | Description |
+| --- | --- | --- | --- | --- |
+| Drawer | `side` | `"left" \| "right" \| "top" \| "bottom"` | `"right"` | Panel edge and swipe-dismiss direction |
+| Drawer | `nomotion` | `boolean` | Inherited, otherwise `false` | Disables opening and closing transitions |
+| Drawer | `handle` | `DrawerHandle` | - | Associates the root with a detached trigger |
+| Drawer | `open` | `boolean` | - | Controlled open state |
+| Drawer | `defaultOpen` | `boolean` | `false` | Initial uncontrolled open state |
+| Drawer | `onOpenChange` | `(open: boolean) => void` | - | Called when open state changes |
+| DrawerContent | `title` | `string` | - | Visible accessible title; provide another accessible name if omitted |
+| DrawerContent | `subtitle` | `string` | - | Supporting text under the title |
+| DrawerContent | `size` | `"sm" \| "md" \| "lg" \| "xl"` | `"md"` | Width or height according to the panel edge |
+| DrawerContent | `hideClose` | `boolean` | `false` | Hides the default close control |
+| DrawerContent | `contentClassName` | `string` | - | Classes for the padded content wrapper |
+| DrawerContent | `bodyClassName` | `string` | - | Classes for the scrollable body |
+| DrawerTrigger | `handle` | `DrawerHandle` | - | Connects a trigger rendered outside the Drawer |
+| DrawerClose | - | - | - | Wraps a control that closes the Drawer |
+
+Create handles with `createDrawerHandle()`. Its type is `DrawerHandle<Payload = undefined>`.
+</Section>
+
+</BaseSidebar>

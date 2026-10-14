@@ -4,13 +4,15 @@ import { classNames } from "@/utils/classNames";
 export interface Props {
     class?: string;
     colspan?: number;
+    scope?: "col" | "colgroup" | "row" | "rowgroup";
 }
 
-const { class: className, colspan, ...props } = Astro.props;
+const { class: className, colspan, scope, ...props } = Astro.props;
 ---
 
 <th 
     colspan={colspan}
+    scope={scope ?? (colspan && colspan > 1 ? "colgroup" : "col")}
     class={classNames(
         "p-4 pt-3 font-medium text-muted-foreground text-left border-b border-border",
         className

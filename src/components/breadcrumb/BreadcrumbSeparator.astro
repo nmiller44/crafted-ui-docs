@@ -1,0 +1,20 @@
+---
+import { classNames } from "@utils/classNames"
+import IconChevronRight from "@components/icons/IconChevronRight.astro"
+
+interface Props {
+    type?: "chevron" | "slash" | "dot";
+    className?: string;
+}
+
+const { 
+    type = "chevron",
+    className
+ } = Astro.props;
+---
+<span class={classNames("text-muted-foreground inline-flex items-baseline", className)} aria-hidden="true">
+    {type === "chevron" && <IconChevronRight class="size-3 relative top-[0.125rem]" />}
+    {type === "slash" && <span>/</span>}
+    {type === "dot" && <span>•</span>}
+    {!type && <slot />}
+</span>

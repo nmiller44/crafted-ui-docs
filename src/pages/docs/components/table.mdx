@@ -12,7 +12,6 @@ import TableBody from "@/components/table/TableBody.astro";
 import TableRow from "@/components/table/TableRow.astro";
 import TableCell from "@/components/table/TableCell.astro";
 import Card from "@/components/card/Card.astro";
-import CardBody from "@/components/card/CardBody.astro";
 
 <BaseSidebar title={frontmatter.title} description={frontmatter.description}>
 
@@ -98,8 +97,7 @@ import CardBody from "@/components/card/CardBody.astro";
 
 <CodePreview code={`
 <Card>
-    <CardBody>
-        <Table>
+    <Table>
             <TableHead>
                 <TableHeadCell>Product</TableHeadCell>
                 <TableHeadCell>Category</TableHeadCell>
@@ -126,14 +124,12 @@ import CardBody from "@/components/card/CardBody.astro";
                     <TableCell>Low Stock</TableCell>
                 </TableRow>
             </TableBody>
-        </Table>
-    </CardBody>
+    </Table>
 </Card>
 `}>
     <div class="max-w-3xl">
         <Card>
-            <CardBody>
-                <Table>
+            <Table>
                     <TableHead>
                         <TableHeadCell>Product</TableHeadCell>
                         <TableHeadCell>Category</TableHeadCell>
@@ -160,15 +156,18 @@ import CardBody from "@/components/card/CardBody.astro";
                             <TableCell>Low Stock</TableCell>
                         </TableRow>
                     </TableBody>
-                </Table>
-            </CardBody>
+            </Table>
         </Card>
     </div>
 </CodePreview>
 
 <Section>
     ### Column Spanning
-    Use the `colspan` prop on TableHeadCell or TableCell to span multiple columns.
+    Use the `colspan` prop on TableHeadCell or TableCell to span multiple columns. For a
+    header with `colspan` greater than 1 automatically receives `scope="colgroup"` so
+    assistive technologies can associate it with the columns it describes. TableHeadCell
+    uses `scope="col"` for ordinary column headers. Pass an explicit `scope` to override
+    the automatic value.
 </Section>
 
 <CodePreview code={`
@@ -232,10 +231,10 @@ import CardBody from "@/components/card/CardBody.astro";
 
 <CodePreview code={`
 <Table>
-    <TableHead className="bg-primary/10">
-        <TableHeadCell className="text-primary">Ingredient</TableHeadCell>
-        <TableHeadCell className="text-primary">Amount</TableHeadCell>
-        <TableHeadCell className="text-primary">Cost</TableHeadCell>
+    <TableHead className="bg-primary/5">
+        <TableHeadCell className="text-primary dark:text-foreground">Ingredient</TableHeadCell>
+        <TableHeadCell className="text-primary dark:text-foreground">Amount</TableHeadCell>
+        <TableHeadCell className="text-primary dark:text-foreground">Cost</TableHeadCell>
     </TableHead>
     <TableBody>
         <TableRow className="hover:bg-muted/50">
@@ -258,10 +257,10 @@ import CardBody from "@/components/card/CardBody.astro";
 `}>
     <div class="max-w-3xl">
         <Table>
-            <TableHead class="bg-primary/10">
-                <TableHeadCell class="text-primary">Ingredient</TableHeadCell>
-                <TableHeadCell class="text-primary">Amount</TableHeadCell>
-                <TableHeadCell class="text-primary">Cost</TableHeadCell>
+            <TableHead class="bg-primary/5">
+                <TableHeadCell class="text-primary dark:text-foreground">Ingredient</TableHeadCell>
+                <TableHeadCell class="text-primary dark:text-foreground">Amount</TableHeadCell>
+                <TableHeadCell class="text-primary dark:text-foreground">Cost</TableHeadCell>
             </TableHead>
             <TableBody>
                 <TableRow class="hover:bg-muted/50">
@@ -308,6 +307,7 @@ import CardBody from "@/components/card/CardBody.astro";
     |------|------|---------|-------------|
     | className | string | - | Additional CSS classes |
     | colspan | number | - | Number of columns to span |
+    | scope | "col" \| "colgroup" \| "row" \| "rowgroup" | col, or colgroup when colspan > 1 | Header scope for assistive technologies; overrides the automatic scope |
 
     #### TableBody
     Accepts all props from the native `<tbody>` element.
@@ -334,8 +334,9 @@ import CardBody from "@/components/card/CardBody.astro";
     ### Accessibility
     - Semantic HTML table elements for proper structure
     - TableHead provides proper `<thead>` semantics
-    - Column headers use `<th>` elements for screen readers
+    - TableHeadCell uses `scope="colgroup"` automatically when `colspan` is greater than 1; pass `scope` explicitly to override it
     - Left-aligned text for better readability
+    - Keep `text-muted-foreground` on `bg-muted/50` at a minimum contrast ratio of 4.5:1
 
     ### Best Practices
     - Use TableHead for column headers
