@@ -15,6 +15,17 @@ Crafted UI is a component library built with React 19, TypeScript, Tailwind CSS 
 - Motion: /docs/motion - Component transitions, nomotion inheritance, and reduced-motion preferences
 - Typography: /docs/typography - Typography system and text styles
 
+### Installation Setup
+
+Install `crafted-ui` in a React 19 application with Tailwind CSS v4 configured. In the application's main CSS file, processed by Tailwind, use:
+
+```css
+@import "tailwindcss";
+@import "crafted-ui/styles";
+```
+
+The styles import includes Crafted's theme tokens, dark variant, base/component rules, and automatic source registration for the packaged component JavaScript.
+
 ## Components
 
 ### Layout Components
