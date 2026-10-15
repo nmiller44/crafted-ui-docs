@@ -13,7 +13,7 @@ import Heading3 from '../../components/heading/Heading3.astro';
 
 <BaseSidebar title={frontmatter.title} description={frontmatter.description}>
     <Section title="Required">
-        Crafted UI requires TailwindCSS to be installed in your project. If you haven't already installed TailwindCSS, you can do so by following the 
+      Crafted UI requires React 19 and Tailwind CSS v4. If you haven't already installed Tailwind CSS v4, you can do so by following the
         <a href="https://tailwindcss.com/docs/installation" target="_blank" rel="noopener">official installation guide</a>.
     </Section>
 
@@ -26,14 +26,14 @@ import Heading3 from '../../components/heading/Heading3.astro';
     </Section>
 
     <Section title="Import Styles">
-        Import the Crafted UI styles in your application's main CSS file:
+      Import the Crafted UI styles in your application's main CSS file, processed by Tailwind CSS v4:
 
         ```css
         @import "tailwindcss";
-        @import "crafted-ui/styles" layer(components);
+      @import "crafted-ui/styles";
         ```
 
-        This will include all the necessary CSS for the Crafted UI components. **NOTE:** The `layer(components)` directive ensures that Crafted UI styles are properly layered, allowing your custom utility classes to override component defaults.
+      The styles import supplies Crafted's theme tokens, dark variant, and base/component rules. It also automatically registers the packaged component JavaScript so Tailwind generates the utilities used by Crafted UI.
     </Section>
 
     <Section title="Use Crafted UI">
