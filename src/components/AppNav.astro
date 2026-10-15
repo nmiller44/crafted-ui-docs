@@ -22,13 +22,13 @@ const navActionClass = classNames(
   "inline-flex items-center justify-center rounded-md",
   "border-0 bg-transparent text-primary",
   "focus-visible:outline-none",
-  "transition-[background-color,box-shadow,transform,opacity] duration-200",
+  "transition-[background-color,box-shadow,opacity] duration-150 ease-out motion-reduce:transition-none",
 
   // Hover Animation
   "hover:[text-shadow:0.5px_0_0_currentColor] focus-visible:[text-shadow:0.5px_0_0_currentColor]",
-  "hover:-translate-y-1 focus-visible:-translate-y-1",
-  "[&>svg]:transition-transform [&>svg]:duration-200",
-  "hover:[&>svg]:scale-110 focus-visible:[&>svg]:scale-110",
+  "motion-safe:hover:[&>:not(.sr-only)]:-translate-y-1 motion-safe:focus-visible:[&>:not(.sr-only)]:-translate-y-1",
+  "[&>:not(.sr-only)]:transition-transform [&>:not(.sr-only)]:duration-150 [&>:not(.sr-only)]:ease-out motion-reduce:[&>:not(.sr-only)]:transition-none",
+  "motion-safe:hover:[&>svg]:scale-110 motion-safe:focus-visible:[&>svg]:scale-110",
 
   "disabled:opacity-50 disabled:pointer-events-none"
 );
