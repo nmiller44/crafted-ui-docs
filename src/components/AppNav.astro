@@ -15,8 +15,10 @@ import IconGithub from "@components/icons/IconGithub.astro";
 import { classNames } from "@utils/classNames";
 import { getLinks } from "@data/links";
 import { sidebarLinks } from "@data/sidebar";
+import { getCraftedUiVersion } from "@data/version";
 
 const links = getLinks();
+const craftedUiVersion = await getCraftedUiVersion();
 const currentPath = Astro.url.pathname;
 const navActionClass = classNames(
   "inline-flex items-center justify-center rounded-md",
@@ -87,7 +89,7 @@ const navActionClass = classNames(
         >
           <IconNpm className="size-4 shrink-0" />
           <span class="sr-only">npm</span>
-          <span class="ml-1.5 text-sm">0.4.0</span>
+          <span class="ml-1.5 text-sm">{ craftedUiVersion }</span>
         </a>
         <a
           class={navActionClass}
