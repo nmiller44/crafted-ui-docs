@@ -19,17 +19,13 @@ const {
 } = Astro.props;
 ---
 <header class={classNames(
-            "max-w-container mr-auto w-full",
-            "px-6 lg:px-8",
-            "space-y-6 md:flex md:items-start md:justify-between",
+            "md:flex md:items-start md:justify-between",
             wrapperClassName)} {...props}>
-    { !!title
+    { (title || subtitle)
         ?   <>
-            <div>
-                <Heading1 title={title} subtitle={subtitle} className={className} />
-            </div>
+            <Heading1 title={title} subtitle={subtitle} className={className} />
             { Astro.slots.has('default') &&
-                <div>
+                <div class="flex gap-2 pt-2">
                     <slot />
                 </div>
             }

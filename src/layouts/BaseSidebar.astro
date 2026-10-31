@@ -34,8 +34,10 @@ const {
                 ))}
             </Sidebar>
         </div>
-        <Page title={ title } subtitle={ description }>
-            <slot />
-        </Page>
+        <main class="w-full grow max-w-container mr-auto px-6 lg:px-8 py-8 md:py-12">
+            <Page title={ title } subtitle={ description }>
+                <slot />
+            </Page>
+        </main>
     </div>
 </Base>

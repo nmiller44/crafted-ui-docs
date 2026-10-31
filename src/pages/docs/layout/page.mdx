@@ -1,6 +1,6 @@
 ---
 title: 'Page'
-description: 'A layout component for structuring page content with consistent spacing and container width.'
+description: 'Route-level content wrapper with an optional page header and responsive vertical rhythm.'
 ---
 import BaseSidebar from "@/layouts/BaseSidebar.astro";
 import CodePreview from "@/components/CodePreview.astro";
@@ -9,487 +9,495 @@ import Page from "@/components/page/Page.astro";
 import PageHeader from "@/components/page/PageHeader.astro";
 import Section from "@/components/section/Section.astro";
 
-import Prose from '@/components/Prose.astro';
 import Heading1 from '@/components/heading/Heading1.astro';
 import Heading3 from '@/components/heading/Heading3.astro';
+import Heading4 from '@/components/heading/Heading4.astro';
+import Heading5 from '@/components/heading/Heading5.astro';
 import Button from '@/components/button/Button.astro';
 import Badge from '@/components/badge/Badge.astro';
+import Card from '@/components/card/Card.astro';
+import Metric from '@/components/metric/Metric.astro';
+import Breadcrumb from '@/components/breadcrumb/Breadcrumb.astro';
+import BreadcrumbList from '@/components/breadcrumb/BreadcrumbList.astro';
+import BreadcrumbListItem from '@/components/breadcrumb/BreadcrumbListItem.astro';
+import BreadcrumbSeparator from '@/components/breadcrumb/BreadcrumbSeparator.astro';
+import Table from '@/components/table/Table.astro';
+import TableBody from '@/components/table/TableBody.astro';
+import TableCell from '@/components/table/TableCell.astro';
+import TableHead from '@/components/table/TableHead.astro';
+import TableHeadCell from '@/components/table/TableHeadCell.astro';
+import TableRow from '@/components/table/TableRow.astro';
+import Fieldset from '@/components/fieldset/Fieldset.astro';
+import FieldsetButtons from '@/components/fieldset/FieldsetButtons.astro';
+import Field from '@/components/field/Field.astro';
+import FieldLabel from '@/components/field/FieldLabel.astro';
+import Input from '@/components/input/Input.astro';
 
 <BaseSidebar title={frontmatter.title} description={frontmatter.description}>
 
 <CodePreview code={`
-<Page title="Sample Page" subtitle="This demonstrates a complete page layout with header and content">
-    <Section title="First Section">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="p-4 bg-muted rounded-md">
-                <p>This content is automatically contained within the page container with responsive padding.</p>
-            </div>
-            <div className="p-4 bg-muted rounded-md">
-                <p>Page components handle container width, spacing, and responsive behavior automatically.</p>
-            </div>
-        </div>
-    </Section>
-    
-    <Section title="Second Section">
-        <div className="p-4 bg-accent/10 rounded-md">
-            <p>Sections within a page are automatically spaced using space-y-12 for consistent vertical rhythm.</p>
-        </div>
+<Page title="Inventory Dashboard" subtitle="Live taproom and warehouse inventory.">
+    <Card>
+        <Table>
+            <TableHead>
+                <TableHeadCell>Beer</TableHeadCell>
+                <TableHeadCell>Style</TableHeadCell>
+                <TableHeadCell>ABV</TableHeadCell>
+                <TableHeadCell>Status</TableHeadCell>
+            </TableHead>
+            <TableBody>
+                <TableRow>
+                    <TableCell>Hoppy Trails IPA</TableCell>
+                    <TableCell>West Coast IPA</TableCell>
+                    <TableCell>6.8%</TableCell>
+                    <TableCell><Badge clr="success">On Tap</Badge></TableCell>
+                </TableRow>
+                <TableRow>
+                    <TableCell>Midnight Oak Stout</TableCell>
+                    <TableCell>Imperial Stout</TableCell>
+                    <TableCell>10.2%</TableCell>
+                    <TableCell><Badge clr="warning">Low Stock</Badge></TableCell>
+                </TableRow>
+            </TableBody>
+        </Table>
+    </Card>
+    <Section title="Cellar Notes">
+        <p>Golden Hour Pils will be ready for the taproom after its final conditioning check.</p>
     </Section>
 </Page>
 `}>
-    <Page title="Sample Page" subtitle="This demonstrates a complete page layout with header and content">
-        <Section title="First Section" prose={false}>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div class="p-4 bg-muted rounded-md">
-                    <p>This content is automatically contained within the page container with responsive padding.</p>
-                </div>
-                <div class="p-4 bg-muted rounded-md">
-                    <p>Page components handle container width, spacing, and responsive behavior automatically.</p>
-                </div>
-            </div>
-        </Section>
-        
-        <Section title="Second Section" prose={false}>
-            <div class="p-4 bg-accent/10 rounded-md">
-                <p>Sections within a page are automatically spaced using space-y-12 for consistent vertical rhythm.</p>
-            </div>
+    <Page title="Inventory Dashboard" subtitle="Live taproom and warehouse inventory.">
+        <Card>
+            <Table>
+                <TableHead>
+                    <TableHeadCell>Beer</TableHeadCell>
+                    <TableHeadCell>Style</TableHeadCell>
+                    <TableHeadCell>ABV</TableHeadCell>
+                    <TableHeadCell>Status</TableHeadCell>
+                </TableHead>
+                <TableBody>
+                    <TableRow>
+                        <TableCell>Hoppy Trails IPA</TableCell>
+                        <TableCell>West Coast IPA</TableCell>
+                        <TableCell>6.8%</TableCell>
+                        <TableCell><Badge clr="success">On Tap</Badge></TableCell>
+                    </TableRow>
+                    <TableRow>
+                        <TableCell>Midnight Oak Stout</TableCell>
+                        <TableCell>Imperial Stout</TableCell>
+                        <TableCell>10.2%</TableCell>
+                        <TableCell><Badge clr="warning">Low Stock</Badge></TableCell>
+                    </TableRow>
+                </TableBody>
+            </Table>
+        </Card>
+        <Section title="Cellar Notes" prose={false}>
+            <p>Golden Hour Pils will be ready for the taproom after its final conditioning check.</p>
         </Section>
     </Page>
 </CodePreview>
 
     <Section title="Overview">
-        The Page component provides a complete page layout structure with automatic container sizing, responsive padding, and consistent spacing. It combines container functionality with page-specific styling and can optionally include a PageHeader for titles and actions. The Page component is designed to be the top-level layout component for your application pages.
+        `Page` holds route-level content. It renders a single `div` that applies 32px of
+        vertical spacing between its direct children, increasing to 48px from the `md`
+        breakpoint, and optionally renders a `PageHeader` when a `title` or `subtitle` is
+        supplied.
+
+        `Page` is deliberately minimal. **The parent layout owns the `main` landmark, the
+        container width, and the window padding.** This keeps `Page` reusable inside any
+        shell, whether that shell has a sidebar, a navbar, or neither.
     </Section>
 
-    <Section title="Page">
-        ### Description
-        A layout component that wraps page content with consistent container sizing, padding, and spacing.
+    <Section title="Layout Contract">
+        ### Responsibilities
+        Understanding the split makes it clear where each class belongs:
+
+        | Concern | Owner |
+        | --- | --- |
+        | `main` landmark | Parent layout |
+        | Container width (`max-w-container`, `mx-auto`) | Parent layout |
+        | Window padding (`px-6 lg:px-8`, `py-8 md:py-12`) | Parent layout |
+        | Breadcrumb placement and spacing | Parent layout |
+        | Spacing between page-level blocks | `Page` |
+        | Page heading and page-level actions | `Page` / `PageHeader` |
+
+        ### Parent Layout Example
+        A typical route shell wraps `Page` with the landmark, container, and padding:
+
+        ```tsx
+        <main className="w-full grow max-w-container mx-auto px-6 lg:px-8 py-8 md:py-12">
+          <Page title="Inventory Dashboard" subtitle="Live taproom and warehouse inventory.">
+            {/* Page content */}
+          </Page>
+        </main>
+        ```
+
+        Because `Page` renders a plain `div`, it can also sit beside other page-level
+        blocks such as a breadcrumb trail without fighting over spacing.
     </Section>
 
 <CodePreview code={`
-import { Page } from "crafted-ui";
-import { Section } from "crafted-ui";
+<main className="w-full grow max-w-container mx-auto px-6 lg:px-8 py-8 md:py-12 space-y-6 md:space-y-8">
+    <Breadcrumb>
+        <BreadcrumbList>
+            <BreadcrumbListItem><a href="#">Sales</a></BreadcrumbListItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbListItem><a href="#">Logistics</a></BreadcrumbListItem>
+            <BreadcrumbSeparator />
+            <BreadcrumbListItem><span className="active" aria-current="page">Delivery Plan</span></BreadcrumbListItem>
+        </BreadcrumbList>
+    </Breadcrumb>
 
-<Page title="My Page" subtitle="Page description">
-  <Section title="Content Section">
-    <p>Page content goes here</p>
-  </Section>
-</Page>
-`}>
-    <Page title="My Page" subtitle="Page description">
-        <Section title="Content Section" prose={false}>
-            <p>Page content goes here</p>
+    <Page>
+        <PageHeader title="Delivery Plan" subtitle="Manage outbound routes and delivery timing.">
+            <Button outline>Export</Button>
+            <Button clr="primary">Add Stop</Button>
+        </PageHeader>
+
+        <Section title="Outbound Summary">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+                <Card slim><Metric title="Cases Out Today" value="1,248" /></Card>
+                <Card slim><Metric title="Active Deliveries" value="32" /></Card>
+                <Card slim><Metric title="On-Time Departure" value="96%" /></Card>
+            </div>
         </Section>
     </Page>
-</CodePreview>
-
-    <Section>
-
-        ### Props
-        The `Page` component accepts the following props:
-        
-        | Prop | Type | Description |
-        | --- | --- | --- |
-        | title | string | Optional page title that renders a PageHeader |
-        | subtitle | string | Optional subtitle for the page header |
-        | className | string | Additional CSS class names for the content container |
-        | children | ReactNode | Content of the page |
-
-        The component also accepts all standard HTML div attributes for the content container.
-    </Section>
-
-    <Section title="PageHeader">
-        ### Description
-        A header component specifically designed for page titles with optional actions and responsive layout.
-    </Section>
-
-<CodePreview code={`
-import { PageHeader } from "crafted-ui";
-import { Button } from "crafted-ui";
-
-<PageHeader 
-  title="Page Title" 
-  subtitle="Page description"
->
-  <Button>Action</Button>
-</PageHeader>
+</main>
 `}>
-    <PageHeader 
-      title="Page Title" 
-      subtitle="Page description"
-    >
-        <Button>Action</Button>
-    </PageHeader>
-</CodePreview>
+    <div class="space-y-6 md:space-y-8">
+        <Breadcrumb>
+            <BreadcrumbList class="flex-wrap">
+                <BreadcrumbListItem><a href="#">Sales</a></BreadcrumbListItem>
+                <BreadcrumbSeparator />
+                <BreadcrumbListItem><a href="#">Logistics</a></BreadcrumbListItem>
+                <BreadcrumbSeparator />
+                <BreadcrumbListItem><span class="active" aria-current="page">Delivery Plan</span></BreadcrumbListItem>
+            </BreadcrumbList>
+        </Breadcrumb>
 
-    <Section>
+        <Page>
+            <PageHeader title="Delivery Plan" subtitle="Manage outbound routes and delivery timing.">
+                <Button outline>Export</Button>
+                <Button clr="primary">Add Stop</Button>
+            </PageHeader>
 
-        ### Props
-        The `PageHeader` component accepts the following props:
-        
-        | Prop | Type | Description |
-        | --- | --- | --- |
-        | title | string | Header title text |
-        | subtitle | string | Optional subtitle text |
-        | className | string | Additional CSS class names for the heading |
-        | wrapperClassName | string | Additional CSS class names for the header container |
-        | children | ReactNode | Optional content (like buttons) to display alongside the header |
-
-        The component also accepts all standard HTML header attributes.
-    </Section>
-
-    <Section title="Layout Structure">
-        ### Container Behavior
-        The Page component applies consistent container sizing and responsive padding:
-
-        - **Container width**: `max-w-container mx-auto` (centers content with maximum width)
-        - **Responsive padding**: `px-4 py-6 sm:px-6 lg:px-8 lg:py-8`
-        - **Content spacing**: `space-y-12` for vertical spacing between child elements
-    </Section>
-
-<CodePreview code={`
-<Page title="Layout Demo" subtitle="Shows container and spacing behavior">
-  <div className="p-4 bg-primary/10 rounded-md">
-    <p className="text-sm">Container content with automatic width constraints</p>
-  </div>
-  <div className="p-4 bg-secondary/10 rounded-md">
-    <p className="text-sm">Automatic spacing between content blocks (space-y-12)</p>
-  </div>
-</Page>
-`}>
-    <div class="border border-border rounded-md overflow-hidden">
-        <Page title="Layout Demo" subtitle="Shows container and spacing behavior">
-            <div class="p-4 bg-primary/10 rounded-md">
-                <p class="text-sm">Container content with automatic width constraints</p>
-            </div>
-            <div class="p-4 bg-secondary/10 rounded-md">
-                <p class="text-sm">Automatic spacing between content blocks (space-y-12)</p>
-            </div>
+            <Section title="Outbound Summary" prose={false}>
+                <div class="grid grid-cols-1 gap-4 md:grid-cols-3">
+                    <Card slim><Metric title="Cases Out Today" value="1,248" /></Card>
+                    <Card slim><Metric title="Active Deliveries" value="32" /></Card>
+                    <Card slim><Metric title="On-Time Departure" value="96%" /></Card>
+                </div>
+            </Section>
         </Page>
     </div>
 </CodePreview>
 
-    <Section>
+    <Section title="Page">
+        ### Description
+        A route-level wrapper that applies consistent vertical rhythm to its direct children
+        and optionally renders a `PageHeader`.
 
-        ### Header Layout
-        When a title is provided, PageHeader automatically handles responsive layout:
+        The header is rendered when either `title` or `subtitle` is provided. When both are
+        omitted, `Page` renders only its children, which lets you pass a fully custom
+        `PageHeader` as the first child instead.
 
-        - **Mobile**: Title and actions stack vertically
-        - **Desktop**: Title and actions are side-by-side with `md:flex md:items-center md:justify-between`
+        ### Props
+        The `Page` component accepts the following props:
+
+        | Prop | Type | Default | Description |
+        | --- | --- | --- | --- |
+        | title | string | - | Page title; renders a `PageHeader` when provided |
+        | subtitle | string | - | Page subtitle; also renders a `PageHeader` when provided |
+        | className | string | - | Additional class names for the root `div`, which includes the header |
+        | children | ReactNode | - | Page content |
+
+        The component also accepts all standard HTML `div` attributes, which are applied to
+        the root element.
+
+        > **Note:** `className` applies to the root element, so utilities such as
+        > `max-w-prose` or custom spacing affect the header as well as the content.
+    </Section>
+
+    <Section title="Spacing Scale">
+        ### Vertical Rhythm
+        `Page` is the anchor of the spacing scale. Every value below is expressed in the
+        utilities that produce it:
+
+        | Scope | Mobile | `md` and up | Owner |
+        | --- | --- | --- | --- |
+        | Window padding | 32px (`py-8`) | 48px (`md:py-12`) | Parent layout |
+        | Page-level blocks | 32px (`space-y-8`) | 48px (`md:space-y-12`) | `Page` |
+        | Breadcrumb to content | 24px (`space-y-6`) | 32px (`md:space-y-8`) | Parent layout |
+        | Section internal gap | 32px (`space-y-8`) | 32px (`space-y-8`) | `Section` |
+        | Nested heading to content | 16px (`space-y-4`) | 16px (`space-y-4`) | Author |
+
+        ### Heading Scale
+        Headings use a single bold weight so size alone carries the hierarchy:
+
+        | Component | Size |
+        | --- | --- |
+        | `Heading1` | 36px |
+        | `Heading2` | 30px |
+        | `Heading3` | 24px |
+        | `Heading4` | 20px |
+        | `Heading5` | 18px |
+
+        The example below shows the scale in practice: major areas separate at the page
+        level, sections keep 32px internally, and nested headings stay 16px from their body
+        content.
+    </Section>
+
+<SamplePage>
+    <Page title="Production" subtitle="Plan the batch and prepare the cellar.">
+        <Section title="Brew Schedule" prose={false}>
+            <p class="max-w-prose text-muted-foreground">Review the brew schedule before preparing equipment. Each batch moves through the same checks, from recipe selection to cellar handoff.</p>
+
+            <section class="space-y-8">
+                <div class="space-y-4">
+                    <Heading3 title="Brew Day" subtitle="Prepare the ingredients and equipment." />
+                    <p class="max-w-prose">Confirm the grain bill and reserve a fermentation vessel before heating the strike water.</p>
+                </div>
+
+                <div class="space-y-4">
+                    <Heading4 title="Equipment Preparation" />
+                    <p class="max-w-prose">Inspect the kettle, transfer lines, and heat exchanger. Replace worn seals before starting.</p>
+                </div>
+
+                <div class="space-y-4">
+                    <Heading5 title="Sanitation Check" subtitle="Complete immediately before transferring wort." />
+                    <Card body>
+                        <ul class="list-disc pl-5 space-y-2">
+                            <li>Mix sanitizer at the recommended concentration.</li>
+                            <li>Give every contact surface the full required contact time.</li>
+                            <li>Record the check in the batch log.</li>
+                        </ul>
+                    </Card>
+                </div>
+            </section>
+        </Section>
+
+        <Section title="Distribution" subtitle="Return to the next major area of operations." prose={false}>
+            <p class="max-w-prose">Once the batch is packaged and released, confirm account allocations and delivery windows. This section should read as a fresh chapter, not a continuation of the fermentation notes.</p>
+        </Section>
+    </Page>
+</SamplePage>
+
+    <Section title="PageHeader">
+        ### Description
+        A header for page titles, with optional actions that align to the right from the
+        `md` breakpoint.
+
+        When `title` or `subtitle` is provided, `PageHeader` renders a `Heading1` and places
+        any children in an actions group. When both are omitted, the children render
+        directly, which allows a fully custom header while keeping the semantic `header`
+        element and the responsive layout.
     </Section>
 
 <CodePreview code={`
-<PageHeader title="Page with Actions" subtitle="Responsive header layout">
-  <div className="flex gap-2">
-    <Button>Edit</Button>
-    <Button clr="primary">Save</Button>
-  </div>
+<PageHeader title="Cellar Operations" subtitle="Monitor fermentation, conditioning, and keg readiness." />
+`}>
+    <PageHeader title="Cellar Operations" subtitle="Monitor fermentation, conditioning, and keg readiness." />
+</CodePreview>
+
+    <Section>
+        ### Header Actions
+        Children are placed in a right-aligned actions group. Pass buttons directly; the
+        component supplies the flex container and spacing.
+    </Section>
+
+<CodePreview code={`
+<PageHeader title="Taproom Service" subtitle="Prepare today's pour list and service assignments.">
+    <Button outline>Print Menu</Button>
+    <Button>Assign Staff</Button>
+    <Button clr="primary">Open Service</Button>
 </PageHeader>
 `}>
-    <PageHeader title="Page with Actions" subtitle="Responsive header layout">
-        <div class="flex gap-2">
-            <Button>Edit</Button>
-            <Button clr="primary">Save</Button>
-        </div>
+    <PageHeader title="Taproom Service" subtitle="Prepare today's pour list and service assignments.">
+        <Button outline>Print Menu</Button>
+        <Button>Assign Staff</Button>
+        <Button clr="primary">Open Service</Button>
     </PageHeader>
 </CodePreview>
 
     <Section>
-        ### Header with Badge and Actions
-        Combine a Badge with the header title and include action buttons using a custom header structure:
+        ### Custom Header
+        Omit `title` and `subtitle` to compose the header yourself. Use `wrapperClassName`
+        to style the `header` element without replacing its responsive layout.
     </Section>
 
 <CodePreview code={`
-import { PageHeader } from "crafted-ui";
-import { Badge } from "crafted-ui";
-import { Button } from "crafted-ui";
-
-<PageHeader subtitle="Manage your craft brewery inventory">
-  <div className="flex items-start gap-3">
-    <h1 className="text-4xl font-bold tracking-tight">Barrel Aged Collection</h1>
-    <Badge clr="warning">Limited</Badge>
-  </div>
-  <div className="flex gap-2">
-    <Button>View Details</Button>
-    <Button clr="primary">Add to Collection</Button>
-  </div>
+<PageHeader wrapperClassName="bg-muted/50 p-6 rounded-lg border border-border">
+    <div className="flex items-start gap-3">
+        <Heading1 title="Limited Release Board" subtitle="Barrel-aged drops and small-batch availability." />
+        <Badge clr="yellow">Pilot Batch</Badge>
+    </div>
+    <div className="flex gap-2">
+        <Button>Preview Notes</Button>
+        <Button clr="primary">Publish Lineup</Button>
+    </div>
 </PageHeader>
 `}>
-    <PageHeader>
+    <PageHeader wrapperClassName="bg-muted/50 p-6 rounded-lg border border-border">
         <div class="flex items-start gap-3">
-            <Heading1 title="Barrel Aged Collection" 
-                      subtitle="Manage your craft brewery inventory" />
-            <Badge clr="warning">Limited</Badge>
+            <Heading1 title="Limited Release Board" subtitle="Barrel-aged drops and small-batch availability." />
+            <Badge clr="yellow">Pilot Batch</Badge>
         </div>
         <div class="flex gap-2">
-            <Button>View Details</Button>
-            <Button clr="primary">Add to Collection</Button>
+            <Button>Preview Notes</Button>
+            <Button clr="primary">Publish Lineup</Button>
         </div>
     </PageHeader>
 </CodePreview>
 
     <Section>
+        ### Props
+        The `PageHeader` component accepts the following props:
+
+        | Prop | Type | Default | Description |
+        | --- | --- | --- | --- |
+        | title | string | - | Header title text, rendered as a `Heading1` |
+        | subtitle | string | - | Subtitle text, rendered beneath the title |
+        | className | string | - | Additional class names forwarded to the `Heading1` |
+        | wrapperClassName | string | - | Additional class names for the `header` element |
+        | children | ReactNode | - | Actions when `title` or `subtitle` is set; otherwise the full header content |
+
+        The component also accepts all standard HTML `header` attributes.
+
+        ### Responsive Layout
+        - **Mobile:** the title block and actions stack vertically
+        - **`md` and up:** `md:flex md:items-start md:justify-between` places the title on the left and actions on the right, aligned to the top of the title
     </Section>
 
     <Section title="Usage Patterns">
-        ### Complete Page Layout
-        Using Page for a full page structure:
+        ### Page with Header Actions
+        Pass a `PageHeader` as the first child of `Page` when the header needs actions.
+        Use the `title` and `subtitle` props on `Page` only when no actions are required.
     </Section>
 
 <SamplePage>
-    <Page title="Dashboard" subtitle="Overview of your account">
+    <Page>
+        <PageHeader title="User Settings" subtitle="Manage your account preferences.">
+            <Button outline>Cancel</Button>
+            <Button clr="primary">Save Changes</Button>
+        </PageHeader>
+
         <Section title="Quick Stats" prose={false}>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div class="p-4 bg-muted rounded-md text-center">
-                    <div class="text-2xl font-bold">1,234</div>
-                    <div class="text-sm text-muted-foreground">Total Users</div>
-                </div>
-                <div class="p-4 bg-muted rounded-md text-center">
-                    <div class="text-2xl font-bold">56</div>
-                    <div class="text-sm text-muted-foreground">Active Projects</div>
-                </div>
-                <div class="p-4 bg-muted rounded-md text-center">
-                    <div class="text-2xl font-bold">89%</div>
-                    <div class="text-sm text-muted-foreground">Completion Rate</div>
-                </div>
+                <Card slim><Metric title="Total Users" value="1,234" /></Card>
+                <Card slim><Metric title="Active Projects" value="56" /></Card>
+                <Card slim><Metric title="Completion Rate" value="89%" /></Card>
             </div>
         </Section>
-        
+
         <Section title="Recent Activity" prose={false}>
-            <div class="space-y-3">
-                <div class="p-3 bg-muted rounded-md text-sm">User John Doe completed Project Alpha</div>
-                <div class="p-3 bg-muted rounded-md text-sm">New team member added to Beta Team</div>
-                <div class="p-3 bg-muted rounded-md text-sm">Project Gamma reached 75% completion</div>
-            </div>
+            <Card>
+                <Table>
+                    <TableHead>
+                        <TableHeadCell>Event</TableHeadCell>
+                        <TableHeadCell>Status</TableHeadCell>
+                    </TableHead>
+                    <TableBody>
+                        <TableRow>
+                            <TableCell>Harbor Hall Distributors order released</TableCell>
+                            <TableCell><Badge clr="success">Complete</Badge></TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell>Downtown Tap Partners route rescheduled</TableCell>
+                            <TableCell><Badge clr="warning">Delayed</Badge></TableCell>
+                        </TableRow>
+                    </TableBody>
+                </Table>
+            </Card>
         </Section>
     </Page>
 </SamplePage>
 
     <Section>
-
-        ### Page with Header Actions
-        Including action buttons in the page header:
+        ### Form Page
+        Forms sit inside `Page` like any other block. Constrain the form with a wrapper
+        rather than with `className` on `Page`, so the header keeps the full page width.
     </Section>
 
 <SamplePage>
-    <Page title="User Settings" subtitle="Manage your account preferences">
-        <div slot="header-actions">
-            <Button clr="primary">Save Changes</Button>
-        </div>
-        
-        <Section title="Profile Information" prose={false}>
-            <div class="space-y-4">
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div class="p-4 bg-muted rounded-md">
-                        <label class="block text-sm font-medium mb-2">First Name</label>
-                        <input type="text" class="w-full p-2 border border-border rounded-md" value="John" />
-                    </div>
-                    <div class="p-4 bg-muted rounded-md">
-                        <label class="block text-sm font-medium mb-2">Last Name</label>
-                        <input type="text" class="w-full p-2 border border-border rounded-md" value="Doe" />
-                    </div>
-                </div>
-            </div>
-        </Section>
+    <Page title="Brewery Settings" subtitle="Manage how your brewery appears to customers.">
+        <Card body className="max-w-2xl">
+            <form>
+                <Fieldset title="Brewery Profile" subtitle="Update your public brewery information.">
+                    <Field>
+                        <FieldLabel>Brewery Name</FieldLabel>
+                        <Input value="Hoppy Trails Brewing" />
+                    </Field>
+                    <Field>
+                        <FieldLabel>Contact Email</FieldLabel>
+                        <Input type="email" value="hello@hoppytrails.com" />
+                    </Field>
+                    <FieldsetButtons>
+                        <Button outline>Cancel</Button>
+                        <Button type="submit">Save Changes</Button>
+                    </FieldsetButtons>
+                </Fieldset>
+            </form>
+        </Card>
     </Page>
 </SamplePage>
 
     <Section>
-
-        ### Standalone PageHeader
-        Using PageHeader independently for custom layouts:
-    </Section>
-
-<CodePreview code={`
-<div>
-  <PageHeader 
-    title="Custom Layout" 
-    subtitle="Using PageHeader independently"
-    wrapperClassName="bg-muted px-4 py-6"
-  >
-    <Button>Custom Action</Button>
-  </PageHeader>
-  
-  <main className="px-4 py-8">
-    {/* Custom content layout */}
-  </main>
-</div>
-`}>
-    <div>
-        <PageHeader 
-          title="Custom Layout" 
-          subtitle="Using PageHeader independently"
-          wrapperClassName="bg-muted px-4 py-6"
-        >
-            <Button>Custom Action</Button>
-        </PageHeader>
-        
-        <main class="px-4 py-8">
-            <div class="p-4 bg-muted/50 rounded-md">
-                <p>Custom content layout</p>
-            </div>
-        </main>
-    </div>
-</CodePreview>
-
-    <Section>
-    </Section>
-
-    <Section title="Responsive Behavior">
-        ### Breakpoint Behavior
-        Page components adapt to different screen sizes:
-
-        - **Mobile (< 640px)**: `px-4 py-6` padding
-        - **Small (≥ 640px)**: `px-6` horizontal padding  
-        - **Large (≥ 1024px)**: `px-8 py-8` increased padding
-
-        ### Header Responsiveness
-        PageHeader layout changes based on screen size:
-
-        - **Mobile**: Title and actions stack vertically
-        - **Medium and up**: Horizontal layout with title on left, actions on right
-
-        ### Container Width
-        The `max-w-container` class provides:
-
-        - Maximum width constraint (defined in your Tailwind config)
-        - Automatic horizontal centering with `mx-auto`
-        - Responsive behavior at different breakpoints
+        ```tsx
+        <Page title="Brewery Settings" subtitle="Manage how your brewery appears to customers.">
+          <Card body className="max-w-2xl">
+            <Form onSubmit={(event) => event.preventDefault()}>
+              <Fieldset title="Brewery Profile" subtitle="Update your public brewery information.">
+                <Field>
+                  <FieldLabel>Brewery Name</FieldLabel>
+                  <Input defaultValue="Hoppy Trails Brewing" />
+                </Field>
+                <Field>
+                  <FieldLabel>Contact Email</FieldLabel>
+                  <Input type="email" defaultValue="hello@hoppytrails.com" />
+                </Field>
+                <FieldsetButtons>
+                  <Button outline>Cancel</Button>
+                  <Button type="submit">Save Changes</Button>
+                </FieldsetButtons>
+              </Fieldset>
+            </Form>
+          </Card>
+        </Page>
+        ```
     </Section>
 
     <Section title="Accessibility">
         The Page components follow semantic HTML and accessibility best practices:
-        
-        - Uses semantic `<header>` element for PageHeader
-        - Maintains proper heading hierarchy (h1 for page titles)
-        - Provides logical document structure and content flow
-        - Ensures adequate spacing for readability
-        
+
+        - `PageHeader` renders a semantic `header` element
+        - Page titles render as a single `h1`, preserving heading hierarchy
+        - `Page` itself renders a neutral `div`, so the parent layout can own exactly one `main` landmark per route
+
         When implementing pages, ensure that:
-        
-        1. Page titles are descriptive and provide clear context
-        2. Content is organized logically within sections
-        3. Interactive elements (buttons, links) have proper focus states
-        4. Color contrast meets accessibility standards
+
+        1. Exactly one `main` landmark wraps the page content
+        2. Page titles are descriptive and provide clear context
+        3. Content is organized logically within `Section` components
+        4. Interactive elements have visible focus states
         5. Content remains readable and navigable at all screen sizes
-    </Section>
-
-    <Section title="Customization">
-        ### Custom Container Styling
-        Override default container behavior:
-    </Section>
-
-<CodePreview code={`
-<Page 
-  className="max-w-4xl space-y-6" 
-  title="Custom Width"
->
-  <Section title="Narrower Container">
-    <p>Content with custom maximum width</p>
-  </Section>
-</Page>
-`}>
-    <Page 
-      className="max-w-4xl space-y-6" 
-      title="Custom Width"
-    >
-        <Section title="Narrower Container" prose={false}>
-            <p>Content with custom maximum width</p>
-        </Section>
-    </Page>
-</CodePreview>
-
-    <Section>
-
-        ### Custom Header Styling
-        Apply custom styling to PageHeader:
-    </Section>
-
-<CodePreview code={`
-<PageHeader 
-  title="Styled Header" 
-  subtitle="Custom appearance"
-  wrapperClassName="bg-gradient-to-r from-primary to-accent p-8 rounded-lg"
-  className="text-white"
->
-  <Button clr="secondary">Action</Button>
-</PageHeader>
-`}>
-    <PageHeader 
-      title="Styled Header" 
-      subtitle="Custom appearance"
-      wrapperClassName="bg-gradient-to-r from-primary to-accent p-8 rounded-lg"
-      className="text-white"
-    >
-        <Button clr="secondary">Action</Button>
-    </PageHeader>
-</CodePreview>
-
-    <Section>
-
-        ### Full-Width Sections
-        Combine Page with full-width elements:
-    </Section>
-
-<CodePreview code={`
-<Page title="Mixed Layout">
-  <Section title="Regular Content">
-    <p>Standard container width</p>
-  </Section>
-</Page>
-
-<div className="bg-muted py-12">
-  <div className="max-w-container mx-auto px-4 sm:px-6 lg:px-8">
-    <Section title="Full-Width Section">
-      <p>Full-width background with contained content</p>
-    </Section>
-  </div>
-</div>
-`}>
-    <div class="space-y-0">
-        <Page title="Mixed Layout">
-            <Section title="Regular Content" prose={false}>
-                <p>Standard container width</p>
-            </Section>
-        </Page>
-        
-        <div class="bg-muted py-12">
-            <div class="max-w-container mx-auto px-4 sm:px-6 lg:px-8">
-                <Section title="Full-Width Section" prose={false}>
-                    <p>Full-width background with contained content</p>
-                </Section>
-            </div>
-        </div>
-    </div>
-</CodePreview>
-
-    <Section>
     </Section>
 
     <Section title="Best Practices">
         ### Page Structure
-        - Use Page as the top-level layout component for application pages
-        - Include descriptive titles and subtitles for better user orientation
-        - Organize content using Section components within the Page
-        - Place primary actions in the PageHeader for easy access
+        - Let the parent layout own the `main` landmark, container width, and window padding
+        - Use the `title` and `subtitle` props for simple headings
+        - Pass a `PageHeader` as the first child when the header needs actions or custom content
+        - Organize content with `Section` components so the 32px internal rhythm is consistent
 
         ### Content Organization
-        - Keep related content grouped within sections
-        - Use consistent spacing by relying on the built-in space-y-12
-        - Consider the visual hierarchy when structuring page content
-        - Ensure logical flow from page title through content sections
-
-        ### Performance Considerations
-        - Page components are lightweight wrappers with minimal performance impact
-        - Container constraints prevent content from becoming too wide on large screens
-        - Responsive padding reduces layout shift across different devices
-        - Use Page consistently across your application for predictable layouts
+        - Treat each direct child of `Page` as a major block; the 32px to 48px gap is intentionally large
+        - Keep nested headings 16px from their body content so groups read as units
+        - Constrain narrow content with a wrapper rather than with `className` on `Page`
 
         ### Layout Patterns
-        - Combine Page with Section components for structured content
-        - Use PageHeader actions for page-level functionality
-        - Consider mobile-first responsive design when planning page layouts
-        - Maintain consistent spacing and sizing across different page types
+        - Place breadcrumbs in the parent layout above `Page`, using 24px to 32px spacing
+        - Reuse the same layout shell across routes for predictable page chrome
+        - Reach for `wrapperClassName` on `PageHeader` before replacing the component
     </Section>
 
 </BaseSidebar>
